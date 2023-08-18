@@ -19,3 +19,14 @@ a {
 li {
     list-style: none;
 }
+:root {
+    --sidebar-width: 250px;
+    --sidebar-tablet-width: 150px;
+    --sidebar-mobile-width: 50px;
+}
+
+
+
+.main {
+    padding-top: 200px;
+}

@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="{{url('public/site/css/header.css')}}">
+
+
 <header>
     <div class="d-flex flex-column flex-sm-row py-3 py-sm-0 gap-3 gap-sm-0 container">
         <div class="logo">

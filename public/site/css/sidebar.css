@@ -1,0 +1,60 @@
+/* Side bar */
+aside {
+    width: var(--sidebar-width);
+    position: fixed;
+    z-index: 1;
+}
+
+aside ul {
+    padding: 0;
+}
+
+aside li a {
+    display: block;
+    padding: 11px 12px;
+    border-radius: 10px;
+    transition: background-color 0.1s ease;
+}
+
+aside li a.active {
+    font-weight: bold;
+}
+
+aside li a.active,
+aside li a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: background-color 0.1s ease;
+}
+
+aside .icon {
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+aside li a span {
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 575px) {
+    
+
+    aside {
+        width: var(--sidebar-mobile-width);
+    }
+
+    aside li a span {
+        font-size: 10px;
+    }
+
+
+}
+@media only screen and (max-width: 991px) {
+    aside {
+        width: var(--sidebar-tablet-width);
+    }
+
+    
+}
+
