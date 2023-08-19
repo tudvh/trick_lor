@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="{{url('public/site/css/header.css')}}">
-
-
 <header>
     <div class="d-flex flex-column flex-sm-row py-3 py-sm-0 gap-3 gap-sm-0 container">
         <div class="logo">
@@ -20,7 +17,7 @@
 
         <div class="more d-flex gap-2">
             <a href="{{ route('site.home') }}" class="btn">Đăng nhập</a>
-            <a href="{{ route('site.home') }}" class="btn btn-success">Đăng ký</a>
+            <a href="{{ route('site.home') }}" class="btn signup-btn">Đăng ký</a>
         </div>
     </div>
 </header>

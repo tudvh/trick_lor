@@ -1,19 +1,18 @@
 .content {
-    height: 2000px;
     margin-left: calc(var(--sidebar-width) + 30px);
+    flex: 1;
 }
 
-@media only screen and (max-width: 575px) {
-    
+/* Tablet */
+@media only screen and (max-width: 991px) {
     .content {
-        margin-left: calc(var(--sidebar-mobile-width) + 20px);
+        margin-left: calc(var(--sidebar-tablet-width) + 20px);
     }
 }
 
-@media only screen and (max-width: 991px) {
-    
-
+/* Mobile */
+@media only screen and (max-width: 575px) {
     .content {
-        margin-left: calc(var(--sidebar-tablet-width) + 20px);
+        margin-left: calc(var(--sidebar-mobile-width) + 20px);
     }
 }

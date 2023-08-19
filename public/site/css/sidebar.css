@@ -1,4 +1,3 @@
-/* Side bar */
 aside {
     width: var(--sidebar-width);
     position: fixed;
@@ -6,7 +5,8 @@ aside {
 }
 
 aside ul {
-    padding: 0;
+    padding: 0 8px 0 0;
+    overflow-y: scroll;
 }
 
 aside li a {
@@ -17,7 +17,7 @@ aside li a {
 }
 
 aside li a.active {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 aside li a.active,
@@ -26,20 +26,34 @@ aside li a:hover {
     transition: background-color 0.1s ease;
 }
 
-aside .icon {
+aside .icon-box {
     width: 25px;
+    height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+aside li a .icon-box svg path {
+    fill: black;
+}
+aside li a.active .icon-box svg path {
+    fill: currentColor;
 }
 
 aside li a span {
     font-size: 14px;
 }
 
-@media only screen and (max-width: 575px) {
-    
+/* Tablet */
+@media only screen and (max-width: 991px) {
+    aside {
+        width: var(--sidebar-tablet-width);
+    }
+}
 
+/* Mobile */
+@media only screen and (max-width: 575px) {
     aside {
         width: var(--sidebar-mobile-width);
     }
@@ -47,14 +61,4 @@ aside li a span {
     aside li a span {
         font-size: 10px;
     }
-
-
 }
-@media only screen and (max-width: 991px) {
-    aside {
-        width: var(--sidebar-tablet-width);
-    }
-
-    
-}
-

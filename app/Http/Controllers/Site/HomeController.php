@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Language;
 use App\Models\Post;
-use Psy\CodeCleaner\ListPass;
 
 class HomeController extends Controller
 {
@@ -16,5 +15,12 @@ class HomeController extends Controller
         $listPosts = Post::get();
 
         return view('pages.site.home', compact('listLanguages', 'listPosts'));
+    }
+
+    public function post()
+    {
+        $listLanguages = Language::get();
+
+        return view('pages.site.post', compact('listLanguages'));
     }
 }

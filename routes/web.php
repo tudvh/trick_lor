@@ -16,3 +16,4 @@ use App\Http\Controllers\Site;
 */
 
 Route::get('/', [Site\HomeController::class, 'home'])->name('site.home');
+Route::get('/post', [Site\HomeController::class, 'post'])->name('site.post');

@@ -1,0 +1,25 @@
+.video {
+    border-radius: 12px;
+}
+
+.post-title {
+    font-weight: bold;
+    margin-bottom: 0;
+    color: darkblue;
+}
+
+.post-info {
+    font-size: 15px;
+}
+
+.post-desc h4 {
+    font-weight: 700;
+}
+
+.post-desc p {
+    text-align: justify;
+}
+
+.post-desc p strong {
+    color: orangered;
+}
