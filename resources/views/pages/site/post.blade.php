@@ -3,6 +3,7 @@
 @section('title', 'Trang chủ')
 
 @section('css')
+<link rel="stylesheet" href="{{ url('public/site/css/prism.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/post.css') }}">
 @stop
 
@@ -15,19 +16,20 @@
         </div>
         <div class="w-100 d-flex justify-content-center">
             <div class="d-flex justify-content-end align-items-center mt-3 gap-3" id="action">
-                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 0 24 24">
-                    <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z" />
-                </svg>
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 0 24 24">
-                    <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z" fill="rgba(255,0,0,1)" />
-                </svg> -->
-                <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 0 122.88 108.3">
-                    <path d="M96.14,12.47l-76.71-1.1,28.3,27.85L96.14,12.47ZM53.27,49l9.88,39.17L102.1,22,53.27,49ZM117,1.6a5.59,5.59,0,0,1,4.9,8.75L66.06,105.21a5.6,5.6,0,0,1-10.44-1.15L41.74,49,1.67,9.57A5.59,5.59,0,0,1,5.65,0L117,1.6Z" />
-                </svg>
+                <div class="icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                    </svg>
+                </div>
+                <!-- <div class="icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" fill="#ff0000" />
+                    </svg>
+                </div> -->
             </div>
         </div>
-
     </div>
+
     <div class="col-12 col-lg-6 mt-4 mt-lg-0 mb-5">
         <h2 class="post-title">{{ $post->title }}</h2>
         <span class="post-info">19/8/2023</span>
@@ -66,6 +68,16 @@ padding: calc(10px * 2);</code></pre>
             <p>Trong v&iacute; dụ tr&ecirc;n, ch&uacute;ng ta sử dụng <code>calc()</code> để t&iacute;nh to&aacute;n gi&aacute; trị cho thuộc t&iacute;nh <code>width</code>, <code>height</code> v&agrave; <code>padding</code>.</p>
             <h4>Kết luận</h4>
             <p>H&agrave;m <code>calc()</code> l&agrave; một c&ocirc;ng cụ mạnh mẽ cho ph&eacute;p bạn thực hiện t&iacute;nh to&aacute;n trong CSS, gi&uacute;p tạo ra c&aacute;c thiết kế linh hoạt v&agrave; th&iacute;ch nghi với nhiều k&iacute;ch thước m&agrave;n h&igrave;nh kh&aacute;c nhau. Bằng c&aacute;ch kết hợp c&aacute;c ph&eacute;p to&aacute;n (+, -, *, /) với gi&aacute; trị của c&aacute;c thuộc t&iacute;nh, bạn c&oacute; thể tạo ra c&aacute;c giao diện hấp dẫn v&agrave; linh hoạt cho trang web của m&igrave;nh. H&atilde;y tận dụng <code>calc()</code> để tạo ra c&aacute;c trải nghiệm người d&ugrave;ng tốt hơn tr&ecirc;n mọi thiết bị!</p>
+
+            <pre class="language-php"><code>public function testEditor()
+{
+    return view('pages.site.testEditor');
+}</code></pre>
+            <div class="copy-btn" data-clipboard-target="pre code">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path d="M384 336H192c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16l140.1 0L400 115.9V320c0 8.8-7.2 16-16 16zM192 384H384c35.3 0 64-28.7 64-64V115.9c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1H192c-35.3 0-64 28.7-64 64V320c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H256c35.3 0 64-28.7 64-64V416H272v32c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192c0-8.8 7.2-16 16-16H96V128H64z" />
+                </svg>
+            </div>
         </div>
     </div>
 </div>
@@ -73,6 +85,13 @@ padding: calc(10px * 2);</code></pre>
 @stop
 
 @section('js')
+<!-- Prism JS -->
+<script src="{{ url('public/site/js/prism.js') }}"></script>
+<script>
+    Prism.highlightAll();
+</script>
+
+<!-- Local JS -->
 <script>
     const videoElement = document.querySelector('.video')
     const videoBox = document.querySelector('#video-box')

@@ -1,11 +1,11 @@
 .video {
     border-radius: 12px;
+    user-select: none;
 }
 
 .post-title {
     font-weight: bold;
     margin-bottom: 0;
-    color: darkblue;
 }
 
 .post-info {
@@ -13,13 +13,39 @@
 }
 
 .post-desc h4 {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .post-desc p {
     text-align: justify;
 }
 
-.post-desc p strong {
-    color: orangered;
+.content .icon-box {
+    width: 35px;
+    cursor: pointer;
+}
+
+pre {
+    position: relative;
+}
+
+pre code {
+    font-size: 15px !important;
+}
+
+pre .copy-btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: fit-content;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+pre .copy-btn svg {
+    width: 1.3rem;
+    fill: #fff;
 }
