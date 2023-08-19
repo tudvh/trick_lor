@@ -15,7 +15,8 @@ use App\Http\Controllers\Site;
 |
 */
 
+Route::get('/test-editor', [Site\HomeController::class, 'testEditor']);
+
 Route::get('/', [Site\HomeController::class, 'home'])->name('site.home');
 Route::get('/post/{postSlug}', [Site\HomeController::class, 'post'])->name('site.post');
-
-Route::get('/test-editor', [Site\HomeController::class, 'testEditor']);
+Route::get('/{language}', [Site\HomeController::class, 'language'])->name('site.language');

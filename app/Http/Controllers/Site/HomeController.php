@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
 use App\Models\Post;
+use App\Models\Code;
+
+use PhpParser\Node\Expr\BinaryOp\Pow;
 
 class HomeController extends Controller
 {
@@ -13,8 +16,8 @@ class HomeController extends Controller
     {
         $listLanguages = Language::get();
         $listPosts = Post::get();
-
-        return view('pages.site.home', compact('listLanguages', 'listPosts'));
+        $page = 'home';
+        return view('pages.site.home', compact('listLanguages', 'page', 'listPosts'));
     }
 
     public function post(string $postSlug)
@@ -23,6 +26,19 @@ class HomeController extends Controller
         $post = Post::where('slug', $postSlug)->first();
 
         return view('pages.site.post', compact('listLanguages', 'post'));
+    }
+
+    public function language(string $languageActive)
+    {
+        $listLanguages = Language::get();
+        $language = Language::where('slug', $languageActive)->first();
+        $page = $languageActive;
+        $listPostsArr = [];
+        foreach ($language->codes as $code) {
+            $listPostsArr[] = $code->post;
+        }
+        $listPosts = collect($listPostsArr);
+        return view('pages.site.home', compact('listLanguages', 'page', 'listPosts'));
     }
 
     public function testEditor()

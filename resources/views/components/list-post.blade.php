@@ -12,7 +12,7 @@ use \App\Helpers\DateHelper;
             </div>
             <div class="info">
                 <h3 class="title">{{ $post->title }}</h3>
-                <span> {{ DateHelper::convertDateFormat($post->created_at)  }} - 500 view</span>
+                <span>{{ DateHelper::convertDateFormat($post->created_at)  }}</span>
                 <div class="d-flex gap-2">
                     @foreach($post->codes as $code)
                     <div class="icon-box">
