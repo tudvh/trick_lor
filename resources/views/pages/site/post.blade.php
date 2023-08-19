@@ -11,16 +11,16 @@
 <div class="row">
     <div class="col-12 col-lg-6">
         <div id="video-box" class="w-100 d-flex justify-content-center">
-            <iframe class="video" type="text/html" frameborder="0" style="width: 100%; height: 500px;" src="https://www.youtube-nocookie.com/embed/0HaBOFvBoIA?autoplay=1&disablekb=1&fs=0&iv_load_policy=3&loop=1&playlist=0HaBOFvBoIA&modestbranding=1&rel=0&showinfo=0&vq=hd1080"></iframe>
+            <iframe class="video" type="text/html" frameborder="0" style="width: 100%; height: 500px;" src="https://www.youtube-nocookie.com/embed/{{ $post->youtube_id }}?autoplay=1&disablekb=1&fs=0&iv_load_policy=3&loop=1&playlist=0HaBOFvBoIA&modestbranding=1&rel=0&showinfo=0&vq=hd1080"></iframe>
         </div>
         <div class="w-100 d-flex justify-content-center">
             <div class="d-flex justify-content-end align-items-center mt-3 gap-3" id="action">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 0 24 24">
-                    <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
-                </svg> -->
-                <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 0 24 24">
-                    <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z" fill="rgba(255,0,0,1)"></path>
+                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 0 24 24">
+                    <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z" />
                 </svg>
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 0 24 24">
+                    <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z" fill="rgba(255,0,0,1)" />
+                </svg> -->
                 <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 0 122.88 108.3">
                     <path d="M96.14,12.47l-76.71-1.1,28.3,27.85L96.14,12.47ZM53.27,49l9.88,39.17L102.1,22,53.27,49ZM117,1.6a5.59,5.59,0,0,1,4.9,8.75L66.06,105.21a5.6,5.6,0,0,1-10.44-1.15L41.74,49,1.67,9.57A5.59,5.59,0,0,1,5.65,0L117,1.6Z" />
                 </svg>
@@ -29,8 +29,8 @@
 
     </div>
     <div class="col-12 col-lg-6 mt-4 mt-lg-0 mb-5">
-        <h2 class="post-title">Cách sử dụng calc() trong CSS</h2>
-        <span class="post-info"> 19/8/2023 - 500 lượt xem</span>
+        <h2 class="post-title">{{ $post->title }}</h2>
+        <span class="post-info">19/8/2023</span>
         <div class="d-flex gap-2 mt-2">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24">
                 <path d="M12 18.1778L16.6192 16.9222L17.2434 10.1444H9.02648L8.82219 7.88889H17.4477L17.6747 5.67778H6.32535L6.96091 12.3556H14.7806L14.5195 15.2222L12 15.8889L9.48045 15.2222L9.32156 13.3778H7.0517L7.38083 16.9222L12 18.1778ZM3 2H21L19.377 20L12 22L4.62295 20L3 2Z" fill="rgba(227,76,38,1)"></path>
@@ -55,10 +55,17 @@
             </svg>
         </div>
         <div class="mt-5 post-desc">
-            <h4>Giới thiệu về calc()</h4>
-            <p>Hàm <strong>calc()</strong> là một công cụ mạnh mẽ cho phép bạn thực hiện các phép tính toán trong CSS. Điều này rất hữu ích khi bạn cần tính toán giá trị của thuộc tính CSS dựa trên các giá trị khác. <strong>calc()</strong> có thể được sử dụng trong nhiều thuộc tính như <strong>width, height, margin, padding</strong> và nhiều thuộc tính khác.</p>
-            <h4>Cách sử dụng</h4>
-            <p>Hàm <strong>calc()</strong> có cách sử dụng khá đơn giản. Bạn chỉ cần sử dụng các phép toán (+, -, *, /) để kết hợp các giá trị cần tính toán.</p>
+            <h4>Giới thiệu</h4>
+            <p>H&agrave;m <code>calc()</code> l&agrave; một c&ocirc;ng cụ mạnh mẽ cho ph&eacute;p bạn thực hiện c&aacute;c ph&eacute;p t&iacute;nh to&aacute;n trong CSS. Điều n&agrave;y rất hữu &iacute;ch khi bạn cần t&iacute;nh to&aacute;n gi&aacute; trị của thuộc t&iacute;nh CSS dựa tr&ecirc;n c&aacute;c gi&aacute; trị kh&aacute;c. <code>calc()</code> c&oacute; thể được sử dụng trong nhiều thuộc t&iacute;nh như <code>width</code>, <code>height</code>, <code>margin</code>, <code>padding</code> v&agrave; nhiều thuộc t&iacute;nh kh&aacute;c.</p>
+            <h4>C&aacute;ch sử dụng</h4>
+            <p>H&agrave;m <code>calc()</code>&nbsp;c&oacute; c&aacute;ch sử dụng kh&aacute; đơn giản. Bạn chỉ cần sử dụng c&aacute;c ph&eacute;p to&aacute;n (+, -, *, /) để kết hợp c&aacute;c gi&aacute; trị cần t&iacute;nh to&aacute;n.</p>
+            <p>V&iacute; dụ:</p>
+            <pre class="language-css"><code>width: calc(100% - 20px);
+height: calc(50vh + 30px);
+padding: calc(10px * 2);</code></pre>
+            <p>Trong v&iacute; dụ tr&ecirc;n, ch&uacute;ng ta sử dụng <code>calc()</code> để t&iacute;nh to&aacute;n gi&aacute; trị cho thuộc t&iacute;nh <code>width</code>, <code>height</code> v&agrave; <code>padding</code>.</p>
+            <h4>Kết luận</h4>
+            <p>H&agrave;m <code>calc()</code> l&agrave; một c&ocirc;ng cụ mạnh mẽ cho ph&eacute;p bạn thực hiện t&iacute;nh to&aacute;n trong CSS, gi&uacute;p tạo ra c&aacute;c thiết kế linh hoạt v&agrave; th&iacute;ch nghi với nhiều k&iacute;ch thước m&agrave;n h&igrave;nh kh&aacute;c nhau. Bằng c&aacute;ch kết hợp c&aacute;c ph&eacute;p to&aacute;n (+, -, *, /) với gi&aacute; trị của c&aacute;c thuộc t&iacute;nh, bạn c&oacute; thể tạo ra c&aacute;c giao diện hấp dẫn v&agrave; linh hoạt cho trang web của m&igrave;nh. H&atilde;y tận dụng <code>calc()</code> để tạo ra c&aacute;c trải nghiệm người d&ugrave;ng tốt hơn tr&ecirc;n mọi thiết bị!</p>
         </div>
     </div>
 </div>

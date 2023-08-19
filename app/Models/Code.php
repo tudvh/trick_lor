@@ -8,16 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Code extends Model
 {
     use HasFactory;
+
     protected $table = 'code';
 
-    protected $fillable = ['id_post', 'id_language', 'code'];
+    protected $fillable = ['post_id', 'language_id'];
 
     public function post()
     {
-        return $this->hasOne(Post::class, 'id', 'id_post');
+        return $this->hasOne(Post::class, 'id', 'post_id');
     }
+
     public function language()
     {
-        return $this->hasOne(Language::class, 'id', 'id_language');
+        return $this->hasOne(Language::class, 'id', 'language_id');
     }
 }

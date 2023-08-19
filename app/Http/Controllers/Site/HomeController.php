@@ -17,10 +17,16 @@ class HomeController extends Controller
         return view('pages.site.home', compact('listLanguages', 'listPosts'));
     }
 
-    public function post()
+    public function post(string $postSlug)
     {
         $listLanguages = Language::get();
+        $post = Post::where('slug', $postSlug)->first();
 
-        return view('pages.site.post', compact('listLanguages'));
+        return view('pages.site.post', compact('listLanguages', 'post'));
+    }
+
+    public function testEditor()
+    {
+        return view('pages.site.testEditor');
     }
 }

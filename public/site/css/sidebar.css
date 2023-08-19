@@ -26,17 +26,10 @@ aside li a:hover {
     transition: background-color 0.1s ease;
 }
 
-aside .icon-box {
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 aside li a .icon-box svg path {
     fill: black;
 }
+
 aside li a.active .icon-box svg path {
     fill: currentColor;
 }

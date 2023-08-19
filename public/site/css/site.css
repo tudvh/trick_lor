@@ -30,6 +30,14 @@ li {
     padding-top: 200px;
 }
 
+/* Icon */
+.icon-box {
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Scrollbar css */
 html *::-webkit-scrollbar {
     border-radius: 0;

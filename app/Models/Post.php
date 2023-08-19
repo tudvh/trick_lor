@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
     protected $table = 'posts';
 
-    protected $fillable = ['title', 'id_youtube', 'description', 'thumbnails'];
+    protected $fillable = ['title', 'slug', 'youtube_id', 'description', 'thumbnail'];
+
     public function codes()
     {
-        return $this->hasMany(Code::class, 'id_post', 'id');
+        return $this->hasMany(Code::class, 'post_id', 'id');
     }
 }

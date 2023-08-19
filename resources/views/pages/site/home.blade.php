@@ -9,7 +9,7 @@
 @section('content')
 
 @if ($listPosts->count() > 0)
-<x-list-post col="4" :listPosts="$listPosts" />
+<x-list-post :colLg="4" :colSm="6" :listPosts="$listPosts" />
 @else
 <h3>Chưa có bài đăng!</h3>
 @endif

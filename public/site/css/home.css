@@ -6,11 +6,15 @@
     overflow: hidden;
 }
 
+.wrapper .img-box {
+    overflow: hidden;
+    border-radius: 15px;
+}
+
 .wrapper > .item img {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
-    border-radius: 15px;
     transition: scale 0.1s;
 }
 
@@ -24,6 +28,7 @@
 }
 
 .wrapper > .item:hover img {
+    width: 100%;
     scale: 1.1;
 }
 
@@ -39,4 +44,8 @@
     display: block;
     font-size: 0.8rem;
     margin-bottom: 0.3rem;
+}
+
+.wrapper > .item .icon-box svg path {
+    fill: currentColor;
 }
