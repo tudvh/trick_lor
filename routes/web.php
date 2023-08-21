@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Site;
+use App\Http\Controllers\Admin;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,13 @@ use App\Http\Controllers\Site;
 |
 */
 
+
 Route::get('/test-editor', [Site\HomeController::class, 'testEditor']);
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', [Admin\HomeController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/posts/list', [Admin\PostsController::class, 'index'])->name('admin.posts.list');
+});
+
 
 Route::get('/', [Site\HomeController::class, 'home'])->name('site.home');
 Route::get('/post/{postSlug}', [Site\HomeController::class, 'post'])->name('site.post');

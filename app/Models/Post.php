@@ -11,7 +11,7 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $fillable = ['title', 'slug', 'youtube_id', 'description', 'thumbnail'];
+    protected $fillable = ['title', 'slug', 'youtube_id', 'description', 'thumbnail', 'active'];
 
     public function codes()
     {

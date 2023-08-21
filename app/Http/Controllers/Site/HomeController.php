@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function home()
     {
         $listLanguages = Language::get();
-        $listPosts = Post::get();
+        $listPosts = Post::where('active', 1)->get();
         $page = 'home';
         return view('pages.site.home', compact('listLanguages', 'page', 'listPosts'));
     }
