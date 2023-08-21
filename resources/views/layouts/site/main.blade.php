@@ -43,8 +43,6 @@
             const windowHeight = window.innerHeight
             const sideBarHeight = windowHeight - sideBarTop
 
-            console.log(windowHeight, sideBarTop, sideBarHeight);
-
             sideBarElement.style.height = `${sideBarHeight}px`
         }
 
