@@ -9,6 +9,7 @@ class HomeController extends Controller
 {
     public function dashboard()
     {
-        return view('pages.admin.dashboard');
+        $page = 'home';
+        return view('pages.admin.dashboard', compact('page'));
     }
 }

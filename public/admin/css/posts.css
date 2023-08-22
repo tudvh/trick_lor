@@ -5,3 +5,47 @@
     /* box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2); */
     box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
 }
+.content-wrapper .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 500px; */
+    min-width: 10px;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+}
+
+.content-wrapper .search input,.content-wrapper select,
+.content-wrapper .search .submit-btn {
+    border: 0;
+    outline: 0;
+    background: none;
+}
+.content-wrapper select{
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.content-wrapper .search input,.content-wrapper select {
+    flex: 1;
+    /* min-width: 10px; */
+    padding: 5px 20px;
+}
+
+.content-wrapper .search .submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border-left: 1px solid #d3d3d3;
+    border-radius: 0 40px 40px 0;
+}
+
+.content-wrapper .search .submit-btn:hover {
+    background-color: #f0f0f0;
+}
+.table{
+    vertical-align:middle;
+}
