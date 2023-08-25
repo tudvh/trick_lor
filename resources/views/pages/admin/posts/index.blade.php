@@ -8,7 +8,6 @@ use \App\Helpers\DateHelper;
 @section('title', 'Quản lý bài đăng')
 @section('title-content', 'Danh sách bài đăng')
 
-
 @section('css')
 <link rel="stylesheet" href="{{ url('public/admin/css/posts.css') }}">
 @stop
@@ -20,8 +19,6 @@ use \App\Helpers\DateHelper;
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-
-
                     Thông báo
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -36,6 +33,7 @@ use \App\Helpers\DateHelper;
         </div>
     </div>
 </div>
+
 <div class="content-wrapper">
     <div class="content-header d-flex algin-items-center justify-content-between">
         <div class="filter d-flex gap-3">
@@ -49,7 +47,6 @@ use \App\Helpers\DateHelper;
             </form>
 
             <select name="language">
-
                 <option value="">Ngôn ngữ</option>
                 @foreach($listLanguage as $language)
                 <option value="{{ $language->id }}">{{ $language->name }}</option>
@@ -61,7 +58,7 @@ use \App\Helpers\DateHelper;
                 <option value="0">Đã ẩn</option>
             </select>
         </div>
-        <a class="btn btn-success d-flex align-items-center gap-2">
+        <a class="btn btn-success d-flex align-items-center gap-2" href="{{ route('admin.posts.create') }}">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                 <path style="fill:#fff" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
             </svg>
@@ -78,17 +75,12 @@ use \App\Helpers\DateHelper;
                 <th scope="col">Ngày tạo</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">Hành động</th>
-
             </tr>
         </thead>
         <tbody class="table-group-divider">
-
             {!! $postRender !!}
-
         </tbody>
-
     </table>
-
 </div>
 @stop
 @section('js')

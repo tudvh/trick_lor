@@ -30,7 +30,6 @@ class PostsController extends Controller
         $language = $request->language;
         $listPost = Post::query();
         if ($status != '') {
-
             $listPost = $listPost->where('active', $status);
         }
         if ($language != '') {
@@ -42,15 +41,13 @@ class PostsController extends Controller
         $postRender = $this->renderTable($listPost);
         return $postRender;
     }
+
     public function setStatus(Post $post)
     {
         $post->active = $post->active == 1 ? 0 : 1;
         $post->save();
-        return redirect()->route('admin.posts.list');
+        return redirect()->route('admin.posts.index');
     }
-
-
-
 
     private function renderTable($listPost)
     {
@@ -95,8 +92,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
-        return view('pages.admin.posts.create');
+        $listLanguage = Language::all();
+        $page = 'posts';
+        return view('pages.admin.posts.create', compact('listLanguage', 'page'));
     }
 
     /**

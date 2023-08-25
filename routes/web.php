@@ -21,9 +21,13 @@ use App\Http\Controllers\Admin;
 Route::get('/test-editor', [Site\HomeController::class, 'testEditor']);
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [Admin\HomeController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/posts/list', [Admin\PostsController::class, 'index'])->name('admin.posts.list');
-    Route::get('/posts/search', [Admin\PostsController::class, 'search'])->name('admin.posts.search');
-    Route::get('/posts/setStatus/{post}', [Admin\PostsController::class, 'setStatus'])->name('admin.posts.setStatus');
+
+    Route::group(['prefix' => 'posts'], function () {
+        Route::get('/', [Admin\PostsController::class, 'index'])->name('admin.posts.index');
+        Route::get('/search', [Admin\PostsController::class, 'search'])->name('admin.posts.search');
+        Route::get('/create', [Admin\PostsController::class, 'create'])->name('admin.posts.create');
+        Route::get('/{post}/setStatus/', [Admin\PostsController::class, 'setStatus'])->name('admin.posts.setStatus');
+    });
 });
 
 
