@@ -11,44 +11,6 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $posts = Post::all();
-        $page = 'posts';
-        $listLanguage = Language::all();
-        $postRender = $this->renderTable($posts);
-
-        return view('pages.admin.posts.index', compact('postRender', 'page', 'listLanguage'));
-    }
-
-    public function search(Request $request)
-    {
-        $status = $request->status;
-        $language = $request->language;
-        $listPost = Post::query();
-        if ($status != '') {
-            $listPost = $listPost->where('active', $status);
-        }
-        if ($language != '') {
-            $listPost = $listPost->whereHas('codes', function ($query) use ($language) {
-                return $query->where('language_id', $language);
-            });
-        }
-        $listPost = $listPost->where('title', 'like', '%' . $request->title . '%')->get();
-        $postRender = $this->renderTable($listPost);
-        return $postRender;
-    }
-
-    public function setStatus(Post $post)
-    {
-        $post->active = $post->active == 1 ? 0 : 1;
-        $post->save();
-        return redirect()->route('admin.posts.index');
-    }
-
     private function renderTable($listPost)
     {
         $renderStr = '';
@@ -87,9 +49,17 @@ class PostsController extends Controller
         }
         return $renderStr;
     }
-    /**
-     * Show the form for creating a new resource.
-     */
+
+    public function index()
+    {
+        $posts = Post::all();
+        $page = 'posts';
+        $listLanguage = Language::all();
+        $postRender = $this->renderTable($posts);
+
+        return view('pages.admin.posts.index', compact('postRender', 'page', 'listLanguage'));
+    }
+
     public function create()
     {
         $listLanguage = Language::all();
@@ -97,43 +67,53 @@ class PostsController extends Controller
         return view('pages.admin.posts.create', compact('listLanguage', 'page'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Post $post)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Post $post)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Post $post)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $status = $request->status;
+        $language = $request->language;
+        $listPost = Post::query();
+        if ($status != '') {
+            $listPost = $listPost->where('active', $status);
+        }
+        if ($language != '') {
+            $listPost = $listPost->whereHas('codes', function ($query) use ($language) {
+                return $query->where('language_id', $language);
+            });
+        }
+        $listPost = $listPost->where('title', 'like', '%' . $request->title . '%')->get();
+        $postRender = $this->renderTable($listPost);
+        return $postRender;
+    }
+
+    public function setStatus(Post $post)
+    {
+        $post->active = $post->active == 1 ? 0 : 1;
+        $post->save();
+        return redirect()->route('admin.posts.index');
     }
 }

@@ -1,7 +1,6 @@
 <aside>
     <ul>
         <li>
-
             <a class="d-flex align-items-center flex-column flex-sm-row gap-1 gap-sm-3 @if (isset($page) && $page=='home' )  active @endif" href="{{ route('site.home') }}">
                 <div class="icon-box">
                     <svg style="color: orangered" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">

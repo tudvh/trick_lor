@@ -1,33 +1,37 @@
-aside{
+aside {
     background-color: #343a40;
     position: fixed;
     top: 0;
-    width:var(--width-sidebar);
+    width: var(--width-sidebar);
     bottom: 0;
-    box-shadow: 0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22)!important;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
     display: flex;
     flex-direction: column;
     align-items: start;
 }
-aside h2{
-    color: rgba(255,255,255,.8);
+
+aside h2 {
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
     margin: 0;
 }
 
-aside .logo-header{
+aside .logo-header {
     padding: 0.6rem;
     width: 100%;
     border-bottom: 1px solid var(--border-bottom);
 }
-aside ul{
+
+aside ul {
     width: 100%;
     padding: 0.5rem;
 }
-aside ul li{
+
+aside ul li {
     width: 100%;
 }
-aside ul li a{
+
+aside ul li a {
     display: block;
     width: 100%;
     padding: 0.5rem 1rem;
@@ -36,17 +40,22 @@ aside ul li a{
     color: #dee2e6;
     font-size: 1rem;
 }
-aside ul li a svg path{
+
+aside ul li a svg path {
     fill: #dee2e6;
 }
-aside ul li a.active,aside ul li .active svg path{
+
+aside ul li a.active,
+aside ul li .active svg path {
     color: #fff;
     background-color: #007bff;
 }
-aside ul li a:not(.active):hover{
-    background-color: #ffffff1A;
+
+aside ul li a:not(.active):hover {
+    background-color: #ffffff1a;
     color: #fff;
 }
-ul h6{
+
+ul h6 {
     color: #d0d4db;
 }

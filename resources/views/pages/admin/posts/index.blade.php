@@ -9,7 +9,7 @@ use \App\Helpers\DateHelper;
 @section('title-content', 'Danh sách bài đăng')
 
 @section('css')
-<link rel="stylesheet" href="{{ url('public/admin/css/posts.css') }}">
+<link rel="stylesheet" href="{{ url('public/admin/css/posts/index.css') }}">
 @stop
 
 @section('content')
@@ -84,5 +84,5 @@ use \App\Helpers\DateHelper;
 </div>
 @stop
 @section('js')
-<script src="{{ url('public/admin/js/listPost.js') }}"></script>
+<script src="{{ url('public/admin/js/posts/index.js') }}"></script>
 @stop

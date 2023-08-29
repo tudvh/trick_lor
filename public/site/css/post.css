@@ -12,31 +12,55 @@
     font-size: 15px;
 }
 
-.post-desc h4 {
-    font-weight: 600;
-}
-
-.post-desc p {
-    text-align: justify;
-}
-
 .content .icon-box {
     width: 30px;
     cursor: pointer;
 }
+
 .content .icon-box path {
     fill: currentColor;
 }
 
-pre {
+.post-desc h4 {
+    font-weight: 600;
+}
+
+.post-desc p,
+.post-desc li {
+    text-align: justify;
+}
+
+.post-desc p {
+    margin-bottom: 0.8rem;
+    line-height: 1.8rem;
+}
+
+.post-desc ul {
+    padding-left: 1.2rem;
+}
+
+.post-desc li {
+    list-style: unset;
+}
+
+.post-desc > ul > li {
+    margin-bottom: 0.5rem;
+}
+
+.post-desc pre[class*="language-"] {
     position: relative;
+    overflow: hidden;
+    padding: 0;
 }
 
-pre code {
-    font-size: 15px !important;
+.post-desc pre[class*="language-"] code {
+    display: block;
+    font-size: 14px;
+    overflow-x: scroll;
+    padding: 1rem;
 }
 
-pre .copy-btn {
+.post-desc pre .copy-btn {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -45,13 +69,26 @@ pre .copy-btn {
     border: none;
     outline: none;
     width: 1.3rem;
-
     cursor: pointer;
     z-index: 1000;
     fill: rgba(255, 255, 255, 0.7);
     transition: all 0.2s ease;
 }
 
-pre .copy-btn:hover {
+.post-desc pre .copy-btn:hover {
     fill: rgba(255, 255, 255, 1);
+}
+
+/* Scroll code */
+.post-desc pre[class*="language-"] code::-webkit-scrollbar-thumb {
+    border-color: #272822;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.post-desc pre[class*="language-"] code::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.post-desc pre[class*="language-"] code::-webkit-scrollbar-thumb:active {
+    background-color: rgba(255, 255, 255, 0.6);
 }

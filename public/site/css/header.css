@@ -1,13 +1,18 @@
 header {
+    position: fixed;
     width: 100%;
     height: fit-content;
-    position: fixed;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
     z-index: 10;
 }
 
+header .header-wrapper {
+    position: relative;
+}
+
 header .container {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
@@ -20,7 +25,7 @@ header .more {
 
 header .logo a {
     display: block;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 header .logo h2 {
@@ -31,12 +36,26 @@ header .logo h2:hover {
     color: orange;
 }
 
-header .search {
+header .search-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 500px;
-    min-width: 10px;
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+header .close-search-btn {
+    font-size: 1.3rem;
+    color: rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+header .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
     border: 1px solid #d3d3d3;
     border-radius: 40px;
 }
@@ -50,8 +69,7 @@ header .search .submit-btn {
 
 header .search input {
     flex: 1;
-    min-width: 10px;
-    padding: 5px 20px;
+    padding: 6px 20px;
 }
 
 header .search .submit-btn {
@@ -67,13 +85,20 @@ header .search .submit-btn:hover {
     background-color: #f0f0f0;
 }
 
-header .signup-btn {
+header .open-search-btn {
+    font-size: 1.25rem;
+    padding: 0 10px;
+    color: rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+header .login-btn {
     background-color: orangered;
     color: #fff;
     transition: background-color 0.15s ease;
 }
 
-header .signup-btn:hover {
+header .login-btn:hover {
     background-color: orange;
     color: #fff;
     transition: background-color 0.15s ease;
@@ -81,18 +106,30 @@ header .signup-btn:hover {
 
 /* Tablet */
 @media only screen and (max-width: 991px) {
-    header .search {
-        flex: 1;
+    header .search-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        -webkit-padding-start: 20px;
+        -webkit-padding-end: 20px;
+        /* padding-left: 40px;
+        padding-right: 40px; */
+        display: none;
     }
-}
 
-/* Mobile */
-@media only screen and (max-width: 575px) {
-    header .search {
-        width: 85%;
+    header .search-wrapper.search-open {
+        display: flex;
     }
 
-    header .logo a {
-        padding: 0;
+    header .close-search-btn {
+        display: block;
+    }
+
+    header .open-search-btn {
+        display: flex;
+        align-items: center;
     }
 }

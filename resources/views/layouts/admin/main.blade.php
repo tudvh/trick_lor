@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - Trick loR Admin</title>
+    <link rel="icon" href="{{ url('public/site/img/logo-icon.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('public/admin/css/admin.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/header.css') }}">

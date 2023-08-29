@@ -1,0 +1,67 @@
+.content label {
+    font-weight: bold;
+}
+
+.language-box {
+    position: relative;
+}
+
+.language-selected {
+    min-height: 38px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.language-selected-item {
+    width: fit-content;
+    height: 24px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    padding: 0 0 0 0.75rem;
+}
+
+.language-selected .icon-remove {
+    cursor: pointer;
+    padding: 5px 0.5rem;
+    height: fit-content;
+}
+
+.language-selected .icon-remove:hover svg path {
+    fill: red;
+}
+
+.language-choose {
+    position: absolute;
+    z-index: 9999;
+    padding-left: 0;
+    padding-right: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+}
+
+.language-choose ul {
+    padding: 0;
+}
+
+.language-choose ul li {
+    margin: 0;
+    cursor: pointer;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.language-choose ul li.disabled {
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.language-choose ul li:hover {
+    background-color: #0074f0;
+    color: #fff;
+}
+
+.none {
+    display: none;
+}
