@@ -57,13 +57,15 @@ function removeSelectedItem(id) {
 
 function setValueLanguageSelect(id, isSelected) {
     const listOption = languageSelect.querySelectorAll("option");
-
+    if(isSelected){
+        addInvalidSelect(false)
+    }
     for (let option of listOption) {
         if (option.value === id) {
             option.selected = isSelected;
         }
     }
-
+   
     setDisableLanguageChooseItem(id);
 }
 

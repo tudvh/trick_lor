@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use \App\Helpers\DateHelper;
 use App\Models\Post;
+use App\Models\Code;
 use App\Models\Language;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -69,7 +71,45 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|unique:posts,title',
+            'youtube_id' => 'required|unique:posts,youtube_id',
+
+        ], [
+            'title.required' => 'Vui lòng nhập title.',
+            'title.unique' => 'Tên bài đăng đã tồn tại.',
+
+            'youtube_id.required' => 'Vui lòng nhập youtube_id.',
+            'youtube_id.unique' => 'Youtube_id đã tồn tại.'
+
+        ]);
+
+
+        $post = new Post();
+        $post->title = $request->title;
+        $post->slug = Str::slug($request->title);
+        $post->youtube_id = $request->youtube_id;
+        $post->description = $request->input('description');
+        $post->active = $request->status;
+        
+        $links=["https://i.ytimg.com/vi/{$post->youtube_id}/mqdefault.jpg",
+            "https://i.ytimg.com/vi/{$post->youtube_id}/hqdefault.jpg",
+            "https://i.ytimg.com/vi/{$post->youtube_id}/maxresdefault.jpg"
+        ];
+        $post->thumbnail = json_encode($links);
+
+        $post->save();
+        foreach($request->languages as $language){
+            $code =  new Code();
+            $code->post_id = $post->id;
+            $code->language_id = $language;
+            $code->save();
+        } 
+        
+        
+        
+
+        return redirect()->route('admin.posts.index')->with("success","Thêm bài đăng thành công!");
     }
 
     public function show(Post $post)
@@ -115,5 +155,28 @@ class PostsController extends Controller
         $post->active = $post->active == 1 ? 0 : 1;
         $post->save();
         return redirect()->route('admin.posts.index');
+    }
+
+    public function preview(Request $request){
+        $post = new Post();
+        $post->id=9999;
+        $post->title = $request->title;
+        $post->youtube_id = $request->youtube_id;
+        
+
+        $post->description = $request->input('description');
+
+        $postLanguages = collect($request->languages)->map(function ($language) use ($post) {
+            return new Code([
+                'post_id' => $post->id,
+                'language_id' => $language
+            ]);
+        });
+        
+        $post->codes=$postLanguages;
+        
+        
+        
+        echo view('components.product-detail',compact('post'));
     }
 }

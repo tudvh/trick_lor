@@ -6,7 +6,9 @@ const statusElm = document.querySelector('select[name="status"]');
 var searchValue = "";
 var languageValue = "";
 var statusValue = "";
+var typingTimer;
 
+// call ajax
 function getDataSearch(searchValue, languageValue, statusValue) {
     var xml = new XMLHttpRequest();
 
@@ -22,21 +24,31 @@ function getDataSearch(searchValue, languageValue, statusValue) {
     xml.send();
 }
 
+//get value search key
 searchElm.addEventListener("input", function () {
-    searchValue = searchElm.value;
+    searchValue = searchElm.value;    
+    clearTimeout(typingTimer);
 
-    getDataSearch(searchValue, languageValue, statusValue);
+    // Đặt timeout mới sau khi ngừng nhập trong 500ms
+    typingTimer = setTimeout(function () {
+        // Gọi hàm AJAX ở đây
+        getDataSearch(searchValue, languageValue, statusValue);
+    }, 500);
 });
 
+//get value languages
 languageElm.addEventListener("change", function () {
     languageValue = languageElm.value;
     getDataSearch(searchValue, languageValue, statusValue);
 });
 
+
+//get value status
 statusElm.addEventListener("change", function () {
     statusValue = statusElm.value;
     getDataSearch(searchValue, languageValue, statusValue);
 });
+
 
 const myModal = new bootstrap.Modal(document.getElementById("alertDelete"), {});
 function togglePost(id) {

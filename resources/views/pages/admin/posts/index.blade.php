@@ -13,7 +13,7 @@ use \App\Helpers\DateHelper;
 @stop
 
 @section('content')
-<meta name="root-url" data-index="{{ URL::to('/'); }}">
+
 <div class="modal fade" id="alertDelete" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -65,7 +65,11 @@ use \App\Helpers\DateHelper;
             <span>Thêm mới</span>
         </a>
     </div>
-
+    @if (session('success'))
+    <div class="alert alert-success mt-3">
+        {{ session('success') }}
+    </div>
+    @endif
     <table class=" table table-striped table-hover mt-4 ">
         <thead>
             <tr>

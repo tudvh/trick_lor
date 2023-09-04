@@ -12,18 +12,38 @@
 
 @section('content')
 <div class="card p-3">
-    <div class="row">
+    <form class="row needs-validation" method="POST" novalidate action="{{ route('admin.posts.store') }}">
+        @csrf
+        @if($errors->any())
+            <div class="alert alert-danger">
+                @if($errors->has('title'))
+                    <small class="text-danger">{{$errors->first('title')}}</small>
+                    <br />
+                @endif   
+                @if($errors->has('youtube_id'))
+                    
+                    <small class="text-danger">{{$errors->first('youtube_id')}}</small>
+                @endif  
+                    
+            </div>
+        @endif    
+        
         <div class="col-12 col-lg-6">
             <div class="form-group">
                 <label for="title">Tiêu đề</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề">
+                
+                <input type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề" required>
+                <div id="invalid-feedback-title" class="invalid-feedback" >
+                    Vui lòng nhập title!
+                </div>
             </div>
         </div>
 
         <div class="col-12 col-lg-6 mt-4 mt-lg-0">
             <div class="form-group">
                 <label for="youtube-link">Link youtube</label>
-                <input type="text" class="form-control" id="youtube-link" name="youtube_link" placeholder="Nhập link youtube">
+                <input type="text" class="form-control" id="youtube-link" name="youtube_id" placeholder="Nhập link youtube" required>
+                <div class="invalid-feedback">Vui lòng nhập link youtube!</div>
             </div>
         </div>
 
@@ -39,18 +59,20 @@
                         @endforeach
                     </ul>
                 </div>
-                <select multiple name="languages[]" id="language-select" class="form-control" hidden>
+                <select multiple name="languages[]" id="language-select" class="form-control" hidden required>
                     @foreach($listLanguage as $language)
                     <option value="{{ $language->id }}">{{ $language->name }}</option>
                     @endforeach
                 </select>
+                
+                <small id="select-ivalid" style="color:#dc3545;display:none">Vui lòng chọn ngôn ngữ!</small>
             </div>
         </div>
 
         <div class="col-12 col-lg-6 mt-4">
             <div class="form-group">
                 <label for="youtube-link">Trạng thái</label>
-                <select name="status" class="form-control">
+                <select name="status" class="form-control" required>
                     <option value="0">Riêng tư</option>
                     <option value="1" selected>Công khai</option>
                 </select>
@@ -60,58 +82,89 @@
         <div class="col-12 mt-4">
             <div class="form-group">
                 <label for="youtube-link">Mô tả</label>
-                <textarea class="form-control" name="" id="desc-textarea" rows="5"></textarea>
+                <textarea class="form-control" name="description" id="desc-textarea" rows="5"></textarea>
             </div>
         </div>
 
         <div class="col-12 mt-4">
             <div class="form-group d-flex gap-3">
-                <a href="" class="btn btn-outline-secondary show-preview">Xem preview</a>
-                <a href="" class="btn btn-success">Thêm</a>
+                <a id="showPreView" class="btn btn-outline-secondary show-preview">Xem preview</a>
+                <button href="" class="btn btn-success" type="submit">Thêm</button>
             </div>
         </div>
 
-        <div class="col-12 col-lg-6 mt-4">
-            <div class="form-group test-select2">
-                <label for="test">Test select 2</label>
-                <select name="test[]" class="form-control select2 form-select" id="test" multiple data-placeholder="Select languages">
-                    @foreach($listLanguage as $language)
-                    <option value="{{ $language->id }}">{{ $language->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
+        
+    </form>
+</div>
+
+<div class="modal fade" id="preview" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Preview</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="preview-content">
+        
+      </div>
+      
     </div>
+  </div>
 </div>
 
 @stop
 
 @section('js')
-<script src="https://cdn.tiny.cloud/1/x8lr9jtz8dxvdavxa6kvrljyfxuuox94bkdn4knyhhg07dsq/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/{{ $apiKey = env('API_EDITOR'); }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="{{ url('public/admin/js/editor.js') }}"></script>
+<script src="{{ url('public/admin/js/posts/preview.js') }}"></script>
+
+
+
+
+
 
 <script src="{{ url('public/admin/js/posts/create.js') }}"></script>
+
 <script>
-    tinymce.init({
-        selector: "#desc-textarea",
-        block_formats: 'Header 4=h4;Paragraph=p',
-        plugins: "tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss preview",
-        toolbar: "undo redo | blocks | bold italic underline strikethrough | link image table mergetags | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | codesample preview code",
-        tinycomments_mode: "embedded",
-    });
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const form = document.querySelector('.needs-validation')
 
-    $('.select2').select2({
-        theme: "bootstrap-5",
-        selectionCssClass: "select2",
-        dropdownCssClass: "select2--small",
+    // Loop over them and prevent submission
+    
+    form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+        }
+        
+        form.classList.add('was-validated')
+    }, false)
+   
+    form.addEventListener('submit', (e)=>{
+        
+        const valueSelect = document.getElementById('language-select').value
+        if(!valueSelect){
+            addInvalidSelect(true);
+        }else{
+            addInvalidSelect(false);   
+        }
+        
     })
+    
+    function addInvalidSelect(check){
+        
+        const elmSelect =document.querySelector(".form-control.language-selected.d-flex.flex-wrap.gap-2")
+        const textWarring =document.getElementById('select-ivalid')
 
-    const previewBtn = document.querySelector('.show-preview')
-    previewBtn.onclick = (e) => {
-        e.preventDefault();
-        console.log(tinymce.get('desc-textarea').getContent());
+        
+        check?elmSelect.style.border = '1px solid red':elmSelect.style.border = '';
+        check?textWarring.style.display = 'block':textWarring.style.display = 'none';
+
     }
 </script>
+
+    
+
 @stop

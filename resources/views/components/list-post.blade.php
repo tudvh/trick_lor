@@ -8,7 +8,10 @@ use \App\Helpers\DateHelper;
     <div class="item col-12 col-sm-{{ $colSm }} col-lg-{{ $colLg }}">
         <a href="{{ route('site.post', ['postSlug' => $post->slug]) }}">
             <div class="img-box">
-                <img src="{{url('public/site/img')}}/{{ $post->thumbnail }}" alt="">
+                <?php
+                    $imageThumnail = json_decode($post->thumbnail)[2];
+                ?>
+                <img src="{{ $imageThumnail }}" alt="">
             </div>
             <div class="info">
                 <h3 class="title">{{ $post->title }}</h3>
