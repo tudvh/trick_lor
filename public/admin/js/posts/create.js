@@ -3,6 +3,13 @@ const languageChoose = document.querySelector(".language-choose");
 const languageChooseItems = languageChoose.querySelectorAll("li");
 const languageSelect = document.querySelector("#language-select");
 
+languageSelect.querySelectorAll("option").forEach(option=> {
+    if(option.selected){
+        addItemElm(option.value,option.innerHTML);
+        setDisableLanguageChooseItem(option.value);
+    }
+})
+
 document.addEventListener("click", (e) => {
     const outsideClick = languageSelected.contains(e.target);
 
@@ -13,23 +20,50 @@ document.addEventListener("click", (e) => {
     }
 });
 
+
+//set even on choose language
 for (let languageChooseItem of languageChooseItems) {
     languageChooseItem.addEventListener("click", () => {
         const languageId = languageChooseItem.dataset.id;
-        const languageText = languageChooseItem.textContent;
+        const languageName = languageChooseItem.textContent;
 
-        addSelectedItem(languageId, languageText);
+        handleSelect(languageId,true,languageName);
     });
 }
 
-function addSelectedItem(id, name) {
-    setValueLanguageSelect(id, true);
+//set selected language
+function setSelectedLanguage(id,isSelected) {
+    const listOption = languageSelect.querySelectorAll("option");
+    for (let option of listOption) {
+        if (option.value === id) {
+            option.selected = isSelected;
+        }
+    }
+}
 
+function handleSelect(id, selected,languageName="") {
+    setDisableLanguageChooseItem(id);
+    if (selected==false) {
+        //remove value
+        setSelectedLanguage(id,false);
+        //remove elm
+        removeItemElm(id);
+    }else{
+       
+        //add value
+        setSelectedLanguage(id,true);
+        //add elm
+        addItemElm(id,languageName);
+    }
+}
+
+//add item select elm
+function addItemElm(id,languageName){
     // Create language selected item
     const newSelectedItem = document.createElement("div");
     newSelectedItem.className = "form-control language-selected-item";
     newSelectedItem.id = `_${id}`;
-    newSelectedItem.innerHTML = `<span>${name}</span>
+    newSelectedItem.innerHTML = `<span>${languageName}</span>
                                 <span class="icon-remove d-flex align-items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="0.8rem" viewBox="0 0 384 512">
                                         <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
@@ -42,33 +76,19 @@ function addSelectedItem(id, name) {
     // Set event when click on remove btn
     const removeBtn = newSelectedItem.querySelector(".icon-remove");
     removeBtn.onclick = () => {
-        removeSelectedItem(id);
+        handleSelect(id,false);
     };
 }
 
-function removeSelectedItem(id) {
-    setValueLanguageSelect(id, false);
-
+//remove item select elm
+function removeItemElm(id){
     const itemToRemove = languageSelected.querySelector(`#_${id}`);
     if (itemToRemove) {
         itemToRemove.remove();
     }
 }
 
-function setValueLanguageSelect(id, isSelected) {
-    const listOption = languageSelect.querySelectorAll("option");
-    if(isSelected){
-        addInvalidSelect(false)
-    }
-    for (let option of listOption) {
-        if (option.value === id) {
-            option.selected = isSelected;
-        }
-    }
-   
-    setDisableLanguageChooseItem(id);
-}
-
+// set Disable
 function setDisableLanguageChooseItem(id) {
     for (let languageChooseItem of languageChooseItems) {
         const languageId = languageChooseItem.dataset.id;
