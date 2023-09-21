@@ -11,9 +11,21 @@
 @stop
 
 @section('content')
+
+<?php
+    if(old('languages')!==null){
+        $listLangugePost=old('languages');
+    }
+?>
 <div class="card p-3">
-    <form class="row needs-validation" method="POST" novalidate action="{{ route('admin.posts.store') }}">
+    @if (session('success'))
+        <div class="alert alert-success mt-3">
+            {{ session('success') }}
+        </div>
+    @endif
+    <form class="row needs-validation" method="POST" novalidate action="{{ route('admin.posts.update',['post'=>$post->id]) }}">
         @csrf
+        @method('PUT')
         @if($errors->any())
             <div class="alert alert-danger">
                 @if($errors->has('title'))
@@ -32,7 +44,7 @@
             <div class="form-group">
                 <label for="title">Tiêu đề</label>
                 
-                <input value="{{ $post->title }}" type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề" required>
+                <input value="@if(old('title')) {{old('title')}} @else {{$post->title}} @endif" type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề" required>
                 <div id="invalid-feedback-title" class="invalid-feedback" >
                     Vui lòng nhập title!
                 </div>
@@ -41,8 +53,9 @@
 
         <div class="col-12 col-lg-6 mt-4 mt-lg-0">
             <div class="form-group">
+            
                 <label for="youtube-link">Id youtube</label>
-                <input value="{{ $post->youtube_id }}" type="text" class="form-control" id="youtube-link" name="youtube_id" placeholder="Nhập id youtube" required>
+                <input value="@if(old('youtube_id')) {{old('youtube_id')}} @else {{$post->youtube_id}} @endif" type="text" class="form-control" id="youtube-link" name="youtube_id" placeholder="Nhập id youtube" required>
                 <div class="invalid-feedback">Vui lòng nhập id youtube!</div>
             </div>
         </div>
@@ -54,6 +67,9 @@
                 </div>
                 <div class="form-control language-choose none">
                     <ul>
+                        
+                        
+
                         @foreach($listLanguage as $language)
                         
                         <li data-id='{{ $language->id }}'>{{ $language->name }}</li>
@@ -63,6 +79,9 @@
                 <select multiple name="languages[]" id="language-select" class="form-control" hidden required>
                     @foreach($listLanguage as $language)
                     <?php
+
+
+
                         $checkLanguage="";
                         if(in_array($language->id, $listLangugePost)){
                             $checkLanguage = "selected";
@@ -82,8 +101,11 @@
                 <label for="youtube-link">Trạng thái</label>
                 
                 <select name="status" class="form-control" required>
-                    <option value="0" @if($post->status==0) selected @endif >Riêng tư</option>
-                    <option value="1" @if($post->status==1) selected @endif >Công khai</option>
+                        <?php 
+                            $check = old('status')!==null?old('status'):$post->active;
+                        ?>       
+                    <option value="0" @if($check==0) selected @endif >Riêng tư</option>
+                    <option value="1" @if($check==1) selected @endif >Công khai</option>
                 </select>
             </div>
         </div>
@@ -92,7 +114,13 @@
             <div class="form-group">
                 <label for="youtube-link">Mô tả</label>
                 <textarea class="form-control" name="description" id="desc-textarea" rows="5" >
-                    {!!$post->description!!}
+                    @if(old('description')!==null)
+                        {!!old('description')!!}
+                    
+                    @else
+                        {!!$post->description!!}
+                    
+                    @endif
                 </textarea>
             </div>
         </div>

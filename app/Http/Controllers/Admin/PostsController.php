@@ -128,7 +128,57 @@ class PostsController extends Controller
     
     public function update(Request $request, Post $post)
     {
-        //
+        
+        $this->validate($request, [
+            'title' => 'required|unique:posts,title,'. $post->id,
+            'youtube_id' => 'required|unique:posts,youtube_id,'. $post->id,
+
+        ], [
+            'title.required' => 'Vui lòng nhập title.',
+            'title.unique' => 'Tên bài đăng đã tồn tại.',
+
+            'youtube_id.required' => 'Vui lòng nhập youtube_id.',
+            'youtube_id.unique' => 'Youtube_id đã tồn tại.'
+
+        ]);
+        $post->title = $request->title;
+        $post->slug = Str::slug($request->title);
+        $post->youtube_id = $request->youtube_id;
+        $post->description = $request->input('description');
+        $post->active = $request->status;
+        
+        $links=["https://i.ytimg.com/vi/{$post->youtube_id}/mqdefault.jpg",
+            "https://i.ytimg.com/vi/{$post->youtube_id}/hqdefault.jpg",
+            "https://i.ytimg.com/vi/{$post->youtube_id}/maxresdefault.jpg"
+        ];
+        $post->thumbnail = json_encode($links);
+
+        $post->save();
+
+        $listLanguagesIdOld = $post->codes->pluck('language_id')->toArray();
+        $listLanguagesIDUpdate =  $request->languages;
+
+        $languageIdsToAdd = array_diff($listLanguagesIDUpdate, $listLanguagesIdOld);
+        $languageIdsToRemove = array_diff($listLanguagesIdOld, $listLanguagesIDUpdate);
+        
+        // dd($languageIdsToRemove);
+        if(count($languageIdsToRemove)>0){
+            $post->codes()->whereIn('language_id', $languageIdsToRemove)->delete();
+        }
+
+        if(count($languageIdsToAdd)>0){
+            $idsLanguages = collect($languageIdsToAdd)->map(function ($language) use ($post) {
+                return new Code([
+                    'post_id' => $post->id,
+                    'language_id' => $language
+                ]);
+            });
+            $post->codes()->saveMany($idsLanguages);
+        }
+        
+
+
+        return redirect()->back()->with("success","Cập nhật bài đăng thành công!");
     }
 
     public function destroy(Post $post)
