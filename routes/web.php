@@ -19,7 +19,13 @@ use App\Http\Controllers\Admin;
 
 Route::get('/test-editor', [Site\HomeController::class, 'testEditor']);
 
+
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('/login', [Admin\HomeController::class, 'login'])->name('admin.login');
+    Route::post('/login', [Admin\HomeController::class, 'handleLogin'])->name('admin.login');
+    Route::get('/logout', [Admin\HomeController::class, 'logout'])->name('admin.logout');
+
+
     Route::get('/', [Admin\HomeController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::group(['prefix' => 'posts'], function () {

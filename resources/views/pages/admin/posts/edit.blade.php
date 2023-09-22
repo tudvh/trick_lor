@@ -79,9 +79,6 @@
                 <select multiple name="languages[]" id="language-select" class="form-control" hidden required>
                     @foreach($listLanguage as $language)
                     <?php
-
-
-
                         $checkLanguage="";
                         if(in_array($language->id, $listLangugePost)){
                             $checkLanguage = "selected";

@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="{{ url('public/admin/css/posts/create.css') }}">
 @stop
 
+<?php
+    if(old('languages')!==null){
+        $listLangugePost=old('languages');
+    }
+?>
 @section('content')
 <div class="card p-3">
     <form class="row needs-validation" method="POST" novalidate action="{{ route('admin.posts.store') }}">
@@ -32,17 +37,17 @@
             <div class="form-group">
                 <label for="title">Tiêu đề</label>
                 
-                <input type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề" required>
+                <input value="{{ old('title') }}" type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề" required>
                 <div id="invalid-feedback-title" class="invalid-feedback" >
                     Vui lòng nhập title!
                 </div>
             </div>
-        </div>
+        </div>  
 
         <div class="col-12 col-lg-6 mt-4 mt-lg-0">
             <div class="form-group">
                 <label for="youtube-link">Link youtube</label>
-                <input type="text" class="form-control" id="youtube-link" name="youtube_id" placeholder="Nhập link youtube" required>
+                <input value="{{ old('youtube_id') }}" type="text" class="form-control" id="youtube-link" name="youtube_id" placeholder="Nhập link youtube" required>
                 <div class="invalid-feedback">Vui lòng nhập link youtube!</div>
             </div>
         </div>
@@ -61,7 +66,13 @@
                 </div>
                 <select multiple name="languages[]" id="language-select" class="form-control" hidden required>
                     @foreach($listLanguage as $language)
-                    <option value="{{ $language->id }}">{{ $language->name }}</option>
+                        <?php
+                            $checkLanguage="";
+                            if(isset($listLangugePost) && in_array($language->id, $listLangugePost)){
+                                $checkLanguage = "selected";
+                            }
+                        ?>
+                        <option {{ $checkLanguage }} value="{{ $language->id }}">{{ $language->name }}</option>
                     @endforeach
                 </select>
                 
@@ -73,8 +84,9 @@
             <div class="form-group">
                 <label for="youtube-link">Trạng thái</label>
                 <select name="status" class="form-control" required>
-                    <option value="0">Riêng tư</option>
-                    <option value="1" selected>Công khai</option>
+                                       
+                    <option <?php if(old('status') == 1 && old('status')!==null){echo "selected";}?> value="1">Công khai</option>
+                    <option <?php if(old('status') == 0 && old('status')!==null){echo "selected";}?> value="0">Riêng tư</option>
                 </select>
             </div>
         </div>
@@ -82,7 +94,9 @@
         <div class="col-12 mt-4">
             <div class="form-group">
                 <label for="youtube-link">Mô tả</label>
-                <textarea class="form-control" name="description" id="desc-textarea" rows="5"></textarea>
+                <textarea class="form-control" name="description" id="desc-textarea" rows="5">
+                {!!old('description')!!}
+                </textarea>
             </div>
         </div>
 

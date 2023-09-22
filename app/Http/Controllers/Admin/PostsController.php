@@ -13,6 +13,9 @@ use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
+    public function __construct() {
+        $this->middleware('admin');
+    }
     private function renderTable($listPost)
     {
         $renderStr = '';
@@ -95,8 +98,7 @@ class PostsController extends Controller
         
         $links=["https://i.ytimg.com/vi/{$post->youtube_id}/mqdefault.jpg",
             "https://i.ytimg.com/vi/{$post->youtube_id}/hqdefault.jpg",
-            "https://i.ytimg.com/vi/{$post->youtube_id}/maxresdefault.jpg"
-        ];
+            "https://i.ytimg.com/vi/{$post->youtube_id}/maxresdefault.jpg"];
         $post->thumbnail = json_encode($links);
 
         $post->save();
