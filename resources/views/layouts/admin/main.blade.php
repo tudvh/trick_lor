@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="{{ url('public/admin/css/admin.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/header.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/sidebar.css') }}">
-
-
     @yield('css')
 </head>
 
@@ -32,7 +30,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="http://localhost/trick_lor/public/site/js/prism.js"></script>
     <script>
-        
         Prism.highlightAll();
     </script>
 

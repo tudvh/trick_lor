@@ -1,94 +1,103 @@
-.video {
-    border-radius: 12px;
-    user-select: none;
-}
-
-.post-title {
-    font-weight: bold;
+.post-wrapper .post-title {
+    font-weight: 700;
+    font-size: 2.2rem;
     margin-bottom: 0;
 }
 
-.post-info {
-    font-size: 15px;
+.post-wrapper .post-info {
+    font-size: 1rem;
+    color: #757575;
 }
 
-.content .icon-box {
-    width: 30px;
+.post-wrapper .icon-box {
+    width: 40px;
+    height: 40px;
     cursor: pointer;
 }
 
-.content .icon-box path {
-    fill: currentColor;
+.post-wrapper .post-video {
+    border-radius: 5px;
+    user-select: none;
 }
 
-.post-desc h4 {
+.post-wrapper .post-desc h2,
+.post-wrapper .post-desc h3,
+.post-wrapper .post-desc h4 {
     font-weight: 600;
 }
 
-.post-desc p,
-.post-desc li {
-    text-align: justify;
+.post-wrapper .post-desc h2 {
+    font-size: 1.5rem;
 }
 
-.post-desc p {
-    margin-bottom: 0.8rem;
-    line-height: 1.8rem;
+.post-wrapper .post-desc h3 {
+    font-size: 1.17rem;
 }
 
-.post-desc ul {
+.post-wrapper .post-desc h4 {
+    font-size: 1.1rem;
+}
+
+.post-wrapper .post-desc p {
+    font-size: 1rem;
+    line-height: 2rem;
+}
+
+.post-wrapper .post-desc ul {
     padding-left: 1.2rem;
 }
 
-.post-desc li {
+.post-wrapper .post-desc li {
     list-style: unset;
 }
 
-.post-desc > ul > li {
-    margin-bottom: 0.5rem;
+.post-wrapper .post-desc > ul > li,
+.post-wrapper .post-desc > ol > li {
+    margin-bottom: 1rem;
 }
 
-.post-desc pre[class*="language-"] {
+.post-wrapper .post-desc pre {
     position: relative;
-    overflow: hidden;
     padding: 0;
+    margin-bottom: 1.5rem;
 }
 
-.post-desc pre[class*="language-"] code {
+.post-wrapper .post-desc pre code {
     display: block;
     font-size: 14px;
-    overflow-x: scroll;
+    overflow-x: auto;
     padding: 1rem;
 }
 
-.post-desc pre .copy-btn {
+.post-wrapper .post-desc pre .copy-code-btn {
     position: absolute;
     top: 10px;
     right: 10px;
     width: fit-content;
-    background: none;
-    border: none;
-    outline: none;
-    width: 1.3rem;
+    background: hsla(0, 0%, 88%, 0.2);
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+    color: #bbb;
+    padding: 2px 8px;
+    border-radius: 0.5em;
+    font-size: 13px;
     cursor: pointer;
-    z-index: 1000;
-    fill: rgba(255, 255, 255, 0.7);
-    transition: all 0.2s ease;
+    z-index: 8;
 }
 
-.post-desc pre .copy-btn:hover {
-    fill: rgba(255, 255, 255, 1);
+.post-wrapper .post-desc pre .copy-code-btn:hover,
+.post-wrapper .post-desc pre .copy-code-btn.copied {
+    color: #fff;
 }
 
-/* Scroll code */
-.post-desc pre[class*="language-"] code::-webkit-scrollbar-thumb {
-    border-color: #272822;
+/* Scroll code view */
+.post-wrapper .post-desc pre code::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.4);
 }
 
-.post-desc pre[class*="language-"] code::-webkit-scrollbar-thumb:hover {
+.post-wrapper .post-desc pre code::-webkit-scrollbar-thumb:hover {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.post-desc pre[class*="language-"] code::-webkit-scrollbar-thumb:active {
+.post-wrapper .post-desc pre code::-webkit-scrollbar-thumb:active {
     background-color: rgba(255, 255, 255, 0.6);
 }

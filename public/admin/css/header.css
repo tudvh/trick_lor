@@ -13,26 +13,26 @@ nav {
     border-bottom: 1px solid #dee2e6;
 }
 
-a {
+nav a {
     color: #000;
     text-decoration: none;
 }
 
-ul {
+nav ul {
     margin: 0;
     color: rgba(0, 0, 0, 0.7);
 }
 
-ul li {
+nav ul li {
     list-style: none;
 }
 
-ul li a {
+nav ul li a {
     display: block;
     padding: 1rem 0;
     color: rgba(0, 0, 0, 0.7);
 }
 
-svg path {
+nav svg path {
     fill: rgba(0, 0, 0, 0.7);
 }

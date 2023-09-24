@@ -6,43 +6,49 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
 use App\Models\Post;
-use App\Models\Code;
-
-use PhpParser\Node\Expr\BinaryOp\Pow;
 
 class HomeController extends Controller
 {
     public function home()
     {
-        $listLanguages = Language::get();
-        $listPosts = Post::where('active', 1)->get();
         $page = 'home';
-        return view('pages.site.home', compact('listLanguages', 'page', 'listPosts'));
+
+        $listPosts = Post::where('active', 1)->get();
+        return view('pages.site.home', compact('page', 'listPosts'));
+    }
+
+    public function search(Request $request)
+    {
+        $page = 'home';
+        $titleWeb = trim($request->q);
+
+        $searchKey = '%' . str_replace(' ', '%', trim($request->q)) . '%';
+        $listPosts = Post::where('active', 1)
+            ->where('title', 'like', $searchKey)
+            ->orWhere('description', 'like', $searchKey)
+            ->get();
+
+        return view('pages.site.home', compact('page', 'listPosts', 'titleWeb'));
+    }
+
+    public function language(string $languageSlug)
+    {
+        $language = Language::where('slug', $languageSlug)->first();
+
+        $page = $languageSlug;
+        $titleWeb = $language->name;
+
+        $listPosts = collect($language->codes)->map(function ($code) {
+            return $code->post;
+        });
+
+        return view('pages.site.home', compact('page', 'listPosts', 'titleWeb'));
     }
 
     public function post(string $postSlug)
     {
-        $listLanguages = Language::get();
         $post = Post::where('slug', $postSlug)->first();
 
-        return view('pages.site.post', compact('listLanguages', 'post'));
-    }
-
-    public function language(string $languageActive)
-    {
-        $listLanguages = Language::get();
-        $language = Language::where('slug', $languageActive)->first();
-        $page = $languageActive;
-        $listPostsArr = [];
-        foreach ($language->codes as $code) {
-            $listPostsArr[] = $code->post;
-        }
-        $listPosts = collect($listPostsArr);
-        return view('pages.site.home', compact('listLanguages', 'page', 'listPosts'));
-    }
-
-    public function testEditor()
-    {
-        return view('pages.site.testEditor');
+        return view('pages.site.post', compact('post'));
     }
 }

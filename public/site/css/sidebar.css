@@ -1,27 +1,50 @@
 aside {
     width: var(--sidebar-width);
-    height: calc(100vh - 100px);
+    height: 100vh;
     position: fixed;
-    z-index: 1;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: calc(var(--header-height) + 20px);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.5s ease;
 }
 
-aside ul {
+aside .logo-web {
+    display: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.079);
+}
+
+aside .logo-web a {
+    height: 130px;
+    display: flex;
+    align-items: center;
     padding: 0;
+}
+
+aside .logo-web a img {
+    height: 30px;
+}
+
+aside ul + ul {
+    border-top: 1px solid rgba(0, 0, 0, 0.079);
+}
+
+aside .list {
+    padding-right: 0;
     height: 100%;
     overflow-y: scroll;
-    margin: 0;
 }
 
 aside li a {
     display: block;
     padding: 11px 12px;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: background-color 0.1s ease;
 }
 
 aside li a.active {
-    font-weight: 600;
+    font-weight: bold;
+    color: var(--color-primary);
 }
 
 aside li a.active,
@@ -30,12 +53,8 @@ aside li a:hover {
     transition: background-color 0.1s ease;
 }
 
-aside li a .icon-box svg path {
-    fill: rgba(0, 0, 0, 0.8);
-}
-
-aside li a.active .icon-box svg path {
-    fill: currentColor;
+aside li a.home-btn .icon-box {
+    font-size: 23px;
 }
 
 aside li a span {
@@ -43,19 +62,34 @@ aside li a span {
 }
 
 /* Tablet */
-@media only screen and (max-width: 991px) {
+@media (max-width: 991px) {
     aside {
         width: var(--sidebar-tablet-width);
     }
 }
 
 /* Mobile */
-@media only screen and (max-width: 575px) {
+@media (max-width: 575px) {
     aside {
-        width: var(--sidebar-mobile-width);
+        position: fixed;
+        left: 0;
+        padding-top: 0;
+        width: var(--sidebar-width);
+        background-color: #fff;
+        z-index: 30;
+        margin-left: calc(0px - var(--sidebar-width));
+        background-image: linear-gradient(#fff, #fff1eb);
     }
 
-    aside li a span {
-        font-size: 10px;
+    aside > * {
+        padding: 12px;
+    }
+
+    aside.open {
+        margin-left: 0;
+    }
+
+    aside .logo-web {
+        display: block;
     }
 }

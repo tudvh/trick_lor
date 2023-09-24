@@ -1,17 +1,22 @@
 header {
     position: fixed;
     width: 100%;
-    height: fit-content;
+    height: var(--header-height);
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
     z-index: 10;
 }
 
-header .header-wrapper {
-    position: relative;
+header .header-icon-btn {
+    height: 100%;
+    display: none;
+    align-items: center;
+    font-size: 1.3rem;
+    cursor: pointer;
 }
 
 header .container {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,34 +26,41 @@ header .container {
 header .logo,
 header .more {
     width: fit-content;
-}
-
-header .logo a {
-    display: block;
-    padding: 20px 0;
-}
-
-header .logo h2 {
-    color: orangered;
-}
-
-header .logo h2:hover {
-    color: orange;
-}
-
-header .search-wrapper {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+header .logo > * {
+    height: 100%;
+}
+
+header .logo .sidebar-menu {
+    padding-right: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+header .logo a {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: 30px;
+}
+
+header .search-wrapper {
     width: 500px;
-    padding: 20px 0;
     background-color: #fff;
 }
 
-header .close-search-btn {
-    font-size: 1.3rem;
-    color: rgba(0, 0, 0, 0.8);
-    display: none;
+header .search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 header .search {
@@ -56,56 +68,62 @@ header .search {
     justify-content: center;
     align-items: center;
     flex: 1;
-    border: 1px solid #d3d3d3;
-    border-radius: 40px;
+    background: rgba(22, 24, 35, 0.06);
+    border-radius: 92px;
+    border: 1px solid transparent;
 }
 
-header .search input,
-header .search .submit-btn {
-    border: 0;
-    outline: 0;
-    background: none;
+header .search:has(input:hover),
+header .search:has(input:focus) {
+    border-color: rgba(22, 24, 35, 0.2);
 }
 
 header .search input {
-    flex: 1;
-    padding: 6px 20px;
+    width: 100%;
+    padding: 12px 16px;
+    caret-color: var(--color-primary);
+}
+
+header .search .span-split {
+    width: 1px;
+    height: 28px;
+    margin: -3px 0;
+    background: rgba(22, 24, 35, 0.12);
 }
 
 header .search .submit-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
-    border-left: 1px solid #d3d3d3;
-    border-radius: 0 40px 40px 0;
+    border-radius: 0 92px 92px 0;
+    color: rgba(22, 24, 35, 0.34);
+    font-size: 1.25rem;
+    padding: 13px 20px;
 }
 
 header .search .submit-btn:hover {
-    background-color: #f0f0f0;
+    background: rgba(22, 24, 35, 0.06);
 }
 
-header .open-search-btn {
-    font-size: 1.25rem;
-    padding: 0 10px;
-    color: rgba(0, 0, 0, 0.8);
-    display: none;
+header .more .open-search-btn {
+    height: 100%;
+    padding: 0 16px;
+    justify-content: center;
+    align-items: center;
 }
 
-header .login-btn {
-    background-color: orangered;
+header .more .login-btn {
+    background-color: var(--color-primary);
     color: #fff;
-    transition: background-color 0.15s ease;
 }
 
-header .login-btn:hover {
-    background-color: orange;
+header .more .login-btn:hover {
+    background-color: var(--color-primary-hover);
     color: #fff;
-    transition: background-color 0.15s ease;
 }
 
 /* Tablet */
-@media only screen and (max-width: 991px) {
+@media (max-width: 991px) {
     header .search-wrapper {
         position: absolute;
         top: 0;
@@ -113,11 +131,11 @@ header .login-btn:hover {
         right: 0;
         bottom: 0;
         width: 100%;
-        -webkit-padding-start: 20px;
-        -webkit-padding-end: 20px;
-        /* padding-left: 40px;
-        padding-right: 40px; */
         display: none;
+    }
+
+    header .search-container {
+        padding: 0 20px;
     }
 
     header .search-wrapper.search-open {
@@ -125,11 +143,21 @@ header .login-btn:hover {
     }
 
     header .close-search-btn {
-        display: block;
+        display: flex;
     }
 
-    header .open-search-btn {
+    header .more .open-search-btn {
         display: flex;
-        align-items: center;
+    }
+}
+
+/* Mobile */
+@media (max-width: 575px) {
+    header .logo .sidebar-menu {
+        display: flex;
+    }
+
+    header .logo img {
+        display: none;
     }
 }

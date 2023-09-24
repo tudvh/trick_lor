@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+:root {
+    --color-text: #292929;
+}
+
+/* Reset CSS */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    line-height: 1.5;
+    font-size: 1rem;
+    text-rendering: optimizeSpeed;
+    color: var(--color-text);
+}
+
+/* Default element css */
+button,
+input {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
+}
+
+a:hover {
+    color: currentColor;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.btn,
+a,
+input[type="submit"],
+button {
+    transition: all 0.2s ease;
+}
+
+.btn:hover,
+a:hover,
+input[type="submit"]:hover,
+button:hover {
+    transition-duration: 0.1s;
+}
+
+/* Scrollbar css */
+::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 3px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Scrollbar css mobile */
+@media (max-width: 575px) {
+    ::-webkit-scrollbar {
+        width: 9px;
+        height: 9px;
+    }
+}

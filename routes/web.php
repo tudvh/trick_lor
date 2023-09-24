@@ -17,9 +17,7 @@ use App\Http\Controllers\Admin;
 |
 */
 
-Route::get('/test-editor', [Site\HomeController::class, 'testEditor']);
-
-
+// Admin
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', [Admin\HomeController::class, 'login'])->name('admin.login');
     Route::post('/login', [Admin\HomeController::class, 'handleLogin'])->name('admin.login');
@@ -39,10 +37,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('/{post}', [Admin\PostsController::class, 'update'])->name('admin.posts.update');
         Route::delete('/{post}', [Admin\PostsController::class, 'destroy'])->name('admin.posts.destroy');
         Route::get('/{post}/setStatus', [Admin\PostsController::class, 'setStatus'])->name('admin.posts.setStatus');
-
     });
 });
 
-Route::get('/', [Site\HomeController::class, 'home'])->name('site.home');
-Route::get('/post/{postSlug}', [Site\HomeController::class, 'post'])->name('site.post');
-Route::get('/{language}', [Site\HomeController::class, 'language'])->name('site.language');
+// Site
+Route::group(['prefix' => ''], function () {
+    Route::get('/', [Site\HomeController::class, 'home'])->name('site.home');
+    Route::get('/search', [Site\HomeController::class, 'search'])->name('site.search');
+    Route::get('/post/{post}', [Site\HomeController::class, 'post'])->name('site.post');
+    Route::get('/language/{language}', [Site\HomeController::class, 'language'])->name('site.language');
+});

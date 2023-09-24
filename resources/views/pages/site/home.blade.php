@@ -1,6 +1,6 @@
 @extends('layouts.site.main')
 
-@section('title', 'Trang chủ')
+@section('title', isset($titleWeb) ? $titleWeb : 'Trang chủ')
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/home.css') }}">
@@ -11,7 +11,7 @@
 @if ($listPosts->count() > 0)
 <x-list-post :colLg="4" :colSm="6" :listPosts="$listPosts" />
 @else
-<h3>Chưa có bài đăng!</h3>
+<h3>Danh sách bài đăng trống!</h3>
 @endif
 
 @stop

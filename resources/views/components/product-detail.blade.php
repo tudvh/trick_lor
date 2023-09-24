@@ -1,11 +1,13 @@
 <?php
-use \App\Helpers\DateHelper;
 
+use \App\Helpers\DateHelper;
 ?>
 
 <link rel="stylesheet" href="{{ url('public/site/css/prism.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/post.css') }}">
+
 <div class="row">
+    @if($post->youtube_id)
     <div class="col-12 col-lg-6">
         <div id="video-box" class="w-100 d-flex justify-content-center">
             <iframe class="video" type="text/html" frameborder="0" style="width: 100%; height: 500px;" src="https://www.youtube-nocookie.com/embed/{{ $post->youtube_id }}?autoplay=1&disablekb=1&fs=0&iv_load_policy=3&loop=1&playlist={{ $post->youtube_id }}&modestbranding=1&rel=0&showinfo=0&vq=hd1080"></iframe>
@@ -20,10 +22,10 @@ use \App\Helpers\DateHelper;
             </div>
         </div>
     </div>
+    @endif
 
-    <div class="col-12 col-lg-6 mt-4 mt-lg-0 mb-5">
+    <div class="col-12 @if($post->youtube_id) col-lg-6 @endif mt-4 mt-lg-0 mb-3">
         <h2 class="post-title">{{ $post->title }}</h2>
-        
         <div class="d-flex gap-2 mt-2">
             @foreach($post->codes as $code)
             <div class="icon-box">
@@ -36,7 +38,3 @@ use \App\Helpers\DateHelper;
         </div>
     </div>
 </div>
-
-
-
-

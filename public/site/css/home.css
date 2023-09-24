@@ -1,38 +1,39 @@
-.wrapper > .item {
+.content-wrapper > .item {
     padding: 1rem;
+    border-radius: 5px;
 }
 
-.wrapper > .item a {
+.content-wrapper > .item a {
     overflow: hidden;
 }
 
-.wrapper .img-box {
+.content-wrapper .img-box {
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
-.wrapper > .item img {
+.content-wrapper > .item img {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
     transition: scale 0.1s;
 }
 
-.wrapper > .item .info {
+.content-wrapper > .item .info {
     padding: 0 0.5rem;
     margin-top: 0.5rem;
 }
 
-.wrapper > .item:hover {
+.content-wrapper > .item:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
 }
 
-.wrapper > .item:hover img {
+.content-wrapper > .item:hover img {
     width: 100%;
     scale: 1.1;
 }
 
-.wrapper > .item .info .title {
+.content-wrapper > .item .info .title {
     margin-bottom: 0;
     color: #000000;
     font-size: 1rem;
@@ -40,12 +41,8 @@
     font-weight: 600;
 }
 
-.wrapper > .item .info span {
+.content-wrapper > .item .info span {
     display: block;
     font-size: 0.8rem;
     margin-bottom: 0.3rem;
-}
-
-.wrapper > .item .icon-box svg path {
-    fill: currentColor;
 }

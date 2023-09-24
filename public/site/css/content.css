@@ -1,6 +1,9 @@
 .content {
     width: calc(100% - var(--sidebar-width));
+    min-height: calc(100vh - 2rem);
     margin-left: calc(var(--sidebar-width));
+    padding-top: calc(var(--header-height) + 20px);
+    margin-bottom: 2rem;
 }
 
 .content > .row {
@@ -8,7 +11,7 @@
 }
 
 /* Tablet */
-@media only screen and (max-width: 991px) {
+@media (max-width: 991px) {
     .content {
         width: calc(100% - var(--sidebar-tablet-width));
         margin-left: calc(var(--sidebar-tablet-width));
@@ -16,9 +19,9 @@
 }
 
 /* Mobile */
-@media only screen and (max-width: 575px) {
+@media (max-width: 575px) {
     .content {
-        width: calc(100% - var(--sidebar-mobile-width));
-        margin-left: calc(var(--sidebar-mobile-width));
+        width: 100%;
+        margin-left: 0;
     }
 }
