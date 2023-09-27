@@ -30,13 +30,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/', [Admin\PostsController::class, 'index'])->name('admin.posts.index');
         Route::get('/create', [Admin\PostsController::class, 'create'])->name('admin.posts.create');
         Route::post('/', [Admin\PostsController::class, 'store'])->name('admin.posts.store');
-        Route::get('/search', [Admin\PostsController::class, 'search'])->name('admin.posts.search');
+        Route::get('/filter', [Admin\PostsController::class, 'filter'])->name('admin.posts.filter');
         Route::post('/preview', [Admin\PostsController::class, 'preview'])->name('admin.posts.preview');
         Route::get('/{post}', [Admin\PostsController::class, 'show'])->name('admin.posts.show');
         Route::get('/{post}/edit', [Admin\PostsController::class, 'edit'])->name('admin.posts.edit');
         Route::put('/{post}', [Admin\PostsController::class, 'update'])->name('admin.posts.update');
         Route::delete('/{post}', [Admin\PostsController::class, 'destroy'])->name('admin.posts.destroy');
-        Route::get('/{post}/setStatus', [Admin\PostsController::class, 'setStatus'])->name('admin.posts.setStatus');
+        Route::get('/{post}/toggle-status', [Admin\PostsController::class, 'toggleStatus'])->name('admin.posts.toggle-status');
     });
 });
 

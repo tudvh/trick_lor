@@ -1,103 +1,132 @@
 .post-wrapper .post-title {
-    font-weight: 700;
-    font-size: 2.2rem;
-    margin-bottom: 0;
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 0;
 }
 
 .post-wrapper .post-info {
-    font-size: 1rem;
-    color: #757575;
+  font-size: 1rem;
+  color: #757575;
 }
 
 .post-wrapper .icon-box {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.post-wrapper .video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
 }
 
 .post-wrapper .post-video {
-    border-radius: 5px;
-    user-select: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  user-select: none;
 }
 
 .post-wrapper .post-desc h2,
 .post-wrapper .post-desc h3,
 .post-wrapper .post-desc h4 {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .post-wrapper .post-desc h2 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .post-wrapper .post-desc h3 {
-    font-size: 1.17rem;
+  font-size: 1.17rem;
 }
 
 .post-wrapper .post-desc h4 {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .post-wrapper .post-desc p {
-    font-size: 1rem;
-    line-height: 2rem;
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
+.post-wrapper .post-desc p:has(> img) {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+}
+
+.post-wrapper .post-desc p img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: auto;
+  height: 100%;
+  transform: translateX(-50%);
+  border-radius: 5px;
 }
 
 .post-wrapper .post-desc ul {
-    padding-left: 1.2rem;
+  padding-left: 1.2rem;
 }
 
 .post-wrapper .post-desc li {
-    list-style: unset;
+  list-style: unset;
 }
 
 .post-wrapper .post-desc > ul > li,
 .post-wrapper .post-desc > ol > li {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .post-wrapper .post-desc pre {
-    position: relative;
-    padding: 0;
-    margin-bottom: 1.5rem;
+  position: relative;
+  padding: 0;
+  margin-bottom: 1.5rem;
 }
 
 .post-wrapper .post-desc pre code {
-    display: block;
-    font-size: 14px;
-    overflow-x: auto;
-    padding: 1rem;
+  display: block;
+  font-size: 14px;
+  overflow-x: auto;
+  padding: 1rem;
 }
 
 .post-wrapper .post-desc pre .copy-code-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: fit-content;
-    background: hsla(0, 0%, 88%, 0.2);
-    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
-    color: #bbb;
-    padding: 2px 8px;
-    border-radius: 0.5em;
-    font-size: 13px;
-    cursor: pointer;
-    z-index: 8;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: fit-content;
+  background: hsla(0, 0%, 88%, 0.2);
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+  color: #bbb;
+  padding: 2px 8px;
+  border-radius: 0.5em;
+  font-size: 13px;
+  cursor: pointer;
+  z-index: 8;
 }
 
 .post-wrapper .post-desc pre .copy-code-btn:hover,
 .post-wrapper .post-desc pre .copy-code-btn.copied {
-    color: #fff;
+  color: #fff;
 }
 
 /* Scroll code view */
 .post-wrapper .post-desc pre code::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .post-wrapper .post-desc pre code::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .post-wrapper .post-desc pre code::-webkit-scrollbar-thumb:active {
-    background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.6);
 }

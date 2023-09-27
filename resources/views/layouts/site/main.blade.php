@@ -34,8 +34,9 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ url('public/site/js/sidebar-mobile.js') }}"></script>
-    <!-- <script src="{{ url('public/assets/js/remove-ads.js') }}"></script> -->
+    <script src="{{ url('public/site/js/header-open-search.js') }}"></script>
+    <script src="{{ url('public/assets/js/sidebar-mobile.js') }}"></script>
+    <!-- <script src="{{ url('public/assets/js/hide-logo.js') }}"></script> -->
 
     <!-- <div style="text-align: right;position: fixed;z-index:9999999;bottom: 0;width: auto;right: 1%;cursor: pointer;line-height: 0;display:block !important;">
         <a title="Hosted on free web hosting 000webhost.com. Host your own website for FREE." target="_blank" href="https://www.000webhost.com/?utm_source=000webhostapp&amp;utm_campaign=000_logo&amp;utm_medium=website&amp;utm_content=footer_img">

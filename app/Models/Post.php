@@ -13,6 +13,10 @@ class Post extends Model
 
     protected $fillable = ['title', 'slug', 'youtube_id', 'description', 'thumbnail', 'active'];
 
+    protected $casts = [
+        'thumbnail' => 'array',
+    ];
+
     public function codes()
     {
         return $this->hasMany(Code::class, 'post_id', 'id');

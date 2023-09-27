@@ -13,39 +13,39 @@
 @section('content')
 
 <?php
-    if(old('languages')!==null){
-        $listLangugePost=old('languages');
-    }
+if (old('languages') !== null) {
+    $listLangugePost = old('languages');
+}
 ?>
 <div class="card p-3">
     @if (session('success'))
-        <div class="alert alert-success mt-3">
-            {{ session('success') }}
-        </div>
+    <div class="alert alert-success mt-3">
+        {{ session('success') }}
+    </div>
     @endif
     <form class="row needs-validation" method="POST" novalidate action="{{ route('admin.posts.update',['post'=>$post->id]) }}">
         @csrf
         @method('PUT')
         @if($errors->any())
-            <div class="alert alert-danger">
-                @if($errors->has('title'))
-                    <small class="text-danger">{{$errors->first('title')}}</small>
-                    <br />
-                @endif   
-                @if($errors->has('youtube_id'))
-                    
-                    <small class="text-danger">{{$errors->first('youtube_id')}}</small>
-                @endif  
-                    
-            </div>
-        @endif    
-        
+        <div class="alert alert-danger">
+            @if($errors->has('title'))
+            <small class="text-danger">{{$errors->first('title')}}</small>
+            <br />
+            @endif
+            @if($errors->has('youtube_id'))
+
+            <small class="text-danger">{{$errors->first('youtube_id')}}</small>
+            @endif
+
+        </div>
+        @endif
+
         <div class="col-12 col-lg-6">
             <div class="form-group">
                 <label for="title">Tiêu đề</label>
-                
+
                 <input value="@if(old('title')) {{old('title')}} @else {{$post->title}} @endif" type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề" required>
-                <div id="invalid-feedback-title" class="invalid-feedback" >
+                <div id="invalid-feedback-title" class="invalid-feedback">
                     Vui lòng nhập title!
                 </div>
             </div>
@@ -53,9 +53,9 @@
 
         <div class="col-12 col-lg-6 mt-4 mt-lg-0">
             <div class="form-group">
-            
-                <label for="youtube-link">Id youtube</label>
-                <input value="@if(old('youtube_id')) {{old('youtube_id')}} @else {{$post->youtube_id}} @endif" type="text" class="form-control" id="youtube-link" name="youtube_id" placeholder="Nhập id youtube" required>
+
+                <label for="youtube-link">Youtube id</label>
+                <input value="@if(old('youtube_id')) {{old('youtube_id')}} @else {{$post->youtube_id}} @endif" type="text" class="form-control" id="youtube-id" name="youtube_id" placeholder="Nhập id youtube" required>
                 <div class="invalid-feedback">Vui lòng nhập id youtube!</div>
             </div>
         </div>
@@ -67,28 +67,28 @@
                 </div>
                 <div class="form-control language-choose none">
                     <ul>
-                        
-                        
 
-                        @foreach($listLanguage as $language)
-                        
+
+
+                        @foreach($listLanguages as $language)
+
                         <li data-id='{{ $language->id }}'>{{ $language->name }}</li>
                         @endforeach
                     </ul>
                 </div>
                 <select multiple name="languages[]" id="language-select" class="form-control" hidden required>
-                    @foreach($listLanguage as $language)
+                    @foreach($listLanguages as $language)
                     <?php
-                        $checkLanguage="";
-                        if(in_array($language->id, $listLangugePost)){
-                            $checkLanguage = "selected";
-                        }
+                    $checkLanguage = "";
+                    if (in_array($language->id, $listLangugePost)) {
+                        $checkLanguage = "selected";
+                    }
                     ?>
-                    
+
                     <option {{ $checkLanguage }} value="{{ $language->id }}">{{ $language->name }}</option>
                     @endforeach
                 </select>
-                
+
                 <small id="select-ivalid" style="color:#dc3545;display:none">Vui lòng chọn ngôn ngữ!</small>
             </div>
         </div>
@@ -96,13 +96,13 @@
         <div class="col-12 col-lg-6 mt-4">
             <div class="form-group">
                 <label for="youtube-link">Trạng thái</label>
-                
+
                 <select name="status" class="form-control" required>
-                        <?php 
-                            $check = old('status')!==null?old('status'):$post->active;
-                        ?>       
-                    <option value="0" @if($check==0) selected @endif >Riêng tư</option>
-                    <option value="1" @if($check==1) selected @endif >Công khai</option>
+                    <?php
+                    $check = old('status') !== null ? old('status') : $post->active;
+                    ?>
+                    <option value="0" @if($check==0) selected @endif>Riêng tư</option>
+                    <option value="1" @if($check==1) selected @endif>Công khai</option>
                 </select>
             </div>
         </div>
@@ -110,7 +110,7 @@
         <div class="col-12 mt-4">
             <div class="form-group">
                 <label for="youtube-link">Mô tả</label>
-                <textarea class="form-control" name="description" id="desc-textarea" rows="5" >
+                <textarea class="form-control" name="description" id="desc-textarea" rows="5">
                     @if(old('description')!==null)
                         {!!old('description')!!}
                     
@@ -129,84 +129,80 @@
             </div>
         </div>
 
-        
+
     </form>
 </div>
 
 <div class="modal fade" id="preview" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Preview</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="preview-content">
-        
-      </div>
-      
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Preview</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="preview-content">
+
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
 
 @stop
 
 
 <?php
-    
+
 ?>
 
 
 @section('js')
 
 <script src="https://cdn.tiny.cloud/1/{{ $apiKey = env('API_EDITOR'); }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="{{ url('public/admin/js/editor.js') }}"></script>
+<script src="{{ url('public/assets/js/tinymce.js') }}"></script>
+<script src="{{ url('public/assets/js/prism.js') }}"></script>
+
 <script src="{{ url('public/admin/js/posts/preview.js') }}"></script>
-
-
-
-
-
-
 <script src="{{ url('public/admin/js/posts/create.js') }}"></script>
 
 <script>
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const form = document.querySelector('.needs-validation')
+    const form = document.querySelector('.needs-validation')
 
     // Loop over them and prevent submission
-    
+
     form.addEventListener('submit', event => {
         if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
+            event.preventDefault()
+            event.stopPropagation()
         }
-        
+
         form.classList.add('was-validated')
     }, false)
-   
-    form.addEventListener('submit', (e)=>{
-        
-        const valueSelect = document.getElementById('language-select').value
-        if(!valueSelect){
-            addInvalidSelect(true);
-        }else{
-            addInvalidSelect(false);   
-        }
-        
-    })
-    
-    function addInvalidSelect(check){
-        
-        const elmSelect =document.querySelector(".form-control.language-selected.d-flex.flex-wrap.gap-2")
-        const textWarring =document.getElementById('select-ivalid')
 
-        
-        check?elmSelect.style.border = '1px solid red':elmSelect.style.border = '';
-        check?textWarring.style.display = 'block':textWarring.style.display = 'none';
+    form.addEventListener('submit', (e) => {
+
+        const valueSelect = document.getElementById('language-select').value
+        if (!valueSelect) {
+            addInvalidSelect(true);
+        } else {
+            addInvalidSelect(false);
+        }
+
+    })
+
+    function addInvalidSelect(check) {
+
+        const elmSelect = document.querySelector(".form-control.language-selected.d-flex.flex-wrap.gap-2")
+        const textWarring = document.getElementById('select-ivalid')
+
+
+        check ? elmSelect.style.border = '1px solid red' : elmSelect.style.border = '';
+        check ? textWarring.style.display = 'block' : textWarring.style.display = 'none';
 
     }
 </script>
 
-    
+
 
 @stop

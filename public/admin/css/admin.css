@@ -1,33 +1,85 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-
 :root {
-    --width-sidebar: 250px;
-    --border-bottom: #4f5962;
+  --header-height: 60px;
+  --sidebar-width: 250px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
+.btn {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-html {
-    scroll-behavior: smooth;
+.content-wrapper {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-body {
-    font-family: "Roboto", sans-serif;
-    box-sizing: border-box;
+/* Overlay */
+.overlay,
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
-.content {
-    height: 2000px;
-    margin-left: var(--width-sidebar);
-    background-color: #f4f6f9;
-    padding: 1rem;
+.overlay {
+  display: none;
+  z-index: 20;
 }
 
-.content .title {
-    font-size: 1.8rem;
-    margin: 0;
-    margin-bottom: 2rem;
+.loading-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.loading-overlay.none {
+  display: none;
+}
+
+.loading-overlay .loading-icon {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 4.5rem;
+}
+
+.loading-overlay .loading-icon i {
+  animation: spinner 0.7s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(150deg);
+  }
+  80% {
+    transform: rotate(210deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Scroll */
+::-webkit-scrollbar-track {
+  background-color: #f4f6f9;
+}
+
+/* Sidebar mobile */
+@media (max-width: 991px) {
+  .wrapper.sidebar-open aside {
+    margin-left: 0;
+  }
+
+  .wrapper.sidebar-open .overlay {
+    display: block;
+  }
 }

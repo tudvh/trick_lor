@@ -1,48 +1,52 @@
+.content-wrapper {
+  width: 100%;
+}
+
 .content-wrapper > .item {
-    padding: 1rem;
-    border-radius: 5px;
+  padding: 1rem;
+  border-radius: 5px;
 }
 
 .content-wrapper > .item a {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .content-wrapper .img-box {
-    overflow: hidden;
-    border-radius: 10px;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .content-wrapper > .item img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    transition: scale 0.1s;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  transition: scale 0.1s;
 }
 
 .content-wrapper > .item .info {
-    padding: 0 0.5rem;
-    margin-top: 0.5rem;
+  padding: 0 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .content-wrapper > .item:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
 }
 
 .content-wrapper > .item:hover img {
-    width: 100%;
-    scale: 1.1;
+  width: 100%;
+  scale: 1.1;
 }
 
 .content-wrapper > .item .info .title {
-    margin-bottom: 0;
-    color: #000000;
-    font-size: 1rem;
-    line-height: 1.7rem;
-    font-weight: 600;
+  margin-bottom: 0;
+  color: #000000;
+  font-size: 1rem;
+  line-height: 1.7rem;
+  font-weight: 600;
 }
 
 .content-wrapper > .item .info span {
-    display: block;
-    font-size: 0.8rem;
-    margin-bottom: 0.3rem;
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
 }

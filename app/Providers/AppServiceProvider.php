@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $views = ['pages.site.home', 'pages.site.post'];
+        $views = ['pages.site.home', 'pages.site.post', 'pages.admin.posts.*'];
 
         foreach ($views as $view) {
             view()->composer($view, function ($view) {

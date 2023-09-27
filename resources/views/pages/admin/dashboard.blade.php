@@ -1,15 +1,8 @@
 @extends('layouts.admin.main')
 
 @section('title', 'Dashboard')
-@section('title-content', 'Đây nè')
-
-
-<!-- @section('css')
-<link rel="stylesheet" href="{{ url('public/site/css/home.css') }}">
-@stop -->
+@section('title-content', 'Dashboard')
 
 @section('content')
-
-
 
 @stop
