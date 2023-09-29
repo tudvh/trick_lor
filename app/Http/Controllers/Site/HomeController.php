@@ -13,7 +13,9 @@ class HomeController extends Controller
     {
         $page = 'home';
 
-        $listPosts = Post::where('active', 1)->get();
+        $listPosts = Post::where('active', 1)
+            ->orderBy('id', 'desc')
+            ->get();
         return view('pages.site.home', compact('page', 'listPosts'));
     }
 
@@ -26,6 +28,7 @@ class HomeController extends Controller
         $listPosts = Post::where('active', 1)
             ->where('title', 'like', $searchKey)
             ->orWhere('description', 'like', $searchKey)
+            ->orderBy('id', 'desc')
             ->get();
 
         return view('pages.site.home', compact('page', 'listPosts', 'titleWeb'));
@@ -40,7 +43,7 @@ class HomeController extends Controller
 
         $listPosts = collect($language->codes)->map(function ($code) {
             return $code->post;
-        });
+        })->reverse();
 
         return view('pages.site.home', compact('page', 'listPosts', 'titleWeb'));
     }

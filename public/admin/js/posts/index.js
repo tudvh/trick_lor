@@ -1,5 +1,3 @@
-import { showLoadingOverlay, closeLoadingOverlay } from '../admin.js'
-
 // Filter elements
 const rootURL = document.querySelector('meta[name="root-url"]').dataset.index
 const searchInput = document.querySelector('input[name="search"]')

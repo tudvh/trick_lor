@@ -1,9 +1,9 @@
 const loadingOverlay = document.querySelector('.loading-overlay')
 
-export const showLoadingOverlay = () => {
+const showLoadingOverlay = () => {
   loadingOverlay.classList.remove('none')
 }
 
-export const closeLoadingOverlay = () => {
+const closeLoadingOverlay = () => {
   loadingOverlay.classList.add('none')
 }

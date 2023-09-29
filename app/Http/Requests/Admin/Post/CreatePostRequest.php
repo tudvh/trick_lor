@@ -23,7 +23,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:posts,title',
-            'youtube_id' => 'unique:posts,youtube_id',
+            'youtube_id' => 'nullable|unique:posts,youtube_id',
         ];
     }
 

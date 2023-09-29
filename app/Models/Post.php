@@ -11,10 +11,10 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $fillable = ['title', 'slug', 'youtube_id', 'description', 'thumbnail', 'active'];
+    protected $fillable = ['title', 'slug', 'youtube_id', 'description', 'thumbnails', 'active'];
 
     protected $casts = [
-        'thumbnail' => 'array',
+        'thumbnails' => 'array',
     ];
 
     public function codes()

@@ -7,15 +7,22 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\CreatePostRequest;
+use App\Services\Post\PostService;
+use App\Services\Post\PostLanguageService;
 use App\Models\Post;
 use App\Models\Code;
 
-
 class PostsController extends Controller
 {
-    public function __construct()
+    protected $postService;
+    protected $postLanguageService;
+
+    public function __construct(PostService $postService, PostLanguageService $postLanguageService)
     {
         $this->middleware('admin');
+
+        $this->postService = $postService;
+        $this->postLanguageService = $postLanguageService;
     }
 
     public function index(Request $request)
@@ -34,26 +41,8 @@ class PostsController extends Controller
 
     public function store(CreatePostRequest $request)
     {
-        $post = new Post();
-        $post->title = $request->title;
-        $post->slug = Str::slug($request->title);
-        $post->youtube_id = $request->youtube_id;
-        $post->description = $request->input('description');
-        $post->active = $request->status;
-
-        $post->thumbnail = [
-            "https://i.ytimg.com/vi/{$post->youtube_id}/mqdefault.jpg",
-            "https://i.ytimg.com/vi/{$post->youtube_id}/hqdefault.jpg",
-            "https://i.ytimg.com/vi/{$post->youtube_id}/maxresdefault.jpg"
-        ];
-
-        $post->save();
-        foreach ($request->languages as $language) {
-            $code =  new Code();
-            $code->post_id = $post->id;
-            $code->language_id = $language;
-            $code->save();
-        }
+        $newPost = $this->postService->create($request);
+        $this->postLanguageService->createList($newPost, $request->languages);
 
         return redirect()->route('admin.posts.index')->with("success", "Thêm bài đăng thành công!");
     }
@@ -108,7 +97,6 @@ class PostsController extends Controller
         $languageIdsToAdd = array_diff($listLanguagesIDUpdate, $listLanguagesIdOld);
         $languageIdsToRemove = array_diff($listLanguagesIdOld, $listLanguagesIDUpdate);
 
-        // dd($languageIdsToRemove);
         if (count($languageIdsToRemove) > 0) {
             $post->codes()->whereIn('language_id', $languageIdsToRemove)->delete();
         }
@@ -153,7 +141,7 @@ class PostsController extends Controller
                 return $query->where('language_id', $language);
             });
         }
-        $posts = $posts->orderBy('id', 'desc')->paginate(1);
+        $posts = $posts->orderBy('id', 'desc')->paginate(3);
 
         $postsDataTable = view('components.admin.post-list-table-body', compact('posts'));
 

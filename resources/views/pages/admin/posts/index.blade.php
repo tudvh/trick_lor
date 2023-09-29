@@ -74,5 +74,5 @@
 @stop
 
 @section('js')
-<script src="{{ url('public/admin/js/posts/index.js') }}" type="module"></script>
+<script src="{{ url('public/admin/js/posts/index.js') }}"></script>
 @stop

@@ -5,12 +5,12 @@ const dialogBox = document.querySelector('#preview')
 const dialogBodyBox = dialogBox.querySelector('.modal-body')
 const dialogModal = new bootstrap.Modal(dialogBox, {})
 
-const loadingOverlay = document.createElement('div')
-loadingOverlay.setAttribute('class', 'preview-loading-overlay')
-loadingOverlay.innerHTML = '<div class="loading-icon"><i class="fa-solid fa-spinner"></i></div>'
+const previewLoading = document.createElement('div')
+previewLoading.setAttribute('class', 'preview-loading-overlay')
+previewLoading.innerHTML = '<div class="loading-icon"><i class="fa-solid fa-spinner"></i></div>'
 
-const showLoading = () => {
-  dialogBodyBox.appendChild(loadingOverlay)
+const showPreviewLoading = () => {
+  dialogBodyBox.appendChild(previewLoading)
 }
 
 // Even on hidden modal, we reset content
@@ -21,7 +21,7 @@ dialogBox.addEventListener('hide.bs.modal', function () {
 // Show modal preview
 const showModalPreview = () => {
   dialogModal.show()
-  showLoading()
+  showPreviewLoading()
 
   const url = `${rootURL}/admin/posts/preview`
 

@@ -76,6 +76,7 @@ aside li a span {
     padding-top: 0;
     margin-left: calc(0px - var(--sidebar-width));
     background-image: linear-gradient(#fff, #fff1eb);
+    transition: margin-left 0.5s ease;
     z-index: 30;
   }
 
