@@ -56,14 +56,14 @@ li {
 a,
 input[type='submit'],
 button {
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 }
 
 .btn:hover,
 a:hover,
 input[type='submit']:hover,
 button:hover {
-  transition-duration: 0.1s;
+  transition-duration: 0.2s;
 }
 
 .icon-box {
@@ -72,6 +72,13 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Pagination */
+.pagination .page-item .page-link {
+  font-size: 14px;
+  padding: 5px 15px;
+  border-radius: 4px;
 }
 
 /* Scrollbar css */

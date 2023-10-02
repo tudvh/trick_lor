@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ url('public/admin/css/admin.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/header.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/sidebar.css') }}">
-    <link rel="stylesheet" href="{{ url('public/admin/css/content.css') }}">
+    <link rel="stylesheet" href="{{ url('public/admin/css/main.css') }}">
     @yield('css')
 </head>
 
@@ -23,9 +23,16 @@
 
         @include('layouts/admin/layoutItems/sidebar')
 
-        <div class="content">
-            <h1 class="title">@yield('title-content')</h1>
-            <div class="content-wrapper">
+        <div class="main">
+            <div class="main-header">
+                <div class="d-flex flex-column flex-md-row align-items-center">
+                    <h1 class="main-header-title me-auto">@yield('title-content')</h1>
+                    <div class="main-header-action ms-auto">
+                        @yield('action')
+                    </div>
+                </div>
+            </div>
+            <div class="content">
                 @yield('content')
             </div>
         </div>

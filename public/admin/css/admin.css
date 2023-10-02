@@ -10,13 +10,6 @@
   align-items: center;
 }
 
-.content-wrapper {
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 5px;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
 /* Overlay */
 .overlay,
 .loading-overlay {
@@ -66,11 +59,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-/* Scroll */
-::-webkit-scrollbar-track {
-  background-color: #f4f6f9;
 }
 
 /* Sidebar mobile */

@@ -22,11 +22,12 @@
 
 .content-wrapper > .item img {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 0;
-  transform: translateY(-50%);
   width: 100%;
-  transition: scale 0.1s;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 0.1s ease;
 }
 
 .content-wrapper > .item .info {
@@ -45,10 +46,14 @@
 
 .content-wrapper > .item .info .title {
   margin-bottom: 0;
-  color: #000000;
   font-size: 1rem;
   line-height: 1.7rem;
-  font-weight: 600;
+  font-weight: bold;
+  transition: color 0.1s ease;
+}
+
+.content-wrapper > .item:hover .info .title {
+  color: var(--color-primary);
 }
 
 .content-wrapper > .item .info span {

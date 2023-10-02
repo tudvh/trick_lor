@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Code extends Model
+class PostLanguage extends Model
 {
     use HasFactory;
 
-    protected $table = 'code';
+    protected $table = 'post_languages';
 
     protected $fillable = ['post_id', 'language_id'];
 

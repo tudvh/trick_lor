@@ -7,7 +7,10 @@
 
 :root {
   --color-primary: #ff4500;
-  --color-primary-hover: #ff6a33;
+  --color-primary-600: #cc3700;
+  --color-primary-500: #ff581a;
+  --color-primary-100: #fff1eb;
+  --color-primary-shadow: rgba(255, 69, 0, 0.25);
 }
 
 /* Overlay */
@@ -20,6 +23,31 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 20;
   display: none;
+}
+
+/* Pagination */
+.pagination .page-item.active .page-link {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: var(--bs-pagination-disabled-color);
+}
+
+.pagination .page-item .page-link {
+  color: var(--color-primary);
+}
+
+.pagination .page-item:not(.active) .page-link:hover,
+.pagination .page-item:not(.active) .page-link:focus {
+  color: var(--color-primary-600);
+}
+
+.pagination .page-item .page-link:focus {
+  background-color: var(--color-primary-100);
+  box-shadow: 0 0 0 0.25rem var(--color-primary-shadow);
 }
 
 /* Sidebar mobile */

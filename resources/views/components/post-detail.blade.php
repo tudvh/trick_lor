@@ -7,9 +7,9 @@ use \App\Helpers\DateHelper;
         <h2 class="post-title">{{ $post->title }}</h2>
         <span class="post-info">{{ DateHelper::convertDateFormat($post->created_at) }}</span>
         <div class="d-flex flex-wrap gap-2 mt-2">
-            @foreach($post->codes as $code)
+            @foreach($post->postLanguages as $postLanguage)
             <div class="icon-box">
-                {!! $code->language->icon !!}
+                {!! $postLanguage->language->icon !!}
             </div>
             @endforeach
         </div>

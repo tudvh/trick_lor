@@ -1,0 +1,32 @@
+.main {
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+  padding: 5rem 0;
+  padding-top: var(--header-height);
+  background-color: #fff;
+}
+
+.main .main-header {
+  position: sticky;
+  top: var(--header-height);
+  padding: 3rem 2rem;
+  z-index: 20;
+  background-color: #fff;
+}
+
+.main .main-header-title {
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.main .content {
+  padding: 0 2rem;
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+  .main {
+    margin-left: calc(0px);
+  }
+}

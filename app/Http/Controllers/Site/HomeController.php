@@ -15,23 +15,23 @@ class HomeController extends Controller
 
         $listPosts = Post::where('active', 1)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(12);
         return view('pages.site.home', compact('page', 'listPosts'));
     }
 
     public function search(Request $request)
     {
         $page = 'home';
-        $titleWeb = trim($request->q);
+        $titleWeb = $searchKey = trim($request->q);
 
-        $searchKey = '%' . str_replace(' ', '%', trim($request->q)) . '%';
+        $searchKeyHandle = '%' . $searchKey . '%';
         $listPosts = Post::where('active', 1)
-            ->where('title', 'like', $searchKey)
-            ->orWhere('description', 'like', $searchKey)
+            ->where('title', 'like', $searchKeyHandle)
+            ->orWhere('description', 'like', $searchKeyHandle)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(12);
 
-        return view('pages.site.home', compact('page', 'listPosts', 'titleWeb'));
+        return view('pages.site.home', compact('page', 'listPosts', 'titleWeb', 'searchKey'));
     }
 
     public function language(string $languageSlug)
@@ -41,9 +41,9 @@ class HomeController extends Controller
         $page = $languageSlug;
         $titleWeb = $language->name;
 
-        $listPosts = collect($language->codes)->map(function ($code) {
-            return $code->post;
-        })->reverse();
+        $listPosts = Post::whereHas('postLanguages', function ($query) use ($language) {
+            return $query->where('language_id', $language->id);
+        })->orderBy('id', 'desc')->paginate(12);
 
         return view('pages.site.home', compact('page', 'listPosts', 'titleWeb'));
     }

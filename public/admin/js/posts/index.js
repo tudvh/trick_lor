@@ -50,7 +50,7 @@ searchInput.addEventListener('input', function () {
   clearTimeout(typingTimer)
 
   typingTimer = setTimeout(function () {
-    getDataSearch()
+    getData()
   }, 500)
 })
 
@@ -107,16 +107,20 @@ const setUpPaginationLink = () => {
 
 // Toggle post status
 const setContentDialog = string => {
-  dialogContentBox.textContent = string
+  dialogContentBox.innerHTML = string
 }
 
 const togglePostStatus = (postId, isShow) => {
   dialogModal.show()
 
   if (isShow) {
-    setContentDialog('Bạn có chắc muốn hiển thị bài đăng này không')
+    setContentDialog(
+      'Bạn có chắc muốn chuyển sang chế độ <span class="text-success fw-bold">công khai</span> không?',
+    )
   } else {
-    setContentDialog('Bạn có chắc muốn ẩn bài đăng này không')
+    setContentDialog(
+      'Bạn có chắc muốn chuyển sang chế độ <span class="text-danger fw-bold">riêng tư</span> không?',
+    )
   }
 
   dialogAcceptBtn.onclick = () => {

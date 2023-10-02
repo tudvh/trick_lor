@@ -8,13 +8,7 @@
 @stop
 
 @section('content')
-
 <div class="d-flex flex-column gap-4">
-    <a class="btn btn-success gap-2 ms-auto" href="{{ route('admin.posts.create') }}">
-        <i class="fa-solid fa-plus"></i>
-        <span>Thêm mới</span>
-    </a>
-
     @if (session('success'))
     <div class="alert alert-success m-0">
         {{ session('success') }}
@@ -36,9 +30,9 @@
             </div>
             <div class="col-12 col-md-auto">
                 <select name="status" class="form-select">
-                    <option value="">Trạng thái</option>
-                    <option value="1">Đang hoạt động</option>
-                    <option value="0">Đã ẩn</option>
+                    <option value="">Chế độ hiển thị</option>
+                    <option value="1">Công khai</option>
+                    <option value="0">Riêng tư</option>
                 </select>
             </div>
             <div class="col-md-auto">
@@ -50,7 +44,7 @@
         </div>
     </div>
 
-    <div class="d-flex flex-column gap-4" id="data"></div>
+    <div class="d-flex flex-column gap-5" id="data"></div>
 </div>
 
 <div class="modal fade" id="post-toggle-status-dialog" tabindex="-1">
@@ -70,7 +64,13 @@
         </div>
     </div>
 </div>
+@stop
 
+@section('action')
+<a class="btn btn-success gap-2 ms-auto" href="{{ route('admin.posts.create') }}">
+    <i class="fa-solid fa-plus"></i>
+    <span>Thêm mới</span>
+</a>
 @stop
 
 @section('js')

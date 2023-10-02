@@ -15,7 +15,7 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
                 <form class="search" action="{{ route('site.search') }}">
-                    <input type="text" name="q" autocomplete="off" placeholder="Tìm kiếm...">
+                    <input type="text" name="q" autocomplete="off" placeholder="Tìm kiếm..." value="@if (isset($searchKey)){{ $searchKey }}@endif">
                     <span class="span-split"></span>
                     <button class="submit-btn" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>

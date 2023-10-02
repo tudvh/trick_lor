@@ -11,10 +11,10 @@ class Language extends Model
 
     protected $table = 'languages';
 
-    protected $fillable = ['name', 'icon'];
+    protected $fillable = ['name', 'slug', 'icon', 'active'];
 
-    public function codes()
+    public function postLanguages()
     {
-        return $this->hasMany(Code::class, 'language_id', 'id');
+        return $this->hasMany(PostLanguage::class, 'language_id', 'id');
     }
 }

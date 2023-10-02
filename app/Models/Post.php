@@ -11,14 +11,15 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $fillable = ['title', 'slug', 'youtube_id', 'description', 'thumbnails', 'active'];
+    protected $fillable = ['title', 'slug', 'youtube_id', 'description', 'thumbnails', 'thumbnails_custom', 'active'];
 
     protected $casts = [
         'thumbnails' => 'array',
+        'thumbnails_custom' => 'array',
     ];
 
-    public function codes()
+    public function postLanguages()
     {
-        return $this->hasMany(Code::class, 'post_id', 'id');
+        return $this->hasMany(PostLanguage::class, 'post_id', 'id');
     }
 }

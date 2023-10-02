@@ -8,25 +8,26 @@ use App\Helpers\DateHelper;
         <a href="{{ route('site.post', ['post' => $post->slug]) }}">
             <div class="img-box">
                 <?php
-                $thumbnails = $post->thumbnails;
-                if ($thumbnails) {
-                    $thumbnailMq = $thumbnails[0];
-                    $thumbnailHq = $thumbnails[1];
-                    $thumbnailMax = $thumbnails[2];
+                if ($post->thumbnails_custom) {
+                    $thumbnails = $post->thumbnails_custom;
+                } elseif ($post->thumbnails) {
+                    $thumbnails = $post->thumbnails;
                 } else {
-                    $thumbnailMq = url('public/assets/img/post-thumbnail/post-thumbnail-default/mqdefault.png');
-                    $thumbnailHq = url('public/assets/img/post-thumbnail/post-thumbnail-default/hqdefault.png');
-                    $thumbnailMax = url('public/assets/img/post-thumbnail/post-thumbnail-default/maxresdefault.png');
+                    $thumbnails = [
+                        url('public/assets/img/post-thumbnail/post-thumbnail-default/mqdefault.png'),
+                        url('public/assets/img/post-thumbnail/post-thumbnail-default/hqdefault.png'),
+                        url('public/assets/img/post-thumbnail/post-thumbnail-default/maxresdefault.png')
+                    ];
                 }
                 ?>
-                <img src="{{ $thumbnailMax }}" srcset="{{ $thumbnailMq }} 320w, {{ $thumbnailHq }} 480w, {{ $thumbnailMax }} 1280w" sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 1280px" alt="{{ $post->title }}" />
+                <x-thumbnail :thumbnails="$thumbnails" :alt="$post->title" />
             </div>
             <div class="info">
                 <h3 class="title">{{ $post->title }}</h3>
                 <span>{{ DateHelper::convertDateFormat($post->created_at) }}</span>
                 <div class="d-flex flex-wrap gap-2">
-                    @foreach ($post->codes as $code)
-                    <div class="icon-box">{!! $code->language->icon !!}</div>
+                    @foreach ($post->postLanguages as $postLanguage)
+                    <div class="icon-box">{!! $postLanguage->language->icon !!}</div>
                     @endforeach
                 </div>
             </div>
