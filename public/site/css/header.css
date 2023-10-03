@@ -151,12 +151,15 @@ header .more .login-btn:hover {
   }
 }
 
-/* Mobile */
-@media (max-width: 575px) {
+/* Tablet */
+@media (max-width: 991px) {
   header .logo .sidebar-menu {
     display: flex;
   }
+}
 
+/* Mobile */
+@media (max-width: 575px) {
   header .logo img {
     display: none;
   }

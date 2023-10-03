@@ -1,8 +1,8 @@
 :root {
   --header-height: 70px;
-  --sidebar-width: 250px;
-  --sidebar-tablet-width: 150px;
-  --sidebar-mobile-width: 50px;
+  --sidebar-width: 20%;
+  --sidebar-mobile-width: 250px;
+  --content-padding-left: 1.5rem;
 }
 
 :root {
@@ -10,6 +10,7 @@
   --color-primary-600: #cc3700;
   --color-primary-500: #ff581a;
   --color-primary-100: #fff1eb;
+  --color-secondary-100: #ebfaff;
   --color-primary-shadow: rgba(255, 69, 0, 0.25);
 }
 
@@ -51,7 +52,7 @@
 }
 
 /* Sidebar mobile */
-@media (max-width: 575px) {
+@media (max-width: 991px) {
   .wrapper.sidebar-open aside {
     margin-left: 0;
     transition: margin-left 0.5s ease;

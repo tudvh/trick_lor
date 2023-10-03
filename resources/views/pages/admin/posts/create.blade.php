@@ -31,7 +31,6 @@
             </div>
         </div>
 
-
         <div class="col-12 col-lg-6 mt-4">
             <div class="form-group">
                 <label for="title" class="form-label">Tiêu đề <span class="text-danger">*</span></label>

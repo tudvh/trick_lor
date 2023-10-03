@@ -19,9 +19,9 @@ use App\Http\Controllers\Admin;
 
 // Admin
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/login', [Admin\HomeController::class, 'login'])->name('admin.login');
-    Route::post('/login', [Admin\HomeController::class, 'handleLogin'])->name('admin.login');
-    Route::get('/logout', [Admin\HomeController::class, 'logout'])->name('admin.logout');
+    Route::get('/login', [Admin\AuthController::class, 'login'])->name('admin.login');
+    Route::post('/login', [Admin\AuthController::class, 'handleLogin'])->name('admin.login');
+    Route::get('/logout', [Admin\AuthController::class, 'logout'])->name('admin.logout');
 
 
     Route::get('/', [Admin\HomeController::class, 'dashboard'])->name('admin.dashboard');

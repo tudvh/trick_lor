@@ -1,10 +1,12 @@
 aside {
   width: var(--sidebar-width);
   height: 100vh;
-  position: fixed;
+  position: sticky;
+  top: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  padding-top: calc(var(--header-height) + 20px);
+  padding-top: calc(var(--header-height) + 50px);
   z-index: 5;
 }
 
@@ -63,19 +65,12 @@ aside li a span {
 /* Tablet */
 @media (max-width: 991px) {
   aside {
-    width: var(--sidebar-tablet-width);
-  }
-}
-
-/* Mobile */
-@media (max-width: 575px) {
-  aside {
     position: fixed;
     left: 0;
-    width: var(--sidebar-width);
+    width: var(--sidebar-mobile-width);
     padding-top: 0;
-    margin-left: calc(0px - var(--sidebar-width));
-    background-image: linear-gradient(#fff, #fff1eb);
+    margin-left: calc(0px - var(--sidebar-mobile-width));
+    background-image: linear-gradient(#fff, var(--color-secondary-100));
     transition: margin-left 0.5s ease;
     z-index: 30;
   }

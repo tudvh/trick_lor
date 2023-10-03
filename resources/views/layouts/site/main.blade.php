@@ -18,14 +18,16 @@
 
 <body>
     <div class="wrapper">
-        @include('layouts/site/layoutItems/header')
+        @include('partials/site/header')
 
         <div class="main">
             <div class="container">
-                @include('layouts/site/layoutItems/sidebar')
+                <div class="d-flex w-100">
+                    @include('partials/site/sidebar')
 
-                <div class="content">
-                    @yield('content')
+                    <div class="content">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>

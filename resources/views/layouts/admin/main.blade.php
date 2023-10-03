@@ -19,9 +19,9 @@
 
 <body>
     <div class="wrapper">
-        @include('layouts/admin/layoutItems/header')
+        @include('partials/admin/header')
 
-        @include('layouts/admin/layoutItems/sidebar')
+        @include('partials/admin/sidebar')
 
         <div class="main">
             <div class="main-header">

@@ -1,56 +1,49 @@
-<!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
-<html lang="en" dir="ltr">
+@extends('layouts.admin.no-partial')
 
-<head>
-  <meta charset="utf-8">
-  <title>Đăng nhập</title>
-  <link rel="stylesheet" href="{{ url('public/admin/css/style_login.css') }}">
-  <link rel="icon" href="{{ url('public/site/img/logo-icon.png') }}">
+@section('title', 'Đăng nhập')
 
-  <style>
-    .error {
-      color: red;
+@section('css')
+<link rel="stylesheet" href="{{ url('public/admin/css/login.css') }}">
+@stop
 
-      margin-top: 15px;
-      display: block;
-      font-weight: bold;
-      font-style: italic;
-      text-align: center;
-    }
+@section('content')
+<div class="login-container">
+    <form action="{{ route('admin.login') }}" method="POST">
+        <div class="d-flex flex-column gap-4 p-5">
+            <h1 class="title">Đăng nhập Admin</h1>
 
-    .none {
-      display: none;
-    }
-  </style>
-</head>
+            @csrf
 
-<body>
-  <div class="center">
-    <h1>Đăng nhập Admin</h1>
-    <form action="{{ route('admin.login') }}" method="post">
-      @csrf
-      @if (session('error'))
-      <p class="error">{{ session('error') }}</p>
-      @endif
-      <div class="txt_field">
-        <input type="text" required name='username'>
-        <span></span>
-        <label>Tài khoản</label>
-      </div>
-      <div class="txt_field">
-        <input type="password" required name='password'>
-        <span></span>
-        <label>Mật khẩu</label>
-      </div>
+            @if (session('error'))
+            <div class="alert alert-danger m-0">
+                {{ session('error') }}
+            </div>
+            @endif
 
-      <input type="submit" value="Login">
-      <div class="signup_link">
-      </div>
+            <div class="group">
+                <div class="txt_field">
+                    <input type="text" name='username' required>
+                    <span></span>
+                    <label>Tài khoản</label>
+                </div>
+                @if ($errors->has('username'))
+                <small class="text-danger">{{ $errors->first('username') }}</small>
+                @endif
+            </div>
+
+            <div class="group">
+                <div class="txt_field">
+                    <input type="password" name='password' required>
+                    <span></span>
+                    <label>Mật khẩu</label>
+                </div>
+                @if ($errors->has('password'))
+                <small class="text-danger">{{ $errors->first('password') }}</small>
+                @endif
+            </div>
+
+            <input type="submit" class="mt-3" value="Đăng nhập">
+        </div>
     </form>
-  </div>
-
-  <!-- <script src="{{ url('public/assets/js/hide-logo.js') }}"></script> -->
-</body>
-
-</html>
+</div>
+@stop
