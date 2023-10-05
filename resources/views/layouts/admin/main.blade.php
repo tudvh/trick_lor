@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="stylesheet" href="{{ url('public/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url('public/assets/css/toast-custom.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/admin.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/header.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/sidebar.css') }}">
@@ -44,10 +45,13 @@
                 <i class="fa-solid fa-spinner"></i>
             </div>
         </div>
+
+        <div id="toast"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url('public/admin/js/admin.js') }}"></script>
+    <script src="{{ url('public/assets/js/toast-custom.js') }}"></script>
     <script src="{{ url('public/assets/js/sidebar-mobile.js') }}"></script>
     <!-- <script src="{{ url('public/assets/js/hide-logo.js') }}"></script> -->
     @yield('js')

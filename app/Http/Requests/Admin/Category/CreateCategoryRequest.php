@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Auth;
+namespace App\Http\Requests\Admin\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class CreateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,17 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => 'required',
-            'password' => 'required',
+            'name' => 'required|unique:languages,name',
+            'icon' => 'required'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'username.required' => 'Tài khoản không được để trống',
-            'password.required' => 'Mật khẩu không được để trống',
+            'name.required' => 'Vui lòng nhập tên danh mục',
+            'name.unique' => 'Tên danh mục đã tồn tại',
+            'icon.required' => 'Vui lòng nhập icon'
         ];
     }
 }

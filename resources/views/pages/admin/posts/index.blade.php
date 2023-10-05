@@ -75,4 +75,5 @@
 
 @section('js')
 <script src="{{ url('public/admin/js/posts/index.js') }}"></script>
+<script src="{{ url('public/admin/js/posts/toggle-status.js') }}"></script>
 @stop

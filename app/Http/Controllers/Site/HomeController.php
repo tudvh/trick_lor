@@ -34,6 +34,13 @@ class HomeController extends Controller
         return view('pages.site.home', compact('page', 'listPosts', 'titleWeb', 'searchKey'));
     }
 
+    public function trending(Request $request)
+    {
+        $page = 'trending';
+
+        return view('pages.site.trending', compact('page'));
+    }
+
     public function language(string $languageSlug)
     {
         $language = Language::where('slug', $languageSlug)->first();

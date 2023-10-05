@@ -25,7 +25,7 @@ class PostController extends Controller
         $this->postLanguageService = $postLanguageService;
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $page = 'posts';
 
@@ -120,7 +120,7 @@ class PostController extends Controller
         $post->active = $post->active == 1 ? 0 : 1;
         $post->save();
 
-        return redirect()->route('admin.posts.index')->with('success', 'Cập nhật trạng thái bài đăng thành công');
+        return view('components.admin.post-data', compact('post'));
     }
 
     public function preview(Request $request)

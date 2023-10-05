@@ -18,7 +18,7 @@ use \App\Helpers\DateHelper;
         </thead>
         <tbody>
             @foreach($posts as $post)
-            <tr class="align-top">
+            <tr class="align-top" data-post-id="{{ $post->id }}">
                 <th>{{ $post->id }}</th>
                 <td class="post-title" title="{{ $post->title }}">
                     <div class="d-flex gap-3">
@@ -52,7 +52,7 @@ use \App\Helpers\DateHelper;
                     @if($post->active)
                     <span class='badge bg-success'>Công khai</span>
                     @else
-                    <span class='badge bg-danger'>Riêng tư</span>
+                    <span class='badge bg-secondary'>Riêng tư</span>
                     @endif
                 </td>
                 <td>
@@ -61,11 +61,11 @@ use \App\Helpers\DateHelper;
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                         @if($post->active)
-                        <button class='btn btn-danger' data-index="{{ $post->id }}" onclick="togglePostStatus('{{ $post->id }}', false)" title="Chuyển sang chế độ riêng tư">
+                        <button class='btn btn-danger' onclick="togglePostStatus('{{ $post->id }}', false)" title="Chuyển sang chế độ riêng tư">
                             <i class="fa-solid fa-eye-slash"></i>
                         </button>
                         @else
-                        <button class='btn btn-success' data-index="{{ $post->id }}" onclick="togglePostStatus('{{ $post->id }}', true)" title="Chuyển sang chế độ công khai">
+                        <button class='btn btn-success' onclick="togglePostStatus('{{ $post->id }}', true)" title="Chuyển sang chế độ công khai">
                             <i class="fa-solid fa-eye"></i>
                         </button>
                         @endif

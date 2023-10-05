@@ -44,7 +44,3 @@
 .content table .post-title-text {
   flex: 1;
 }
-
-.content .pagination li.page-item:not(.disabled):not(.active) a {
-  cursor: pointer;
-}

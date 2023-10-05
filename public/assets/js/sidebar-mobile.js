@@ -9,12 +9,12 @@ sidebarMenuBtn.addEventListener('click', () => {
 
 overlayBox.addEventListener('click', () => {
   wrapperBox.classList.remove('sidebar-open')
-  document.body.style.overflowY = 'auto'
+  document.body.style.overflowY = 'scroll'
 })
 
 window.addEventListener('resize', () => {
   if (window.outerWidth > 991) {
     wrapperBox.classList.remove('sidebar-open')
-    document.body.style.overflowY = 'auto'
+    document.body.style.overflowY = 'scroll'
   }
 })

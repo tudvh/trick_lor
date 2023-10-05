@@ -4,6 +4,6 @@ const showLoadingOverlay = () => {
   loadingOverlay.classList.remove('none')
 }
 
-const closeLoadingOverlay = () => {
+const hideLoadingOverlay = () => {
   loadingOverlay.classList.add('none')
 }

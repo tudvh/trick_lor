@@ -14,7 +14,6 @@
 @else
 <x-post-detail :post="$post" />
 @endif
-
 @stop
 
 @section('js')

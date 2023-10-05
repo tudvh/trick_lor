@@ -15,11 +15,11 @@
                 </a>
             </li>
             <li>
-                <a class="d-flex align-items-center flex-row gap-3 home-btn @if (isset($page) && $page=='about' ) active @endif" href="{{ route('site.home') }}">
+                <a class="d-flex align-items-center flex-row gap-3 home-btn @if (isset($page) && $page=='trending' ) active @endif" href="{{ route('site.trending') }}">
                     <div class="icon-box">
-                        <i class="fa-solid fa-circle-info"></i>
+                        <i class="fa-solid fa-arrow-trend-up"></i>
                     </div>
-                    <span class="text-center">Giới thiệu</span>
+                    <span class="text-center">Phổ biến</span>
                 </a>
             </li>
         </ul>

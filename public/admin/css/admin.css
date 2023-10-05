@@ -46,6 +46,11 @@
   animation: spinner 0.7s linear infinite;
 }
 
+/* Pagination */
+.pagination li.page-item:not(.disabled):not(.active) a {
+  cursor: pointer;
+}
+
 @keyframes spinner {
   0% {
     transform: rotate(0);

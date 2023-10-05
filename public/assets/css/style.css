@@ -23,6 +23,7 @@ body {
   font-size: 1rem;
   text-rendering: optimizeSpeed;
   color: var(--color-text);
+  overflow-y: scroll;
 }
 
 /* Default element css */
@@ -72,6 +73,15 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Toast */
+.toast-container img {
+  width: 30px;
+}
+
+.toast-container .toast-body {
+  background-color: var(--bs-toast-header-bg);
 }
 
 /* Pagination */

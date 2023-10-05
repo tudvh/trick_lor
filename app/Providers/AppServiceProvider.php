@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Use list languages
-        $views = ['pages.site.home', 'pages.site.post', 'pages.admin.posts.*'];
+        $views = ['pages.site.*', 'pages.admin.posts.*'];
         foreach ($views as $view) {
             view()->composer($view, function ($view) {
                 $view->with([

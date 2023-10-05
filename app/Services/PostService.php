@@ -91,6 +91,7 @@ class PostService
                 return true;
             }
         } catch (\GuzzleHttp\Exception\RequestException $e) {
+            dd('Có lỗi trong lúc kiểm tra Youtube id. Vui lòng thử lại.');
             return false;
         }
 
@@ -116,7 +117,10 @@ class PostService
     {
         $dom = new DOMDocument();
         $dom->loadHTML(mb_convert_encoding($description, 'HTML-ENTITIES', 'UTF-8'));
-        $imageElements = $dom->getElementsByTagName('img');
+        $body = $dom->getElementsByTagName('body')->item(0);
+
+        $imageElements = [];
+        $this->collectImages($body, $imageElements);
 
         foreach ($imageElements as $imageElement) {
             $imageSrcOld = $imageElement->getAttribute('src');
@@ -137,13 +141,12 @@ class PostService
             }
         }
 
-        $body = $dom->getElementsByTagName('body')->item(0);
         $bodyContent = '';
         foreach ($body->childNodes as $childNode) {
             $bodyContent .= $dom->saveHTML($childNode);
         }
 
-        return preg_replace('~[\r\n]+~', '', $bodyContent);
+        return $bodyContent;
     }
 
     private function deleteImageDescriptionOld($postId, $descriptionUpdate)
@@ -168,6 +171,19 @@ class PostService
 
         if (count($publicIdsDelete) > 0) {
             Cloudder::destroyImages($publicIdsDelete);
+        }
+    }
+
+    private function collectImages($node, &$imageElements)
+    {
+        foreach ($node->childNodes as $childNode) {
+            if ($childNode->nodeName === 'img') {
+                $imageElements[] = $childNode;
+            } elseif ($childNode->nodeName === 'pre') {
+                continue;
+            } else {
+                $this->collectImages($childNode, $imageElements);
+            }
         }
     }
 

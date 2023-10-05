@@ -149,7 +149,7 @@
         <div class="col-12 mt-4">
             <div class="form-group">
                 <label for="desc-textarea" class="form-label">Mô tả <span class="text-danger">*</span></label>
-                <textarea class="form-control" name="description" id="desc-textarea" placeholder="Nhập mô tả" required>@if(old('description')!==null){!! old('description') !!}@else{!! $post->description !!}@endif</textarea>
+                <textarea class="form-control" name="description" id="desc-textarea" placeholder="Nhập mô tả" required>@if(old('description')!==null){{ old('description') }}@else{{ $post->description }}@endif</textarea>
             </div>
         </div>
     </div>

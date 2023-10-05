@@ -13,12 +13,6 @@ let statusValue = ''
 let page = 1
 let typingTimer
 
-// Toggle post status variables
-const dialogBox = document.querySelector('#post-toggle-status-dialog')
-const dialogContentBox = dialogBox.querySelector('.modal-body p')
-const dialogAcceptBtn = dialogBox.querySelector('#accept-btn')
-const dialogModal = new bootstrap.Modal(dialogBox, {})
-
 // Call api to get list posts
 function getData(link = '') {
   showLoadingOverlay()
@@ -29,7 +23,7 @@ function getData(link = '') {
     if (xml.readyState === 4 && xml.status === 200) {
       dataBox.innerHTML = xml.responseText
       setUpPaginationLink()
-      closeLoadingOverlay()
+      hideLoadingOverlay()
     }
   }
 
@@ -103,27 +97,4 @@ const setUpPaginationLink = () => {
       getData(btn.dataset.href)
     })
   })
-}
-
-// Toggle post status
-const setContentDialog = string => {
-  dialogContentBox.innerHTML = string
-}
-
-const togglePostStatus = (postId, isShow) => {
-  dialogModal.show()
-
-  if (isShow) {
-    setContentDialog(
-      'Bạn có chắc muốn chuyển sang chế độ <span class="text-success fw-bold">công khai</span> không?',
-    )
-  } else {
-    setContentDialog(
-      'Bạn có chắc muốn chuyển sang chế độ <span class="text-danger fw-bold">riêng tư</span> không?',
-    )
-  }
-
-  dialogAcceptBtn.onclick = () => {
-    location.href = `${rootURL}/admin/posts/${postId}/toggle-status`
-  }
 }
