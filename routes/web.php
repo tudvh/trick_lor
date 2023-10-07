@@ -56,4 +56,15 @@ Route::group(['prefix' => ''], function () {
     Route::get('/trending', [Site\HomeController::class, 'trending'])->name('site.trending');
     Route::get('/post/{post}', [Site\HomeController::class, 'post'])->name('site.post');
     Route::get('/language/{language}', [Site\HomeController::class, 'language'])->name('site.language');
+
+    // Auth
+    Route::group(['prefix' => 'auth'], function () {
+        Route::post('/login', [Site\AuthController::class, 'handleLogin']);
+        Route::post('/register', [Site\AuthController::class, 'handleRegister']);
+        Route::get('/logout', [Site\AuthController::class, 'logout'])->name('site.auth.logout');
+
+        // Google
+        Route::get('/google', [Site\AuthController::class, 'redirectToGoogle']);
+        Route::get('/google/callback', [Site\AuthController::class, 'handleGoogleCallback']);
+    });
 });

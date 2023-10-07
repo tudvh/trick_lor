@@ -3,7 +3,20 @@
         <h2>Trick loR Admin</h2>
     </a>
 
-    <ul class="d-flex flex-column mt-3 gap-1">
+    <ul class="d-flex flex-column mt-3 pt-0 gap-1">
+        <li>
+            <div class="mb-3 pb-3 user-panel">
+                <a class="d-flex align-items-center gap-2 " href="{{ route('admin.dashboard') }}">
+                    @if (auth()->guard('admin')->user()->avatar)
+                    <img src="{{ auth()->guard('admin')->user()->avatar }}" alt="{{ auth()->guard('admin')->user()->full_name }}">
+                    @else
+                    <img src="{{ url('public/assets/img/logo-icon.png') }}" alt="{{ auth()->guard('admin')->user()->full_name }}">
+                    @endif
+                    <span>{{ auth()->guard('admin')->user()->full_name }}</span>
+                </a>
+            </div>
+        </li>
+
         <li>
             <a class="d-flex align-items-center gap-2 @if(isset($page) && $page=='dashboard') active @endif" href="{{ route('admin.dashboard') }}">
                 <i class="fa-solid fa-chart-line"></i>

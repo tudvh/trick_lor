@@ -40,7 +40,7 @@
 
         <div class="overlay"></div>
 
-        <div class="loading-overlay none">
+        <div class="loading-overlay d-none">
             <div class="loading-icon">
                 <i class="fa-solid fa-spinner"></i>
             </div>
@@ -50,7 +50,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ url('public/admin/js/admin.js') }}"></script>
+    <script src="{{ url('public/assets/js/assets.js') }}"></script>
     <script src="{{ url('public/assets/js/toast-custom.js') }}"></script>
     <script src="{{ url('public/assets/js/sidebar-mobile.js') }}"></script>
     <!-- <script src="{{ url('public/assets/js/hide-logo.js') }}"></script> -->

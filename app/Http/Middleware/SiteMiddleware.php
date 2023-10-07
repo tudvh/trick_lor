@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class SiteMiddleware
 {
     public function __construct()
     {
@@ -17,18 +17,14 @@ class AdminMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $guard = 'admin'): Response
+    public function handle(Request $request, Closure $next, $guard = 'site'): Response
     {
         if (!Auth::guard($guard)->check()) {
-            return redirect()->route('admin.login')->with('error', 'Vui lòng đăng nhập');
+            return redirect()->route('site.home')->with('error-notification', 'Vui lòng đăng nhập');
         }
         if (Auth::guard($guard)->user()->active === 0) {
             Auth::guard($guard)->logout();
-            return redirect()->route('admin.login')->with('error', 'Tài khoản của bạn đã bị cấm sử dụng');
-        }
-        if (Auth::guard($guard)->user()->role !== 'admin') {
-            Auth::guard($guard)->logout();
-            return redirect()->route('admin.login')->with('error', 'Bạn không có quyền truy cập vào trang này');
+            return redirect()->route('site.home')->with('error-notification', 'Tài khoản của bạn đã bị cấm sử dụng');
         }
 
         return $next($request);

@@ -1,6 +1,6 @@
 header {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: var(--header-height);
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
@@ -122,6 +122,20 @@ header .more .login-btn:hover {
   color: #fff;
 }
 
+header .more .user-avatar {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header .more .user-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 /* Tablet */
 @media (max-width: 991px) {
   header .search-wrapper {
@@ -140,6 +154,7 @@ header .more .login-btn:hover {
 
   header .search-wrapper.search-open {
     display: flex;
+    z-index: 10;
   }
 
   header .close-search-btn {

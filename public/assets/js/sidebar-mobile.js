@@ -4,17 +4,17 @@ const overlayBox = document.querySelector('.overlay')
 
 sidebarMenuBtn.addEventListener('click', () => {
   wrapperBox.classList.add('sidebar-open')
-  document.body.style.overflowY = 'hidden'
+  document.body.classList.add('no-scroll')
 })
 
 overlayBox.addEventListener('click', () => {
   wrapperBox.classList.remove('sidebar-open')
-  document.body.style.overflowY = 'scroll'
+  document.body.classList.remove('no-scroll')
 })
 
 window.addEventListener('resize', () => {
-  if (window.outerWidth > 991) {
+  if (window.outerWidth > 991 && wrapperBox.classList.contains('sidebar-open')) {
     wrapperBox.classList.remove('sidebar-open')
-    document.body.style.overflowY = 'scroll'
+    document.body.classList.remove('no-scroll')
   }
 })

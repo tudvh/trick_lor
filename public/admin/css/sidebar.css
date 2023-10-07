@@ -28,6 +28,20 @@ aside .logo-header > h2 {
   margin: 0;
 }
 
+aside .user-panel {
+  border-bottom: 1px solid #4f5962;
+}
+
+aside .user-panel a {
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+aside .user-panel img {
+  border-radius: 50%;
+  width: 2.1rem;
+}
+
 aside ul {
   height: calc(100vh - var(--header-height));
   padding: 0.5rem;

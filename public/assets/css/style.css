@@ -27,6 +27,11 @@ body {
 }
 
 /* Default element css */
+body.no-scroll {
+  overflow-y: hidden;
+  padding-right: 13px;
+}
+
 button,
 input {
   outline: none;
@@ -67,6 +72,13 @@ button:hover {
   transition-duration: 0.1s;
 }
 
+.btn {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .icon-box {
   width: 30px;
   height: 30px;
@@ -82,6 +94,53 @@ button:hover {
 
 .toast-container .toast-body {
   background-color: var(--bs-toast-header-bg);
+}
+
+/* Overlay */
+.overlay,
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.overlay {
+  display: none;
+  z-index: 20;
+}
+
+.loading-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1150;
+}
+
+.loading-overlay .loading-icon {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 4.5rem;
+}
+
+.loading-overlay .loading-icon i {
+  animation: spinner 0.7s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(150deg);
+  }
+  80% {
+    transform: rotate(210deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Pagination */

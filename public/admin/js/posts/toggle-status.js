@@ -50,7 +50,7 @@ const togglePostStatus = (postId, isShow) => {
   }
 
   dialogAcceptBtn.onclick = () => {
-    callApiToToggleStatus(postId)
     dialogModal.hide()
+    callApiToToggleStatus(postId)
   }
 }

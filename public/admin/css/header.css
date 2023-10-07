@@ -1,6 +1,6 @@
 .nav-header {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: var(--header-height);
   margin-left: var(--sidebar-width);
   background-color: #fff;

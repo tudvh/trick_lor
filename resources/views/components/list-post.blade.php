@@ -3,7 +3,7 @@ use App\Helpers\DateHelper;
 @endphp
 
 <div class="content-wrapper row">
-    @foreach ($listPosts as $post)
+    @foreach ($listPosts as $index => $post)
     <div class="item col-12 col-sm-{{ $colSm }} col-lg-{{ $colLg }}">
         <a href="{{ route('site.post', ['post' => $post->slug]) }}">
             <div class="img-box">
@@ -12,11 +12,17 @@ use App\Helpers\DateHelper;
                     $thumbnails = $post->thumbnails_custom;
                 } elseif ($post->thumbnails) {
                     $thumbnails = $post->thumbnails;
-                } else {
+                } elseif ($index % 2 == 0) {
                     $thumbnails = [
-                        url('public/assets/img/post-thumbnail/post-thumbnail-default/mqdefault.png'),
-                        url('public/assets/img/post-thumbnail/post-thumbnail-default/hqdefault.png'),
-                        url('public/assets/img/post-thumbnail/post-thumbnail-default/maxresdefault.png')
+                        url('public/assets/img/post-thumbnail/post-thumbnail-primary/mqdefault.png'),
+                        url('public/assets/img/post-thumbnail/post-thumbnail-primary/hqdefault.png'),
+                        url('public/assets/img/post-thumbnail/post-thumbnail-primary/maxresdefault.png')
+                    ];
+                } elseif ($index % 2 == 1) {
+                    $thumbnails = [
+                        url('public/assets/img/post-thumbnail/post-thumbnail-secondary/mqdefault.png'),
+                        url('public/assets/img/post-thumbnail/post-thumbnail-secondary/hqdefault.png'),
+                        url('public/assets/img/post-thumbnail/post-thumbnail-secondary/maxresdefault.png')
                     ];
                 }
                 ?>

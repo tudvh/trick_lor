@@ -8,9 +8,9 @@ use \App\Helpers\DateHelper;
         <span class="post-info">{{ DateHelper::convertDateFormat($post->created_at) }}</span>
         <div class="d-flex flex-wrap gap-2 mt-2">
             @foreach($post->postLanguages as $postLanguage)
-            <div class="icon-box">
+            <a href="{{ route('site.language', ['language'=>$postLanguage->language->slug]) }}" class="icon-box" title="{{ $postLanguage->language->name }}" target="_blank">
                 {!! $postLanguage->language->icon !!}
-            </div>
+            </a>
             @endforeach
         </div>
     </div>
