@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ url('public/assets/css/prism.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/post.css') }}">
 
+<link rel="stylesheet" href="{{ url('public/assets/css/image-chosen.css') }}">
 <link rel="stylesheet" href="{{ url('public/admin/css/posts/preview.css') }}">
 <link rel="stylesheet" href="{{ url('public/admin/css/posts/create.css') }}">
 @stop
@@ -106,27 +107,27 @@
         </div>
 
         <div class="col-12 col-lg-6 mt-4">
-            <div class="form-group thumbnail-container">
-                <label for="thumbnail" class="form-label">Thumbnail tủy chỉnh</label>
-                <input type="file" class="form-control d-none @if($errors->has('thumbnail')) is-invalid @endif" id="thumbnail" name="thumbnail">
-                <input type="file" class="form-control d-none" id="thumbnail-fake">
-                <input type="checkbox" class="form-check-input d-none" id="is-remove-thumbnail" name="is_remove_thumbnail" value="Remove thumbnail">
+            <div class="form-group image-chosen-wrapper">
+                <label for="image-chosen-file" class="form-label">Thumbnail tủy chỉnh</label>
+                <input type="file" class="form-control d-none @if($errors->has('thumbnail')) is-invalid @endif" id="image-chosen-file" name="thumbnail" accept="image/*">
+                <input type="checkbox" class="form-check-input d-none" id="is-remove-image" name="is_remove_thumbnail" value="Remove thumbnail">
 
-                <div class="thumbnail-choose-container gap-3">
-                    <div class="thumbnail-content-container">
-                        <div class="thumbnail-content-wrapper">
-                            <img src="{{ url('public/admin/img/img-default.png') }}" class="thumbnail-content-default">
-                            <div class="thumbnail-content"></div>
-                            <div class="remove-thumbnail-overlay">
-                                <button class="remove-thumbnail-btn" type="button">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </button>
-                            </div>
+                <div class="image-chosen-container gap-3">
+                    <div class="image-chosen-content-wrapper">
+                        <div class="image-chosen-content-container">
+                            <img src="{{ url('public/admin/img/post-default.png') }}" class="image-chosen-content-default">
+                            <div class="image-chosen-content"></div>
+                            <label for="image-chosen-file" class="image-choose">
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-camera"></i>
+                                </div>
+                            </label>
                         </div>
                     </div>
 
-                    <button class="thumbnail-choose-btn btn btn-primary" type="button">
-                        <label for="thumbnail-fake" class="form-label">Chọn ảnh</label>
+                    <button class="btn btn-danger gap-2 remove-image-btn" type="button">
+                        <i class="fa-solid fa-trash"></i>
+                        <span>Xóa ảnh</span>
                     </button>
                 </div>
 
@@ -168,9 +169,9 @@
 <script src="{{ url('public/assets/js/tinymce.js') }}"></script>
 <script src="{{ url('public/assets/js/prism.js') }}"></script>
 
+<script src="{{ url('public/assets/js/image-chosen.js') }}"></script>
 <script src="{{ url('public/admin/js/posts/create.js') }}"></script>
 <script src="{{ url('public/admin/js/posts/preview.js') }}"></script>
-<script src="{{ url('public/admin/js/posts/thumbnail.js') }}"></script>
 
 <script>
     // Form validation check

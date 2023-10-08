@@ -38,12 +38,12 @@
                     @if($user->avatar)
                     <img src="{{ $user->avatar }}" alt="{{ $user->full_name }}">
                     @else
-                    <img src="{{ url('public/assets/img/logo-icon.png') }}" alt="{{ $user->full_name }}">
+                    <img src="{{ url('public/assets/img/user-avatar/user-avatar-default.png') }}" alt="{{ $user->full_name }}">
                     @endif
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a href="#" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
+                        <a href="{{ route('site.personal') }}" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
                             <div class="icon-box">
                                 <i class="fa-solid fa-user"></i>
                             </div>

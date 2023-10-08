@@ -118,7 +118,7 @@ header .more .login-btn {
 }
 
 header .more .login-btn:hover {
-  background-color: var(--color-primary-500);
+  background-color: var(--color-primary-600);
   color: #fff;
 }
 

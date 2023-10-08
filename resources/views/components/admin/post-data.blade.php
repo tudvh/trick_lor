@@ -12,7 +12,7 @@ use \App\Helpers\DateHelper;
                 @elseif($post->thumbnails)
                 <x-thumbnail :thumbnails="$post->thumbnails" :alt="$post->title" />
                 @else
-                <img src="{{ url('public/admin/img/img-default.png') }}" class="thumbnail-content-default">
+                <img src="{{ url('public/admin/img/post-default.png') }}" class="thumbnail-content-default">
                 @endif
             </div>
         </div>

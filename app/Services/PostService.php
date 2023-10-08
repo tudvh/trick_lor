@@ -62,7 +62,7 @@ class PostService
 
         if ($request->file('thumbnail')) {
             $post->thumbnails_custom = $this->handleThumbnailCustom($request->file('thumbnail'), $post->id);
-        } elseif ($request->is_remove_thumbnail) {
+        } elseif ($request->is_remove_thumbnail && $post->thumbnails_custom) {
             $folderPath = $this->getCloudinaryRootPath() . "/$post->id/post-thumbnail";
             $this->deleteAllImageInFolder($folderPath);
 

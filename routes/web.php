@@ -57,11 +57,18 @@ Route::group(['prefix' => ''], function () {
     Route::get('/post/{post}', [Site\HomeController::class, 'post'])->name('site.post');
     Route::get('/language/{language}', [Site\HomeController::class, 'language'])->name('site.language');
 
+    // Personal
+    Route::group(['prefix' => 'personal'], function () {
+        Route::get('/', [Site\AuthController::class, 'personal'])->name('site.personal');
+        Route::put('/update', [Site\AuthController::class, 'updatePersonal'])->name('site.personal.update');
+    });
+
     // Auth
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/login', [Site\AuthController::class, 'handleLogin']);
         Route::post('/register', [Site\AuthController::class, 'handleRegister']);
         Route::get('/logout', [Site\AuthController::class, 'logout'])->name('site.auth.logout');
+        Route::post('/change-password', [Site\AuthController::class, 'changePassword'])->name('site.auth.change-password');
 
         // Google
         Route::get('/google', [Site\AuthController::class, 'redirectToGoogle']);

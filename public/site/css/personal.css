@@ -1,0 +1,41 @@
+.personal-wrapper label {
+  font-weight: bold;
+}
+
+.personal-wrapper input:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 0.25rem var(--color-primary-shadow);
+}
+
+.personal-wrapper button[type='submit'] {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.personal-wrapper button[type='submit']:hover {
+  background-color: var(--color-primary-600);
+  border-color: var(--color-primary-600);
+}
+
+.image-chosen-wrapper .image-chosen-content-wrapper {
+  width: 144px;
+}
+
+.image-chosen-wrapper .image-chosen-content-container {
+  padding-top: 100%;
+}
+
+.image-chosen-wrapper .image-chosen-content-container > *,
+.image-chosen-wrapper .image-chosen-content-container .image-chosen-content img {
+  border-radius: 50%;
+}
+
+.image-chosen-wrapper .remove-image-btn {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.image-chosen-wrapper .remove-image-btn:hover {
+  background-color: var(--color-secondary-600);
+  border-color: var(--color-secondary-600);
+}

@@ -1,3 +1,11 @@
+const listToast = document.querySelectorAll('#toast .toast--custom')
+Array.from(listToast).forEach(toast => {
+  const btnClose = toast.querySelector('.toast__close')
+  btnClose.onclick = () => {
+    toast.remove()
+  }
+})
+
 const toast = ({ title = '', message = '', type = 'info', duration = 3000 }) => {
   const main = document.getElementById('toast')
   if (main) {

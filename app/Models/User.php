@@ -17,4 +17,9 @@ class User extends Authenticatable
     protected $fillable = ['full_name', 'avatar', 'email', 'username', 'password', 'role', 'google_id', 'active'];
 
     protected $hidden = ['password'];
+
+    public function hasPassword()
+    {
+        return $this->password != null;
+    }
 }
