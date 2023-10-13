@@ -8,6 +8,7 @@ const ROOT_URL = document.querySelector('meta[name="root-url"]').dataset.index
 const loginContainer = document.querySelector('#login-container')
 const loginForm = loginContainer.querySelector('#login-form')
 const switchToRegisterBtn = loginContainer.querySelector('#switch-to-register')
+const switchToForgotBtn = loginContainer.querySelector('#switch-to-forgot')
 const loginEmailInput = loginContainer.querySelector('#login-email')
 const loginPasswordInput = loginContainer.querySelector('#login-password')
 
@@ -19,6 +20,11 @@ const registerFullNameInput = registerContainer.querySelector('#register-full-na
 const registerEmailInput = registerContainer.querySelector('#register-email')
 const registerPasswordInput = registerContainer.querySelector('#register-password')
 const registerPasswordConfirmInput = registerContainer.querySelector('#register-password-confirm')
+
+// Forgot variables
+const forgotContainer = document.querySelector('#forgot-container')
+const forgotForm = forgotContainer.querySelector('#forgot-form')
+const forgotEmailInput = forgotContainer.querySelector('#forgot-email')
 
 // Google variables
 const authGoogleBtn = document.querySelectorAll('.auth-google')
@@ -33,6 +39,13 @@ const openRegisterForm = () => {
 const openLoginForm = () => {
   loginContainer.classList.remove('d-none')
   registerContainer.classList.add('d-none')
+  forgotContainer.classList.add('d-none')
+}
+
+// Open forgot form
+const openForgotForm = () => {
+  loginContainer.classList.add('d-none')
+  forgotContainer.classList.remove('d-none')
 }
 
 // Open auth overlay
@@ -41,6 +54,7 @@ openAuthBtn.addEventListener('click', () => {
 
   switchToRegisterBtn.onclick = openRegisterForm
   switchToLoginBtn.onclick = openLoginForm
+  switchToForgotBtn.onclick = openForgotForm
 })
 
 // Switch to login form when auth overlay is closed
@@ -127,6 +141,45 @@ registerForm.onsubmit = e => {
         message: error.response.data.message,
         type: 'error',
         duration: 5000,
+      })
+    })
+    .finally(() => {
+      hideLoadingOverlay()
+    })
+}
+
+// Event when forgot password submit
+forgotForm.onsubmit = e => {
+  e.preventDefault()
+  showLoadingOverlay()
+
+  axios
+    .post(
+      `${ROOT_URL}/auth/forgot`,
+      {
+        _token,
+        email: forgotEmailInput.value,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+    .then(data => {
+      toast({
+        title: 'Thành công',
+        message: data.data.message,
+        type: 'success',
+        duration: 999999,
+      })
+    })
+    .catch(error => {
+      toast({
+        title: 'Thất bại',
+        message: error.response.data.message,
+        type: 'error',
+        duration: 999999,
       })
     })
     .finally(() => {

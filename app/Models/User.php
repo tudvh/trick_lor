@@ -14,9 +14,9 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    protected $fillable = ['full_name', 'avatar', 'email', 'username', 'password', 'role', 'google_id', 'active'];
+    protected $fillable = ['full_name', 'avatar', 'email', 'username', 'password', 'role', 'google_id', 'active', 'verification_token', 'last_email_sent_at'];
 
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'verification_token', 'last_email_sent_at'];
 
     public function hasPassword()
     {

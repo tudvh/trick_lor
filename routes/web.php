@@ -19,11 +19,21 @@ use App\Http\Controllers\Admin;
 
 // Admin
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/login', [Admin\AuthController::class, 'login'])->name('admin.login');
-    Route::post('/login', [Admin\AuthController::class, 'handleLogin'])->name('admin.login');
-    Route::get('/logout', [Admin\AuthController::class, 'logout'])->name('admin.logout');
-
     Route::get('/', [Admin\HomeController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Personal
+    Route::group(['prefix' => 'personal'], function () {
+        Route::get('/', [Admin\AuthController::class, 'personal'])->name('admin.personal');
+        Route::put('/update', [Admin\AuthController::class, 'updatePersonal'])->name('admin.personal.update');
+    });
+
+    // Auth
+    Route::group(['prefix' => 'auth'], function () {
+        Route::get('/login', [Admin\AuthController::class, 'login'])->name('admin.auth.login');
+        Route::post('/login', [Admin\AuthController::class, 'handleLogin'])->name('admin.auth.login');
+        Route::get('/logout', [Admin\AuthController::class, 'logout'])->name('admin.auth.logout');
+        Route::post('/change-password', [Admin\AuthController::class, 'changePassword'])->name('admin.auth.change-password');
+    });
 
     // Post
     Route::group(['prefix' => 'posts'], function () {
@@ -69,6 +79,9 @@ Route::group(['prefix' => ''], function () {
         Route::post('/register', [Site\AuthController::class, 'handleRegister']);
         Route::get('/logout', [Site\AuthController::class, 'logout'])->name('site.auth.logout');
         Route::post('/change-password', [Site\AuthController::class, 'changePassword'])->name('site.auth.change-password');
+        Route::post('/forgot', [Site\AuthController::class, 'forgot'])->name('site.auth.forgot');
+        Route::get('/reset-password', [Site\AuthController::class, 'resetPassword'])->name('site.auth.reset-password');
+        Route::post('/reset-password', [Site\AuthController::class, 'handleResetPassword'])->name('site.auth.reset-password');
 
         // Google
         Route::get('/google', [Site\AuthController::class, 'redirectToGoogle']);

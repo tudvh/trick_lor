@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="login-container">
-    <form action="{{ route('admin.login') }}" method="POST">
+    <form method="POST">
         <div class="d-flex flex-column gap-4 p-5">
             <h1 class="title">Đăng nhập Admin</h1>
 

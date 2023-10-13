@@ -20,15 +20,15 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next, $guard = 'admin'): Response
     {
         if (!Auth::guard($guard)->check()) {
-            return redirect()->route('admin.login')->with('error', 'Vui lòng đăng nhập');
+            return redirect()->route('admin.auth.login')->with('error', 'Vui lòng đăng nhập');
         }
         if (Auth::guard($guard)->user()->active === 0) {
             Auth::guard($guard)->logout();
-            return redirect()->route('admin.login')->with('error', 'Tài khoản của bạn đã bị cấm sử dụng');
+            return redirect()->route('admin.auth.login')->with('error', 'Tài khoản của bạn đã bị cấm sử dụng');
         }
         if (Auth::guard($guard)->user()->role !== 'admin') {
             Auth::guard($guard)->logout();
-            return redirect()->route('admin.login')->with('error', 'Bạn không có quyền truy cập vào trang này');
+            return redirect()->route('admin.auth.login')->with('error', 'Bạn không có quyền truy cập vào trang này');
         }
 
         return $next($request);

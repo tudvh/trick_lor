@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="root-url" data-index="{{ URL::to('/'); }}">
+    <meta name="root-url" data-index="{{ URL::to('/') }}">
     <title>@yield('title') - Trick loR</title>
     <link rel="icon" href="{{ url('public/assets/img/logo-icon.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +63,7 @@
             @if (session('success-notification'))
             <div class="toast--custom toast--success" style="animation: slideInLeft ease .3s">
                 <div class="toast__icon">
-                    <i class="fas fa-exclamation-circle"></i>
+                    <i class="fas fa-check-circle"></i>
                 </div>
                 <div class="toast__body">
                     <h3 class="toast__title">Thành công</h3>

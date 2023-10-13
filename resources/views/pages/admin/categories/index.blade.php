@@ -22,6 +22,7 @@
                     <th>Id</th>
                     <th>Tên danh mục</th>
                     <th>Icon</th>
+                    <th>Số lượng bài đăng</th>
                     <th>Hành động</th>
                 </tr>
             </thead>
@@ -33,6 +34,7 @@
                     <td>
                         <div class="icon-box ms-auto me-auto">{!! $category->icon !!}</div>
                     </td>
+                    <td>{{ $category->postLanguages()->count() }}</td>
                     <td>
                         <div class='d-flex justify-content-center align-items-center gap-2'>
                             <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}" class='btn btn-primary' title="Chỉnh sửa danh mục">

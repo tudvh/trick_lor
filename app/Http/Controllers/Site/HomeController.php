@@ -24,14 +24,19 @@ class HomeController extends Controller
         $page = 'home';
         $titleWeb = $searchKey = trim($request->q);
 
-        $searchKeyHandle = '%' . $searchKey . '%';
-        $listPosts = Post::where('active', 1)
-            ->where('title', 'like', $searchKeyHandle)
-            ->orWhere('description', 'like', $searchKeyHandle)
-            ->orderBy('id', 'desc')
-            ->paginate(12);
+        if ($searchKey) {
+            $searchKeyHandle = '%' . $searchKey . '%';
+            $listPosts = Post::where('active', 1)
+                ->where('title', 'like', $searchKeyHandle)
+                ->orWhere('description', 'like', $searchKeyHandle)
+                ->where('active', 1)
+                ->orderBy('id', 'desc')
+                ->paginate(12);
 
-        return view('pages.site.home', compact('page', 'listPosts', 'titleWeb', 'searchKey'));
+            return view('pages.site.home', compact('page', 'listPosts', 'titleWeb', 'searchKey'));
+        } else {
+            return redirect()->route('site.home');
+        }
     }
 
     public function trending(Request $request)

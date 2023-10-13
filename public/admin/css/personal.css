@@ -1,0 +1,16 @@
+.personal-wrapper label {
+  font-weight: bold;
+}
+
+.image-chosen-wrapper .image-chosen-content-wrapper {
+  width: 144px;
+}
+
+.image-chosen-wrapper .image-chosen-content-container {
+  padding-top: 100%;
+}
+
+.image-chosen-wrapper .image-chosen-content-container > *,
+.image-chosen-wrapper .image-chosen-content-container .image-chosen-content img {
+  border-radius: 50%;
+}
