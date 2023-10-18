@@ -5,21 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostLanguage extends Model
+class PostCategory extends Model
 {
     use HasFactory;
 
-    protected $table = 'post_languages';
+    protected $table = 'post_categories';
 
-    protected $fillable = ['post_id', 'language_id'];
+    protected $fillable = ['post_id', 'category_id'];
 
     public function post()
     {
         return $this->hasOne(Post::class, 'id', 'post_id');
     }
 
-    public function language()
+    public function category()
     {
-        return $this->hasOne(Language::class, 'id', 'language_id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
 }

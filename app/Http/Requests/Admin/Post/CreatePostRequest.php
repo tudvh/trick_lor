@@ -24,7 +24,7 @@ class CreatePostRequest extends FormRequest
         return [
             'title' => 'required|unique:posts,title',
             'youtube_id' => 'nullable|unique:posts,youtube_id',
-            'languages' => 'required|array|min:1',
+            'categories' => 'required|array|min:1',
             'thumbnail' => 'image|max:2048',
             'active' => 'required|in:0,1',
         ];
@@ -36,7 +36,7 @@ class CreatePostRequest extends FormRequest
             'title.required' => 'Vui lòng nhập tiêu đề',
             'title.unique' => 'Tiêu đề của bài đăng đã tồn tại',
             'youtube_id.unique' => 'Youtube id đã tồn tại',
-            'languages.required' => 'Vui lòng chọn ít nhất 1 ngôn ngữ',
+            'categories.required' => 'Vui lòng chọn ít nhất 1 danh mục',
             'thumbnail.image' => 'Thumbnail phải là một tệp hình ảnh',
             'thumbnail.max' => 'Kích thước thumbnail không vượt quá 2MB',
             'active' => 'Vui lòng chọn trạng thái'

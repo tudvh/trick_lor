@@ -29,7 +29,7 @@ function getData(link = '') {
 
   const url =
     link ||
-    `${rootURL}/admin/posts/filter?status=${statusValue}&title=${searchValue}&language=${languageValue}&page=${page}`
+    `${rootURL}/admin/posts/filter?status=${statusValue}&key=${searchValue}&category=${languageValue}&page=${page}`
 
   xml.open('GET', url, true)
   xml.send()

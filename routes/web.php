@@ -65,7 +65,7 @@ Route::group(['prefix' => ''], function () {
     Route::get('/search', [Site\HomeController::class, 'search'])->name('site.search');
     Route::get('/trending', [Site\HomeController::class, 'trending'])->name('site.trending');
     Route::get('/post/{post}', [Site\HomeController::class, 'post'])->name('site.post');
-    Route::get('/language/{language}', [Site\HomeController::class, 'language'])->name('site.language');
+    Route::get('/category/{category}', [Site\HomeController::class, 'category'])->name('site.category');
 
     // Personal
     Route::group(['prefix' => 'personal'], function () {

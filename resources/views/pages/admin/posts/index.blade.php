@@ -23,8 +23,8 @@
             <div class="col-12 col-md-auto">
                 <select name="language" class="form-select">
                     <option value="">Ngôn ngữ</option>
-                    @foreach($listLanguages as $language)
-                    <option value="{{ $language->id }}">{{ $language->name }}</option>
+                    @foreach($listCategories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>

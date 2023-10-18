@@ -8,21 +8,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\CreatePostRequest;
 use App\Http\Requests\Admin\Post\UpdatePostRequest;
 use App\Services\PostService;
-use App\Services\PostLanguageService;
+use App\Services\PostCategoryService;
 use App\Models\Post;
-use App\Models\PostLanguage;
+use App\Models\PostCategory;
 
 class PostController extends Controller
 {
     protected $postService;
-    protected $postLanguageService;
+    protected $postCategoryService;
 
-    public function __construct(PostService $postService, PostLanguageService $postLanguageService)
+    public function __construct(PostService $postService, PostCategoryService $postCategoryService)
     {
         $this->middleware('admin');
 
         $this->postService = $postService;
-        $this->postLanguageService = $postLanguageService;
+        $this->postCategoryService = $postCategoryService;
     }
 
     public function index()
@@ -49,7 +49,7 @@ class PostController extends Controller
         }
 
         $newPost = $this->postService->create($request);
-        $this->postLanguageService->createList($newPost, $request->languages);
+        $this->postCategoryService->createList($newPost, $request->categories);
 
         return redirect()->route('admin.posts.index')->with("success", "Thêm bài đăng thành công!");
     }
@@ -62,9 +62,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $page = 'posts';
-        $listLanguagesChosen = PostLanguage::where('post_id', $post->id)->pluck('language_id')->toArray();
+        $listCategoriesChosen = PostCategory::where('post_id', $post->id)->pluck('category_id')->toArray();
 
-        return view('pages.admin.posts.edit', compact('post', 'page', 'listLanguagesChosen'));
+        return view('pages.admin.posts.edit', compact('post', 'page', 'listCategoriesChosen'));
     }
 
     public function update(UpdatePostRequest $request, Post $post)
@@ -76,7 +76,7 @@ class PostController extends Controller
                 ->withInput();
         }
         $this->postService->update($request, $post);
-        $this->postLanguageService->updateList($post, $request->languages);
+        $this->postCategoryService->updateList($post, $request->categories);
 
         return redirect()->back()->with("success", "Cập nhật bài đăng thành công!");
     }
@@ -89,16 +89,16 @@ class PostController extends Controller
     public function filter(Request $request)
     {
         $status = $request->input('status');
-        $language = $request->input('language');
-        $searchKey = $request->input('title');
+        $category = $request->input('category');
+        $searchKey = $request->input('key');
 
         $posts = Post::query();
         if ($status != null) {
             $posts = $posts->where('active', $status);
         }
-        if ($language != null) {
-            $posts = $posts->whereHas('postLanguages', function ($query) use ($language) {
-                return $query->where('language_id', $language);
+        if ($category != null) {
+            $posts = $posts->whereHas('postCategories', function ($query) use ($category) {
+                return $query->where('category_id', $category);
             });
         }
         if ($searchKey != null) {
@@ -133,13 +133,13 @@ class PostController extends Controller
         $post->created_at = Carbon::now();
         $post->id = 999999;
 
-        $postLanguages = collect($request->languages)->map(function ($languageId) use ($post) {
-            return new PostLanguage([
+        $postCategories = collect($request->categories)->map(function ($categoryId) use ($post) {
+            return new PostCategory([
                 'post_id' => $post->id,
-                'language_id' => $languageId
+                'category_id' => $categoryId
             ]);
         });
-        $post->postLanguages = $postLanguages;
+        $post->postCategories = $postCategories;
 
         return view('components.post-detail', compact('post'));
     }

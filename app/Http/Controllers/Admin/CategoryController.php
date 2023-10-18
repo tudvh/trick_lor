@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\CreateCategoryRequest;
 use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
-use App\Models\Language;
-use App\Models\PostLanguage;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -19,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         $page = 'categories';
-        $categories = Language::orderBy('id', 'desc')->paginate(20);
+        $categories = Category::orderBy('id', 'desc')->paginate(20);
 
         return view('pages.admin.categories.index', compact('page', 'categories'));
     }
@@ -33,7 +32,7 @@ class CategoryController extends Controller
 
     public function store(CreateCategoryRequest $request)
     {
-        Language::create([
+        Category::create([
             'name' => trim($request->name),
             'slug' => str()->slug(trim($request->name)),
             'icon' => $request->icon,
@@ -42,14 +41,14 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with("success", "Thêm danh mục thành công!");
     }
 
-    public function edit(Language $category)
+    public function edit(Category $category)
     {
         $page = 'categories';
 
         return view('pages.admin.categories.edit', compact('page', 'category'));
     }
 
-    public function update(UpdateCategoryRequest $request, Language $category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update([
             'name' => trim($request->name),

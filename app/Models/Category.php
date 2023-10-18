@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Language extends Model
+class Category extends Model
 {
     use HasFactory;
 
-    protected $table = 'languages';
+    protected $table = 'categories';
 
     protected $fillable = ['name', 'slug', 'icon', 'active'];
 
-    public function postLanguages()
+    public function postCategories()
     {
-        return $this->hasMany(PostLanguage::class, 'language_id', 'id');
+        return $this->hasMany(PostCategory::class, 'category_id', 'id');
     }
 }

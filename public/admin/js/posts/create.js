@@ -1,38 +1,38 @@
-const languageSelected = document.querySelector('.language-selected')
-const languageChoose = document.querySelector('.language-choose')
-const languageChooseItems = languageChoose.querySelectorAll('li')
-const languageSelect = document.querySelector('#language-select')
+const categorySelected = document.querySelector('.category-selected')
+const categoryChoose = document.querySelector('.category-choose')
+const categoryChooseItems = categoryChoose.querySelectorAll('li')
+const categorySelect = document.querySelector('#category-select')
 
-languageSelect.querySelectorAll('option').forEach(option => {
+categorySelect.querySelectorAll('option').forEach(option => {
   if (option.selected) {
     addItemElm(option.value, option.innerHTML)
-    setDisableLanguageChooseItem(option.value)
+    setDisablecategoryChooseItem(option.value)
   }
 })
 
 document.addEventListener('click', e => {
-  const isClick = languageSelected.contains(e.target)
+  const isClick = categorySelected.contains(e.target)
 
   if (isClick) {
-    languageChoose.classList.toggle('none')
+    categoryChoose.classList.toggle('d-none')
   } else {
-    languageChoose.classList.add('none')
+    categoryChoose.classList.add('d-none')
   }
 })
 
-// Set even on choose language
-for (let languageChooseItem of languageChooseItems) {
-  languageChooseItem.addEventListener('click', () => {
-    const languageId = languageChooseItem.dataset.id
-    const languageName = languageChooseItem.textContent
+// Set even on choose category
+for (let categoryChooseItem of categoryChooseItems) {
+  categoryChooseItem.addEventListener('click', () => {
+    const categoryId = categoryChooseItem.dataset.id
+    const categoryName = categoryChooseItem.textContent
 
-    handleSelect(languageId, true, languageName)
+    handleSelect(categoryId, true, categoryName)
   })
 }
 
-//set selected language
-function setSelectedLanguage(id, isSelected) {
-  const listOption = languageSelect.querySelectorAll('option')
+//set selected category
+function setSelectedcategory(id, isSelected) {
+  const listOption = categorySelect.querySelectorAll('option')
   for (let option of listOption) {
     if (option.value === id) {
       option.selected = isSelected
@@ -40,34 +40,34 @@ function setSelectedLanguage(id, isSelected) {
   }
 }
 
-function handleSelect(id, selected, languageName = '') {
-  setDisableLanguageChooseItem(id)
+function handleSelect(id, selected, categoryName = '') {
+  setDisablecategoryChooseItem(id)
   if (selected == false) {
     //remove value
-    setSelectedLanguage(id, false)
+    setSelectedcategory(id, false)
     //remove elm
     removeItemElm(id)
   } else {
     //add value
-    setSelectedLanguage(id, true)
+    setSelectedcategory(id, true)
     //add elm
-    addItemElm(id, languageName)
+    addItemElm(id, categoryName)
   }
 }
 
 // Add item select element
-function addItemElm(id, languageName) {
-  // Create language selected item
+function addItemElm(id, categoryName) {
+  // Create category selected item
   const newSelectedItem = document.createElement('div')
-  newSelectedItem.className = 'form-control language-selected-item'
+  newSelectedItem.className = 'form-control category-selected-item'
   newSelectedItem.id = `_${id}`
-  newSelectedItem.innerHTML = `<span>${languageName}</span>
+  newSelectedItem.innerHTML = `<span>${categoryName}</span>
                                 <span class="icon-remove d-flex align-items-center">
                                   <i class="fa-solid fa-xmark"></i>
                                 </span>`
 
-  // Add item to language selected box
-  languageSelected.appendChild(newSelectedItem)
+  // Add item to category selected box
+  categorySelected.appendChild(newSelectedItem)
 
   // Set event when click on remove btn
   const removeBtn = newSelectedItem.querySelector('.icon-remove')
@@ -78,19 +78,19 @@ function addItemElm(id, languageName) {
 
 //remove item select elm
 function removeItemElm(id) {
-  const itemToRemove = languageSelected.querySelector(`#_${id}`)
+  const itemToRemove = categorySelected.querySelector(`#_${id}`)
   if (itemToRemove) {
     itemToRemove.remove()
   }
 }
 
 // Set disable
-function setDisableLanguageChooseItem(id) {
-  for (let languageChooseItem of languageChooseItems) {
-    const languageId = languageChooseItem.dataset.id
+function setDisablecategoryChooseItem(id) {
+  for (let categoryChooseItem of categoryChooseItems) {
+    const categoryId = categoryChooseItem.dataset.id
 
-    if (languageId == id) {
-      languageChooseItem.classList.toggle('disabled')
+    if (categoryId == id) {
+      categoryChooseItem.classList.toggle('disabled')
     }
   }
 }

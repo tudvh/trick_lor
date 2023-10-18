@@ -38,14 +38,14 @@ const showModalPreview = () => {
   const title = document.getElementById('title').value
   const youtubeId = document.getElementById('youtube-id').value
   const description = tinymce.get('desc-textarea').getContent()
-  const languages = Array.from(languageSelect.selectedOptions).map(option => option.value)
+  const categories = Array.from(categorySelect.selectedOptions).map(option => option.value)
 
   const post = {
     title,
     youtube_id: youtubeId,
     description,
     _token,
-    languages,
+    categories,
   }
 
   xhr.send(JSON.stringify(post))

@@ -32,8 +32,8 @@ use App\Helpers\DateHelper;
                 <h3 class="title">{{ $post->title }}</h3>
                 <span>{{ DateHelper::convertDateFormat($post->created_at) }}</span>
                 <div class="d-flex flex-wrap gap-2">
-                    @foreach ($post->postLanguages as $postLanguage)
-                    <div class="icon-box">{!! $postLanguage->language->icon !!}</div>
+                    @foreach ($post->postCategories as $postCategory)
+                    <div class="icon-box">{!! $postCategory->category->icon !!}</div>
                     @endforeach
                 </div>
             </div>

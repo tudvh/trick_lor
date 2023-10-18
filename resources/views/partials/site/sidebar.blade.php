@@ -25,13 +25,13 @@
         </ul>
 
         <ul>
-            @foreach($listLanguages as $language)
+            @foreach($listCategories as $category)
             <li>
-                <a class="d-flex align-items-center flex-row gap-3 @if(isset($page) && $language->slug==$page)  active @endif" href="{{ route('site.language',['language'=>$language->slug]) }}">
+                <a class="d-flex align-items-center flex-row gap-3 @if(isset($page) && $category->slug==$page)  active @endif" href="{{ route('site.category',['category'=>$category->slug]) }}">
                     <div class="icon-box">
-                        {!! $language->icon !!}
+                        {!! $category->icon !!}
                     </div>
-                    <span class="text-center">{{ $language->name }}</span>
+                    <span class="text-center">{{ $category->name }}</span>
                 </a>
             </li>
             @endforeach

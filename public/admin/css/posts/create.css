@@ -6,21 +6,17 @@
   font-weight: bold;
 }
 
-.content .none {
-  display: none;
-}
-
-.content .language-box {
+.content .category-box {
   position: relative;
 }
 
-.content .language-selected {
+.content .category-selected {
   min-height: 38px;
   cursor: pointer;
   user-select: none;
 }
 
-.content .language-selected-item {
+.content .category-selected-item {
   width: fit-content;
   height: 24px;
   font-size: 14px;
@@ -31,17 +27,17 @@
   padding: 0 0 0 0.75rem;
 }
 
-.content .language-selected .icon-remove {
+.content .category-selected .icon-remove {
   cursor: pointer;
   padding: 5px 0.5rem;
   height: fit-content;
 }
 
-.content .language-selected .icon-remove:hover {
+.content .category-selected .icon-remove:hover {
   color: var(--bs-red);
 }
 
-.content .language-choose {
+.content .category-choose {
   position: absolute;
   top: calc(100% + 0.25rem);
   padding-left: 0;
@@ -50,34 +46,34 @@
   z-index: 10;
 }
 
-.content .language-choose ul {
+.content .category-choose ul {
   padding: 0;
 }
 
-.content .language-choose ul li {
+.content .category-choose ul li {
   margin: 0;
   cursor: pointer;
   padding: 6px 12px;
   font-size: 14px;
 }
 
-.content .language-choose ul li.disabled {
+.content .category-choose ul li.disabled {
   pointer-events: none;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.content .language-choose ul li:hover {
+.content .category-choose ul li:hover {
   background-color: #0074f0;
   color: #fff;
 }
 
-.content .was-validated #language-select:valid ~ #language-selected.form-control,
+.content .was-validated #category-select:valid ~ #category-selected.form-control,
 .content .was-validated #desc-textarea:valid ~ .tox.tox-tinymce {
   border-color: var(--bs-green);
 }
 
-.content .was-validated #language-select:invalid ~ #language-selected.form-control,
-.content #language-select.is-invalid ~ #language-selected.form-control,
+.content .was-validated #category-select:invalid ~ #category-selected.form-control,
+.content #category-select.is-invalid ~ #category-selected.form-control,
 .content .was-validated #desc-textarea:invalid ~ .tox.tox-tinymce,
 .content #desc-textarea.is-invalid ~ .tox.tox-tinymce {
   border-color: var(--bs-red);

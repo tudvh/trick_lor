@@ -57,33 +57,33 @@
         </div>
 
         <div class="col-12 col-lg-6 mt-4">
-            <div class="form-group language-box">
-                <label for="language-selected" class="form-label">Ngôn ngữ <span class="text-danger">*</span></label>
+            <div class="form-group category-box">
+                <label for="category-selected" class="form-label">Danh mục <span class="text-danger">*</span></label>
 
                 @php
-                $listLanguagesChosen = old('languages', []);
+                $listCategoriesChosen = old('categories', []);
                 @endphp
-                <select class="form-control @if($errors->has('languages')) is-invalid @endif" id="language-select" name="languages[]" multiple hidden required>
-                    @foreach ($listLanguages as $language)
-                    <option value="{{ $language->id }}" {{ in_array($language->id, $listLanguagesChosen) ? 'selected' : '' }}>
-                        {{ $language->name }}
+                <select class="form-control @if($errors->has('categories')) is-invalid @endif" id="category-select" name="categories[]" multiple hidden required>
+                    @foreach ($listCategories as $category)
+                    <option value="{{ $category->id }}" {{ in_array($category->id, $listCategoriesChosen) ? 'selected' : '' }}>
+                        {{ $category->name }}
                     </option>
                     @endforeach
                 </select>
 
-                <div class="form-control language-selected d-flex flex-wrap gap-2" id="language-selected" tabindex="0"></div>
-                <div class="form-control language-choose none">
+                <div class="form-control category-selected d-flex flex-wrap gap-2" id="category-selected" tabindex="0"></div>
+                <div class="form-control category-choose d-none">
                     <ul>
-                        @foreach ($listLanguages as $language)
-                        <li data-id='{{ $language->id }}'>{{ $language->name }}</li>
+                        @foreach ($listCategories as $category)
+                        <li data-id='{{ $category->id }}'>{{ $category->name }}</li>
                         @endforeach
                     </ul>
                 </div>
 
-                @if ($errors->has('languages'))
-                <small class="text-danger">{{ $errors->first('languages') }}</small>
+                @if ($errors->has('categories'))
+                <small class="text-danger">{{ $errors->first('categories') }}</small>
                 @else
-                <small class="invalid-feedback">Vui lòng chọn ít nhất 1 ngôn ngữ</small>
+                <small class="invalid-feedback">Vui lòng chọn ít nhất 1 danh mục</small>
                 @endif
             </div>
         </div>

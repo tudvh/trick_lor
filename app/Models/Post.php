@@ -18,8 +18,8 @@ class Post extends Model
         'thumbnails_custom' => 'array',
     ];
 
-    public function postLanguages()
+    public function postCategories()
     {
-        return $this->hasMany(PostLanguage::class, 'post_id', 'id');
+        return $this->hasMany(PostCategory::class, 'post_id', 'id');
     }
 }

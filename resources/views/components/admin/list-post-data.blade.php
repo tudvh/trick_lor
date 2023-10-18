@@ -38,9 +38,9 @@ use \App\Helpers\DateHelper;
                 </td>
                 <td class="post-language">
                     <div class="d-flex flex-wrap justify-content-center gap-2">
-                        @foreach($post->postLanguages as $postLanguage)
-                        <div class="icon-box" title="{{ $postLanguage->language->name }}">
-                            {!! $postLanguage->language->icon !!}
+                        @foreach($post->postCategories as $postCategory)
+                        <div class="icon-box" title="{{ $postCategory->category->name }}">
+                            {!! $postCategory->category->icon !!}
                         </div>
                         @endforeach
                     </div>

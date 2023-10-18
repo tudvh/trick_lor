@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Models\Language;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         foreach ($views as $view) {
             view()->composer($view, function ($view) {
                 $view->with([
-                    'listLanguages' => Language::all()
+                    'listCategories' => Category::all()
                 ]);
             });
         }
