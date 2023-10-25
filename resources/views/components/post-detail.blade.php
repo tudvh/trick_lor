@@ -5,7 +5,7 @@ use \App\Helpers\DateHelper;
 <div class="post-wrapper d-flex flex-column gap-5">
     <div class="post-header">
         <h2 class="post-title">{{ $post->title }}</h2>
-        <span class="post-info">{{ DateHelper::convertDateFormat($post->created_at) }}</span>
+        <span class="post-info">{{ DateHelper::formatTimeAgo($post->created_at) }}</span>
         <div class="d-flex flex-wrap gap-2 mt-2">
             @foreach($post->postCategories as $postCategory)
             <a href="{{ route('site.category', ['category'=>$postCategory->category->slug]) }}" class="icon-box" title="{{ $postCategory->category->name }}" target="_blank">

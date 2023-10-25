@@ -1,6 +1,10 @@
 @extends('layouts.site.main')
 
-@section('title', 'Thiết lập mật khẩu mới')
+@section('meta')
+<meta property="og:description" content="">
+@stop
+
+@section('title', 'Thiết lập mật khẩu mới - Trick loR')
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/personal.css') }}">

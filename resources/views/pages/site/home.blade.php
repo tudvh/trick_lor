@@ -1,6 +1,11 @@
 @extends('layouts.site.main')
 
-@section('title', isset($titleWeb) ? $titleWeb : 'Trang chủ')
+@section('meta')
+<meta property="og:description" content="">
+<meta property="og:image" content="{{ url('public/assets/img/post-thumbnail/post-thumbnail-primary/maxresdefault.png') }}">
+@stop
+
+@section('title', isset($titleWeb) ? $titleWeb . ' - Trick loR' : 'Trick loR')
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/home.css') }}">

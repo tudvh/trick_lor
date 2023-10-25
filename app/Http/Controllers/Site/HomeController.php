@@ -30,7 +30,10 @@ class HomeController extends Controller
             $listPosts = Post::where('active', 1)
                 ->where(function ($query) use ($searchKeyHandle) {
                     $query->where('title', 'like', $searchKeyHandle)
-                        ->orWhere('description', 'like', $searchKeyHandle);
+                        ->orWhere('description', 'like', $searchKeyHandle)
+                        ->orWhereHas('postCategories.category', function ($query) use ($searchKeyHandle) {
+                            return $query->where('name', 'like', $searchKeyHandle);
+                        });
                 })
                 ->orderBy('id', 'desc')
                 ->paginate(12);
@@ -55,9 +58,10 @@ class HomeController extends Controller
         $page = $categorySlug;
         $titleWeb = $category->name;
 
-        $listPosts = Post::whereHas('postCategories', function ($query) use ($category) {
-            return $query->where('category_id', $category->id);
-        })
+        $listPosts = Post::where('active', 1)
+            ->whereHas('postCategories', function ($query) use ($category) {
+                return $query->where('category_id', $category->id);
+            })
             ->orderBy('id', 'desc')
             ->paginate(12);
 
@@ -68,6 +72,16 @@ class HomeController extends Controller
     {
         $post = Post::where('slug', $postSlug)->first();
 
-        return view('pages.site.post', compact('post'));
+        $categoryIds = $post->postCategories->pluck('category_id')->toArray();
+
+        $suggestedPosts = Post::whereHas('postCategories', function ($query) use ($categoryIds) {
+            $query->whereIn('category_id', $categoryIds);
+        })
+            ->where('id', '!=', $post->id)
+            ->inRandomOrder()
+            ->take(6)
+            ->get();
+
+        return view('pages.site.post', compact('post', 'suggestedPosts'));
     }
 }

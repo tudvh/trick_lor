@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\CreatePostRequest;
@@ -126,9 +127,9 @@ class PostController extends Controller
     public function preview(Request $request)
     {
         $post = new Post([
-            'title' => $request->title,
-            'youtube_id' => $request->input('youtube_id'),
-            'description' => $request->input('description'),
+            'title' => Str::ucfirst(trim($request->title)),
+            'youtube_id' => trim($request->input('youtube_id')),
+            'description' => trim($request->input('description')),
         ]);
         $post->created_at = Carbon::now();
         $post->id = 999999;

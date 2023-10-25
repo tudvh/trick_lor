@@ -1,6 +1,10 @@
 @extends('layouts.site.main')
 
-@section('title', 'Thiết lập về tôi')
+@section('meta')
+<meta property="og:description" content="">
+@stop
+
+@section('title', 'Thiết lập về tôi - Trick loR')
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/assets/css/image-chosen.css') }}">

@@ -1,6 +1,10 @@
 @extends('layouts.site.main')
 
-@section('title', 'Phổ biến')
+@section('meta')
+<meta property="og:description" content="">
+@stop
+
+@section('title', 'Phổ biến - Trick loR')
 
 @section('css')
 @stop
