@@ -22,6 +22,7 @@
                     <th>Id</th>
                     <th>Tên danh mục</th>
                     <th>Icon</th>
+                    <th>Icon color</th>
                     <th>Số lượng bài đăng</th>
                     <th>Hành động</th>
                 </tr>
@@ -33,6 +34,9 @@
                     <td title="{{ $category->name }}">{{ $category->name }}</td>
                     <td>
                         <div class="icon-box ms-auto me-auto">{!! $category->icon !!}</div>
+                    </td>
+                    <td>
+                        <div class="icon-box ms-auto me-auto">{!! $category->icon_color !!}</div>
                     </td>
                     <td>{{ $category->postCategories()->count() }}</td>
                     <td>

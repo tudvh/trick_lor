@@ -13,7 +13,7 @@ use App\Helpers\ThumbnailHelper;
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/assets/css/prism.css') }}">
-<link rel="stylesheet" href="{{ url('public/site/css/home.css') }}">
+<link rel="stylesheet" href="{{ url('public/site/css/list-post.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/post.css') }}">
 @stop
 
@@ -22,16 +22,22 @@ use App\Helpers\ThumbnailHelper;
 @if(!$post->active)
 <h1>Bài viết không có sẵn</h1>
 @else
-<x-post-detail :post="$post" />
+<div class="post-wrapper d-flex flex-column gap-5">
+    <x-post-detail :post="$post" />
 
-<hr class="my-5">
+    <hr>
 
-<h2 class="post-title mt-3">Bài đăng tương tự</h2>
-<x-list-post :colLg="4" :colSm="6" :listPosts="$suggestedPosts" />
+    <div class="post-suggest">
+        <h2 class="post-title">Bài đăng tương tự</h2>
+        <x-list-post :colLg="4" :colSm="6" :listPosts="$suggestedPosts" />
+    </div>
 
-<hr class="my-5">
+    <hr>
 
-<h2 class="post-title mt-3">Bình luận</h2>
+    <div class="post-comment">
+        <h2 class="post-title">Bình luận</h2>
+    </div>
+</div>
 @endif
 @stop
 
@@ -44,4 +50,5 @@ use App\Helpers\ThumbnailHelper;
 
 <!-- Local JS -->
 <script src="{{ url('public/assets/js/copy-code.js') }}"></script>
+<script src="{{ url('public/site/js/post.js') }}"></script>
 @stop

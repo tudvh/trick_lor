@@ -98,11 +98,12 @@ header .search .submit-btn {
   border-radius: 0 92px 92px 0;
   color: rgba(22, 24, 35, 0.34);
   font-size: 1.25rem;
-  padding: 13px 20px;
+  padding: 14px 16px 14px 12px;
 }
 
 header .search .submit-btn:hover {
   background: rgba(22, 24, 35, 0.06);
+  color: rgba(22, 24, 35, 1);
 }
 
 header .more .open-search-btn {

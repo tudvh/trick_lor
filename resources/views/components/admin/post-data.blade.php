@@ -1,5 +1,6 @@
 @php
 use \App\Helpers\DateHelper;
+use \App\Helpers\NumberHelper;
 @endphp
 
 <th>{{ $post->id }}</th>
@@ -29,8 +30,6 @@ use \App\Helpers\DateHelper;
     </div>
 </td>
 <td>{{ $post->youtube_id }}</td>
-<td>{{ DateHelper::convertDateFormat($post->created_at) }}</td>
-<td>10.000</td>
 <td>
     @if($post->active)
     <span class='badge bg-success'>Công khai</span>
@@ -38,6 +37,9 @@ use \App\Helpers\DateHelper;
     <span class='badge bg-secondary'>Riêng tư</span>
     @endif
 </td>
+<td>{{ DateHelper::convertDateFormat($post->created_at) }}</td>
+<td>{{ NumberHelper::format($post->postViews->count()) }}</td>
+<td>0</td>
 <td>
     <div class='d-flex justify-content-center align-items-center gap-2'>
         <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class='btn btn-primary' title="Chỉnh sửa bài đăng">

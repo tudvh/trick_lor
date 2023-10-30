@@ -5,7 +5,7 @@
 }
 
 .post-wrapper .post-title {
-  font-weight: 700;
+  font-weight: bold;
   font-size: 2.2rem;
   margin-bottom: 0;
 }
@@ -13,9 +13,23 @@
 .post-wrapper .post-info {
   font-size: 1rem;
   color: #757575;
+  flex: 1;
 }
 
-.post-wrapper .icon-box {
+.post-wrapper .post-more > button {
+  color: #757575;
+  font-size: 1.2rem;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-wrapper .post-more > button:hover {
+  color: #292929;
+}
+
+.post-wrapper .post-category .icon-box {
   width: 40px;
   height: 40px;
   cursor: pointer;

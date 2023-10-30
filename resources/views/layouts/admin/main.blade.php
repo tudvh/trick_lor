@@ -44,7 +44,7 @@
 
         <div class="loading-overlay d-none">
             <div class="loading-icon">
-                <i class="fa-solid fa-spinner"></i>
+                <i class="fas fa-spinner"></i>
             </div>
         </div>
 

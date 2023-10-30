@@ -87,6 +87,32 @@ button:hover {
   align-items: center;
 }
 
+/* Dropdown menu */
+.dropdown-toggle::after {
+  display: none;
+}
+
+ul.dropdown-menu {
+  border: none;
+  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.2);
+}
+
+ul .dropdown-item {
+  color: #444444;
+  padding: 12px 20px;
+}
+
+ul .dropdown-item:hover,
+ul .dropdown-item:focus {
+  background-color: #f0f0f0;
+  color: #292929;
+}
+
+ul .dropdown-item .icon-box {
+  width: 30px;
+  height: auto;
+}
+
 /* Toast */
 .toast-container img {
   width: 30px;

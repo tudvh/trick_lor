@@ -23,7 +23,8 @@ class CreateCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:languages,name',
-            'icon' => 'required'
+            'icon' => 'required',
+            'icon_color' => 'required'
         ];
     }
 
@@ -32,7 +33,8 @@ class CreateCategoryRequest extends FormRequest
         return [
             'name.required' => 'Vui lòng nhập tên danh mục',
             'name.unique' => 'Tên danh mục đã tồn tại',
-            'icon.required' => 'Vui lòng nhập icon'
+            'icon.required' => 'Vui lòng nhập icon',
+            'icon_color.required' => 'Vui lòng nhập icon color'
         ];
     }
 }

@@ -36,6 +36,7 @@ class CategoryController extends Controller
             'name' => trim($request->name),
             'slug' => str()->slug(trim($request->name)),
             'icon' => $request->icon,
+            'icon_color' => $request->icon_color,
         ]);
 
         return redirect()->route('admin.categories.index')->with("success", "Thêm danh mục thành công!");
@@ -54,6 +55,7 @@ class CategoryController extends Controller
             'name' => trim($request->name),
             'slug' => str()->slug(trim($request->name)),
             'icon' => $request->icon,
+            'icon_color' => $request->icon_color,
         ]);
 
         return redirect()->back()->with("success", "Cập nhật bài đăng thành công!");

@@ -1,18 +1,18 @@
-.content-wrapper {
+.list-post {
   width: 100%;
   margin: 0;
 }
 
-.content-wrapper > .item {
-  padding: 0 1rem 2rem 1rem;
+.list-post > .item {
+  padding-bottom: 1rem;
   border-radius: 5px;
 }
 
-.content-wrapper > .item a {
+.list-post > .item a {
   overflow: hidden;
 }
 
-.content-wrapper .img-box {
+.list-post .img-box {
   position: relative;
   width: 100%;
   height: 0;
@@ -21,7 +21,7 @@
   overflow: hidden;
 }
 
-.content-wrapper > .item img {
+.list-post > .item img {
   position: absolute;
   top: 0;
   left: 0;
@@ -31,31 +31,37 @@
   transition: scale 0.2s ease;
 }
 
-.content-wrapper > .item a:hover img {
+.list-post > .item a:hover img {
   width: 100%;
   scale: 1.1;
   transition: scale 0.1s ease;
 }
 
-.content-wrapper > .item .info {
+.list-post > .item .info {
   padding: 0 0.5rem;
   margin-top: 0.5rem;
 }
 
-.content-wrapper > .item .info .title {
+.list-post > .item .info .title {
   margin-bottom: 0;
   font-size: 1rem;
   line-height: 1.7rem;
   font-weight: bold;
   transition: color 0.2s ease;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
-.content-wrapper > .item a:hover .info .title {
+.list-post > .item a:hover .info .title {
   color: var(--color-primary);
   transition: color 0.1s ease;
 }
 
-.content-wrapper > .item .info span {
+.list-post > .item .info span {
   display: block;
   font-size: 0.8rem;
   margin-bottom: 0.3rem;

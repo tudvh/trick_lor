@@ -8,8 +8,8 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Post\CreatePostRequest;
 use App\Http\Requests\Admin\Post\UpdatePostRequest;
-use App\Services\PostService;
-use App\Services\PostCategoryService;
+use App\Services\Admin\PostService;
+use App\Services\Admin\PostCategoryService;
 use App\Models\Post;
 use App\Models\PostCategory;
 

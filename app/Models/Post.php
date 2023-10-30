@@ -22,4 +22,9 @@ class Post extends Model
     {
         return $this->hasMany(PostCategory::class, 'post_id', 'id');
     }
+
+    public function postViews()
+    {
+        return $this->hasMany(PostView::class, 'post_id', 'id');
+    }
 }

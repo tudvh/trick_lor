@@ -1,36 +1,56 @@
-function createCopyCodeBtn() {
-    const copyCodeBtn = document.createElement("button");
-    copyCodeBtn.className = "copy-code-btn";
-    copyCodeBtn.textContent = "Copy";
-    return copyCodeBtn;
+const createCopyCodeBtn = () => {
+  const copyCodeBtn = document.createElement('button')
+  copyCodeBtn.className = 'copy-code-btn'
+  copyCodeBtn.textContent = 'Copy'
+  return copyCodeBtn
 }
 
-function handleCopyCode(copyCodeBtn, codeContainer) {
-    const codeContent = codeContainer.textContent;
-    navigator.clipboard.writeText(codeContent).then(() => {
-        copyCodeBtn.textContent = "Copied!";
-        copyCodeBtn.classList.add("copied");
+const handleCopyCode = async (copyCodeBtn, codeContainer) => {
+  const codeContent = codeContainer.textContent
 
-        setTimeout(() => {
-            copyCodeBtn.textContent = "Copy";
-            copyCodeBtn.classList.remove("copied");
-        }, 3000);
-    });
+  try {
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(codeContent)
+    } else {
+      const tempInput = document.createElement('input')
+      tempInput.value = codeContent
+      document.body.appendChild(tempInput)
+      tempInput.select()
+      document.execCommand('copy')
+      document.body.removeChild(tempInput)
+    }
+
+    copyCodeBtn.textContent = 'Copied!'
+    copyCodeBtn.classList.add('copied')
+
+    setTimeout(() => {
+      copyCodeBtn.textContent = 'Copy'
+      copyCodeBtn.classList.remove('copied')
+    }, 3000)
+  } catch (error) {
+    console.error('Lỗi khi sao chép code:', error)
+    toast({
+      title: 'Lỗi',
+      message: 'Không thể sao chép code',
+      type: 'error',
+      duration: 5000,
+    })
+  }
 }
 
-function addCopyCodeBtnToCodeBox(codeBox) {
-    const copyCodeBtn = createCopyCodeBtn();
-    codeBox.appendChild(copyCodeBtn);
+const addCopyCodeBtnToCodeBox = codeBox => {
+  const copyCodeBtn = createCopyCodeBtn()
+  codeBox.appendChild(copyCodeBtn)
 
-    copyCodeBtn.addEventListener("click", function () {
-        const codeContainer = codeBox.querySelector("code");
-        handleCopyCode(copyCodeBtn, codeContainer);
-    });
+  copyCodeBtn.addEventListener('click', () => {
+    const codeContainer = codeBox.querySelector('code')
+    handleCopyCode(copyCodeBtn, codeContainer)
+  })
 }
 
-function addCopyCodeBtnsToAllCodeBoxes() {
-    const listCodeBox = document.querySelectorAll("pre");
-    listCodeBox.forEach(addCopyCodeBtnToCodeBox);
+const addCopyCodeBtnsToAllCodeBoxes = () => {
+  const listCodeBox = document.querySelectorAll('pre')
+  listCodeBox.forEach(addCopyCodeBtnToCodeBox)
 }
 
-addCopyCodeBtnsToAllCodeBoxes();
+addCopyCodeBtnsToAllCodeBoxes()

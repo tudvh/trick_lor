@@ -156,6 +156,10 @@ class AuthController extends Controller
 
     public function resetPassword(Request $request)
     {
+        if (!$request->code) {
+            return redirect()->route('site.home')->with('error-notification', 'Đường dẫn không hợp lệ');
+        }
+
         $verificationToken = $request->code;
         $user = User::where('verification_token', $verificationToken)->first();
 
@@ -168,6 +172,10 @@ class AuthController extends Controller
 
     public function handleResetPassword(ChangePasswordRequest $request)
     {
+        if (!$request->verification_token) {
+            return redirect()->route('site.home')->with('error-notification', 'Đường dẫn không hợp lệ');
+        }
+
         $user = User::where('verification_token', $request->verification_token)->first();
 
         if (!$user) {

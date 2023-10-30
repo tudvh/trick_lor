@@ -27,7 +27,7 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label for="name" class="form-label">Tên danh mục <span class="text-danger">*</span></label>
+                <label for="name" class="form-label fw-bold">Tên danh mục <span class="text-danger">*</span></label>
                 <input type="text" class="form-control @if($errors->has('name')) is-invalid @endif" id="name" name="name" placeholder="Nhập tên danh mục" value="@if(old('name')){{ old('name') }}@else{{ $category->name }}@endif" autocomplete="off" required>
                 @if ($errors->has('name'))
                 <small class="text-danger">{{ $errors->first('name') }}</small>
@@ -37,10 +37,20 @@
 
         <div class="col-12">
             <div class="form-group">
-                <label for="icon" class="form-label">Icon <span class="text-danger">*</span></label>
+                <label for="icon" class="form-label fw-bold">Icon <span class="text-danger">*</span></label>
                 <textarea class="form-control @if($errors->has('icon')) is-invalid @endif" name="icon" id="icon" placeholder="Nhập icon" rows="10" required>@if(old('icon')){{ old('icon') }}@else{{ $category->icon }}@endif</textarea>
                 @if ($errors->has('icon'))
                 <small class="text-danger">{{ $errors->first('icon') }}</small>
+                @endif
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label for="icon-color" class="form-label fw-bold">Icon color <span class="text-danger">*</span></label>
+                <textarea class="form-control @if($errors->has('icon_color')) is-invalid @endif" name="icon_color" id="icon-color" placeholder="Nhập icon color" rows="10" required>@if(old('icon_color')){{ old('icon_color') }}@else{{ $category->icon_color }}@endif</textarea>
+                @if ($errors->has('icon_color'))
+                <small class="text-danger">{{ $errors->first('icon_color') }}</small>
                 @endif
             </div>
         </div>

@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\Site;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostView;
+use App\Services\Site\PostService;
 
 class HomeController extends Controller
 {
+    protected $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
+
     public function home()
     {
         $page = 'home';
@@ -48,7 +58,17 @@ class HomeController extends Controller
     {
         $page = 'trending';
 
-        return view('pages.site.trending', compact('page'));
+        $now = now();
+        $oneDayAgo = Carbon::now()->subDay();
+        $oneWeekAgo = Carbon::now()->subWeek();
+        $oneMonthAgo = Carbon::now()->subMonth();
+
+        $trendingPostsDay = $this->postService->getTrending($oneDayAgo, $oneWeekAgo, $oneMonthAgo, 'day');
+        $trendingPostsWeek = $this->postService->getTrending(null, $oneWeekAgo, $oneMonthAgo, 'week');
+        $trendingPostsMonth = $this->postService->getTrending(null, null, $oneMonthAgo,  'month');
+        $trendingPosts = $this->postService->getTrending(null, null, null, 'all');
+
+        return view('pages.site.trending', compact('page', 'trendingPostsDay', 'trendingPostsWeek', 'trendingPostsMonth', 'trendingPosts'));
     }
 
     public function category(string $categorySlug)
@@ -56,7 +76,6 @@ class HomeController extends Controller
         $category = Category::where('slug', $categorySlug)->first();
 
         $page = $categorySlug;
-        $titleWeb = $category->name;
 
         $listPosts = Post::where('active', 1)
             ->whereHas('postCategories', function ($query) use ($category) {
@@ -65,18 +84,23 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(12);
 
-        return view('pages.site.home', compact('page', 'listPosts', 'titleWeb'));
+        return view('pages.site.category', compact('page', 'listPosts', 'category'));
     }
 
     public function post(string $postSlug)
     {
-        $post = Post::where('slug', $postSlug)->first();
+        $post = Post::where('slug', $postSlug)->firstOrFail();
+
+        // Add post view
+        PostView::create([
+            'post_id' => $post->id,
+            'user_id' => optional(auth('site')->user())->id
+        ]);
 
         $categoryIds = $post->postCategories->pluck('category_id')->toArray();
 
-        $suggestedPosts = Post::whereHas('postCategories', function ($query) use ($categoryIds) {
-            $query->whereIn('category_id', $categoryIds);
-        })
+        $suggestedPosts = Post::where('active', 1)
+            ->whereHas('postCategories', fn ($query) => $query->whereIn('category_id', $categoryIds))
             ->where('id', '!=', $post->id)
             ->inRandomOrder()
             ->take(6)

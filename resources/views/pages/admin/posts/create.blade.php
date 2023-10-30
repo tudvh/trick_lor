@@ -27,7 +27,7 @@
 
         <div class="col-12">
             <div class="d-flex gap-3">
-                <a class="btn btn-primary show-preview ms-auto">Xem preview</a>
+                <a class="btn btn-primary show-preview ms-auto">Preview</a>
                 <input class="btn btn-success" type="submit" value="Tạo mới">
             </div>
         </div>
@@ -95,8 +95,8 @@
                     @php
                     $oldActive = old('active');
                     @endphp
-                    <option value="1" {{ $oldActive === '1' ? 'selected' : '' }}>Công khai</option>
-                    <option value="0" {{ $oldActive === '0' ? 'selected' : '' }}>Riêng tư</option>
+                    <option value="1" {{ $oldActive === 1 ? 'selected' : '' }}>Công khai</option>
+                    <option value="0" {{ $oldActive === 0 ? 'selected' : '' }}>Riêng tư</option>
                 </select>
                 @if ($errors->has('active'))
                 <small class="text-danger">{{ $errors->first('active') }}</small>
@@ -158,7 +158,7 @@
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Preview</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body"></div>
+            <div class="modal-body post-wrapper d-flex flex-column gap-5"></div>
         </div>
     </div>
 </div>

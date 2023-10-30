@@ -36,7 +36,7 @@
             </div>
 
             <button type="submit" class="btn btn-success ms-auto gap-2">
-                <i class="fa-solid fa-circle-check"></i>
+                <i class="far fa-edit"></i>
                 <span>Xác nhận</span>
             </button>
         </div>

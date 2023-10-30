@@ -10,7 +10,8 @@
     <title>@yield('title')</title>
     <link rel="icon" href="{{ url('public/assets/img/logo-icon.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" /> -->
+    <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ url('public/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('public/assets/css/toast-custom.css') }}">
     <link rel="stylesheet" href="{{ url('public/site/css/site.css') }}">
@@ -43,7 +44,7 @@
 
         <div class="loading-overlay d-none">
             <div class="loading-icon">
-                <i class="fa-solid fa-spinner"></i>
+                <i class="fas fa-spinner"></i>
             </div>
         </div>
 
