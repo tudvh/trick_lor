@@ -11,7 +11,10 @@
     <link rel="icon" href="{{ url('public/assets/img/logo-icon.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" /> -->
-    <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-light.css">
     <link rel="stylesheet" href="{{ url('public/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('public/assets/css/toast-custom.css') }}">
     <link rel="stylesheet" href="{{ url('public/site/css/site.css') }}">
@@ -22,6 +25,7 @@
     <link rel="stylesheet" href="{{ url('public/site/css/auth.css') }}">
     @endguest
     @yield('css')
+    <script src="{{ url('public/assets/js/toast-custom.js') }}"></script>
 </head>
 
 <body>
@@ -44,38 +48,30 @@
 
         <div class="loading-overlay d-none">
             <div class="loading-icon">
-                <i class="fas fa-spinner"></i>
+                <i class="fa-light fa-loader"></i>
             </div>
         </div>
 
         <div id="toast">
             @if (session('error-notification'))
-            <div class="toast--custom toast--error" style="animation: slideInLeft ease .3s">
-                <div class="toast__icon">
-                    <i class="fas fa-exclamation-circle"></i>
-                </div>
-                <div class="toast__body">
-                    <h3 class="toast__title">Lỗi</h3>
-                    <p class="toast__msg">{{ session('error-notification') }}</p>
-                </div>
-                <div class="toast__close">
-                    <i class="fas fa-times"></i>
-                </div>
-            </div>
+            <script>
+                toast({
+                    title: 'Lỗi',
+                    message: "{{ session('error-notification') }}",
+                    type: 'error',
+                    duration: 108000,
+                })
+            </script>
             @endif
             @if (session('success-notification'))
-            <div class="toast--custom toast--success" style="animation: slideInLeft ease .3s">
-                <div class="toast__icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="toast__body">
-                    <h3 class="toast__title">Thành công</h3>
-                    <p class="toast__msg">{{ session('success-notification') }}</p>
-                </div>
-                <div class="toast__close">
-                    <i class="fas fa-times"></i>
-                </div>
-            </div>
+            <script>
+                toast({
+                    title: 'Thành công',
+                    message: "{{ session('success-notification') }}",
+                    type: 'success',
+                    duration: 108000,
+                })
+            </script>
             @endif
         </div>
     </div>
@@ -83,7 +79,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ url('public/assets/js/assets.js') }}"></script>
-    <script src="{{ url('public/assets/js/toast-custom.js') }}"></script>
     <script src="{{ url('public/site/js/header-open-search.js') }}"></script>
     <script src="{{ url('public/assets/js/sidebar-mobile.js') }}"></script>
     @guest('site')

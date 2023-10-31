@@ -41,6 +41,7 @@ class AuthController extends Controller
             Auth::guard('admin')->logout();
             return redirect()->back()->with('error', 'Bạn không có quyền truy cập vào trang này!');
         }
+
         return redirect()->route('admin.dashboard');
     }
 

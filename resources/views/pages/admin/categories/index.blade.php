@@ -42,7 +42,7 @@
                     <td>
                         <div class='d-flex justify-content-center align-items-center gap-2'>
                             <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}" class='btn btn-primary' title="Chỉnh sửa danh mục">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-light fa-pen-to-square"></i>
                             </a>
                         </div>
                     </td>

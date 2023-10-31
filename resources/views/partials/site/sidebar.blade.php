@@ -10,9 +10,9 @@
                 <a class="d-flex align-items-center flex-row gap-3 @if (isset($page) && $page=='home') active @endif" href="{{ route('site.home') }}">
                     <div class="icon-box">
                         @if (isset($page) && $page=='home')
-                        <i class="fas fa-home-alt"></i>
+                        <i class="fa-solid fa-house"></i>
                         @else
-                        <i class="fal fa-home-alt"></i>
+                        <i class="fa-light fa-house"></i>
                         @endif
                     </div>
                     <span class="text-center">Trang chủ</span>
@@ -22,9 +22,9 @@
                 <a class="d-flex align-items-center flex-row gap-3 @if (isset($page) && $page=='trending') active @endif" href="{{ route('site.trending') }}">
                     <div class="icon-box">
                         @if (isset($page) && $page=='trending')
-                        <i class="fas fa-fire"></i>
+                        <i class="fa-sharp fa-solid fa-fire"></i>
                         @else
-                        <i class="fal fa-fire"></i>
+                        <i class="fa-sharp fa-light fa-fire"></i>
                         @endif
                     </div>
                     <span class="text-center">Phổ biến</span>

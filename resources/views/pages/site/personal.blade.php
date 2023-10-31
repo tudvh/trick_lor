@@ -44,7 +44,7 @@
                             </div>
                             <label for="image-chosen-file" class="image-choose">
                                 <div class="icon-box">
-                                    <i class="far fa-camera"></i>
+                                    <i class="fa-solid fa-camera"></i>
                                 </div>
                             </label>
                         </div>
@@ -69,7 +69,7 @@
             </div>
 
             <button type="submit" class="btn btn-success ms-auto gap-2">
-                <i class="far fa-edit"></i>
+                <i class="fa-solid fa-pen-to-square"></i>
                 <span>Cập nhật thông tin</span>
             </button>
         </div>
@@ -108,7 +108,7 @@
             </div>
 
             <button type="submit" class="btn btn-success ms-auto gap-2">
-                <i class="far fa-edit"></i>
+                <i class="fa-solid fa-pen-to-square"></i>
                 <span>Xác nhận</span>
             </button>
         </div>

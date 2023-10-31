@@ -42,7 +42,7 @@ use \App\Helpers\NumberHelper;
                     <div class="d-flex flex-wrap justify-content-center gap-2">
                         @foreach($post->postCategories as $postCategory)
                         <div class="icon-box" title="{{ $postCategory->category->name }}">
-                            {!! $postCategory->category->icon !!}
+                            {!! $postCategory->category->icon_color !!}
                         </div>
                         @endforeach
                     </div>
@@ -61,15 +61,15 @@ use \App\Helpers\NumberHelper;
                 <td>
                     <div class='d-flex justify-content-center align-items-center gap-2'>
                         <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class='btn btn-primary' title="Chỉnh sửa bài đăng">
-                            <i class="fa-solid fa-pen-to-square"></i>
+                            <i class="fa-light fa-pen-to-square"></i>
                         </a>
                         @if($post->active)
                         <button class='btn btn-danger' onclick="togglePostStatus('{{ $post->id }}', false)" title="Chuyển sang chế độ riêng tư">
-                            <i class="fa-solid fa-eye-slash"></i>
+                            <i class="fa-sharp fa-light fa-eye-slash"></i>
                         </button>
                         @else
                         <button class='btn btn-success' onclick="togglePostStatus('{{ $post->id }}', true)" title="Chuyển sang chế độ công khai">
-                            <i class="fa-solid fa-eye"></i>
+                            <i class="fa-light fa-eye"></i>
                         </button>
                         @endif
                     </div>

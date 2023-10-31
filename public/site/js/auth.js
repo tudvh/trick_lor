@@ -199,6 +199,13 @@ function receiveDataFromGoogleLoginWindow(data) {
     setTimeout(() => {
       location.reload()
     }, 500)
+  } else if (data.status === 'error') {
+    toast({
+      title: 'Lỗi',
+      message: data.message,
+      type: 'error',
+      duration: 999999,
+    })
   }
 }
 

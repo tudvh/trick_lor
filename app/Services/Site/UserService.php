@@ -2,57 +2,61 @@
 
 namespace App\Services\Site;
 
-use JD\Cloudder\Facades\Cloudder;
+use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\CloudinaryService;
 
 class UserService
 {
-    private function getCloudinaryRootPath()
+    protected $cloudinaryService;
+    private const CLOUDINARY_ROOT_PATH = "trick-lor/user-avatar";
+    private const AVATAR_MAX_QUALITY = 144;
+
+    public function __construct(CloudinaryService $cloudinaryService)
     {
-        return "trick-lor/user-avatar";
+        $this->cloudinaryService = $cloudinaryService;
     }
 
-    public function update($request, User $user)
+    public function createWithSocial(array $data)
+    {
+        $user = User::create([
+            'full_name' => $data['full_name'],
+            'email' => $data['email'],
+            'google_id' => $data['google_id']
+        ]);
+
+        $imageSrc = $data['avatar'];
+        $publicId = $this::CLOUDINARY_ROOT_PATH . "/" . $user->id;
+        $maxQuality = $this::AVATAR_MAX_QUALITY;
+        $uploadedResult = $this->cloudinaryService->upload($imageSrc, $publicId, $maxQuality);
+
+        $user->avatar = $uploadedResult->getSecurePath();
+        $user->avatar_public_id = $uploadedResult->getPublicId();
+
+        $user->save();
+
+        return $user;
+    }
+
+    public function update(Request $request, User $user)
     {
         $user->full_name = mb_convert_case(ucwords(trim($request->full_name)), MB_CASE_TITLE, "UTF-8");
 
-        if ($request->file('avatar')) {
-            $user->avatar = $this->handleAvatarUser($request->file('avatar'), $user->id);
-        } elseif ($request->is_remove_avatar && $user->avatar) {
-            $imagePath = $this->getCloudinaryRootPath() . "/$user->id";
-            $this->deleteAvatarUser($imagePath);
+        if ($request->hasFile('avatar')) {
+            $imageSrc = $request->file('avatar')->getRealPath();
+            $publicId = $this::CLOUDINARY_ROOT_PATH . "/" . $user->id;
+            $maxQuality = $this::AVATAR_MAX_QUALITY;
+            $uploadedResult = $this->cloudinaryService->upload($imageSrc, $publicId, $maxQuality);
+
+            $user->avatar = $uploadedResult->getSecurePath();
+            $user->avatar_public_id = $uploadedResult->getPublicId();
+        } elseif ($request->is_remove_avatar && $user->avatar_public_id) {
+            $this->cloudinaryService->delete($user->avatar_public_id);
 
             $user->avatar = null;
+            $user->avatar_public_id = null;
         }
 
         $user->save();
-    }
-
-    public function handleAvatarUser($userAvatar, $userId)
-    {
-        $avatarPath = $this->getCloudinaryRootPath() . "/$userId";
-        $avatarOption = $this->handleQualityImage($userAvatar, 144);
-        $uploadResult = Cloudder::upload($userAvatar, $avatarPath, $avatarOption)->getResult();
-        $avatarSrc = $uploadResult['secure_url'];
-
-        return $avatarSrc;
-    }
-
-    private function handleQualityImage($src, $maxQuality)
-    {
-        list($width, $height) = getimagesize($src);
-        $options = ["crop" => "scale"];
-
-        if ($width > $maxQuality && $height > $maxQuality) {
-            $maxDimension = $width > $height ? "height" : "width";
-            $options[$maxDimension] = $maxQuality;
-        }
-
-        return $options;
-    }
-
-    public function deleteAvatarUser($imagePath)
-    {
-        Cloudder::destroyImages($imagePath);
     }
 }

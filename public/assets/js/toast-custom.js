@@ -27,10 +27,10 @@ const toast = ({ title = '', message = '', type = 'info', duration = 3000 }) => 
     }
 
     const icons = {
-      success: 'fas fa-check-circle',
-      info: 'fas fa-info-circle',
-      warning: 'fas fa-exclamation-circle',
-      error: 'fas fa-exclamation-circle',
+      success: 'fa-solid fa-circle-check',
+      info: 'fa-solid fa-circle-info',
+      warning: 'fa-solid fa-circle-exclamation',
+      error: 'fa-solid fa-circle-exclamation',
     }
     const icon = icons[type]
     const delay = (duration / 1000).toFixed(2)

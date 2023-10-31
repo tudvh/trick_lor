@@ -69,8 +69,8 @@ Route::group(['prefix' => ''], function () {
 
     // Personal
     Route::group(['prefix' => 'personal'], function () {
-        Route::get('/', [Site\AuthController::class, 'personal'])->name('site.personal');
-        Route::put('/update', [Site\AuthController::class, 'updatePersonal'])->name('site.personal.update');
+        Route::get('/', [Site\UserController::class, 'personal'])->name('site.personal');
+        Route::put('/update', [Site\UserController::class, 'updatePersonal'])->name('site.personal.update');
     });
 
     // Auth
@@ -84,7 +84,7 @@ Route::group(['prefix' => ''], function () {
         Route::post('/reset-password', [Site\AuthController::class, 'handleResetPassword'])->name('site.auth.reset-password');
 
         // Google
-        Route::get('/google', [Site\AuthController::class, 'redirectToGoogle']);
-        Route::get('/google/callback', [Site\AuthController::class, 'handleGoogleCallback']);
+        Route::get('/google', [Site\GoogleController::class, 'redirectToGoogle']);
+        Route::get('/google/callback', [Site\GoogleController::class, 'handleGoogleCallback']);
     });
 });

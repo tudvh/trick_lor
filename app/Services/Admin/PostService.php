@@ -3,15 +3,19 @@
 namespace App\Services\Admin;
 
 use DOMDocument;
-use JD\Cloudder\Facades\Cloudder;
 use Illuminate\Support\Str;
 use App\Models\Post;
+use App\Services\CloudinaryService;
 
 class PostService
 {
-    private function getCloudinaryRootPath()
+    protected $cloudinaryService;
+    private const CLOUDINARY_ROOT_PATH = "trick-lor/post";
+    private const IMAGE_DESCRIPTION_MAX_QUALITY = 720;
+
+    public function __construct(CloudinaryService $cloudinaryService)
     {
-        return "trick-lor/post";
+        $this->cloudinaryService = $cloudinaryService;
     }
 
     public function create($request)
@@ -63,8 +67,8 @@ class PostService
         if ($request->file('thumbnail')) {
             $post->thumbnails_custom = $this->handleThumbnailCustom($request->file('thumbnail'), $post->id);
         } elseif ($request->is_remove_thumbnail && $post->thumbnails_custom) {
-            $folderPath = $this->getCloudinaryRootPath() . "/$post->id/post-thumbnail";
-            $this->deleteAllImageInFolder($folderPath);
+            $folderPath = $this::CLOUDINARY_ROOT_PATH . "/" . $post->id . "/post-thumbnail";
+            $this->cloudinaryService->deleteFolder($folderPath);
 
             $post->thumbnails_custom = null;
         }
@@ -92,7 +96,6 @@ class PostService
             }
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             dd('Có lỗi trong lúc kiểm tra Youtube id. Vui lòng thử lại.');
-            return false;
         }
 
         return false;
@@ -104,10 +107,12 @@ class PostService
         $thumbnails = [];
 
         foreach ($thumbnailSizes as $size => $maxQuality) {
-            $thumbnailPath = $this->getCloudinaryRootPath() . "/$postId/post-thumbnail/$size";
-            $thumbnailOption = $this->handleQualityImage($thumbnailFile, $maxQuality);
-            $uploadResult = Cloudder::upload($thumbnailFile, $thumbnailPath, $thumbnailOption)->getResult();
-            $thumbnails[] = $uploadResult['secure_url'];
+            $thumbnailSrc = $thumbnailFile->getRealPath();
+            $publicId = $this::CLOUDINARY_ROOT_PATH . "/$postId/post-thumbnail/$size";
+            $maxQuality = $maxQuality;
+            $uploadedSrc = $this->cloudinaryService->upload($thumbnailSrc, $publicId, $maxQuality)->getSecurePath();
+
+            $thumbnails[] = $uploadedSrc;
         }
 
         return $thumbnails;
@@ -128,12 +133,12 @@ class PostService
 
             if ($publicId == '') {
                 $imageName = uniqid();
-                $imagePath = $this->getCloudinaryRootPath() . "/$postId/post-description/$imageName";
-                $imageOption = $this->handleQualityImage($imageSrcOld, 720);
-                $uploadResult = Cloudder::upload($imageSrcOld, $imagePath, $imageOption)->getResult();
+                $imagePublicId = $this::CLOUDINARY_ROOT_PATH . "/$postId/post-description/$imageName";
+                $maxQuality = $this::IMAGE_DESCRIPTION_MAX_QUALITY;
+                $uploadedResult = $this->cloudinaryService->upload($imageSrcOld, $imagePublicId, $maxQuality);
 
-                $imageElement->setAttribute('src', $uploadResult['secure_url']);
-                $imageElement->setAttribute('data-public-id', $uploadResult['public_id']);
+                $imageElement->setAttribute('src', $uploadedResult->getSecurePath());
+                $imageElement->setAttribute('data-public-id', $uploadedResult->getPublicId());
                 $imageElement->setAttribute('alt', $postTitle);
 
                 $imageElement->removeAttribute('width');
@@ -159,18 +164,18 @@ class PostService
             return $element->getAttribute('data-public-id');
         })->toArray();
 
-        $folderPath = $this->getCloudinaryRootPath() . "/$postId/post-description";
-        $imageFilesInFolder = Cloudder::resources(["type" => "upload", "prefix" => $folderPath])['resources'];
+        $folderPath = $this::CLOUDINARY_ROOT_PATH . "/$postId/post-description";
+        $imageResourcesInFolder = $this->cloudinaryService->getAllResourcesInFolder($folderPath);
 
         $publicIdsDelete = [];
-        foreach ($imageFilesInFolder as $image) {
-            if (!in_array($image['public_id'], $publicIdsUpdate)) {
-                $publicIdsDelete[] = $image['public_id'];
+        foreach ($imageResourcesInFolder as $imageResource) {
+            if (!in_array($imageResource['public_id'], $publicIdsUpdate)) {
+                $publicIdsDelete[] = $imageResource['public_id'];
             }
         }
 
         if (count($publicIdsDelete) > 0) {
-            Cloudder::destroyImages($publicIdsDelete);
+            $this->cloudinaryService->delete(...$publicIdsDelete);
         }
     }
 
@@ -179,38 +184,9 @@ class PostService
         foreach ($node->childNodes as $childNode) {
             if ($childNode->nodeName === 'img') {
                 $imageElements[] = $childNode;
-            } elseif ($childNode->nodeName === 'pre') {
-                continue;
             } else {
                 $this->collectImages($childNode, $imageElements);
             }
-        }
-    }
-
-    private function handleQualityImage($src, $maxQuality)
-    {
-        list($width, $height) = getimagesize($src);
-        $options = ["crop" => "scale"];
-
-        if ($width > $maxQuality && $height > $maxQuality) {
-            $maxDimension = $width > $height ? "height" : "width";
-            $options[$maxDimension] = $maxQuality;
-        }
-
-        return $options;
-    }
-
-    private function deleteAllImageInFolder($folderPath)
-    {
-        $allImageFiles = Cloudder::resources(["type" => "upload", "prefix" => $folderPath])['resources'];
-
-        $publicIdsDelete = [];
-        foreach ($allImageFiles as $imageFile) {
-            $publicIdsDelete[] = $imageFile['public_id'];
-        }
-
-        if (count($publicIdsDelete) > 0) {
-            Cloudder::destroyImages($publicIdsDelete);
         }
     }
 }

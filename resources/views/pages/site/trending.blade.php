@@ -15,7 +15,7 @@
 <div class="content-header">
     <div class="icon-wrapper">
         <div class="icon-box col-auto">
-            <i class="fas fa-fire"></i>
+            <i class="fa-sharp fa-solid fa-fire"></i>
         </div>
     </div>
     <h1 class="fw-bold m-0 col-auto">Phổ biến</h1>

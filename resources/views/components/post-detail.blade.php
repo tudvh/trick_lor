@@ -9,17 +9,19 @@ use App\Helpers\NumberHelper;
         <span class="post-info">{{ NumberHelper::format($post->postViews->count()) }} lượt xem • {{ DateHelper::formatTimeAgo($post->created_at) }}</span>
         <div class="post-more d-flex">
             <button type="button" title="Lưu bài viết">
-                <i class="far fa-bookmark"></i>
+                <i class="fa-regular fa-bookmark"></i>
             </button>
-
+            <!-- <button type="button" title="Hủy lưu bài viết" style="color: var(--color-primary)">
+                <i class="fa-solid fa-bookmark"></i>
+            </button> -->
             <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Chia sẻ">
-                <i class="far fa-share-alt"></i>
+                <i class="fa-sharp fa-solid fa-share-nodes"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>
                     <button id="copy-current-link" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
                         <div class="icon-box">
-                            <i class="fal fa-copy"></i>
+                            <i class="fa-solid fa-copy"></i>
                         </div>
                         <span class="w-100">Sao chép liên kết</span>
                     </button>

@@ -171,9 +171,12 @@ ul .dropdown-item .icon-box {
 
 /* Pagination */
 .pagination .page-item .page-link {
-  font-size: 14px;
+  height: 36px;
   padding: 5px 15px;
   border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Scrollbar css */
