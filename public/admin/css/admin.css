@@ -4,8 +4,14 @@
 }
 
 /* Pagination */
-.pagination li.page-item:not(.disabled):not(.active) a {
+.pagination .page-item .page-link {
   cursor: pointer;
+}
+
+.pagination .page-item.active .page-link,
+.pagination .page-item:hover .page-link,
+.pagination .page-item:not(.active) .page-link:focus {
+  background-color: var(--bs-pagination-color);
 }
 
 /* Sidebar mobile */

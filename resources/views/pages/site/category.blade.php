@@ -20,8 +20,8 @@
     </div>
     <h1 class="fw-bold m-0 col-auto">{{ $category->name }}</h1>
 </div>
-@if ($listPosts->count() > 0)
-<x-list-post :colLg="4" :colSm="6" :listPosts="$listPosts" />
+@if ($posts->count() > 0)
+<x-site.list-post :colLg="4" :colSm="6" :posts="$posts" />
 @else
 <h3 class="mt-3">Danh sách bài đăng trống!</h3>
 @endif

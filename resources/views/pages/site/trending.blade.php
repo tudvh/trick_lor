@@ -28,16 +28,16 @@
 </div>
 <div class="tabs-list">
     <div id="tab-list-day" class="tab-list-item">
-        <x-list-post :colLg="4" :colSm="6" :listPosts="$trendingPostsDay" />
+        <x-site.list-post :colLg="4" :colSm="6" :posts="$trendingPostsDay" />
     </div>
     <div id="tab-list-week" class="tab-list-item d-none">
-        <x-list-post :colLg="4" :colSm="6" :listPosts="$trendingPostsWeek" />
+        <x-site.list-post :colLg="4" :colSm="6" :posts="$trendingPostsWeek" />
     </div>
     <div id="tab-list-month" class="tab-list-item d-none">
-        <x-list-post :colLg="4" :colSm="6" :listPosts="$trendingPostsMonth" />
+        <x-site.list-post :colLg="4" :colSm="6" :posts="$trendingPostsMonth" />
     </div>
     <div id="tab-list-all" class="tab-list-item d-none">
-        <x-list-post :colLg="4" :colSm="6" :listPosts="$trendingPosts" />
+        <x-site.list-post :colLg="4" :colSm="6" :posts="$trendingPosts" />
     </div>
 </div>
 @stop

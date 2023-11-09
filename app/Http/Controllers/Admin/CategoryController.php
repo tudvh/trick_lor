@@ -17,17 +17,14 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $page = 'categories';
         $categories = Category::orderBy('id', 'desc')->paginate(20);
 
-        return view('pages.admin.categories.index', compact('page', 'categories'));
+        return view('pages.admin.categories.index', compact('categories'));
     }
 
     public function create()
     {
-        $page = 'categories';
-
-        return view('pages.admin.categories.create', compact('page'));
+        return view('pages.admin.categories.create');
     }
 
     public function store(CreateCategoryRequest $request)
@@ -44,9 +41,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        $page = 'categories';
-
-        return view('pages.admin.categories.edit', compact('page', 'category'));
+        return view('pages.admin.categories.edit', compact('category'));
     }
 
     public function update(UpdateCategoryRequest $request, Category $category)

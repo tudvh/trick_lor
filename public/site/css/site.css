@@ -10,6 +10,7 @@
   --color-primary-600: #cc3700;
   --color-primary-500: #ff581a;
   --color-primary-400: #ff7d4d;
+  --color-primary-300: #ff9b76;
   --color-primary-100: #fff1eb;
   --color-secondary: #00baff;
   --color-secondary-600: #0095cc;
@@ -18,23 +19,14 @@
 }
 
 /* Pagination */
-.pagination .page-item.active .page-link {
+.pagination .page-item.active .page-link,
+.pagination .page-item:hover .page-link,
+.pagination .page-item:not(.active) .page-link:focus {
   background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: #fff;
 }
 
 .pagination .page-item.disabled .page-link {
   color: var(--bs-pagination-disabled-color);
-}
-
-.pagination .page-item .page-link {
-  color: var(--color-primary);
-}
-
-.pagination .page-item:not(.active) .page-link:hover,
-.pagination .page-item:not(.active) .page-link:focus {
-  color: var(--color-primary-600);
 }
 
 .pagination .page-item .page-link:focus {

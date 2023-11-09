@@ -24,7 +24,7 @@ use \App\Helpers\NumberHelper;
     <div class="d-flex flex-wrap justify-content-center gap-2">
         @foreach($post->postCategories as $postCategory)
         <div class="icon-box" title="{{ $postCategory->category->name }}">
-            {!! $postCategory->category->icon !!}
+            {!! $postCategory->category->icon_color !!}
         </div>
         @endforeach
     </div>

@@ -3,7 +3,7 @@
 }
 
 .personal-wrapper input:focus {
-  border-color: var(--color-primary-500);
+  border-color: var(--color-primary-300);
   box-shadow: 0 0 0 0.25rem var(--color-primary-shadow);
 }
 

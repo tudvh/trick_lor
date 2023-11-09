@@ -29,7 +29,7 @@ use App\Helpers\ThumbnailHelper;
 
     <div class="post-suggest">
         <h2 class="post-title">Bài đăng tương tự</h2>
-        <x-list-post :colLg="4" :colSm="6" :listPosts="$suggestedPosts" />
+        <x-site.list-post :colLg="4" :colSm="6" :posts="$suggestedPosts" />
     </div>
 
     <hr>

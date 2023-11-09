@@ -15,8 +15,6 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $page = 'dashboard';
-
-        return view('pages.admin.dashboard', compact('page'));
+        return view('pages.admin.dashboard');
     }
 }

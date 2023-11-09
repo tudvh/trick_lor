@@ -28,16 +28,12 @@ class PostController extends Controller
 
     public function index()
     {
-        $page = 'posts';
-
-        return view('pages.admin.posts.index', compact('page'));
+        return view('pages.admin.posts.index');
     }
 
     public function create()
     {
-        $page = 'posts';
-
-        return view('pages.admin.posts.create', compact('page'));
+        return view('pages.admin.posts.create');
     }
 
     public function store(CreatePostRequest $request)
@@ -62,10 +58,9 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $page = 'posts';
         $listCategoriesChosen = PostCategory::where('post_id', $post->id)->pluck('category_id')->toArray();
 
-        return view('pages.admin.posts.edit', compact('post', 'page', 'listCategoriesChosen'));
+        return view('pages.admin.posts.edit', compact('post', 'listCategoriesChosen'));
     }
 
     public function update(UpdatePostRequest $request, Post $post)

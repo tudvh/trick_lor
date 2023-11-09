@@ -18,8 +18,8 @@
         </li>
 
         <li>
-            <a class="d-flex align-items-center gap-2 @if(isset($page) && $page=='dashboard') active @endif" href="{{ route('admin.dashboard') }}">
-                @if(isset($page) && $page=='dashboard')
+            <a class="d-flex align-items-center gap-2 @if(request()->is('admin')){{ 'active' }}@endif" href="{{ route('admin.dashboard') }}">
+                @if(request()->is('admin'))
                 <i class="fa-solid fa-grid-horizontal"></i>
                 @else
                 <i class="fa-light fa-grid-horizontal"></i>
@@ -28,8 +28,8 @@
             </a>
         </li>
         <li>
-            <a class="d-flex align-items-center gap-2 @if(isset($page) && $page=='categories') active @endif" href="{{ route('admin.categories.index') }}">
-                @if(isset($page) && $page=='categories')
+            <a class="d-flex align-items-center gap-2 @if(request()->is('admin/categories*')){{ 'active' }}@endif" href="{{ route('admin.categories.index') }}">
+                @if(request()->is('admin/categories*'))
                 <i class="fa-solid fa-folder"></i>
                 @else
                 <i class="fa-light fa-folder"></i>
@@ -38,8 +38,8 @@
             </a>
         </li>
         <li>
-            <a class="d-flex align-items-center gap-2 @if(isset($page) && $page=='posts') active @endif" href="{{ route('admin.posts.index') }}">
-                @if(isset($page) && $page=='posts')
+            <a class="d-flex align-items-center gap-2 @if(request()->is('admin/posts*')){{ 'active' }}@endif" href="{{ route('admin.posts.index') }}">
+                @if(request()->is('admin/posts*'))
                 <i class="fa-solid fa-blog"></i>
                 @else
                 <i class="fa-light fa-blog"></i>

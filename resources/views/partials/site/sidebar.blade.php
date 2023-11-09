@@ -7,9 +7,9 @@
     <div class="list">
         <ul>
             <li>
-                <a class="d-flex align-items-center flex-row gap-3 @if (isset($page) && $page=='home') active @endif" href="{{ route('site.home') }}">
+                <a class="d-flex align-items-center flex-row gap-3 @if(request()->is('/')){{ 'active' }}@endif" href="{{ route('site.home') }}">
                     <div class="icon-box">
-                        @if (isset($page) && $page=='home')
+                        @if (request()->is('/'))
                         <i class="fa-solid fa-house"></i>
                         @else
                         <i class="fa-light fa-house"></i>
@@ -19,9 +19,9 @@
                 </a>
             </li>
             <li>
-                <a class="d-flex align-items-center flex-row gap-3 @if (isset($page) && $page=='trending') active @endif" href="{{ route('site.trending') }}">
+                <a class="d-flex align-items-center flex-row gap-3 @if(request()->is('trending')){{ 'active' }}@endif" href="{{ route('site.trending') }}">
                     <div class="icon-box">
-                        @if (isset($page) && $page=='trending')
+                        @if (request()->is('trending'))
                         <i class="fa-sharp fa-solid fa-fire"></i>
                         @else
                         <i class="fa-sharp fa-light fa-fire"></i>
@@ -35,7 +35,7 @@
         <ul>
             @foreach($listCategories as $category)
             <li>
-                <a class="d-flex align-items-center flex-row gap-3 @if(isset($page) && $category->slug==$page)  active @endif" href="{{ route('site.category',['category'=>$category->slug]) }}">
+                <a class='d-flex align-items-center flex-row gap-3 {{ request()->is("category/{$category->slug}") ? "active" : "" }}' href="{{ route('site.category',['category'=>$category->slug]) }}">
                     <div class="icon-box">
                         {!! $category->icon_color !!}
                     </div>

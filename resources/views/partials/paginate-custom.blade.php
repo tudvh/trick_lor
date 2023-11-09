@@ -9,31 +9,11 @@ $lastPage = $paginator->lastPage();
     <div class="d-flex justify-content-center align-items-center">
         <ul class="pagination gap-2 flex-wrap justify-content-center">
             {{-- Previous Page Link --}}
-            @if ($paginator->onFirstPage())
-            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                <span class="page-link" aria-hidden="true">
-                    <i class="fa-light fa-arrow-left-long"></i>
-                </span>
-            </li>
-            @else
+            @if ($currentPage >= $onEachSide + 2)
             <li class="page-item">
                 <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
-                    <i class="fa-light fa-arrow-left-long"></i>
+                    <i class="fa-regular fa-angle-left"></i>
                 </a>
-            </li>
-            @endif
-
-            {{-- First Page Link --}}
-            @if ($currentPage >= $onEachSide + 3)
-            <li class="page-item">
-                <a class="page-link" href="{{ $paginator->url(1) }}">1</a>
-            </li>
-            <li class="page-item disabled">
-                <span class="page-link" aria-hidden="true">...</span>
-            </li>
-            @elseif ($currentPage >= $onEachSide + 2)
-            <li class="page-item">
-                <a class="page-link" href="{{ $paginator->url(1) }}">1</a>
             </li>
             @endif
 
@@ -45,19 +25,12 @@ $lastPage = $paginator->lastPage();
                 @endfor
 
                 {{-- Next Page Link --}}
-                @if ($paginator->hasMorePages())
-                <li class="page-item">
+                @if ($currentPage <= $lastPage - $onEachSide - 2) <li class="page-item">
                     <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">
-                        <i class="fa-light fa-arrow-right-long"></i>
+                        <i class="fa-regular fa-angle-right"></i>
                     </a>
-                </li>
-                @else
-                <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                    <span class="page-link" aria-hidden="true">
-                        <i class="fa-light fa-arrow-right-long"></i>
-                    </span>
-                </li>
-                @endif
+                    </li>
+                    @endif
         </ul>
     </div>
 </nav>

@@ -36,7 +36,7 @@
                     @endphp
 
                     @if($user->avatar)
-                    <img src="{{ $user->avatar }}" alt="{{ $user->full_name }}" title="{{ $user->full_name }}">
+                    <img src="{{ $user->avatar }}" alt="{{ $user->full_name }}" title="Tài khoản">
                     @else
                     <img src="{{ url('public/assets/img/user-avatar/user-avatar-default.png') }}" alt="{{ $user->full_name }}">
                     @endif

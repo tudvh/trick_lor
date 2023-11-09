@@ -171,12 +171,24 @@ ul .dropdown-item .icon-box {
 
 /* Pagination */
 .pagination .page-item .page-link {
-  height: 36px;
-  padding: 5px 15px;
-  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  padding: unset;
+  border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #000;
+  border: none;
+}
+
+.pagination .page-item.active .page-link,
+.pagination .page-item:hover .page-link,
+.pagination .page-item:not(.active) .page-link:focus {
+  color: #fff;
+  box-shadow: none;
 }
 
 /* Scrollbar css */
