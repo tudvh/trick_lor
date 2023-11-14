@@ -23,6 +23,11 @@ class Post extends Model
         return $this->hasMany(PostCategory::class, 'post_id', 'id');
     }
 
+    public function categories()
+    {
+        return $this->hasManyThrough(Category::class, PostCategory::class, 'post_id', 'id', 'id', 'category_id');
+    }
+
     public function postViews()
     {
         return $this->hasMany(PostView::class, 'post_id', 'id');

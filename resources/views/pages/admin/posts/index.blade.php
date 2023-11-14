@@ -22,7 +22,7 @@
             </div>
             <div class="col-12 col-md-auto">
                 <select name="language" class="form-select">
-                    <option value="">Ngôn ngữ</option>
+                    <option value="">Danh mục</option>
                     @foreach($listCategories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach

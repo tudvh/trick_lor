@@ -48,7 +48,6 @@
   line-height: 1.7rem;
   font-weight: bold;
   transition: color 0.2s ease;
-
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

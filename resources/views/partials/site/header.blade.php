@@ -14,13 +14,7 @@
                 <div class="close-search-btn header-icon-btn">
                     <i class="fa-regular fa-xmark"></i>
                 </div>
-                <form class="search" action="{{ route('site.search') }}">
-                    <input type="text" name="q" autocomplete="off" placeholder="Tìm kiếm..." value="@if (isset($searchKey)){{ $searchKey }}@endif">
-                    <span class="span-split"></span>
-                    <button class="submit-btn" type="submit">
-                        <i class="fa-regular fa-magnifying-glass"></i>
-                    </button>
-                </form>
+                <livewire:site.header-search :searchKey="isset($searchKey) ? $searchKey : ''" />
             </div>
         </div>
 

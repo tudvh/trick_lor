@@ -22,7 +22,7 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:languages,name,' . request()->id,
+            'name' => 'required|unique:categories,name,' . request()->id,
             'icon' => 'required',
             'icon_color' => 'required'
         ];

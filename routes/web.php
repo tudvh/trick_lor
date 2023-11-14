@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Site;
 use App\Http\Controllers\Admin;
+use Livewire\Livewire;
 
 
 /*
@@ -87,4 +88,13 @@ Route::group(['prefix' => ''], function () {
         Route::get('/google', [Site\GoogleController::class, 'redirectToGoogle']);
         Route::get('/google/callback', [Site\GoogleController::class, 'handleGoogleCallback']);
     });
+});
+
+// Livewire
+Livewire::setScriptRoute(function ($handle) {
+    return Route::get(basename(base_path()) . '/vendor/livewire/livewire/dist/livewire.js', $handle);
+});
+
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post(basename(base_path()) . '/livewire/update', $handle);
 });

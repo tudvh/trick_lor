@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\Site\CategoryService;
 use App\Services\Site\PostService;
 use App\Services\Site\PostViewService;
 
@@ -11,11 +12,13 @@ class HomeController extends Controller
 {
     protected $postService;
     protected $postViewService;
+    protected $categoryService;
 
-    public function __construct(PostService $postService, PostViewService $postViewService)
+    public function __construct(PostService $postService, PostViewService $postViewService, CategoryService $categoryService)
     {
         $this->postService = $postService;
         $this->postViewService = $postViewService;
+        $this->categoryService = $categoryService;
     }
 
     public function home()
@@ -50,6 +53,7 @@ class HomeController extends Controller
 
     public function category(string $categorySlug)
     {
+        $category = $this->categoryService->getBySlug($categorySlug);
         $posts = $this->postService->getByCategorySlug($categorySlug);
 
         return view('pages.site.category', compact('posts', 'category'));
@@ -65,5 +69,10 @@ class HomeController extends Controller
         $this->postViewService->create($post->id);
 
         return view('pages.site.post', compact('post', 'suggestedPosts'));
+    }
+
+    public function testLivewire()
+    {
+        return view('pages.site.livewire');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Services\Site;
 
-use App\Models\Category;
 use App\Models\Post;
 
 class PostService
@@ -32,16 +31,14 @@ class PostService
             return $posts->paginate($limit);
         }
 
-        return $posts->get();
+        return $posts->take($limit)->get();
     }
 
     public function getByCategorySlug($categorySlug)
     {
-        $category = Category::where('slug', $categorySlug)->first();
-
         return Post::where('active', 1)
-            ->whereHas('postCategories', function ($query) use ($category) {
-                return $query->where('category_id', $category->id);
+            ->whereHas('categories', function ($query) use ($categorySlug) {
+                return $query->where('slug', $categorySlug);
             })
             ->orderBy('id', 'desc')
             ->paginate(12);
