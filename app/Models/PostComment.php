@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostView extends Model
+class PostComment extends Model
 {
     use HasFactory;
 
-    protected $table = 'post_views';
+    protected $table = 'post_comments';
 
-    protected $fillable = ['user_id', 'post_id'];
+    protected $fillable = ['user_id', 'post_id', 'content', 'reply_id'];
 
     public function post()
     {
@@ -21,5 +21,10 @@ class PostView extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(PostComment::class, 'reply_id', 'id');
     }
 }

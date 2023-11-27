@@ -4,7 +4,7 @@ use App\Helpers\ThumbnailHelper;
 use App\Helpers\NumberHelper;
 @endphp
 
-<div class="list-post row g-3">
+<div class="list-post row">
     @foreach ($posts as $index => $post)
     <div class="item col-12 col-sm-{{ $colSm }} col-lg-{{ $colLg }}" title="{{ $post->title }}">
         <a href="{{ route('site.post', ['post' => $post->slug]) }}">

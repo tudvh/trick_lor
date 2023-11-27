@@ -1,7 +1,7 @@
 .content {
   flex: unset;
   width: 60%;
-  padding-right: var(--content-padding-left);
+  margin-right: var(--content-padding-left);
 }
 
 .post-wrapper .post-title {
@@ -16,7 +16,7 @@
   flex: 1;
 }
 
-.post-wrapper .post-more > button {
+.post-wrapper .post-more .post-more-btn {
   color: #757575;
   font-size: 1.4rem;
   padding: 4px 8px;
@@ -151,6 +151,6 @@
 @media (max-width: 1400px) {
   .content {
     width: 100%;
-    padding-right: 0;
+    margin-right: 0;
   }
 }

@@ -9,20 +9,27 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/list-post.css') }}">
+<link rel="stylesheet" href="{{ url('public/site/css/category.css') }}">
 @stop
 
 @section('content')
-<div class="content-header border-bottom pb-3">
-    <div class="icon-wrapper">
-        <div class="icon-box col-auto">
-            {!! $category->icon !!}
+<div class="card">
+    <div class="content-header border-bottom pb-3 mb-4">
+        <div class="icon-wrapper">
+            <div class="icon-box col-auto">
+                {!! $category->icon !!}
+            </div>
         </div>
+        <h1 class="fw-bold m-0 col-auto">{{ $category->name }}</h1>
     </div>
-    <h1 class="fw-bold m-0 col-auto">{{ $category->name }}</h1>
+    @if ($posts->count() > 0)
+    <x-site.list-post :colLg="4" :colSm="6" :posts="$posts" />
+    @else
+    <h3>Danh sách bài đăng trống!</h3>
+    @endif
 </div>
-@if ($posts->count() > 0)
-<x-site.list-post :colLg="4" :colSm="6" :posts="$posts" />
-@else
-<h3 class="mt-3">Danh sách bài đăng trống!</h3>
-@endif
+
+<div class="my-5">
+    {{ $posts->withQueryString()->links('partials.paginate-custom', ['onEachSide' => 3]) }}
+</div>
 @stop

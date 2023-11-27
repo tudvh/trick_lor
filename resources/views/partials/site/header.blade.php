@@ -45,11 +45,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
+                        <a href="{{ route('site.activities.view') }}" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
                             <div class="icon-box">
-                                <i class="fa-solid fa-gear"></i>
+                                <i class="fa-solid fa-list-ul"></i>
                             </div>
-                            <span class="w-100">Cài đặt</span>
+                            <span class="w-100">Nhật ký hoạt động</span>
                         </a>
                     </li>
                     <li>

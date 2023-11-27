@@ -8,13 +8,8 @@ use App\Helpers\NumberHelper;
     <div class="d-flex gap-3">
         <span class="post-info">{{ NumberHelper::format($post->postViews->count()) }} lượt xem • {{ DateHelper::formatTimeAgo($post->created_at) }}</span>
         <div class="post-more d-flex">
-            <button type="button" title="Lưu bài viết">
-                <i class="fa-regular fa-bookmark"></i>
-            </button>
-            <!-- <button type="button" title="Hủy lưu bài viết" style="color: var(--color-primary)">
-                <i class="fa-solid fa-bookmark"></i>
-            </button> -->
-            <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Chia sẻ">
+            <livewire:site.post-save :post="$post" />
+            <button type="button" class="dropdown-toggle post-more-btn" data-bs-toggle="dropdown" aria-expanded="false" title="Chia sẻ">
                 <i class="fa-sharp fa-solid fa-share-nodes"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">

@@ -72,7 +72,7 @@ aside li a span {
     width: var(--sidebar-mobile-width);
     padding-top: 0;
     margin-left: calc(0px - var(--sidebar-mobile-width));
-    background-image: linear-gradient(#fff, var(--color-secondary-100));
+    background-color: var(--bg-color-secondary);
     transition: margin-left 0.5s ease;
     z-index: 30;
   }

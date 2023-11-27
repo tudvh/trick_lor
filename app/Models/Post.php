@@ -32,4 +32,14 @@ class Post extends Model
     {
         return $this->hasMany(PostView::class, 'post_id', 'id');
     }
+
+    public function postSaves()
+    {
+        return $this->hasMany(PostSave::class, 'post_id', 'id');
+    }
+
+    public function postComments()
+    {
+        return $this->hasMany(PostComment::class, 'post_id', 'id');
+    }
 }

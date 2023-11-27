@@ -32,6 +32,12 @@ body.no-scroll {
   padding-right: 13px;
 }
 
+@media (max-width: 991px) {
+  body.no-scroll {
+    padding-right: 0;
+  }
+}
+
 button,
 input {
   outline: none;

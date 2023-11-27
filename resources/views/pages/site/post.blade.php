@@ -18,25 +18,26 @@ use App\Helpers\ThumbnailHelper;
 @stop
 
 @section('content')
-
-@if(!$post->active)
-<h1>Bài viết không có sẵn</h1>
-@else
-<div class="post-wrapper d-flex flex-column gap-5">
+@if($post->active)
+<div class="post-wrapper d-flex flex-column gap-5 card">
     <x-post-detail :post="$post" />
 
-    <hr>
+    <hr class="m-0">
 
     <div class="post-suggest">
-        <h2 class="post-title">Bài đăng tương tự</h2>
+        <h2 class="post-title mb-3">Bài đăng tương tự</h2>
         <x-site.list-post :colLg="4" :colSm="6" :posts="$suggestedPosts" />
     </div>
 
-    <hr>
+    <hr class="m-0">
 
     <div class="post-comment">
-        <h2 class="post-title">Bình luận</h2>
+        <h2 class="post-title mb-3">Bình luận</h2>
     </div>
+</div>
+@else
+<div class="card h-100">
+    <h0>Bài viết không có sẵn</h0>
 </div>
 @endif
 @stop

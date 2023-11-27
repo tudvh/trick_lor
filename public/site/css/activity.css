@@ -1,0 +1,23 @@
+.activity-tab {
+  background-color: var(--bg-color-secondary);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.activity-tab a {
+  padding: 1.3rem 1rem;
+  border-bottom: 3px solid transparent;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.activity-tab a.active {
+  font-weight: bold;
+  border-color: var(--color-primary-400);
+}
+
+.activity-tab a:not(.active):hover {
+  border-color: #909090;
+}

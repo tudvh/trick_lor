@@ -68,6 +68,13 @@ Route::group(['prefix' => ''], function () {
     Route::get('/post/{post}', [Site\HomeController::class, 'post'])->name('site.post');
     Route::get('/category/{category}', [Site\HomeController::class, 'category'])->name('site.category');
 
+    // Activity
+    Route::group(['prefix' => 'activities'], function () {
+        Route::get('/view', [Site\ActivityController::class, 'view'])->name('site.activities.view');
+        Route::get('/save', [Site\ActivityController::class, 'save'])->name('site.activities.save');
+        Route::get('/comment', [Site\ActivityController::class, 'comment'])->name('site.activities.comment');
+    });
+
     // Personal
     Route::group(['prefix' => 'personal'], function () {
         Route::get('/', [Site\UserController::class, 'personal'])->name('site.personal');
@@ -92,9 +99,9 @@ Route::group(['prefix' => ''], function () {
 
 // Livewire
 Livewire::setScriptRoute(function ($handle) {
-    return Route::get(basename(base_path()) . '/vendor/livewire/livewire/dist/livewire.js', $handle);
+    return Route::get(env('APP_URL') . '/vendor/livewire/livewire/dist/livewire.js', $handle);
 });
 
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post(basename(base_path()) . '/livewire/update', $handle);
+    return Route::post(env('APP_URL') . '/livewire/update', $handle);
 });

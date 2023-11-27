@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 30, 2023 lúc 09:55 AM
+-- Thời gian đã tạo: Th10 27, 2023 lúc 04:11 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -75,7 +75,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `title`, `slug`, `youtube_id`, `description`, `thumbnails`, `thumbnails_custom`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'Sử dụng CSS Function calc() để Thiết lập Kích thước Phần Tử Trong Thiết kế Website', 'su-dung-css-function-calc-de-thiet-lap-kich-thuoc-phan-tu-trong-thiet-ke-website', 'uCeBJPFhj5g', '<p>CSS Function calc() là một công cụ mạnh mẽ và tiện lợi trong việc quản lý kích thước và vị trí của các phần tử trên trang web của bạn. Bài viết này sẽ giúp bạn hiểu cách sử dụng CSS Function calc() một cách hiệu quả để tạo ra các thiết kế linh hoạt và chuyên nghiệp hơn.</p>\r\n<h2>CSS Function calc() Là Gì?</h2>\r\n<p>Trước hết, hãy xem qua cú pháp cơ bản của CSS Function calc():</p>\r\n<pre class=\"language-css\"><code>.item {\r\n    width: calc(expression);\r\n}</code></pre>\r\n<div>Ở đây, <code>.item</code> là tên của phần tử bạn muốn thiết lập kích thước, và <code>expression</code> có thể là bất kỳ biểu thức tính toán nào bạn muốn. Thường thì <code>expression</code> bao gồm các toán tử cộng, trừ, nhân, chia và các giá trị (px, %) kèm theo. Ví dụ:</div>\r\n<div>\r\n<pre class=\"language-css\"><code>.item {\r\n    width: calc(100px + 200px);\r\n}</code></pre>\r\n<h2>Sử dụng CSS Function calc() trong Thiết kế Web</h2>\r\n<p>CSS Function calc() cho phép bạn thực hiện các phép tính toán trực tiếp trong khai báo CSS, giúp tạo ra những thiết kế động và thích nghi. Dưới đây là một số ví dụ cụ thể về việc sử dụng CSS Function calc() trong thiết kế web:</p>\r\n<h3>1. Tạo Kích thước dựa trên tính toán</h3>\r\n<p>Bạn có thể dễ dàng tính toán kích thước của phần tử dựa trên giá trị cố định và tính toán:</p>\r\n<pre class=\"language-css\"><code>.item {\r\n    width: calc(100px + 200px);\r\n}</code></pre>\r\n<p>Trong ví dụ này, chiều rộng của phần tử <code>.item</code> sẽ là tổng của 100px và 200px, tức là 300px.</p>\r\n<h3>2. Tùy chỉnh chiều rộng dựa trên phần trăm</h3>\r\n<p>Bạn có thể tính toán kích thước dựa trên phần trăm của kích thước parent container:</p>\r\n<pre class=\"language-css\"><code>.item {\r\n    width: calc(100% + 100px);\r\n}</code></pre>\r\n<p>Khi bạn sử dụng CSS Function calc() như vậy, <code>.item</code> sẽ có chiều rộng bằng 100% của phần tử cha cộng thêm 100px.</p>\r\n<h3>3. Điều chỉnh kích thước để tránh xung đột với các phần tử khác</h3>\r\n<p>CSS Function calc() rất hữu ích khi bạn muốn đảm bảo rằng một phần tử không xung đột với các phần tử khác trên trang web, ví dụ như một thanh điều hướng (navbar). Ví dụ:</p>\r\n<pre class=\"language-css\"><code>.item {\r\n    width: calc(100% - 80px);\r\n}</code></pre>\r\n<p>Ở đây, chiều rộng của <code>.item</code> được tính toán bằng cách lấy 100% của chiều rộng của phần tử cha trừ đi chiều rộng của thanh navbar (80px). Điều này giúp tránh tình trạng xung đột với thanh navbar.</p>\r\n<h2>Kết Luận</h2>\r\n<p>CSS Function calc() là một công cụ mạnh mẽ cho việc quản lý kích thước và vị trí của các phần tử trên trang web của bạn. Với khả năng tính toán động và linh hoạt, bạn có thể tạo ra các thiết kế web chuyên nghiệp và thích nghi dễ dàng hơn. Hãy thử sử dụng CSS Function calc() trong các dự án của bạn và khám phá sự linh hoạt mà nó mang lại!</p>\r\n</div>', '[\"https:\\/\\/i.ytimg.com\\/vi\\/uCeBJPFhj5g\\/mqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/uCeBJPFhj5g\\/hqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/uCeBJPFhj5g\\/maxresdefault.jpg\"]', NULL, 1, '2023-08-18 21:06:11', '2023-10-29 11:34:14'),
+(1, 'Sử dụng CSS Function calc() để Thiết lập Kích thước Phần Tử Trong Thiết kế Website', 'su-dung-css-function-calc-de-thiet-lap-kich-thuoc-phan-tu-trong-thiet-ke-website', 'uCeBJPFhj5g', '<p>CSS Function calc() là một công cụ mạnh mẽ và tiện lợi trong việc quản lý kích thước và vị trí của các phần tử trên trang web của bạn. Bài viết này sẽ giúp bạn hiểu cách sử dụng CSS Function calc() một cách hiệu quả để tạo ra các thiết kế linh hoạt và chuyên nghiệp hơn.</p>\n<h2>CSS Function calc() Là Gì?</h2>\n<p>Trước hết, hãy xem qua cú pháp cơ bản của CSS Function calc():</p>\n<pre class=\"language-css\"><code>.item {\n    width: calc(expression);\n}</code></pre>\n<div>Ở đây, <code>.item</code> là tên của phần tử bạn muốn thiết lập kích thước, và <code>expression</code> có thể là bất kỳ biểu thức tính toán nào bạn muốn. Thường thì <code>expression</code> bao gồm các toán tử cộng, trừ, nhân, chia và các giá trị (px, %) kèm theo. Ví dụ:</div>\n<div>\n<pre class=\"language-css\"><code>.item {\n    width: calc(100px + 200px);\n}</code></pre>\n<h2>Sử dụng CSS Function calc() trong Thiết kế Web</h2>\n<p>CSS Function calc() cho phép bạn thực hiện các phép tính toán trực tiếp trong khai báo CSS, giúp tạo ra những thiết kế động và thích nghi. Dưới đây là một số ví dụ cụ thể về việc sử dụng CSS Function calc() trong thiết kế web:</p>\n<h3>1. Tạo Kích thước dựa trên tính toán</h3>\n<p>Bạn có thể dễ dàng tính toán kích thước của phần tử dựa trên giá trị cố định và tính toán:</p>\n<pre class=\"language-css\"><code>.item {\n    width: calc(100px + 200px);\n}</code></pre>\n<p>Trong ví dụ này, chiều rộng của phần tử <code>.item</code> sẽ là tổng của 100px và 200px, tức là 300px.</p>\n<h3>2. Tùy chỉnh chiều rộng dựa trên phần trăm</h3>\n<p>Bạn có thể tính toán kích thước dựa trên phần trăm của kích thước parent container:</p>\n<pre class=\"language-css\"><code>.item {\n    width: calc(100% + 100px);\n}</code></pre>\n<p>Khi bạn sử dụng CSS Function calc() như vậy, <code>.item</code> sẽ có chiều rộng bằng 100% của phần tử cha cộng thêm 100px.</p>\n<h3>3. Điều chỉnh kích thước để tránh xung đột với các phần tử khác</h3>\n<p>CSS Function calc() rất hữu ích khi bạn muốn đảm bảo rằng một phần tử không xung đột với các phần tử khác trên trang web, ví dụ như một thanh điều hướng (navbar). Ví dụ:</p>\n<pre class=\"language-css\"><code>.item {\n    width: calc(100% - 80px);\n}</code></pre>\n<p>Ở đây, chiều rộng của <code>.item</code> được tính toán bằng cách lấy 100% của chiều rộng của phần tử cha trừ đi chiều rộng của thanh navbar (80px). Điều này giúp tránh tình trạng xung đột với thanh navbar.</p>\n<h2>Kết Luận</h2>\n<p>CSS Function calc() là một công cụ mạnh mẽ cho việc quản lý kích thước và vị trí của các phần tử trên trang web của bạn. Với khả năng tính toán động và linh hoạt, bạn có thể tạo ra các thiết kế web chuyên nghiệp và thích nghi dễ dàng hơn. Hãy thử sử dụng CSS Function calc() trong các dự án của bạn và khám phá sự linh hoạt mà nó mang lại!</p>\n</div>', '[\"https:\\/\\/i.ytimg.com\\/vi\\/uCeBJPFhj5g\\/mqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/uCeBJPFhj5g\\/hqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/uCeBJPFhj5g\\/maxresdefault.jpg\"]', NULL, 1, '2023-08-18 21:06:11', '2023-10-29 11:34:14'),
 (2, 'Những Trick Hay Ho Trong Javascript - Phần 1', 'nhung-trick-hay-ho-trong-javascript-phan-1', '71W9f2yQQI0', '<p>Trong bài viết này, chúng ta sẽ khám phá một số trick Javascript thú vị để cải thiện khả năng lập trình của bạn.</p>\r\n<h2>1. Đổi chỗ 2 biến mà không cần biến tạm</h2>\r\n<p>Bạn có thể đổi chỗ giá trị của hai biến mà không cần sử dụng biến tạm. Điều này giúp bạn viết mã ngắn gọn hơn và dễ đọc hơn.</p>\r\n<pre class=\"language-javascript\"><code>let x = 1;\r\nlet y = 2;\r\n\r\n[x, y] = [y, x]; \r\n// Kết quả: x = 2 và y = 1</code></pre>\r\n<h2>2. Sử dụng Spread Operator</h2>\r\n<p>Spread operator (<code>...</code>) là một công cụ mạnh mẽ để làm việc với mảng và danh sách. Bạn có thể kết hợp nhiều mảng lại với nhau một cách dễ dàng.</p>\r\n<pre class=\"language-javascript\"><code>const oddNums = [1, 3, 5, 7];\r\nconst evenNums = [2, 4];\r\n\r\nconst allNums = [...oddNums, ...evenNums];\r\n// Kết quả: allNums = [1, 3, 5, 7, 2, 4]</code></pre>\r\n<h2>3. Tạo Mảng Chứa Phần Tử Không Trùng Lặp</h2>\r\n<p>Đôi khi bạn cần loại bỏ các phần tử trùng lặp khỏi một mảng. Bằng cách sử dụng đối tượng <code>Set</code>, bạn có thể dễ dàng tạo một mảng mới chỉ chứa các giá trị duy nhất.</p>\r\n<pre class=\"language-javascript\"><code>const numbers = [1, 2, 4, 5, 5, 1];\r\n\r\nconst uniqueNums = [...new Set(numbers)];\r\n// Kết quả: uniqueNums = [1, 2, 4, 5]</code></pre>\r\n<h2>4. Chuyển Đổi Số Sang Chuỗi</h2>\r\n<p>Để chuyển một số thành chuỗi, bạn có thể sử dụng phép cộng với một chuỗi rỗng.</p>\r\n<pre class=\"language-javascript\"><code>const myAge = 24;\r\nconsole.log(typeof myAge); // number\r\n\r\nconst myAgeString = \"\" + myAge;\r\nconsole.log(typeof myAgeString); // string</code></pre>\r\n<h2>5. Chuyển Đổi Chuỗi Sang Số</h2>\r\n<p>Khi bạn cần chuyển đổi một chuỗi thành số, bạn có thể sử dụng toán tử <code>+</code> hai lần để ép kiểu chuỗi thành số.</p>\r\n<pre class=\"language-javascript\"><code>const num1 = 10;\r\nconst num2 = \'80\';\r\nconsole.log(num1 + num2);\r\n// Kết quả: \"1080\"\r\n\r\nconsole.log(num1 + +num2);\r\n// Kết quả: 90</code></pre>\r\n<h2>6. Chuyển If-Else Sang 1 Dòng Code</h2>\r\n<p>Khi bạn cần thực hiện một cấu trúc điều kiện đơn giản, bạn có thể sử dụng biểu thức ba ngôi để viết mã ngắn gọn hơn.</p>\r\n<pre class=\"language-javascript\"><code>const isExpired = true;\r\n\r\n// IF-ELSE\r\nif (isExpired) {\r\n    console.log(\'This product has been expired\');\r\n} else {\r\n    console.log(\'This product is still in use\');\r\n}\r\n\r\n// REPLACE TO ONE LINE CODE\r\nisExpired ? console.log(\'This product has been expired\') : console.log(\'This product is still in use\');</code></pre>\r\n<p>Những trick Javascript trên giúp bạn viết mã ngắn gọn, hiệu quả hơn và dễ đọc hơn. Hãy thử áp dụng chúng trong dự án của bạn để nâng cao khả năng lập trình của mình. Chúng ta sẽ tiếp tục khám phá thêm nhiều trick thú vị khác trong các phần sau. Chúc bạn thành công trong việc học và ứng dụng Javascript!</p>', '[\"https:\\/\\/i.ytimg.com\\/vi\\/71W9f2yQQI0\\/mqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/71W9f2yQQI0\\/hqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/71W9f2yQQI0\\/maxresdefault.jpg\"]', NULL, 1, '2023-09-22 02:59:29', '2023-10-27 20:44:09'),
 (3, 'Tạo Horizontal Media Scroller Bằng HTML và CSS', 'tao-horizontal-media-scroller-bang-html-va-css', '9UoWfvlGgBA', '<p>Trong bài viết này, chúng ta sẽ tìm hiểu cách tạo một Horizontal Media Scroller bằng HTML và CSS để hiển thị các hình ảnh một cách hiệu quả. </p>\r\n<h2>Bắt đầu với HTML</h2>\r\n<p>Đầu tiên, chúng ta cần cấu trúc HTML để đưa hình ảnh vào thanh cuộn. Dưới đây là mã HTML mẫu:</p>\r\n<pre class=\"language-markup\"><code>&lt;div class=\"scroller\"&gt;\r\n    &lt;div class=\"scroller-item\"&gt;\r\n        &lt;img src=\"1.jpg\" alt=\"Hình ảnh 1\" /&gt;\r\n    &lt;/div&gt;\r\n    &lt;div class=\"scroller-item\"&gt;\r\n        &lt;img src=\"2.jpg\" alt=\"Hình ảnh 2\" /&gt;\r\n    &lt;/div&gt;\r\n    &lt;div class=\"scroller-item\"&gt;\r\n        &lt;img src=\"3.jpg\" alt=\"Hình ảnh 3\" /&gt;\r\n    &lt;/div&gt;\r\n&lt;/div&gt;</code></pre>\r\n<h2>CSS cho Thanh Cuộn</h2>\r\n<p>Bây giờ, hãy tạo CSS để tạo thanh cuộn ngang và hiệu ứng hấp dẫn cho hình ảnh. Dưới đây là CSS mẫu:</p>\r\n<pre class=\"language-css\"><code>.scroller {\r\n    max-width: 390px;\r\n    padding: 10px;\r\n    display: grid;\r\n    grid-auto-flow: column;\r\n    column-gap: 1rem;\r\n    overflow-x: auto;\r\n}\r\n\r\n.scroller::-webkit-scrollbar {\r\n    display: none;\r\n}\r\n\r\n.scroller-item {\r\n    position: relative;\r\n    width: 100px;\r\n    height: 100px;\r\n    border: 4px solid #151515;\r\n    border-radius: 50%;\r\n}\r\n\r\n.scroller-item img {\r\n    width: 100%;\r\n    height: 100%;\r\n    object-fit: cover;\r\n    border-radius: 50%;\r\n}\r\n\r\n.scroller-item::before {\r\n    content: \"\";\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    width: calc(100% + 15px);\r\n    height: calc(100% + 15px);\r\n    background-image: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #6902be 75%, #bc1888 100%);\r\n    border-radius: inherit;\r\n    z-index: -1;\r\n}</code></pre>\r\n<h2>Cách Hoạt Động</h2>\r\n<ul style=\"list-style-type: disc;\">\r\n<li>\r\n<p>Chúng ta bọc hình ảnh vào một div với lớp \"scroller-item\" để tạo hiệu ứng hình tròn.</p>\r\n</li>\r\n<li>\r\n<p>Dùng CSS Grid để sắp xếp các mục \"scroller-item\" theo hàng ngang, tạo thanh cuộn ngang nếu chúng vượt quá chiều rộng của \"scroller\".</p>\r\n</li>\r\n<li>\r\n<p>Ẩn thanh cuộn mặc định bằng cách sử dụng <code>overflow-x: auto;</code> và <code>scroller::-webkit-scrollbar { display: none; }</code>.</p>\r\n</li>\r\n<li>\r\n<p>Sử dụng <code>::before</code> để tạo hiệu ứng nền hình tròn đẹp mắt với gradient màu.</p>\r\n</li>\r\n</ul>\r\n<p>Với mã HTML và CSS này, bạn có thể tạo một Horizontal Media Scroller tương tự trên Instagram để hiển thị các hình ảnh hoặc nội dung đa phương tiện một cách ấn tượng. Đừng ngần ngại tùy chỉnh nó để phù hợp với thiết kế của bạn.</p>', '[\"https:\\/\\/i.ytimg.com\\/vi\\/9UoWfvlGgBA\\/mqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/9UoWfvlGgBA\\/hqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/9UoWfvlGgBA\\/maxresdefault.jpg\"]', NULL, 1, '2023-09-24 14:17:46', '2023-10-28 09:25:14'),
 (4, 'Đọc số nguyên lớn trong Python dễ dàng hơn', 'doc-so-nguyen-lon-trong-python-de-dang-hon', 'iVKJ3yy-5ng', '<p>Trong bài viết này, chúng ta sẽ tìm hiểu về một số mẹo hay với số nguyên trong Python, giúp cho việc viết và đọc code dễ dàng hơn.</p>\r\n<p>Hãy bắt đầu với một ví dụ đơn giản:</p>\r\n<pre class=\"language-python\"><code>num1 = 5000000000\r\nnum2 = 6000000000\r\ntotal = num1 * num2\r\n\r\nprint(total)</code></pre>\r\n<p>Thường thì khi bạn viết một số nguyên lớn trong Python, bạn sẽ viết liền các chữ số lại với nhau, ví dụ như <strong>5000000000</strong> hay <strong>6000000000</strong>. Tuy nhiên, điều này làm cho việc đọc và hiểu giá trị của số nguyên trở nên khó khăn. Bạn có thể giải quyết vấn đề này bằng cách thêm dấu gạch dưới (_) vào giữa các chữ số, để tạo thành các nhóm có ba chữ số. Ví dụ:</p>\r\n<pre class=\"language-python\"><code>num1 = 5_000_000_000\r\nnum2 = 6_000_000_000\r\ntotal = num1 * num2\r\n\r\nprint(total)</code></pre>\r\n<p>Việc thêm dấu gạch dưới không làm thay đổi giá trị của số nguyên, chỉ là một cách để format code cho dễ đọc. Bạn có thể thấy rõ hơn rằng num1 là 5 tỷ và num2 là 6 tỷ.</p>\r\n<p>Ngoài ra, bạn cũng có thể sử dụng f-string để in ra kết quả có dấu gạch dưới. F-string là một cách để format chuỗi trong Python, cho phép bạn chèn các biến hoặc biểu thức vào trong chuỗi. Để in ra kết quả có dấu gạch dưới, bạn chỉ cần thêm ký hiệu (_) vào sau dấu hai chấm (:) trong f-string. Ví dụ:</p>\r\n<pre class=\"language-python\"><code>num1 = 5_000_000_000\r\nnum2 = 6_000_000_000\r\ntotal = num1 * num2\r\n\r\nprint(f\"{total:_}\")</code></pre>\r\n<p>Đoạn code trên sẽ in ra kết quả là <strong>30_000_000_000_000_000</strong>, một con số rất lớn nhưng vẫn dễ nhìn.</p>\r\n<p>Bạn cũng có thể thay thế dấu gạch dưới bằng dấu phẩy (,) nếu bạn muốn tuân theo quy tắc viết số của tiếng Anh. Ví dụ:</p>\r\n<pre class=\"language-python\"><code>num1 = 5_000_000_000\r\nnum2 = 6_000_000_000\r\ntotal = num1 * num2\r\n\r\nprint(f\"{total:,}\")</code></pre>\r\n<p>Đoạn code trên sẽ in ra kết quả là <strong>30,000,000,000,000,000</strong>.</p>\r\n<p>Như vậy, bạn đã biết cách sử dụng dấu gạch dưới và f-string để làm cho số nguyên trong Python đẹp mắt và dễ đọc hơn. Hy vọng bài viết này có ích cho bạn. Hãy theo dõi blog của tôi để cập nhật thêm nhiều mẹo hay khác nhé!</p>', '[\"https:\\/\\/i.ytimg.com\\/vi\\/iVKJ3yy-5ng\\/mqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/iVKJ3yy-5ng\\/hqdefault.jpg\",\"https:\\/\\/i.ytimg.com\\/vi\\/iVKJ3yy-5ng\\/maxresdefault.jpg\"]', NULL, 1, '2023-09-30 15:30:06', '2023-10-29 15:03:31'),
@@ -95,10 +95,10 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `youtube_id`, `description`, `thumbn
 (19, 'Test upload thumbnail 13', 'test-upload-thumbnail-13', NULL, '<p>sdfgdsfgs</p>', NULL, NULL, 0, '2023-09-30 22:56:03', '2023-10-27 08:39:46'),
 (20, 'Test upload thumbnail 14', 'test-upload-thumbnail-14', NULL, '<p>Test upload thumbnail 14</p>', NULL, NULL, 0, '2023-10-01 08:10:17', '2023-10-27 08:39:48'),
 (21, 'Tài liệu học tập 44', 'tai-lieu-hoc-tap-44', NULL, '<p>fffff</p>', NULL, NULL, 0, '2023-10-02 16:08:55', '2023-10-27 08:39:49'),
-(22, 'Tài liệu học tập 55', 'tai-lieu-hoc-tap-55', NULL, '<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696238205/trick-lor/post/post-description/651a8a778e9cb.webp\" alt=\"Tài liệu học tập 5\" data-public-id=\"trick-lor/post/post-description/651a8a778e9cb\"></p><p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696238208/trick-lor/post/post-description/651a8a7dc3417.webp\" alt=\"Tài liệu học tập 5\" data-public-id=\"trick-lor/post/post-description/651a8a7dc3417\"></p><p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696238210/trick-lor/post/post-description/651a8a80813ee.webp\" alt=\"Tài liệu học tập 5\" data-public-id=\"trick-lor/post/post-description/651a8a80813ee\"></p><p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696238213/trick-lor/post/post-description/651a8a82ec875.webp\" alt=\"Tài liệu học tập 5\" data-public-id=\"trick-lor/post/post-description/651a8a82ec875\"></p>', NULL, NULL, 0, '2023-10-02 16:17:00', '2023-10-27 08:39:52'),
-(23, 'Tài liệu học tập 66', 'tai-lieu-hoc-tap-66', NULL, '<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696317672/trick-lor/post/23/post-description/651bc0e50ce65.jpg\" alt=\"Tài liệu học tập 66\" data-public-id=\"trick-lor/post/23/post-description/651bc0e50ce65\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696317675/trick-lor/post/23/post-description/651bc0e80edef.jpg\" alt=\"Tài liệu học tập 66\" data-public-id=\"trick-lor/post/23/post-description/651bc0e80edef\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696317677/trick-lor/post/23/post-description/651bc0eaa0c27.jpg\" alt=\"Tài liệu học tập 66\" data-public-id=\"trick-lor/post/23/post-description/651bc0eaa0c27\"></p>', NULL, '[\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1696756068\\/trick-lor\\/post\\/23\\/post-thumbnail\\/mqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1696756070\\/trick-lor\\/post\\/23\\/post-thumbnail\\/hqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1696756073\\/trick-lor\\/post\\/23\\/post-thumbnail\\/maxresdefault.jpg\"]', 0, '2023-10-02 16:21:00', '2023-10-25 08:45:20'),
-(24, 'Test category', 'test-category', NULL, '<p>gsdfgsdfsdfg</p>', NULL, NULL, 0, '2023-10-17 09:17:30', '2023-10-27 08:39:54'),
-(25, 'Test category 2', 'test-category-2', NULL, '<p>dgsdfsdfg</p>', NULL, NULL, 0, '2023-10-17 09:22:52', '2023-10-27 08:39:56'),
+(22, 'Tài liệu học tập 6 Tài liệu học tập 6', 'tai-lieu-hoc-tap-6-tai-lieu-hoc-tap-6', NULL, '<p>111</p>', NULL, NULL, 0, '2023-10-02 16:17:00', '2023-11-09 11:09:16'),
+(23, 'Tài liệu học tập 66', 'tai-lieu-hoc-tap-66', NULL, '<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696317672/trick-lor/post/23/post-description/651bc0e50ce65.jpg\" alt=\"Tài liệu học tập 66\" data-public-id=\"trick-lor/post/23/post-description/651bc0e50ce65\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696317675/trick-lor/post/23/post-description/651bc0e80edef.jpg\" alt=\"Tài liệu học tập 66\" data-public-id=\"trick-lor/post/23/post-description/651bc0e80edef\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696317677/trick-lor/post/23/post-description/651bc0eaa0c27.jpg\" alt=\"Tài liệu học tập 66\" data-public-id=\"trick-lor/post/23/post-description/651bc0eaa0c27\"></p>', NULL, '[\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1696756068\\/trick-lor\\/post\\/23\\/post-thumbnail\\/mqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1696756070\\/trick-lor\\/post\\/23\\/post-thumbnail\\/hqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1696756073\\/trick-lor\\/post\\/23\\/post-thumbnail\\/maxresdefault.jpg\"]', 0, '2023-10-02 16:21:00', '2023-11-09 11:09:17'),
+(24, 'Test category', 'test-category', NULL, '<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1698747299/trick-lor/post/24/post-description/6540d39ab5da2.jpg\" alt=\"Test category\" data-public-id=\"trick-lor/post/24/post-description/6540d39ab5da2\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1698754564/trick-lor/post/24/post-description/6540effdf395b.jpg\" data-public-id=\"trick-lor/post/24/post-description/6540effdf395b\" alt=\"Test category\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1698754566/trick-lor/post/24/post-description/6540f00486cfd.jpg\" data-public-id=\"trick-lor/post/24/post-description/6540f00486cfd\" alt=\"Test category\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1698754568/trick-lor/post/24/post-description/6540f0072cf62.jpg\" data-public-id=\"trick-lor/post/24/post-description/6540f0072cf62\" alt=\"Test category\"></p>', NULL, '[\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1698747944\\/trick-lor\\/post\\/24\\/post-thumbnail\\/mqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1698747946\\/trick-lor\\/post\\/24\\/post-thumbnail\\/hqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1698747949\\/trick-lor\\/post\\/24\\/post-thumbnail\\/maxresdefault.jpg\"]', 0, '2023-10-17 09:17:30', '2023-11-09 11:22:28'),
+(25, 'Test category 2', 'test-category-2', NULL, '<p>aaaaa</p>', NULL, NULL, 0, '2023-10-17 09:22:52', '2023-11-07 15:33:56'),
 (26, 'Test category 3', 'test-category-3', NULL, '<p>fgsdgsdf</p>', NULL, NULL, 0, '2023-10-17 09:23:33', '2023-10-27 08:39:58');
 
 -- --------------------------------------------------------
@@ -153,6 +153,45 @@ INSERT INTO `post_categories` (`post_id`, `category_id`, `created_at`, `updated_
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `post_comments`
+--
+
+CREATE TABLE `post_comments` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `reply_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `post_saves`
+--
+
+CREATE TABLE `post_saves` (
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `post_saves`
+--
+
+INSERT INTO `post_saves` (`user_id`, `post_id`, `created_at`, `updated_at`) VALUES
+(5, 3, '2023-11-14 22:28:26', '2023-11-14 22:28:26'),
+(5, 5, '2023-11-14 22:24:08', '2023-11-14 22:24:08'),
+(5, 10, '2023-11-15 19:15:22', '2023-11-15 19:15:22'),
+(5, 15, '2023-11-14 23:24:10', '2023-11-14 23:24:10');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `post_views`
 --
 
@@ -178,30 +217,30 @@ INSERT INTO `post_views` (`id`, `user_id`, `post_id`, `created_at`, `updated_at`
 (7, NULL, 23, '2023-10-26 22:09:39', '2023-10-26 22:09:39'),
 (8, NULL, 13, '2023-10-26 22:09:45', '2023-10-26 22:09:45'),
 (9, NULL, 13, '2023-10-27 08:20:43', '2023-10-27 08:20:43'),
-(10, 11, 13, '2023-10-27 08:20:55', '2023-10-27 08:20:55'),
-(11, 11, 13, '2023-10-27 08:40:10', '2023-10-27 08:40:10'),
-(12, 11, 13, '2023-10-27 09:56:11', '2023-10-27 09:56:11'),
-(13, 11, 1, '2023-10-27 10:02:17', '2023-10-27 10:02:17'),
-(14, 11, 1, '2023-10-27 10:02:19', '2023-10-27 10:02:19'),
-(15, 11, 1, '2023-10-27 10:18:37', '2023-10-27 10:18:37'),
-(16, 11, 1, '2023-10-27 10:19:06', '2023-10-27 10:19:06'),
-(17, 11, 2, '2023-10-27 10:20:12', '2023-10-27 10:20:12'),
-(18, 11, 2, '2023-10-27 10:20:14', '2023-10-27 10:20:14'),
-(19, 11, 13, '2023-10-27 11:18:28', '2023-10-27 11:18:28'),
-(20, 11, 13, '2023-10-27 11:19:16', '2023-10-27 11:19:16'),
-(21, 11, 13, '2023-10-27 11:19:38', '2023-10-27 11:19:38'),
-(22, 11, 13, '2023-10-27 11:20:13', '2023-10-27 11:20:13'),
-(23, 11, 13, '2023-10-27 11:20:32', '2023-10-27 11:20:32'),
-(24, 11, 13, '2023-10-27 11:20:46', '2023-10-27 11:20:46'),
-(25, 11, 13, '2023-10-27 11:20:55', '2023-10-27 11:20:55'),
-(26, 11, 13, '2023-10-27 11:21:26', '2023-10-27 11:21:26'),
-(27, 11, 13, '2023-10-27 11:22:43', '2023-10-27 11:22:43'),
-(28, 11, 13, '2023-10-27 11:23:23', '2023-10-27 11:23:23'),
-(29, 11, 13, '2023-10-27 11:23:36', '2023-10-27 11:23:36'),
-(30, 11, 3, '2023-10-27 11:38:31', '2023-10-27 11:38:31'),
-(31, 11, 4, '2023-10-27 11:44:38', '2023-10-27 11:44:38'),
-(32, 11, 5, '2023-10-27 12:03:03', '2023-10-27 12:03:03'),
-(33, 11, 5, '2023-10-27 12:03:05', '2023-10-27 12:03:05'),
+(10, 5, 13, '2023-10-27 08:20:55', '2023-10-27 08:20:55'),
+(11, 5, 13, '2023-10-27 08:40:10', '2023-10-27 08:40:10'),
+(12, 5, 13, '2023-10-27 09:56:11', '2023-10-27 09:56:11'),
+(13, 5, 1, '2023-10-27 10:02:17', '2023-10-27 10:02:17'),
+(14, 5, 1, '2023-10-27 10:02:19', '2023-10-27 10:02:19'),
+(15, 5, 1, '2023-10-27 10:18:37', '2023-10-27 10:18:37'),
+(16, 5, 1, '2023-10-27 10:19:06', '2023-10-27 10:19:06'),
+(17, 5, 2, '2023-10-27 10:20:12', '2023-10-27 10:20:12'),
+(18, 5, 2, '2023-10-27 10:20:14', '2023-10-27 10:20:14'),
+(19, 5, 13, '2023-10-27 11:18:28', '2023-10-27 11:18:28'),
+(20, 5, 13, '2023-10-27 11:19:16', '2023-10-27 11:19:16'),
+(21, 5, 13, '2023-10-27 11:19:38', '2023-10-27 11:19:38'),
+(22, 5, 13, '2023-10-27 11:20:13', '2023-10-27 11:20:13'),
+(23, 5, 13, '2023-10-27 11:20:32', '2023-10-27 11:20:32'),
+(24, 5, 13, '2023-10-27 11:20:46', '2023-10-27 11:20:46'),
+(25, 5, 13, '2023-10-27 11:20:55', '2023-10-27 11:20:55'),
+(26, 5, 13, '2023-10-27 11:21:26', '2023-10-27 11:21:26'),
+(27, 5, 13, '2023-10-27 11:22:43', '2023-10-27 11:22:43'),
+(28, 5, 13, '2023-10-27 11:23:23', '2023-10-27 11:23:23'),
+(29, 5, 13, '2023-10-27 11:23:36', '2023-10-27 11:23:36'),
+(30, 5, 3, '2023-10-27 11:38:31', '2023-10-27 11:38:31'),
+(31, 5, 4, '2023-10-27 11:44:38', '2023-10-27 11:44:38'),
+(32, 5, 5, '2023-10-27 12:03:03', '2023-10-27 12:03:03'),
+(33, 5, 5, '2023-10-27 12:03:05', '2023-10-27 12:03:05'),
 (34, NULL, 6, '2023-10-27 19:38:08', '2023-10-27 19:38:08'),
 (35, NULL, 7, '2023-10-27 19:52:21', '2023-10-27 19:52:21'),
 (36, NULL, 7, '2023-10-27 19:52:23', '2023-10-27 19:52:23'),
@@ -246,7 +285,365 @@ INSERT INTO `post_views` (`id`, `user_id`, `post_id`, `created_at`, `updated_at`
 (107, NULL, 7, '2023-10-30 09:26:51', '2023-10-30 09:26:51'),
 (108, NULL, 12, '2023-10-30 12:25:10', '2023-10-30 12:25:10'),
 (109, NULL, 12, '2023-10-30 12:25:14', '2023-10-30 12:25:14'),
-(110, NULL, 16, '2023-10-30 15:26:24', '2023-10-30 15:26:24');
+(110, NULL, 16, '2023-10-30 15:26:24', '2023-10-30 15:26:24'),
+(111, NULL, 9, '2023-10-30 15:59:49', '2023-10-30 15:59:49'),
+(112, 5, 11, '2023-10-30 16:25:39', '2023-10-30 16:25:39'),
+(113, NULL, 16, '2023-10-30 19:03:33', '2023-10-30 19:03:33'),
+(114, 5, 9, '2023-10-30 20:17:21', '2023-10-30 20:17:21'),
+(115, 5, 10, '2023-10-30 20:18:43', '2023-10-30 20:18:43'),
+(116, 5, 10, '2023-10-30 20:18:46', '2023-10-30 20:18:46'),
+(117, 5, 15, '2023-10-30 20:20:27', '2023-10-30 20:20:27'),
+(118, 5, 15, '2023-10-30 20:20:29', '2023-10-30 20:20:29'),
+(119, NULL, 6, '2023-10-31 07:28:31', '2023-10-31 07:28:31'),
+(120, NULL, 9, '2023-10-31 08:49:26', '2023-10-31 08:49:26'),
+(121, NULL, 11, '2023-10-31 10:09:16', '2023-10-31 10:09:16'),
+(122, NULL, 11, '2023-10-31 10:09:30', '2023-10-31 10:09:30'),
+(123, NULL, 5, '2023-10-31 10:24:59', '2023-10-31 10:24:59'),
+(124, NULL, 4, '2023-10-31 10:35:39', '2023-10-31 10:35:39'),
+(125, NULL, 4, '2023-10-31 10:35:44', '2023-10-31 10:35:44'),
+(126, 5, 11, '2023-10-31 10:36:21', '2023-10-31 10:36:21'),
+(127, NULL, 4, '2023-10-31 10:36:45', '2023-10-31 10:36:45'),
+(128, 5, 4, '2023-10-31 10:37:00', '2023-10-31 10:37:00'),
+(138, 5, 15, '2023-10-31 19:22:02', '2023-10-31 19:22:02'),
+(139, NULL, 16, '2023-11-03 09:15:21', '2023-11-03 09:15:21'),
+(140, NULL, 16, '2023-11-03 09:15:25', '2023-11-03 09:15:25'),
+(141, NULL, 13, '2023-11-06 20:17:42', '2023-11-06 20:17:42'),
+(142, NULL, 13, '2023-11-06 20:17:58', '2023-11-06 20:17:58'),
+(143, NULL, 6, '2023-11-07 10:02:32', '2023-11-07 10:02:32'),
+(144, NULL, 6, '2023-11-07 10:02:35', '2023-11-07 10:02:35'),
+(145, 5, 7, '2023-11-07 11:12:38', '2023-11-07 11:12:38'),
+(146, 5, 7, '2023-11-07 11:12:40', '2023-11-07 11:12:40'),
+(147, NULL, 9, '2023-11-07 21:18:26', '2023-11-07 21:18:26'),
+(148, NULL, 2, '2023-11-08 12:03:21', '2023-11-08 12:03:21'),
+(149, NULL, 2, '2023-11-08 12:09:08', '2023-11-08 12:09:08'),
+(150, NULL, 2, '2023-11-08 12:10:32', '2023-11-08 12:10:32'),
+(151, NULL, 2, '2023-11-08 12:11:11', '2023-11-08 12:11:11'),
+(152, NULL, 2, '2023-11-08 12:11:15', '2023-11-08 12:11:15'),
+(153, NULL, 2, '2023-11-08 12:11:29', '2023-11-08 12:11:29'),
+(154, NULL, 2, '2023-11-08 12:11:35', '2023-11-08 12:11:35'),
+(155, NULL, 2, '2023-11-08 12:11:41', '2023-11-08 12:11:41'),
+(156, NULL, 2, '2023-11-08 12:11:55', '2023-11-08 12:11:55'),
+(157, NULL, 2, '2023-11-08 12:12:17', '2023-11-08 12:12:17'),
+(158, NULL, 5, '2023-11-08 12:12:26', '2023-11-08 12:12:26'),
+(159, NULL, 15, '2023-11-08 12:13:53', '2023-11-08 12:13:53'),
+(160, 5, 15, '2023-11-08 12:15:00', '2023-11-08 12:15:00'),
+(161, 5, 3, '2023-11-08 19:58:01', '2023-11-08 19:58:01'),
+(162, 5, 14, '2023-11-08 21:59:54', '2023-11-08 21:59:54'),
+(163, 5, 14, '2023-11-08 21:59:57', '2023-11-08 21:59:57'),
+(164, NULL, 4, '2023-11-09 10:24:40', '2023-11-09 10:24:40'),
+(165, NULL, 4, '2023-11-09 10:24:42', '2023-11-09 10:24:42'),
+(166, 5, 4, '2023-11-09 10:24:52', '2023-11-09 10:24:52'),
+(167, 5, 5, '2023-11-09 10:49:09', '2023-11-09 10:49:09'),
+(168, 5, 5, '2023-11-09 10:49:11', '2023-11-09 10:49:11'),
+(169, 5, 5, '2023-11-09 10:49:13', '2023-11-09 10:49:13'),
+(170, 5, 5, '2023-11-09 10:49:17', '2023-11-09 10:49:17'),
+(171, 5, 5, '2023-11-09 10:49:20', '2023-11-09 10:49:20'),
+(172, 5, 5, '2023-11-09 10:49:23', '2023-11-09 10:49:23'),
+(173, 5, 5, '2023-11-09 10:49:27', '2023-11-09 10:49:27'),
+(174, 5, 5, '2023-11-09 10:49:31', '2023-11-09 10:49:31'),
+(175, 5, 5, '2023-11-09 10:49:33', '2023-11-09 10:49:33'),
+(176, 5, 16, '2023-11-09 11:03:50', '2023-11-09 11:03:50'),
+(177, 5, 5, '2023-11-09 11:08:41', '2023-11-09 11:08:41'),
+(178, 5, 4, '2023-11-09 11:08:53', '2023-11-09 11:08:53'),
+(179, 5, 2, '2023-11-09 11:09:30', '2023-11-09 11:09:30'),
+(180, 5, 2, '2023-11-09 11:09:34', '2023-11-09 11:09:34'),
+(181, 5, 2, '2023-11-09 11:13:58', '2023-11-09 11:13:58'),
+(182, 5, 2, '2023-11-09 11:14:03', '2023-11-09 11:14:03'),
+(183, 5, 2, '2023-11-09 11:14:06', '2023-11-09 11:14:06'),
+(184, 5, 2, '2023-11-09 11:14:09', '2023-11-09 11:14:09'),
+(185, 5, 2, '2023-11-09 11:14:13', '2023-11-09 11:14:13'),
+(186, 5, 2, '2023-11-09 11:14:16', '2023-11-09 11:14:16'),
+(187, 5, 2, '2023-11-09 11:14:18', '2023-11-09 11:14:18'),
+(188, 5, 2, '2023-11-09 11:14:27', '2023-11-09 11:14:27'),
+(189, 5, 2, '2023-11-09 11:17:10', '2023-11-09 11:17:10'),
+(190, 5, 2, '2023-11-09 11:17:12', '2023-11-09 11:17:12'),
+(191, 5, 2, '2023-11-09 11:17:13', '2023-11-09 11:17:13'),
+(192, 5, 2, '2023-11-09 11:17:16', '2023-11-09 11:17:16'),
+(193, 5, 2, '2023-11-09 11:17:18', '2023-11-09 11:17:18'),
+(194, 5, 1, '2023-11-09 11:21:16', '2023-11-09 11:21:16'),
+(195, 5, 6, '2023-11-09 11:35:14', '2023-11-09 11:35:14'),
+(196, 5, 6, '2023-11-09 11:35:17', '2023-11-09 11:35:17'),
+(197, 5, 13, '2023-11-09 12:33:22', '2023-11-09 12:33:22'),
+(198, 5, 4, '2023-11-09 19:47:43', '2023-11-09 19:47:43'),
+(199, 5, 14, '2023-11-09 19:47:50', '2023-11-09 19:47:50'),
+(200, 5, 14, '2023-11-09 19:47:53', '2023-11-09 19:47:53'),
+(201, 5, 16, '2023-11-09 19:47:58', '2023-11-09 19:47:58'),
+(202, 5, 16, '2023-11-09 19:49:28', '2023-11-09 19:49:28'),
+(203, 5, 16, '2023-11-09 19:51:52', '2023-11-09 19:51:52'),
+(204, 5, 16, '2023-11-09 19:52:06', '2023-11-09 19:52:06'),
+(205, 5, 16, '2023-11-09 19:53:22', '2023-11-09 19:53:22'),
+(206, 5, 16, '2023-11-09 19:53:53', '2023-11-09 19:53:53'),
+(207, 5, 16, '2023-11-09 19:54:22', '2023-11-09 19:54:22'),
+(208, 5, 16, '2023-11-09 19:54:27', '2023-11-09 19:54:27'),
+(209, 5, 16, '2023-11-09 19:57:21', '2023-11-09 19:57:21'),
+(210, 5, 16, '2023-11-09 19:59:59', '2023-11-09 19:59:59'),
+(211, 5, 12, '2023-11-09 21:05:45', '2023-11-09 21:05:45'),
+(212, 5, 12, '2023-11-09 21:05:48', '2023-11-09 21:05:48'),
+(213, 5, 2, '2023-11-09 21:06:24', '2023-11-09 21:06:24'),
+(214, 5, 2, '2023-11-09 21:06:28', '2023-11-09 21:06:28'),
+(215, 5, 15, '2023-11-09 21:06:35', '2023-11-09 21:06:35'),
+(216, 5, 15, '2023-11-09 21:06:37', '2023-11-09 21:06:37'),
+(217, 5, 11, '2023-11-09 21:13:13', '2023-11-09 21:13:13'),
+(218, 5, 11, '2023-11-09 21:13:15', '2023-11-09 21:13:15'),
+(219, 5, 11, '2023-11-09 21:21:58', '2023-11-09 21:21:58'),
+(220, 5, 15, '2023-11-09 21:22:34', '2023-11-09 21:22:34'),
+(221, 5, 9, '2023-11-09 21:47:58', '2023-11-09 21:47:58'),
+(222, 5, 9, '2023-11-09 21:48:33', '2023-11-09 21:48:33'),
+(223, 5, 1, '2023-11-09 21:49:01', '2023-11-09 21:49:01'),
+(224, NULL, 16, '2023-11-12 10:13:51', '2023-11-12 10:13:51'),
+(225, NULL, 16, '2023-11-12 21:33:26', '2023-11-12 21:33:26'),
+(226, NULL, 12, '2023-11-12 21:33:51', '2023-11-12 21:33:51'),
+(227, NULL, 12, '2023-11-12 21:33:54', '2023-11-12 21:33:54'),
+(228, 5, 6, '2023-11-14 07:57:36', '2023-11-14 07:57:36'),
+(229, 5, 6, '2023-11-14 07:57:38', '2023-11-14 07:57:38'),
+(230, NULL, 12, '2023-11-14 15:43:32', '2023-11-14 15:43:32'),
+(231, NULL, 12, '2023-11-14 15:43:35', '2023-11-14 15:43:35'),
+(232, 5, 12, '2023-11-14 15:50:35', '2023-11-14 15:50:35'),
+(233, 5, 10, '2023-11-14 16:03:45', '2023-11-14 16:03:45'),
+(234, 5, 3, '2023-11-14 16:04:21', '2023-11-14 16:04:21'),
+(235, 5, 3, '2023-11-14 16:15:30', '2023-11-14 16:15:30'),
+(236, 5, 3, '2023-11-14 16:37:05', '2023-11-14 16:37:05'),
+(237, 5, 3, '2023-11-14 16:46:53', '2023-11-14 16:46:53'),
+(238, 5, 3, '2023-11-14 16:47:16', '2023-11-14 16:47:16'),
+(239, 5, 3, '2023-11-14 16:47:26', '2023-11-14 16:47:26'),
+(240, 5, 3, '2023-11-14 16:48:23', '2023-11-14 16:48:23'),
+(241, 5, 3, '2023-11-14 16:58:16', '2023-11-14 16:58:16'),
+(242, 5, 3, '2023-11-14 16:58:30', '2023-11-14 16:58:30'),
+(243, 5, 3, '2023-11-14 16:59:22', '2023-11-14 16:59:22'),
+(244, 5, 3, '2023-11-14 17:00:08', '2023-11-14 17:00:08'),
+(245, 5, 3, '2023-11-14 17:00:34', '2023-11-14 17:00:34'),
+(246, 5, 3, '2023-11-14 17:00:50', '2023-11-14 17:00:50'),
+(247, 5, 3, '2023-11-14 17:01:07', '2023-11-14 17:01:07'),
+(248, 5, 3, '2023-11-14 17:01:23', '2023-11-14 17:01:23'),
+(249, NULL, 3, '2023-11-14 17:03:48', '2023-11-14 17:03:48'),
+(250, 5, 3, '2023-11-14 17:03:54', '2023-11-14 17:03:54'),
+(251, 5, 3, '2023-11-14 17:05:01', '2023-11-14 17:05:01'),
+(252, 5, 3, '2023-11-14 17:06:22', '2023-11-14 17:06:22'),
+(253, 5, 3, '2023-11-14 17:07:00', '2023-11-14 17:07:00'),
+(254, 5, 7, '2023-11-14 17:07:07', '2023-11-14 17:07:07'),
+(255, 5, 7, '2023-11-14 17:07:09', '2023-11-14 17:07:09'),
+(256, 5, 7, '2023-11-14 17:09:14', '2023-11-14 17:09:14'),
+(257, 5, 7, '2023-11-14 17:09:55', '2023-11-14 17:09:55'),
+(258, 5, 7, '2023-11-14 17:11:26', '2023-11-14 17:11:26'),
+(259, 5, 7, '2023-11-14 17:12:01', '2023-11-14 17:12:01'),
+(260, 5, 7, '2023-11-14 17:12:19', '2023-11-14 17:12:19'),
+(261, 5, 7, '2023-11-14 17:14:28', '2023-11-14 17:14:28'),
+(262, 5, 7, '2023-11-14 17:14:57', '2023-11-14 17:14:57'),
+(263, 5, 2, '2023-11-14 17:15:58', '2023-11-14 17:15:58'),
+(264, 5, 3, '2023-11-14 17:16:04', '2023-11-14 17:16:04'),
+(265, 5, 7, '2023-11-14 17:19:24', '2023-11-14 17:19:24'),
+(266, 5, 7, '2023-11-14 17:19:32', '2023-11-14 17:19:32'),
+(267, 5, 7, '2023-11-14 17:20:07', '2023-11-14 17:20:07'),
+(268, 5, 7, '2023-11-14 17:20:13', '2023-11-14 17:20:13'),
+(269, 5, 7, '2023-11-14 17:21:09', '2023-11-14 17:21:09'),
+(270, 5, 7, '2023-11-14 17:21:50', '2023-11-14 17:21:50'),
+(271, 5, 7, '2023-11-14 17:22:07', '2023-11-14 17:22:07'),
+(272, 5, 7, '2023-11-14 17:27:59', '2023-11-14 17:27:59'),
+(273, 5, 7, '2023-11-14 17:28:13', '2023-11-14 17:28:13'),
+(274, 5, 7, '2023-11-14 17:28:52', '2023-11-14 17:28:52'),
+(275, 5, 7, '2023-11-14 17:30:00', '2023-11-14 17:30:00'),
+(276, 5, 7, '2023-11-14 17:30:33', '2023-11-14 17:30:33'),
+(277, 5, 7, '2023-11-14 17:30:54', '2023-11-14 17:30:54'),
+(278, NULL, 9, '2023-11-14 20:06:05', '2023-11-14 20:06:05'),
+(279, NULL, 9, '2023-11-14 20:06:07', '2023-11-14 20:06:07'),
+(280, NULL, 9, '2023-11-14 20:13:51', '2023-11-14 20:13:51'),
+(281, NULL, 9, '2023-11-14 20:13:56', '2023-11-14 20:13:56'),
+(282, NULL, 9, '2023-11-14 20:14:29', '2023-11-14 20:14:29'),
+(283, NULL, 9, '2023-11-14 20:14:49', '2023-11-14 20:14:49'),
+(284, NULL, 9, '2023-11-14 20:16:06', '2023-11-14 20:16:06'),
+(285, NULL, 9, '2023-11-14 20:16:17', '2023-11-14 20:16:17'),
+(286, NULL, 9, '2023-11-14 20:16:24', '2023-11-14 20:16:24'),
+(287, NULL, 9, '2023-11-14 20:16:49', '2023-11-14 20:16:49'),
+(288, NULL, 9, '2023-11-14 20:17:02', '2023-11-14 20:17:02'),
+(289, NULL, 9, '2023-11-14 20:17:35', '2023-11-14 20:17:35'),
+(290, NULL, 9, '2023-11-14 20:17:45', '2023-11-14 20:17:45'),
+(291, NULL, 9, '2023-11-14 20:20:29', '2023-11-14 20:20:29'),
+(292, NULL, 9, '2023-11-14 20:20:41', '2023-11-14 20:20:41'),
+(293, NULL, 9, '2023-11-14 20:20:49', '2023-11-14 20:20:49'),
+(294, NULL, 9, '2023-11-14 20:36:02', '2023-11-14 20:36:02'),
+(295, NULL, 9, '2023-11-14 20:37:10', '2023-11-14 20:37:10'),
+(296, NULL, 9, '2023-11-14 20:37:38', '2023-11-14 20:37:38'),
+(297, NULL, 9, '2023-11-14 20:38:13', '2023-11-14 20:38:13'),
+(298, NULL, 9, '2023-11-14 20:39:55', '2023-11-14 20:39:55'),
+(299, NULL, 9, '2023-11-14 20:40:05', '2023-11-14 20:40:05'),
+(300, NULL, 9, '2023-11-14 20:40:21', '2023-11-14 20:40:21'),
+(301, NULL, 9, '2023-11-14 20:40:50', '2023-11-14 20:40:50'),
+(302, NULL, 9, '2023-11-14 20:40:58', '2023-11-14 20:40:58'),
+(303, NULL, 9, '2023-11-14 20:40:59', '2023-11-14 20:40:59'),
+(304, NULL, 9, '2023-11-14 20:41:00', '2023-11-14 20:41:00'),
+(305, NULL, 9, '2023-11-14 20:41:15', '2023-11-14 20:41:15'),
+(306, NULL, 9, '2023-11-14 20:41:36', '2023-11-14 20:41:36'),
+(307, NULL, 9, '2023-11-14 20:41:46', '2023-11-14 20:41:46'),
+(308, NULL, 9, '2023-11-14 20:42:03', '2023-11-14 20:42:03'),
+(309, NULL, 9, '2023-11-14 20:42:13', '2023-11-14 20:42:13'),
+(310, NULL, 9, '2023-11-14 20:42:26', '2023-11-14 20:42:26'),
+(311, NULL, 9, '2023-11-14 20:42:32', '2023-11-14 20:42:32'),
+(312, NULL, 9, '2023-11-14 20:43:10', '2023-11-14 20:43:10'),
+(313, NULL, 9, '2023-11-14 20:43:37', '2023-11-14 20:43:37'),
+(314, NULL, 9, '2023-11-14 20:44:29', '2023-11-14 20:44:29'),
+(315, NULL, 9, '2023-11-14 20:45:36', '2023-11-14 20:45:36'),
+(316, NULL, 9, '2023-11-14 20:45:47', '2023-11-14 20:45:47'),
+(317, NULL, 9, '2023-11-14 20:46:20', '2023-11-14 20:46:20'),
+(318, NULL, 9, '2023-11-14 20:46:40', '2023-11-14 20:46:40'),
+(319, NULL, 9, '2023-11-14 20:47:32', '2023-11-14 20:47:32'),
+(320, NULL, 9, '2023-11-14 20:47:48', '2023-11-14 20:47:48'),
+(321, NULL, 9, '2023-11-14 20:48:35', '2023-11-14 20:48:35'),
+(322, NULL, 9, '2023-11-14 20:49:52', '2023-11-14 20:49:52'),
+(323, NULL, 9, '2023-11-14 20:50:47', '2023-11-14 20:50:47'),
+(324, NULL, 9, '2023-11-14 20:51:53', '2023-11-14 20:51:53'),
+(325, NULL, 9, '2023-11-14 20:53:24', '2023-11-14 20:53:24'),
+(326, NULL, 9, '2023-11-14 20:54:10', '2023-11-14 20:54:10'),
+(327, NULL, 9, '2023-11-14 20:54:18', '2023-11-14 20:54:18'),
+(328, NULL, 9, '2023-11-14 20:54:25', '2023-11-14 20:54:25'),
+(329, NULL, 9, '2023-11-14 20:55:18', '2023-11-14 20:55:18'),
+(330, NULL, 9, '2023-11-14 20:56:17', '2023-11-14 20:56:17'),
+(331, NULL, 9, '2023-11-14 20:56:28', '2023-11-14 20:56:28'),
+(332, NULL, 9, '2023-11-14 21:02:55', '2023-11-14 21:02:55'),
+(333, NULL, 9, '2023-11-14 21:03:38', '2023-11-14 21:03:38'),
+(334, NULL, 9, '2023-11-14 21:09:19', '2023-11-14 21:09:19'),
+(335, NULL, 9, '2023-11-14 21:09:38', '2023-11-14 21:09:38'),
+(336, NULL, 9, '2023-11-14 21:11:16', '2023-11-14 21:11:16'),
+(337, NULL, 9, '2023-11-14 21:13:40', '2023-11-14 21:13:40'),
+(338, NULL, 9, '2023-11-14 21:15:52', '2023-11-14 21:15:52'),
+(339, NULL, 9, '2023-11-14 21:16:17', '2023-11-14 21:16:17'),
+(340, NULL, 9, '2023-11-14 21:26:30', '2023-11-14 21:26:30'),
+(341, NULL, 1, '2023-11-14 21:26:41', '2023-11-14 21:26:41'),
+(342, NULL, 1, '2023-11-14 21:28:09', '2023-11-14 21:28:09'),
+(343, NULL, 1, '2023-11-14 21:29:38', '2023-11-14 21:29:38'),
+(344, NULL, 1, '2023-11-14 21:30:24', '2023-11-14 21:30:24'),
+(345, NULL, 1, '2023-11-14 21:31:00', '2023-11-14 21:31:00'),
+(346, NULL, 1, '2023-11-14 21:31:09', '2023-11-14 21:31:09'),
+(347, NULL, 1, '2023-11-14 21:32:27', '2023-11-14 21:32:27'),
+(348, 5, 1, '2023-11-14 21:32:37', '2023-11-14 21:32:37'),
+(349, 5, 1, '2023-11-14 21:33:27', '2023-11-14 21:33:27'),
+(350, 5, 1, '2023-11-14 21:33:33', '2023-11-14 21:33:33'),
+(351, 5, 1, '2023-11-14 21:33:47', '2023-11-14 21:33:47'),
+(352, 5, 1, '2023-11-14 21:34:03', '2023-11-14 21:34:03'),
+(353, 5, 1, '2023-11-14 21:34:41', '2023-11-14 21:34:41'),
+(354, 5, 1, '2023-11-14 21:47:00', '2023-11-14 21:47:00'),
+(355, 5, 1, '2023-11-14 21:51:26', '2023-11-14 21:51:26'),
+(356, 5, 1, '2023-11-14 21:52:15', '2023-11-14 21:52:15'),
+(357, 5, 1, '2023-11-14 21:52:24', '2023-11-14 21:52:24'),
+(358, 5, 1, '2023-11-14 21:52:38', '2023-11-14 21:52:38'),
+(359, 5, 1, '2023-11-14 21:55:25', '2023-11-14 21:55:25'),
+(360, 5, 1, '2023-11-14 21:55:40', '2023-11-14 21:55:40'),
+(361, 5, 1, '2023-11-14 21:55:52', '2023-11-14 21:55:52'),
+(362, 5, 1, '2023-11-14 21:57:46', '2023-11-14 21:57:46'),
+(363, 5, 1, '2023-11-14 21:57:52', '2023-11-14 21:57:52'),
+(364, 5, 1, '2023-11-14 21:58:32', '2023-11-14 21:58:32'),
+(365, 5, 1, '2023-11-14 21:58:37', '2023-11-14 21:58:37'),
+(366, 5, 1, '2023-11-14 21:59:50', '2023-11-14 21:59:50'),
+(367, 5, 1, '2023-11-14 22:01:45', '2023-11-14 22:01:45'),
+(368, 5, 1, '2023-11-14 22:01:57', '2023-11-14 22:01:57'),
+(369, 5, 1, '2023-11-14 22:02:16', '2023-11-14 22:02:16'),
+(370, 5, 1, '2023-11-14 22:02:43', '2023-11-14 22:02:43'),
+(371, 5, 1, '2023-11-14 22:02:58', '2023-11-14 22:02:58'),
+(372, 5, 1, '2023-11-14 22:03:43', '2023-11-14 22:03:43'),
+(373, 5, 1, '2023-11-14 22:03:54', '2023-11-14 22:03:54'),
+(374, 5, 1, '2023-11-14 22:04:18', '2023-11-14 22:04:18'),
+(375, 5, 1, '2023-11-14 22:04:41', '2023-11-14 22:04:41'),
+(376, 5, 1, '2023-11-14 22:05:03', '2023-11-14 22:05:03'),
+(377, 5, 1, '2023-11-14 22:05:18', '2023-11-14 22:05:18'),
+(378, 5, 1, '2023-11-14 22:05:32', '2023-11-14 22:05:32'),
+(379, 5, 5, '2023-11-14 22:13:32', '2023-11-14 22:13:32'),
+(380, 5, 5, '2023-11-14 22:13:34', '2023-11-14 22:13:34'),
+(381, 5, 5, '2023-11-14 22:14:54', '2023-11-14 22:14:54'),
+(382, 5, 5, '2023-11-14 22:15:19', '2023-11-14 22:15:19'),
+(383, 5, 5, '2023-11-14 22:15:31', '2023-11-14 22:15:31'),
+(384, 5, 5, '2023-11-14 22:15:44', '2023-11-14 22:15:44'),
+(385, 5, 5, '2023-11-14 22:17:00', '2023-11-14 22:17:00'),
+(386, 5, 5, '2023-11-14 22:17:26', '2023-11-14 22:17:26'),
+(387, 5, 5, '2023-11-14 22:17:58', '2023-11-14 22:17:58'),
+(388, 5, 5, '2023-11-14 22:19:08', '2023-11-14 22:19:08'),
+(389, 5, 5, '2023-11-14 22:19:14', '2023-11-14 22:19:14'),
+(390, 5, 5, '2023-11-14 22:19:57', '2023-11-14 22:19:57'),
+(391, 5, 5, '2023-11-14 22:20:56', '2023-11-14 22:20:56'),
+(392, 5, 5, '2023-11-14 22:21:11', '2023-11-14 22:21:11'),
+(393, 5, 5, '2023-11-14 22:24:01', '2023-11-14 22:24:01'),
+(394, 5, 5, '2023-11-14 22:28:05', '2023-11-14 22:28:05'),
+(395, 5, 3, '2023-11-14 22:28:23', '2023-11-14 22:28:23'),
+(396, 5, 15, '2023-11-14 23:24:06', '2023-11-14 23:24:06'),
+(397, 5, 15, '2023-11-14 23:24:08', '2023-11-14 23:24:08'),
+(398, NULL, 10, '2023-11-15 19:14:44', '2023-11-15 19:14:44'),
+(399, NULL, 10, '2023-11-15 19:14:47', '2023-11-15 19:14:47'),
+(400, 5, 10, '2023-11-15 19:15:12', '2023-11-15 19:15:12'),
+(401, 5, 14, '2023-11-20 09:24:25', '2023-11-20 09:24:25'),
+(402, 5, 14, '2023-11-20 09:24:27', '2023-11-20 09:24:27'),
+(403, NULL, 15, '2023-11-22 09:17:45', '2023-11-22 09:17:45'),
+(404, NULL, 15, '2023-11-22 09:17:48', '2023-11-22 09:17:48'),
+(405, 5, 15, '2023-11-22 09:18:00', '2023-11-22 09:18:00'),
+(406, 5, 5, '2023-11-22 09:18:12', '2023-11-22 09:18:12'),
+(407, 5, 5, '2023-11-22 09:18:14', '2023-11-22 09:18:14'),
+(408, 5, 10, '2023-11-22 09:18:17', '2023-11-22 09:18:17'),
+(409, 5, 4, '2023-11-22 09:18:21', '2023-11-22 09:18:21'),
+(410, 5, 4, '2023-11-22 09:18:23', '2023-11-22 09:18:23'),
+(411, 5, 10, '2023-11-22 09:19:25', '2023-11-22 09:19:25'),
+(412, NULL, 14, '2023-11-26 08:01:51', '2023-11-26 08:01:51'),
+(413, 5, 14, '2023-11-26 08:02:25', '2023-11-26 08:02:25'),
+(415, NULL, 10, '2023-11-26 08:05:03', '2023-11-26 08:05:03'),
+(416, NULL, 12, '2023-11-26 08:06:43', '2023-11-26 08:06:43'),
+(417, 5, 14, '2023-11-26 08:17:35', '2023-11-26 08:17:35'),
+(418, 5, 5, '2023-11-26 10:53:26', '2023-11-26 10:53:26'),
+(419, 5, 14, '2023-11-26 10:54:29', '2023-11-26 10:54:29'),
+(420, 5, 14, '2023-11-26 10:56:11', '2023-11-26 10:56:11'),
+(421, 5, 16, '2023-11-26 12:42:04', '2023-11-26 12:42:04'),
+(422, 5, 16, '2023-11-26 12:43:11', '2023-11-26 12:43:11'),
+(423, 5, 16, '2023-11-26 12:43:15', '2023-11-26 12:43:15'),
+(424, 5, 16, '2023-11-26 12:43:35', '2023-11-26 12:43:35'),
+(425, 5, 16, '2023-11-26 12:44:12', '2023-11-26 12:44:12'),
+(426, 5, 16, '2023-11-26 14:21:42', '2023-11-26 14:21:42'),
+(427, 5, 16, '2023-11-26 14:37:06', '2023-11-26 14:37:06'),
+(428, 5, 16, '2023-11-26 15:11:48', '2023-11-26 15:11:48'),
+(429, 5, 4, '2023-11-26 15:18:11', '2023-11-26 15:18:11'),
+(430, 5, 4, '2023-11-26 15:18:16', '2023-11-26 15:18:16'),
+(431, 5, 4, '2023-11-26 15:18:21', '2023-11-26 15:18:21'),
+(432, 5, 16, '2023-11-26 15:19:55', '2023-11-26 15:19:55'),
+(433, 5, 16, '2023-11-26 15:28:33', '2023-11-26 15:28:33'),
+(434, 5, 16, '2023-11-26 15:28:49', '2023-11-26 15:28:49'),
+(435, 5, 15, '2023-11-26 15:40:47', '2023-11-26 15:40:47'),
+(436, 5, 15, '2023-11-26 15:40:50', '2023-11-26 15:40:50'),
+(437, 5, 15, '2023-11-26 15:41:08', '2023-11-26 15:41:08'),
+(438, 5, 14, '2023-11-26 15:41:29', '2023-11-26 15:41:29'),
+(439, NULL, 14, '2023-11-26 15:46:50', '2023-11-26 15:46:50'),
+(440, NULL, 14, '2023-11-26 15:47:25', '2023-11-26 15:47:25'),
+(441, NULL, 14, '2023-11-26 15:47:28', '2023-11-26 15:47:28'),
+(442, NULL, 14, '2023-11-26 15:47:58', '2023-11-26 15:47:58'),
+(443, NULL, 11, '2023-11-26 15:48:09', '2023-11-26 15:48:09'),
+(444, NULL, 11, '2023-11-26 15:48:11', '2023-11-26 15:48:11'),
+(445, NULL, 11, '2023-11-26 15:48:41', '2023-11-26 15:48:41'),
+(446, NULL, 11, '2023-11-26 15:48:52', '2023-11-26 15:48:52'),
+(447, NULL, 11, '2023-11-26 15:49:10', '2023-11-26 15:49:10'),
+(448, NULL, 11, '2023-11-26 15:50:05', '2023-11-26 15:50:05'),
+(449, NULL, 6, '2023-11-26 15:53:13', '2023-11-26 15:53:13'),
+(450, 5, 7, '2023-11-26 16:05:33', '2023-11-26 16:05:33'),
+(451, 5, 4, '2023-11-26 16:06:17', '2023-11-26 16:06:17'),
+(452, 5, 6, '2023-11-26 16:11:00', '2023-11-26 16:11:00'),
+(453, 5, 6, '2023-11-26 16:11:08', '2023-11-26 16:11:08'),
+(454, 5, 6, '2023-11-26 16:11:16', '2023-11-26 16:11:16'),
+(455, 5, 6, '2023-11-26 16:13:09', '2023-11-26 16:13:09'),
+(456, 5, 6, '2023-11-26 16:13:18', '2023-11-26 16:13:18'),
+(457, 5, 6, '2023-11-26 16:13:40', '2023-11-26 16:13:40'),
+(458, 5, 6, '2023-11-26 16:14:05', '2023-11-26 16:14:05'),
+(459, 5, 6, '2023-11-26 16:14:11', '2023-11-26 16:14:11'),
+(460, 5, 6, '2023-11-26 16:15:18', '2023-11-26 16:15:18'),
+(461, 5, 6, '2023-11-26 16:15:22', '2023-11-26 16:15:22'),
+(462, 5, 6, '2023-11-26 16:15:25', '2023-11-26 16:15:25'),
+(463, 5, 6, '2023-11-26 16:17:11', '2023-11-26 16:17:11'),
+(464, 5, 6, '2023-11-26 16:17:42', '2023-11-26 16:17:42'),
+(465, 5, 2, '2023-11-26 16:24:29', '2023-11-26 16:24:29'),
+(466, 5, 2, '2023-11-26 16:24:32', '2023-11-26 16:24:32'),
+(467, 5, 16, '2023-11-26 16:48:43', '2023-11-26 16:48:43'),
+(468, 5, 13, '2023-11-26 16:48:53', '2023-11-26 16:48:53'),
+(469, 5, 13, '2023-11-26 17:25:03', '2023-11-26 17:25:03'),
+(470, 5, 3, '2023-11-26 17:31:42', '2023-11-26 17:31:42'),
+(471, 5, 3, '2023-11-26 17:31:46', '2023-11-26 17:31:46'),
+(472, 5, 12, '2023-11-26 20:22:51', '2023-11-26 20:22:51'),
+(473, NULL, 4, '2023-11-27 09:58:07', '2023-11-27 09:58:07'),
+(474, NULL, 4, '2023-11-27 09:58:10', '2023-11-27 09:58:10'),
+(475, 5, 4, '2023-11-27 09:58:26', '2023-11-27 09:58:26'),
+(476, 5, 5, '2023-11-27 09:58:47', '2023-11-27 09:58:47'),
+(477, 5, 5, '2023-11-27 09:58:49', '2023-11-27 09:58:49'),
+(478, 5, 16, '2023-11-27 10:07:24', '2023-11-27 10:07:24');
 
 -- --------------------------------------------------------
 
@@ -258,6 +655,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `full_name` varchar(100) NOT NULL,
   `avatar` varchar(100) DEFAULT NULL,
+  `avatar_public_id` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `username` varchar(100) DEFAULT NULL,
   `password` text DEFAULT NULL,
@@ -274,14 +672,12 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `full_name`, `avatar`, `email`, `username`, `password`, `role`, `google_id`, `active`, `verification_token`, `last_email_sent_at`, `created_at`, `updated_at`) VALUES
-(1, 'Nguyễn Admin', 'https://res.cloudinary.com/tudvh/image/upload/v1696911854/trick-lor/user-avatar/1.jpg', NULL, 'admin', '$2y$10$n0Ups9gJr85xJQej3O0yv./G4ruafpI5Yd9jkgA2SknEGBvC3QKuW', 'admin', NULL, 1, NULL, NULL, '2023-09-22 03:33:01', '2023-10-13 08:40:35'),
-(2, 'Đặng Văn Hoài Tú', NULL, NULL, 'tudvh', '$2y$10$ogYedV2pQzDlx9vmD7eBqeVy6pgykXZjL5djXBjfBcnpdaAMhzDTK', 'admin', NULL, 1, NULL, NULL, '2023-10-05 10:29:40', '2023-10-05 10:29:40'),
-(3, 'Nguyễn Đắc Toàn', NULL, NULL, 'toannd', '$2y$10$ogYedV2pQzDlx9vmD7eBqeVy6pgykXZjL5djXBjfBcnpdaAMhzDTK', 'admin', NULL, 1, NULL, NULL, '2023-10-05 10:31:45', '2023-10-05 10:31:45'),
-(4, 'Lưu Văn Tùng', NULL, NULL, 'tunglv', '$2y$10$ogYedV2pQzDlx9vmD7eBqeVy6pgykXZjL5djXBjfBcnpdaAMhzDTK', 'admin', NULL, 1, NULL, NULL, '2023-10-05 10:32:24', '2023-10-05 10:32:24'),
-(5, 'Nguyễn User', NULL, 'user@gmail.com', NULL, '$2y$10$vwikvnz4S4282g0Ap5Y8FuASh4vFuIyHUw72o7VO.ybnS6cFXhuw2', 'user', NULL, 1, NULL, NULL, '2023-10-06 19:27:39', '2023-10-08 22:13:50'),
-(11, 'Đặng Tú', 'https://res.cloudinary.com/tudvh/image/upload/v1698583422/trick-lor/user-avatar/11.png', 'tudang9520@gmail.com', NULL, '$2y$10$PDpnSMJMACM4NP1XcJzAIupNUvPhz/xx42lGxNuXfCILazl7DNEoO', 'user', '114947229524934029235', 1, NULL, '2023-10-13 09:54:10', '2023-10-13 09:53:21', '2023-10-29 19:43:42'),
-(13, 'Tú Đặng Văn Hoài', 'https://res.cloudinary.com/tudvh/image/upload/v1698195363/trick-lor/user-avatar/13.jpg', 'dangtu9520@gmail.com', NULL, NULL, 'user', '105170659776559408479', 1, NULL, NULL, '2023-10-25 07:56:01', '2023-10-25 07:56:04');
+INSERT INTO `users` (`id`, `full_name`, `avatar`, `avatar_public_id`, `email`, `username`, `password`, `role`, `google_id`, `active`, `verification_token`, `last_email_sent_at`, `created_at`, `updated_at`) VALUES
+(1, 'Nguyễn Admin', 'https://res.cloudinary.com/tudvh/image/upload/v1698740308/trick-lor/user-avatar/1.jpg', 'trick-lor/user-avatar/1', NULL, 'admin', '$2y$10$n0Ups9gJr85xJQej3O0yv./G4ruafpI5Yd9jkgA2SknEGBvC3QKuW', 'admin', NULL, 1, NULL, NULL, '2023-09-22 03:33:01', '2023-10-31 15:18:28'),
+(2, 'Đặng Văn Hoài Tú', NULL, NULL, NULL, 'tudvh', '$2y$10$ogYedV2pQzDlx9vmD7eBqeVy6pgykXZjL5djXBjfBcnpdaAMhzDTK', 'admin', NULL, 1, NULL, NULL, '2023-10-05 10:29:40', '2023-10-05 10:29:40'),
+(3, 'Nguyễn Đắc Toàn', NULL, NULL, NULL, 'toannd', '$2y$10$ogYedV2pQzDlx9vmD7eBqeVy6pgykXZjL5djXBjfBcnpdaAMhzDTK', 'admin', NULL, 1, NULL, NULL, '2023-10-05 10:31:45', '2023-10-05 10:31:45'),
+(4, 'Nguyễn User', NULL, NULL, 'user@gmail.com', NULL, '$2y$10$vwikvnz4S4282g0Ap5Y8FuASh4vFuIyHUw72o7VO.ybnS6cFXhuw2', 'user', NULL, 1, NULL, NULL, '2023-10-06 19:27:39', '2023-10-08 22:13:50'),
+(5, 'Đặng Văn Hoài Tú', 'https://res.cloudinary.com/tudvh/image/upload/v1700960564/trick-lor/user-avatar/6.png', 'trick-lor/user-avatar/6', 'tudang9520@gmail.com', NULL, '$2y$10$M2vOY7EtBgNovK8q0L4OJO/tx8qhRJ0lF4/IyLOLvWCRSz1q45XcG', 'user', '114947229524934029235', 1, NULL, '2023-10-31 08:43:42', '2023-10-13 09:53:21', '2023-11-26 08:02:45');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -309,6 +705,23 @@ ALTER TABLE `post_categories`
   ADD KEY `category_id` (`category_id`) USING BTREE;
 
 --
+-- Chỉ mục cho bảng `post_comments`
+--
+ALTER TABLE `post_comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `post_id` (`post_id`),
+  ADD KEY `reply_id` (`reply_id`);
+
+--
+-- Chỉ mục cho bảng `post_saves`
+--
+ALTER TABLE `post_saves`
+  ADD PRIMARY KEY (`user_id`,`post_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `post_id` (`post_id`);
+
+--
 -- Chỉ mục cho bảng `post_views`
 --
 ALTER TABLE `post_views`
@@ -330,7 +743,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `posts`
@@ -339,16 +752,22 @@ ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
+-- AUTO_INCREMENT cho bảng `post_comments`
+--
+ALTER TABLE `post_comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `post_views`
 --
 ALTER TABLE `post_views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=479;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -360,6 +779,21 @@ ALTER TABLE `users`
 ALTER TABLE `post_categories`
   ADD CONSTRAINT `post_categories_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   ADD CONSTRAINT `post_categories_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+
+--
+-- Các ràng buộc cho bảng `post_comments`
+--
+ALTER TABLE `post_comments`
+  ADD CONSTRAINT `post_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `post_comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `post_comments_ibfk_3` FOREIGN KEY (`reply_id`) REFERENCES `post_comments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `post_saves`
+--
+ALTER TABLE `post_saves`
+  ADD CONSTRAINT `post_saves_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `post_saves_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `post_views`

@@ -13,11 +13,15 @@
 
 @section('content')
 @if ($posts->count() > 0)
-<x-site.list-post :colLg="4" :colSm="6" :posts="$posts" />
-<div class="mt-5">
-    {{ $posts->withQueryString()->links('partials.paginate-custom', ['onEachSide' => 2]) }}
+<div class="card">
+    <x-site.list-post :colLg="4" :colSm="6" :posts="$posts" />
+</div>
+<div class="my-5">
+    {{ $posts->withQueryString()->links('partials.paginate-custom', ['onEachSide' => 3]) }}
 </div>
 @else
-<h3>Danh sách bài đăng trống!</h3>
+<div class="card h-100">
+    <h3>Danh sách bài đăng trống!</h3>
+</div>
 @endif
 @stop

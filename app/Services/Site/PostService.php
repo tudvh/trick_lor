@@ -53,7 +53,6 @@ class PostService
 
     public function getTrending($type)
     {
-        $now = now();
         $oneDayAgo = now()->subDay();
         $oneWeekAgo = now()->subWeek();
         $oneMonthAgo = now()->subMonth();

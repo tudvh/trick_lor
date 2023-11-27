@@ -16,6 +16,21 @@
   --color-secondary-600: #0095cc;
   --color-secondary-100: #ebfaff;
   --color-primary-shadow: rgba(255, 69, 0, 0.25);
+
+  --bg-color: #f0f2f5;
+  --bg-color-secondary: #fff;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+.card {
+  background-color: var(--bg-color-secondary);
+  padding: 1.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
 }
 
 /* Pagination */

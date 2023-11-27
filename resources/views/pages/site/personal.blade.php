@@ -13,7 +13,7 @@
 
 @section('content')
 <div class="personal-wrapper">
-    <form class="mb-5" action="{{ route('site.personal.update') }}" method="POST" enctype="multipart/form-data">
+    <form class="mb-5 card" action="{{ route('site.personal.update') }}" method="POST" enctype="multipart/form-data">
         <div class="row">
             <h2 class="m-0 fw-bold">Thiết lập về tôi</h2>
 
@@ -81,9 +81,7 @@
         </div>
     </form>
 
-    <hr>
-
-    <form class="my-5" action="{{ route('site.auth.change-password') }}" method="POST">
+    <form class="my-5 card" action="{{ route('site.auth.change-password') }}" method="POST">
         <div class="d-flex flex-column gap-4">
             <h2 class="m-0 fw-bold">Thiết lập mật khẩu mới</h2>
 

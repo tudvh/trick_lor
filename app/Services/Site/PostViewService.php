@@ -13,4 +13,11 @@ class PostViewService
             'user_id' => optional(auth('site')->user())->id
         ]);
     }
+
+    public function getByUserId($userId)
+    {
+        return PostView::where('user_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->paginate(30);
+    }
 }
