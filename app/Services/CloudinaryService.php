@@ -28,12 +28,12 @@ class CloudinaryService
 
     public function delete(...$imagePublicIds)
     {
-        Cloudinary::admin()->deleteFolder($imagePublicIds);
+        Cloudinary::admin()->deleteAssets($imagePublicIds);
     }
 
     public function deleteFolder($folderPath)
     {
-        Cloudinary::admin()->deleteAssetsByPrefix("$folderPath");
+        Cloudinary::admin()->deleteAssetsByPrefix($folderPath);
     }
 
     private function handleQualityImage($options = [], $imageSrc, $maxQuality)

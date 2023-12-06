@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 27, 2023 lúc 04:11 AM
+-- Thời gian đã tạo: Th10 27, 2023 lúc 04:37 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -677,7 +677,7 @@ INSERT INTO `users` (`id`, `full_name`, `avatar`, `avatar_public_id`, `email`, `
 (2, 'Đặng Văn Hoài Tú', NULL, NULL, NULL, 'tudvh', '$2y$10$ogYedV2pQzDlx9vmD7eBqeVy6pgykXZjL5djXBjfBcnpdaAMhzDTK', 'admin', NULL, 1, NULL, NULL, '2023-10-05 10:29:40', '2023-10-05 10:29:40'),
 (3, 'Nguyễn Đắc Toàn', NULL, NULL, NULL, 'toannd', '$2y$10$ogYedV2pQzDlx9vmD7eBqeVy6pgykXZjL5djXBjfBcnpdaAMhzDTK', 'admin', NULL, 1, NULL, NULL, '2023-10-05 10:31:45', '2023-10-05 10:31:45'),
 (4, 'Nguyễn User', NULL, NULL, 'user@gmail.com', NULL, '$2y$10$vwikvnz4S4282g0Ap5Y8FuASh4vFuIyHUw72o7VO.ybnS6cFXhuw2', 'user', NULL, 1, NULL, NULL, '2023-10-06 19:27:39', '2023-10-08 22:13:50'),
-(5, 'Đặng Văn Hoài Tú', 'https://res.cloudinary.com/tudvh/image/upload/v1700960564/trick-lor/user-avatar/6.png', 'trick-lor/user-avatar/6', 'tudang9520@gmail.com', NULL, '$2y$10$M2vOY7EtBgNovK8q0L4OJO/tx8qhRJ0lF4/IyLOLvWCRSz1q45XcG', 'user', '114947229524934029235', 1, NULL, '2023-10-31 08:43:42', '2023-10-13 09:53:21', '2023-11-26 08:02:45');
+(5, 'Đặng Văn Hoài Tú', NULL, NULL, 'tudang9520@gmail.com', NULL, '$2y$10$M2vOY7EtBgNovK8q0L4OJO/tx8qhRJ0lF4/IyLOLvWCRSz1q45XcG', 'user', '114947229524934029235', 1, NULL, '2023-10-31 08:43:42', '2023-10-13 09:53:21', '2023-11-26 08:02:45');
 
 --
 -- Chỉ mục cho các bảng đã đổ
