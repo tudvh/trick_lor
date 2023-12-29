@@ -1,12 +1,11 @@
 version: "3"
 
 services:
-  workspace:
+  app:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
     container_name: trick_lor
-    working_dir: /var/www/html
     ports:
       - "80:80"
     volumes:
@@ -18,11 +17,11 @@ services:
       - mysql
 
   mysql:
-    image: mysql
+    build: 
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
     container_name: trick_lor_mysql
     ports:
       - "3306:3306"
-    volumes:
-      - ./docker/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password

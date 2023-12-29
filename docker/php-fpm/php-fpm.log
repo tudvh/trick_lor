@@ -1,0 +1,4 @@
+[29-Dec-2023 15:00:33] NOTICE: fpm is running, pid 15
+[29-Dec-2023 15:00:33] NOTICE: ready to handle connections
+[29-Dec-2023 15:00:33] NOTICE: systemd monitor interval set to 10000ms
+[29-Dec-2023 15:01:43] WARNING: [pool www] child 27 said into stderr: "NOTICE: PHP message: PHP Deprecated:  Optional parameter $options declared before required parameter $maxQuality is implicitly treated as a required parameter in /var/www/html/app/Services/CloudinaryService.php on line 39"
