@@ -9,7 +9,6 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/list-post.css') }}">
-<link rel="stylesheet" href="{{ url('public/site/css/category.css') }}">
 @stop
 
 @section('content')

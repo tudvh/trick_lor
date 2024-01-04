@@ -9,20 +9,22 @@
     @yield('meta')
     <title>@yield('title') - Trick loR Admin</title>
     <link rel="icon" href="{{ url('public/assets/img/logo-icon.png') }}">
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" /> -->
+    <!-- Font awesome -->
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-solid.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-regular.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-light.css">
     <link rel="stylesheet" href="{{ url('public/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ url('public/assets/css/toast-custom.css') }}">
+    <!-- Local -->
     <link rel="stylesheet" href="{{ url('public/admin/css/admin.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/header.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/sidebar.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin/css/main.css') }}">
     @yield('css')
-    <script src="{{ url('public/assets/js/toast-custom.js') }}"></script>
+    <!-- Sweet alert 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -53,32 +55,30 @@
             </div>
         </div>
 
-        <div id="toast">
-            @if (session('error-notification'))
-            <script>
-                toast({
-                    title: 'Lỗi',
-                    message: "{{ session('error-notification') }}",
-                    type: 'error',
-                    duration: 108000,
-                })
-            </script>
-            @endif
-            @if (session('success-notification'))
-            <script>
-                toast({
-                    title: 'Thành công',
-                    message: "{{ session('success-notification') }}",
-                    type: 'success',
-                    duration: 108000,
-                })
-            </script>
-            @endif
-        </div>
+        @if (session('error-notification'))
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Lỗi...",
+                text: "{{ session('error-notification') }}",
+            });
+        </script>
+        @endif
+        @if (session('success-notification'))
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Thành công",
+                text: "{{ session('success-notification') }}",
+            });
+        </script>
+        @endif
     </div>
 
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Local -->
     <script src="{{ url('public/assets/js/assets.js') }}"></script>
     <script src="{{ url('public/assets/js/sidebar-mobile.js') }}"></script>
     <!-- <script src="{{ url('public/assets/js/hide-logo.js') }}"></script> -->

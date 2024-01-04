@@ -18,6 +18,6 @@ class PostViewService
     {
         return PostView::where('user_id', $userId)
             ->orderBy('created_at', 'desc')
-            ->paginate(30);
+            ->get();
     }
 }

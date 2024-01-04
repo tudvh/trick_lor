@@ -13,14 +13,14 @@ class PostService
             ->paginate(12);
     }
 
-    public function getBySearch($searchKey, $isPagination, $limit)
+    public function getBySearch($searchKey, $isPagination, $limit = 5)
     {
         $searchKeyHandle = '%' . str_replace(' ', '%', $searchKey)  . '%';
 
         $posts = Post::where('active', 1)
             ->orderBy('id', 'desc')
             ->where(function ($query) use ($searchKeyHandle) {
-                $query->where('title', 'like', $searchKeyHandle)
+                return $query->where('title', 'like', $searchKeyHandle)
                     ->orWhere('description', 'like', $searchKeyHandle)
                     ->orWhereHas('postCategories.category', function ($query) use ($searchKeyHandle) {
                         return $query->where('name', 'like', $searchKeyHandle);

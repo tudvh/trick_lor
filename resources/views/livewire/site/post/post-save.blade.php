@@ -8,4 +8,10 @@
         <i class="fa-regular fa-bookmark"></i>
     </button>
     @endif
+
+    <div class="loading-overlay" wire:loading wire:target="savePost, unSavePost" wire:loading.class="d-flex">
+        <div class="loading-icon">
+            <i class="fa-light fa-loader"></i>
+        </div>
+    </div>
 </div>

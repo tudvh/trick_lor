@@ -14,10 +14,11 @@ use App\Helpers\ThumbnailHelper;
     <button class="submit-btn" type="submit">
         <i class="fa-regular fa-magnifying-glass"></i>
     </button>
-    @if($posts && $posts->count() > 0 && $isFocusSearchInput)
+    @if($searchKey && $isFocusSearchInput)
     <ul class="search-result dropdown-menu">
+        @if($posts && count($posts) > 0)
         @foreach($posts as $post)
-        <li>
+        <li wire:key="{{ $post->id }}" class="d-block">
             <a href="{{ route('site.post', ['post' => $post->slug]) }}" class="dropdown-item">
                 <div class="d-flex align-items-center gap-3 w-100" style="height: 73px">
                     <x-thumbnail :thumbnails="ThumbnailHelper::getThumbnail($post)" :alt="$post->title" />
@@ -33,6 +34,9 @@ use App\Helpers\ThumbnailHelper;
             </a>
         </li>
         @endforeach
+        @else
+        <li class="px-3">Không có kết quả...</li>
+        @endif
     </ul>
     @endif
 </form>

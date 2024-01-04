@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Site;
+namespace App\Livewire\Site\Post;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -30,51 +30,47 @@ class PostSave extends Component
     public function savePost(PostSaveService $postSaveService)
     {
         if (!$this->userId) {
-            $this->dispatch('showToast', [
+            $this->dispatch('showAlert', [
+                'icon' => 'error',
                 'title' => 'Lỗi',
-                'message' => 'Vui lòng đăng nhập',
-                'type' => 'error',
-                'duration' => 5000,
+                'text' => 'Vui lòng đăng nhập',
             ]);
             return;
         }
 
         $postSaveService->create($this->userId, $this->postId);
-
         $this->save = true;
-        $this->dispatch('showToast', [
+
+        $this->dispatch('showAlert', [
+            'icon' => 'success',
             'title' => 'Thành công',
-            'message' => 'Lưu bài viết thành công',
-            'type' => 'success',
-            'duration' => 5000,
+            'text' => 'Lưu bài viết thành công',
         ]);
     }
 
     public function unSavePost(PostSaveService $postSaveService)
     {
         if (!$this->userId) {
-            $this->dispatch('showToast', [
+            $this->dispatch('showAlert', [
+                'icon' => 'error',
                 'title' => 'Lỗi',
-                'message' => 'Vui lòng đăng nhập',
-                'type' => 'error',
-                'duration' => 5000,
+                'text' => 'Vui lòng đăng nhập',
             ]);
             return;
         }
 
         $postSaveService->delete($this->userId, $this->postId);
-
         $this->save = false;
-        $this->dispatch('showToast', [
+
+        $this->dispatch('showAlert', [
+            'icon' => 'success',
             'title' => 'Thành công',
-            'message' => 'Hủy lưu bài viết thành công',
-            'type' => 'success',
-            'duration' => 5000,
+            'text' => 'Hủy lưu bài viết thành công',
         ]);
     }
 
     public function render()
     {
-        return view('livewire.site.post-save');
+        return view('livewire.site.post.post-save');
     }
 }

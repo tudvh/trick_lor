@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Controllers\Controller;
 use App\Services\Site\PostSaveService;
 use App\Services\Site\PostViewService;
@@ -29,28 +30,25 @@ class ActivityController extends Controller
 
         $postViewsGroup = $postViews->groupBy(function ($postView) {
             return Carbon::parse($postView->created_at)->format('d-m-Y');
+        })->map(function ($group) {
+            return $group->groupBy('post_id')->map->first();
         });
 
-        $postViewsGroup = $postViewsGroup->map(function ($group) {
-            return $group->groupBy('post_id')->map(function ($postView) {
-                return $postView->first();
-            });
-        });
+        $perPage = 5;
+        $totalGroups = $postViewsGroup->count();
+        $page = request()->get('page', 1);
 
-        // $postViewsGroup = $postViewsGroup->map(function ($group) {
-        //     $ids = [];
+        $slicedGroups = $postViewsGroup->slice(($page - 1) * $perPage, $perPage)->all();
 
-        //     return $group->filter(function ($postView) use (&$ids) {
-        //         if (in_array($postView->post_id, $ids)) {
-        //             return false;
-        //         }
+        $postViewsPaginator = new LengthAwarePaginator(
+            $slicedGroups,
+            $totalGroups,
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
 
-        //         $ids[] = $postView->post_id;
-        //         return true;
-        //     });
-        // });
-
-        return view('pages.site.activities.view', compact('postViews', 'postViewsGroup'));
+        return view('pages.site.activities.view', compact('postViewsPaginator'));
     }
 
     public function save()

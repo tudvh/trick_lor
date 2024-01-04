@@ -99,9 +99,9 @@ Route::group(['prefix' => ''], function () {
 
 // Livewire
 Livewire::setScriptRoute(function ($handle) {
-    return Route::get(env('APP_URL') . '/vendor/livewire/livewire/dist/livewire.js', $handle);
+    return Route::get(env('APP_PATH') . '/vendor/livewire/livewire/dist/livewire.js', $handle);
 });
 
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post(env('APP_URL') . '/livewire/update', $handle);
+    return Route::post(env('APP_PATH') . '/livewire/update', $handle);
 });

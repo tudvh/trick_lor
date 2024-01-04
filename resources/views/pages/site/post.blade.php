@@ -15,24 +15,24 @@ use App\Helpers\ThumbnailHelper;
 <link rel="stylesheet" href="{{ url('public/assets/css/prism.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/list-post.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/post.css') }}">
+<link rel="stylesheet" href="{{ url('public/site/css/post-comment.css') }}">
 @stop
 
 @section('content')
 @if($post->active)
-<div class="post-wrapper d-flex flex-column gap-5 card">
-    <x-post-detail :post="$post" />
+<div class="post-wrapper d-flex flex-column gap-5">
+    <div class="d-flex flex-column gap-5 card">
+        <x-post-detail :post="$post" />
+    </div>
 
-    <hr class="m-0">
-
-    <div class="post-suggest">
-        <h2 class="post-title mb-3">Bài đăng tương tự</h2>
+    <div class="card">
+        <h2 class="post-title mb-3">Gợi ý</h2>
         <x-site.list-post :colLg="4" :colSm="6" :posts="$suggestedPosts" />
     </div>
 
-    <hr class="m-0">
-
-    <div class="post-comment">
+    <div class="card">
         <h2 class="post-title mb-3">Bình luận</h2>
+        <livewire:site.post.post-comment :postId="$post->id" />
     </div>
 </div>
 @else

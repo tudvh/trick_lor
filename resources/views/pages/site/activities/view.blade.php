@@ -25,9 +25,9 @@ use App\Helpers\NumberHelper;
     <a href="{{ route('site.activities.comment') }}" class="d-block h-100 @if(request()->is('activities/comment')){{ 'active' }}@endif">Bình luận</a>
 </div>
 
-@if ($postViews->count() > 0)
+@if ($postViewsPaginator->count() > 0)
 <div class="d-flex flex-column gap-5">
-    @foreach ($postViewsGroup as $date => $group)
+    @foreach ($postViewsPaginator as $date => $group)
     <div class="card">
         <p class="fw-bold mb-3" style="font-size: 1.75rem;">{{ $date }}</p>
         <div class="list-post">
@@ -55,7 +55,7 @@ use App\Helpers\NumberHelper;
 </div>
 
 <div class="mt-5">
-    {{ $postViews->withQueryString()->links('partials.paginate-custom', ['onEachSide' => 3]) }}
+    {{ $postViewsPaginator->withQueryString()->links('partials.paginate-custom', ['onEachSide' => 3]) }}
 </div>
 @else
 <h3>Bạn chưa xem bài viết nào</h3>

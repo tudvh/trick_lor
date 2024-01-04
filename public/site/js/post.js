@@ -15,19 +15,17 @@ copyCurrentLinkBtn.addEventListener('click', async () => {
       document.body.removeChild(tempInput)
     }
 
-    toast({
+    Swal.fire({
+      icon: 'success',
       title: 'Thành công',
-      message: 'Sao chép liên kết thành công',
-      type: 'success',
-      duration: 5000,
+      text: 'Sao chép liên kết thành công',
     })
   } catch (error) {
     console.error('Lỗi khi sao chép liên kết:', error)
-    toast({
+    Swal.fire({
+      icon: 'error',
       title: 'Lỗi',
-      message: 'Không thể sao chép liên kết',
-      type: 'error',
-      duration: 5000,
+      text: 'Có lỗi trong lúc sao chép liên kết, vui lòng thử lại',
     })
   }
 })

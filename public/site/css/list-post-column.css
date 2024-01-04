@@ -28,7 +28,7 @@
   border-radius: 5px;
 }
 
-.title {
+.list-post .title {
   font-size: 1.1rem;
   font-weight: bold;
   white-space: wrap;
@@ -40,7 +40,7 @@
   margin-bottom: 8px;
 }
 
-.icon-box {
+.list-post > .icon-box {
   width: 29px;
   height: 29px;
 }

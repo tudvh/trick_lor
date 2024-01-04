@@ -7,29 +7,23 @@ use App\Services\Site\PostService;
 
 class HeaderSearch extends Component
 {
-    public $searchKey = '';
+    public string $searchKey = '';
     public $posts = null;
-    public $isFocusSearchInput = false;
+    public bool $isFocusSearchInput = false;
 
     public function mount($searchKey)
     {
-        $this->searchKey = $searchKey;
+        $this->searchKey = $searchKey ?? '';
     }
 
-    public function setFocusSearchInput($focus)
+    public function setFocusSearchInput(bool $focus)
     {
         $this->isFocusSearchInput = $focus;
     }
 
-    public function updatedSearchKey(PostService $postService)
+    public function updatedSearchKey()
     {
         $this->searchKey = trim($this->searchKey);
-
-        if ($this->searchKey) {
-            $this->posts = $postService->getBySearch($this->searchKey, false, 5);
-        } else {
-            $this->clearSearchKey();
-        }
     }
 
     public function clearSearchKey()
@@ -38,8 +32,12 @@ class HeaderSearch extends Component
         $this->posts = null;
     }
 
-    public function render()
+    public function render(PostService $postService)
     {
+        if ($this->searchKey) {
+            $this->posts = $postService->getBySearch($this->searchKey, false, 5);
+        }
+
         return view('livewire.site.header-search');
     }
 }

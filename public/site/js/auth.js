@@ -80,22 +80,19 @@ loginForm.onsubmit = e => {
       },
     )
     .then(data => {
-      toast({
+      Swal.fire({
+        icon: 'success',
         title: 'Thành công',
-        message: data.data.message,
-        type: 'success',
-        duration: 5000,
-      })
-      setTimeout(() => {
+        text: data.data.message,
+      }).then(() => {
         location.reload()
-      }, 500)
+      })
     })
     .catch(error => {
-      toast({
+      Swal.fire({
+        icon: 'error',
         title: 'Thất bại',
-        message: error.response.data.message,
-        type: 'error',
-        duration: 5000,
+        text: error.response.data.message,
       })
     })
     .finally(() => {
@@ -125,22 +122,19 @@ registerForm.onsubmit = e => {
       },
     )
     .then(data => {
-      toast({
+      Swal.fire({
+        icon: 'success',
         title: 'Thành công',
-        message: data.data.message,
-        type: 'success',
-        duration: 5000,
-      })
-      setTimeout(() => {
+        text: data.data.message,
+      }).then(() => {
         location.reload()
-      }, 500)
+      })
     })
     .catch(error => {
-      toast({
+      Swal.fire({
+        icon: 'error',
         title: 'Thất bại',
-        message: error.response.data.message,
-        type: 'error',
-        duration: 5000,
+        text: error.response.data.message,
       })
     })
     .finally(() => {
@@ -167,19 +161,17 @@ forgotForm.onsubmit = e => {
       },
     )
     .then(data => {
-      toast({
+      Swal.fire({
+        icon: 'success',
         title: 'Thành công',
-        message: data.data.message,
-        type: 'success',
-        duration: 999999,
+        text: data.data.message,
       })
     })
     .catch(error => {
-      toast({
+      Swal.fire({
+        icon: 'error',
         title: 'Thất bại',
-        message: error.response.data.message,
-        type: 'error',
-        duration: 999999,
+        text: error.response.data.message,
       })
     })
     .finally(() => {
@@ -190,21 +182,18 @@ forgotForm.onsubmit = e => {
 // Auth google
 function receiveDataFromGoogleLoginWindow(data) {
   if (data.status === 'success') {
-    toast({
+    Swal.fire({
+      icon: 'success',
       title: 'Thành công',
-      message: data.message,
-      type: 'success',
-      duration: 5000,
-    })
-    setTimeout(() => {
+      text: data.message,
+    }).then(() => {
       location.reload()
-    }, 500)
+    })
   } else if (data.status === 'error') {
-    toast({
-      title: 'Lỗi',
-      message: data.message,
-      type: 'error',
-      duration: 999999,
+    Swal.fire({
+      icon: 'error',
+      title: 'Thất bại',
+      text: data.message,
     })
   }
 }

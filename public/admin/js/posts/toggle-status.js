@@ -12,19 +12,17 @@ const callApiToToggleStatus = postId => {
       const postElement = document.querySelector(`table tr[data-post-id="${postId}"]`)
       postElement.innerHTML = response
 
-      toast({
+      Swal.fire({
+        icon: 'success',
         title: 'Thành công',
-        message: 'Thay đổi trạng thái bài đăng thành công',
-        type: 'success',
-        duration: 5000,
+        text: 'Thay đổi trạng thái bài đăng thành công',
       })
     })
     .catch(() => {
-      toast({
-        title: 'Có lỗi',
-        message: 'Có lỗi trong lúc thay đổi trạng thái bài đăng. Vui lòng thử lại sau',
-        type: 'error',
-        duration: 5000,
+      Swal.fire({
+        icon: 'error',
+        title: 'Thất bại',
+        text: 'Có lỗi trong lúc thay đổi trạng thái bài đăng. Vui lòng thử lại sau',
       })
     })
     .finally(() => {
