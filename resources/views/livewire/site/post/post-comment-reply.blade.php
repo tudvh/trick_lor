@@ -34,7 +34,7 @@ use App\Helpers\DateHelper
                 </div>
                 <div class="comment-item-more d-flex align-items-center justify-content-start gap-3">
                     @if($user && $user->id == $comment->user_id)
-                    <button type="button" wire:click="$parent.confirmDelete({{ $comment->id }})">Xóa</button>
+                    <button type="button" wire:click="$dispatch('show-confirm-delete-comment', {commentId: {{ $comment->id }}})">Xóa</button>
                     @endif
                     <span>{{ DateHelper::formatTimeAgo($comment->created_at) }}</span>
                 </div>

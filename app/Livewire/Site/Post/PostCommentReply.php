@@ -10,7 +10,7 @@ class PostCommentReply extends Component
     public $postId;
     public $user;
     public $commentId;
-    public $limit = 1;
+    public $limit = 5;
     public $totalLimit;
     public $commentReplyContent;
 
@@ -24,7 +24,7 @@ class PostCommentReply extends Component
 
     public function showAlert($icon, $title, $text)
     {
-        $this->dispatch('showAlert', [
+        $this->dispatch('show-alert', [
             'icon' => $icon,
             'title' => $title,
             'text' => $text
@@ -50,11 +50,12 @@ class PostCommentReply extends Component
         }
 
         $this->commentReplyContent = '';
+        $this->dispatch('updated');
     }
 
     public function render(PostCommentService $postCommentService)
     {
-        $this->dispatch('addEventTextArea');
+        $this->dispatch('add-event-textarea');
 
         return view('livewire.site.post.post-comment-reply', [
             'commentReplies' => $postCommentService->getReplies($this->commentId, $this->totalLimit),

@@ -10,8 +10,6 @@ use App\Services\Site\PostSaveService;
 class PostSave extends Component
 {
     public $save = false;
-    public $errorMessage = '';
-    public $successMessage = '';
     public $userId = null;
     public $postId = null;
 
@@ -38,6 +36,15 @@ class PostSave extends Component
         $this->skipRender();
     }
 
+    public function showToast($icon, $title)
+    {
+        $this->dispatch('show-toast', [
+            'icon' => $icon,
+            'title' => $title,
+            'timer' => '1500'
+        ]);
+    }
+
     public function savePost(PostSaveService $postSaveService)
     {
         if (!$this->userId) {
@@ -48,7 +55,7 @@ class PostSave extends Component
         $postSaveService->create($this->userId, $this->postId);
         $this->save = true;
 
-        $this->showAlert('success', 'Thành công', 'Lưu bài viết thành công');
+        $this->showToast('success', 'Lưu bài viết thành công');
     }
 
     public function unSavePost(PostSaveService $postSaveService)
@@ -61,7 +68,7 @@ class PostSave extends Component
         $postSaveService->delete($this->userId, $this->postId);
         $this->save = false;
 
-        $this->showAlert('success', 'Thành công', 'Hủy lưu bài viết thành công');
+        $this->showToast('success', 'Hủy lưu bài viết thành công');
     }
 
     public function render()

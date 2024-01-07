@@ -16,9 +16,11 @@ copyCurrentLinkBtn.addEventListener('click', async () => {
     }
 
     Swal.fire({
+      position: 'top-end',
       icon: 'success',
-      title: 'Thành công',
-      text: 'Sao chép liên kết thành công',
+      title: 'Sao chép liên kết thành công',
+      showConfirmButton: false,
+      timer: 1000,
     })
   } catch (error) {
     console.error('Lỗi khi sao chép liên kết:', error)

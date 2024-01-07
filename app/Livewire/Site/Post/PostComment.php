@@ -11,7 +11,7 @@ class PostComment extends Component
     public $postId;
     public $user;
     public $commentIdsToShowReply = [];
-    public $limit = 1;
+    public $limit = 5;
     public $totalLimit;
     public $commentContent;
 
@@ -25,9 +25,15 @@ class PostComment extends Component
         $this->totalLimit = $this->limit;
     }
 
+    public function reRender()
+    {
+        // Gọi hàm này cho zui, chủ yếu để chạy hàm render()
+        return;
+    }
+
     public function showAlert($icon, $title, $text)
     {
-        $this->dispatch('showAlert', [
+        $this->dispatch('show-alert', [
             'icon' => $icon,
             'title' => $title,
             'text' => $text
@@ -64,13 +70,6 @@ class PostComment extends Component
         $this->commentContent = '';
     }
 
-    public function confirmDelete($commentId)
-    {
-        $this->dispatch('showConfirmDeleteComment', [
-            'commentId' => $commentId
-        ]);
-    }
-
     public function deleteComment($commentId, PostCommentService $postCommentService)
     {
         if (!$this->user->id) {
@@ -83,7 +82,7 @@ class PostComment extends Component
 
     public function render(PostCommentService $postCommentService)
     {
-        $this->dispatch('addEventTextArea');
+        $this->dispatch('add-event-textarea');
 
         return view('livewire.site.post.post-comment', [
             'comments' => $postCommentService->getByPostId($this->postId, $this->totalLimit),

@@ -21,7 +21,7 @@ use App\Helpers\DateHelper
                 <div class="comment-item-more d-flex align-items-center justify-content-start gap-3">
                     @if($user && $user->id == $comment->user_id)
                     <button type="button" wire:click="showReply({{ $comment->id }})">Phản hồi</button>
-                    <button type="button" wire:click="confirmDelete({{ $comment->id }})">Xóa</button>
+                    <button type="button" wire:click="$dispatch('show-confirm-delete-comment', {commentId: {{ $comment->id }}})">Xóa</button>
                     @endif
                     <span>{{ DateHelper::formatTimeAgo($comment->created_at) }}</span>
                 </div>
@@ -29,7 +29,7 @@ use App\Helpers\DateHelper
         </div>
 
         @if(in_array($comment->id, $commentIdsToShowReply))
-        <livewire:site.post.post-comment-reply :commentId="$comment->id" :postId="$postId" :user="$user" key="{{ $comment->id }}-{{ $comment->replies->count() }}" />
+        <livewire:site.post.post-comment-reply :commentId="$comment->id" :postId="$postId" :user="$user" key="{{ $comment->id }}-{{ $comment->replies->count() }}" @updated="reRender" />
         @elseif($comment->replies->count() > 0)
         <div class="comment-reply-wrapper d-flex flex-column gap-3">
             <button class="load-more-comment text-start ms-2" wire:click="showReply({{ $comment->id }})">
@@ -66,7 +66,8 @@ use App\Helpers\DateHelper
     </div>
 </div>
 
-<!-- Auto resize textarea when typing -->
+
+@script
 <script>
     const autoResize = (e) => {
         e.style.height = 'auto';
@@ -82,30 +83,41 @@ use App\Helpers\DateHelper
     }
     autoResizeTextAreas();
 
-    window.addEventListener('addEventTextArea', () => {
+    // Auto resize textarea when typing
+    $wire.on('add-event-textarea', () => {
         setTimeout(autoResizeTextAreas, 500)
-    });
-</script>
+    })
 
-<script>
-    document.addEventListener('livewire:initialized', () => {
-        const component = window.Livewire.find(document.querySelector('.comment-wrapper').getAttribute('wire:id'));
-
-        // Event confirm delete comment
-        document.addEventListener('showConfirmDeleteComment', async (e) => {
-            const result = await Swal.fire({
-                title: "Bạn chắc chứ",
-                text: "Bạn có chắc muốn xóa bình luận này không?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Chắc chắn",
-                cancelButtonText: "Hủy"
-            })
-
-            if (result.isConfirmed) {
-                const commentId = e.detail[0].commentId
-                component.deleteComment(commentId)
-            }
+    // Event confirm delete comment
+    $wire.on('show-confirm-delete-comment', async (e) => {
+        const result = await Swal.fire({
+            title: "Bạn chắc chứ",
+            text: "Bạn có chắc muốn xóa bình luận này không?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Chắc chắn",
+            cancelButtonText: "Hủy"
         })
+
+        if (result.isConfirmed) {
+            const commentId = e.commentId
+            $wire.deleteComment(commentId)
+        }
+    })
+
+    // Event pusher
+    Pusher.logToConsole = true;
+    var pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
+        cluster: 'ap1'
+    });
+    var channel = pusher.subscribe('post-{{ $postId }}');
+    channel.bind('comment-update', function(data) {
+        const userId = '{{ $user ? $user->id : null }}'
+        if (userId != data.userId) {
+            $wire.reRender()
+        } else {
+            console.log('no re render');
+        }
     })
 </script>
+@endscript

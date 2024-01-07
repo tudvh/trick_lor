@@ -2,6 +2,7 @@
 
 namespace App\Services\Site;
 
+use App\Events\PostCommentEvent;
 use App\Models\PostComment;
 
 class PostCommentService
@@ -31,6 +32,8 @@ class PostCommentService
             'content' => trim($content),
             'reply_id' => $replyId
         ]);
+
+        event(new PostCommentEvent($postId, $userId));
     }
 
     public function delete($commentId)
@@ -38,6 +41,7 @@ class PostCommentService
         $comment = PostComment::find($commentId);
         if ($comment) {
             $comment->delete();
+            event(new PostCommentEvent($comment->post->id, $comment->user->id));
         }
     }
 }
