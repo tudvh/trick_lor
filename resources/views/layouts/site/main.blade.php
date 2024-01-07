@@ -12,10 +12,11 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font awesome -->
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-solid.css">
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-regular.css">
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
     <!-- Local -->
     <link rel="stylesheet" href="{{ url('public/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('public/site/css/site.css') }}">
@@ -82,9 +83,6 @@
     <script src="{{ url('public/assets/js/assets.js') }}"></script>
     <script src="{{ url('public/site/js/header-open-search.js') }}"></script>
     <script src="{{ url('public/assets/js/sidebar-mobile.js') }}"></script>
-    @guest('site')
-    <script src="{{ url('public/site/js/auth.js') }}"></script>
-    @endguest
     <!-- <script src="{{ url('public/assets/js/hide-logo.js') }}"></script> -->
     @yield('js')
 </body>

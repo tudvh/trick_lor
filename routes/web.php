@@ -83,8 +83,7 @@ Route::group(['prefix' => ''], function () {
 
     // Auth
     Route::group(['prefix' => 'auth'], function () {
-        Route::post('/login', [Site\AuthController::class, 'handleLogin']);
-        Route::post('/register', [Site\AuthController::class, 'handleRegister']);
+        Route::get('/verify-email', [Site\AuthController::class, 'verifyEmail'])->name('site.auth.verify-email');
         Route::get('/logout', [Site\AuthController::class, 'logout'])->name('site.auth.logout');
         Route::post('/change-password', [Site\AuthController::class, 'changePassword'])->name('site.auth.change-password');
         Route::post('/forgot', [Site\AuthController::class, 'forgot'])->name('site.auth.forgot');

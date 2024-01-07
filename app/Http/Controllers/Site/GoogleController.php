@@ -27,6 +27,7 @@ class GoogleController extends Controller
     public function handleGoogleCallback()
     {
         try {
+            $status = 'success';
             $userGoogle = Socialite::driver('google')->user();
             $user = User::where('email', $userGoogle->email)->first();
 
@@ -34,11 +35,18 @@ class GoogleController extends Controller
                 if (!$user->google_id) {
                     $user->update(['google_id' => $userGoogle->id]);
                 }
+                if ($user->status == 'blocked') {
+                    $status = 'error';
+                    $message = 'Tài khoản của bạn đã bị cấm sử dụng!';
+                } else {
+                    $user->update([
+                        'status' => 'verified',
+                        'verification_token' => null,
+                    ]);
+                    Auth::guard('site')->login($user);
 
-                $user->update(['verification_token' => null]);
-                Auth::guard('site')->login($user);
-
-                $message = 'Đăng nhập thành công';
+                    $message = 'Đăng nhập thành công';
+                }
             } else {
                 $newUser = $this->userService->createWithSocial([
                     'full_name' => $userGoogle->name,
@@ -53,7 +61,7 @@ class GoogleController extends Controller
             }
 
             return  "<script>
-                        window.opener.receiveDataFromGoogleLoginWindow({status:'success',message:'$message'});
+                        window.opener.receiveDataFromGoogleLoginWindow({status:'$status',message:'$message'});
                         window.close();
                     </script>";
         } catch (Exception $e) {

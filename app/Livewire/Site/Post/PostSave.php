@@ -27,46 +27,41 @@ class PostSave extends Component
         }
     }
 
+    public function showAlert($icon, $title, $text)
+    {
+        $this->dispatch('show-alert', [
+            'icon' => $icon,
+            'title' => $title,
+            'text' => $text
+        ]);
+
+        $this->skipRender();
+    }
+
     public function savePost(PostSaveService $postSaveService)
     {
         if (!$this->userId) {
-            $this->dispatch('showAlert', [
-                'icon' => 'error',
-                'title' => 'Lỗi',
-                'text' => 'Vui lòng đăng nhập',
-            ]);
+            $this->showAlert('error', 'Lỗi', 'Vui lòng đăng nhập');
             return;
         }
 
         $postSaveService->create($this->userId, $this->postId);
         $this->save = true;
 
-        $this->dispatch('showAlert', [
-            'icon' => 'success',
-            'title' => 'Thành công',
-            'text' => 'Lưu bài viết thành công',
-        ]);
+        $this->showAlert('success', 'Thành công', 'Lưu bài viết thành công');
     }
 
     public function unSavePost(PostSaveService $postSaveService)
     {
         if (!$this->userId) {
-            $this->dispatch('showAlert', [
-                'icon' => 'error',
-                'title' => 'Lỗi',
-                'text' => 'Vui lòng đăng nhập',
-            ]);
+            $this->showAlert('error', 'Lỗi', 'Vui lòng đăng nhập');
             return;
         }
 
         $postSaveService->delete($this->userId, $this->postId);
         $this->save = false;
 
-        $this->dispatch('showAlert', [
-            'icon' => 'success',
-            'title' => 'Thành công',
-            'text' => 'Hủy lưu bài viết thành công',
-        ]);
+        $this->showAlert('success', 'Thành công', 'Hủy lưu bài viết thành công');
     }
 
     public function render()

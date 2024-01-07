@@ -1,9 +1,9 @@
 <header>
     <div class="container">
         <div class="logo">
-            <div class="sidebar-menu header-icon-btn">
-                <i class="fa-regular fa-bars"></i>
-            </div>
+            <button class="sidebar-menu header-icon-btn">
+                <i class="fa-sharp fa-regular fa-bars"></i>
+            </button>
             <a href="{{ route('site.home') }}">
                 <img src="{{ url('public/site/img/logo-web.png') }}" alt="Trick loR">
             </a>
@@ -59,12 +59,16 @@
                 </ul>
             </div>
             @else
-            <button type="button" id="open-auth-btn" class="btn login-btn">Đăng nhập</button>
+            <button type="button" class="btn login-btn" data-bs-toggle="modal" data-bs-target="#auth-overlay">Đăng nhập</button>
             @endauth
         </div>
     </div>
 </header>
 
 @guest('site')
-@include('partials.site.auth')
+<div class="modal fade" id="auth-overlay" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <livewire:site.auth.auth />
+    </div>
+</div>
 @endguest

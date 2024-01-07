@@ -22,7 +22,7 @@ class SiteMiddleware
         if (!Auth::guard($guard)->check()) {
             return redirect()->route('site.home')->with('error-notification', 'Vui lòng đăng nhập');
         }
-        if (Auth::guard($guard)->user()->active === 0) {
+        if (Auth::guard($guard)->user()->status == 'blocked') {
             Auth::guard($guard)->logout();
             return redirect()->route('site.home')->with('error-notification', 'Tài khoản của bạn đã bị cấm sử dụng');
         }

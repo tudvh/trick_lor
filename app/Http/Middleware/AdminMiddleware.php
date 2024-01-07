@@ -22,7 +22,7 @@ class AdminMiddleware
         if (!Auth::guard($guard)->check()) {
             return redirect()->route('admin.auth.login')->with('error', 'Vui lòng đăng nhập');
         }
-        if (Auth::guard($guard)->user()->active === 0) {
+        if (Auth::guard($guard)->user()->status == 'blocked') {
             Auth::guard($guard)->logout();
             return redirect()->route('admin.auth.login')->with('error', 'Tài khoản của bạn đã bị cấm sử dụng');
         }

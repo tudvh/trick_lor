@@ -234,6 +234,6 @@ header .more .user-avatar img {
 /* Mobile */
 @media (max-width: 575px) {
   header .logo img {
-    display: none;
+    height: 25px;
   }
 }

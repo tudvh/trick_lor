@@ -11,8 +11,8 @@
 @stop
 
 @section('content')
-<div class="personal-wrapper">
-    <form class="mb-5" method="POST">
+<div class="personal-wrapper card">
+    <form method="POST">
         <div class="d-flex flex-column gap-4">
             <h2 class="m-0">Thiết lập mật khẩu mới</h2>
 

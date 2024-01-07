@@ -72,14 +72,16 @@
         <div class="container">
             <header class="header">
                 <img src="https://cdn.discordapp.com/attachments/858695320753012789/1193420808983433297/logo-web.png" alt="Trick loR">
-                <p>Reset your password</p>
+                <p>Welcome to Trick loR</p>
             </header>
             <p>Dear <strong>{{ $fullName }}</strong>,</p>
-            <p>We've received a request to reset the password for your Trick loR account. To complete the password reset process, please click on the link below and create a new, secure password.</p>
+            <p>Thank you so much for being a member of Trick loR.</p>
+            <p>Click here to verify your email.</p>
             <p>
-                <a href="{{ URL::to('/') }}/auth/reset-password?token={{ $verificationToken }}">Create a New Password</a>
+                <a href="{{ URL::to('/') }}/auth/verify-email?token={{ $verificationToken }}">Verify Your Email</a>
             </p>
-            <p>Thank you for your prompt attention to this matter.</p>
+            <p>If you have any questions or require assistance, feel free to respond to this email or reach out to our online support team through the website.</p>
+            <p>Thank you for choosing Trick loR.</p>
             <p>Best regards,</p>
             <p>Trick loR</p>
         </div>
