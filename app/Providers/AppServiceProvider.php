@@ -20,8 +20,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(CategoryService $categoryService): void
     {
-        // Use list categories
-        $views = ['pages.site.*', 'pages.admin.posts.*'];
+        $views = ['pages.site.*', 'pages.admin.posts.create', 'pages.admin.posts.edit'];
+        foreach ($views as $view) {
+            view()->composer($view, function ($view) use ($categoryService) {
+                $view->with([
+                    'listCategories' => $categoryService->getByActive(true)
+                ]);
+            });
+        }
+
+        $views = ['pages.admin.posts.index'];
         foreach ($views as $view) {
             view()->composer($view, function ($view) use ($categoryService) {
                 $view->with([

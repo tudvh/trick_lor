@@ -25,32 +25,37 @@ use App\Helpers\NumberHelper;
     <a href="#" class="d-block h-100 @if(request()->is('activities/comment')){{ 'active' }}@endif">Bình luận</a>
 </div>
 
-@if ($postSaves->count() > 0)
-<div class="card">
-    <div class="list-post">
-        @foreach ($postSaves as $index => $postSave)
-        <div class="item" title="{{ $postSave->post->title }}">
-            <a href="{{ route('site.post', ['post' => $postSave->post->slug]) }}">
-                <div class="d-flex align-items-start gap-3 w-100">
-                    <x-thumbnail :thumbnails="ThumbnailHelper::getThumbnail($postSave->post)" :alt="$postSave->post->title" />
-                    <div class="w-100">
-                        <p class="title">{{ $postSave->post->title }}</p>
-                        <div class="d-flex flex-wrap gap-2">
-                            @foreach ($postSave->post->postCategories as $postCategory)
-                            <div class="icon-box" title="{{ $postCategory->category->name }}">{!! $postCategory->category->icon_color !!}</div>
-                            @endforeach
+@if ($postSavesPaginator->count() > 0)
+<div class="d-flex flex-column gap-5">
+    @foreach ($postSavesPaginator as $date => $group)
+    <div class="card">
+        <p class="fw-bold mb-3" style="font-size: 1.75rem;">{{ $date }}</p>
+        <div class="list-post">
+            @foreach ($group as $index => $postSave)
+            <div class="item" title="{{ $postSave->post->title }}">
+                <a href="{{ route('site.post', ['post' => $postSave->post->slug]) }}">
+                    <div class="d-flex align-items-start gap-3 w-100">
+                        <x-thumbnail :thumbnails="ThumbnailHelper::getThumbnail($postSave->post)" :alt="$postSave->post->title" />
+                        <div class="w-100">
+                            <p class="title">{{ $postSave->post->title }}</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach ($postSave->post->postCategories as $postCategory)
+                                <div class="icon-box" title="{{ $postCategory->category->name }}">{!! $postCategory->category->icon_color !!}</div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
+            <div class="hr"></div>
+            @endforeach
         </div>
-        <div class="hr"></div>
-        @endforeach
     </div>
+    @endforeach
 </div>
 
 <div class="mt-5">
-    {{ $postSaves->withQueryString()->links('partials.paginate-custom', ['onEachSide' => 3]) }}
+    {{ $postSavesPaginator->withQueryString()->links('partials.paginate-custom', ['onEachSide' => 3]) }}
 </div>
 @else
 <h3>Bạn chưa lưu bài viết nào</h3>

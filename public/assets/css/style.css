@@ -119,15 +119,6 @@ ul .dropdown-item .icon-box {
   height: auto;
 }
 
-/* Toast */
-.toast-container img {
-  width: 30px;
-}
-
-.toast-container .toast-body {
-  background-color: var(--bs-toast-header-bg);
-}
-
 /* Overlay */
 .overlay,
 .loading-overlay {

@@ -56,6 +56,26 @@ class ActivityController extends Controller
         $userId = Auth::guard('site')->user()->id;
         $postSaves = $this->postSaveService->getByUserId($userId);
 
-        return view('pages.site.activities.save', compact('postSaves'));
+        $postSavesGroup = $postSaves->groupBy(function ($postSave) {
+            return Carbon::parse($postSave->created_at)->format('d-m-Y');
+        })->map(function ($group) {
+            return $group->groupBy('post_id')->map->first();
+        });
+
+        $perPage = 5;
+        $totalGroups = $postSavesGroup->count();
+        $page = request()->get('page', 1);
+
+        $slicedGroups = $postSavesGroup->slice(($page - 1) * $perPage, $perPage)->all();
+
+        $postSavesPaginator = new LengthAwarePaginator(
+            $slicedGroups,
+            $totalGroups,
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        return view('pages.site.activities.save', compact('postSavesPaginator'));
     }
 }

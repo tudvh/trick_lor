@@ -8,7 +8,12 @@ class CategoryService
 {
     public function getAll()
     {
-        return Category::where('active', 1)->get();
+        return Category::all();
+    }
+
+    public function getByActive($active)
+    {
+        return Category::where('active', $active)->get();
     }
 
     public function getBySlug($slug)

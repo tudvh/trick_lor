@@ -33,7 +33,7 @@ class AuthController extends Controller
         if (!Auth::guard('admin')->attempt($request->only('username', 'password'))) {
             return redirect()->back()->with('error', 'Đăng nhập thất bại!');
         }
-        if (Auth::guard('admin')->user()->active == 0) {
+        if (Auth::guard('admin')->user()->status == 'blocked') {
             Auth::guard('admin')->logout();
             return redirect()->back()->with('error', 'Tài khoản của bạn đã bị cấm sử dụng!');
         }

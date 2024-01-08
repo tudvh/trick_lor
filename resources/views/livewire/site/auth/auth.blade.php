@@ -1,6 +1,6 @@
 <div class="modal-content" id="auth-container">
     <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click="switchScreen('login')"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
         @if($screen == 'login')
@@ -16,6 +16,7 @@
 @script
 <script>
     const ROOT_URL = document.querySelector('meta[name="root-url"]').dataset.index
+    const authOverlay = document.querySelector('#auth-overlay')
 
     $wire.on('login-with-google', () => {
         var width = 500
@@ -26,6 +27,10 @@
                   width=${width},height=${height},left=${left},top=${top}`
 
         window.open(`${ROOT_URL}/auth/google`, 'myWindow', params)
+    })
+
+    authOverlay.addEventListener('hidden.bs.modal', () => {
+        $wire.switchScreen('login')
     })
 </script>
 @endscript

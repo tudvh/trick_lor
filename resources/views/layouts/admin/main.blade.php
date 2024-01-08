@@ -36,12 +36,7 @@
 
         <div class="main">
             <div class="main-header">
-                <div class="d-flex flex-column flex-md-row align-items-center">
-                    <h1 class="main-header-title me-auto">@yield('title-content')</h1>
-                    <div class="main-header-action ms-auto">
-                        @yield('action')
-                    </div>
-                </div>
+                <h1 class="main-header-title">@yield('title-content')</h1>
             </div>
             <div class="content">
                 @yield('content')
