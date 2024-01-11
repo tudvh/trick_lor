@@ -22,7 +22,6 @@ use App\Helpers\NumberHelper;
 <div class="d-flex mb-5 activity-tab">
     <a href="{{ route('site.activities.view') }}" class="d-block h-100 @if(request()->is('activities/view')){{ 'active' }}@endif">Bài viết đã xem</a>
     <a href="{{ route('site.activities.save') }}" class="d-block h-100 @if(request()->is('activities/save')){{ 'active' }}@endif">Bài viết đã lưu</a>
-    <a href="#" class="d-block h-100 @if(request()->is('activities/comment')){{ 'active' }}@endif">Bình luận</a>
 </div>
 
 @if ($postSavesPaginator->count() > 0)

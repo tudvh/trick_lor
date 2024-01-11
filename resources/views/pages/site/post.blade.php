@@ -19,7 +19,6 @@ use App\Helpers\ThumbnailHelper;
 @stop
 
 @section('content')
-@if($post->active)
 <div class="post-wrapper d-flex flex-column gap-5">
     <div class="d-flex flex-column gap-5 card">
         <x-post-detail :post="$post" />
@@ -35,11 +34,6 @@ use App\Helpers\ThumbnailHelper;
         <livewire:site.post.post-comment :postId="$post->id" />
     </div>
 </div>
-@else
-<div class="card h-100">
-    <h0>Bài viết không có sẵn</h0>
-</div>
-@endif
 @stop
 
 @section('js')

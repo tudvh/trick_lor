@@ -72,21 +72,14 @@ Route::group(['prefix' => ''], function () {
     Route::group(['prefix' => 'activities'], function () {
         Route::get('/view', [Site\ActivityController::class, 'view'])->name('site.activities.view');
         Route::get('/save', [Site\ActivityController::class, 'save'])->name('site.activities.save');
-        Route::get('/comment', [Site\ActivityController::class, 'comment'])->name('site.activities.comment');
-    });
-
-    // Personal
-    Route::group(['prefix' => 'personal'], function () {
-        Route::get('/', [Site\UserController::class, 'personal'])->name('site.personal');
-        Route::put('/update', [Site\UserController::class, 'updatePersonal'])->name('site.personal.update');
     });
 
     // Auth
     Route::group(['prefix' => 'auth'], function () {
         Route::get('/verify-email', [Site\AuthController::class, 'verifyEmail'])->name('site.auth.verify-email');
+        Route::get('/personal', [Site\AuthController::class, 'personal'])->name('site.auth.personal');
         Route::get('/logout', [Site\AuthController::class, 'logout'])->name('site.auth.logout');
         Route::post('/change-password', [Site\AuthController::class, 'changePassword'])->name('site.auth.change-password');
-        Route::post('/forgot', [Site\AuthController::class, 'forgot'])->name('site.auth.forgot');
         Route::get('/reset-password', [Site\AuthController::class, 'resetPassword'])->name('site.auth.reset-password');
         Route::post('/reset-password', [Site\AuthController::class, 'handleResetPassword'])->name('site.auth.reset-password');
 

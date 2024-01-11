@@ -11,12 +11,17 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $fillable = ['title', 'slug', 'youtube_id', 'description', 'thumbnails', 'thumbnails_custom', 'active'];
+    protected $fillable = ['title', 'slug', 'author_id', 'youtube_id', 'description', 'thumbnails', 'thumbnails_custom', 'status'];
 
     protected $casts = [
         'thumbnails' => 'array',
         'thumbnails_custom' => 'array',
     ];
+
+    public function author()
+    {
+        return $this->hasOne(User::class, 'id', 'author_id');
+    }
 
     public function postCategories()
     {

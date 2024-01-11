@@ -5,9 +5,19 @@ namespace App\Services\Site;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Services\CloudinaryService;
 
 class AuthService
 {
+    protected $cloudinaryService;
+    private const CLOUDINARY_ROOT_PATH = "user-avatar";
+    private const AVATAR_MAX_QUALITY = 144;
+
+    public function __construct(CloudinaryService $cloudinaryService)
+    {
+        $this->cloudinaryService = $cloudinaryService;
+    }
+
     public function handleLogin($email, $password)
     {
         $credentials = ['email' => $email, 'password' => $password];
@@ -57,6 +67,53 @@ class AuthService
         return response()->json([
             'message' => 'Chúng tôi đã gửi một tin nhắn đến địa chỉ email của bạn. Vui lòng kiểm tra email để tiếp tục.'
         ], 201);
+    }
+
+    public function handleRegisterWithGoogle($fullName, $email, $googleId, $avatar)
+    {
+        $user = User::create([
+            'full_name' => $fullName,
+            'email' => $email,
+            'google_id' => $googleId,
+            'status' => 'verified'
+        ]);
+
+        $imageSrc = $avatar;
+        $publicId = $this::CLOUDINARY_ROOT_PATH . "/" . $user->id;
+        $maxQuality = $this::AVATAR_MAX_QUALITY;
+        $uploadedResult = $this->cloudinaryService->upload($imageSrc, $publicId, $maxQuality);
+
+        $user->avatar = $uploadedResult->getSecurePath();
+        $user->avatar_public_id = $uploadedResult->getPublicId();
+
+        $user->save();
+
+        return $user;
+    }
+
+    public function handleUpdatePersonal($user, $fullName, $avatarUrl, $isRemoveAvatar)
+    {
+        $user->full_name = mb_convert_case(ucwords(trim($fullName)), MB_CASE_TITLE, "UTF-8");
+
+        if ($avatarUrl) {
+            if ($user->avatar_public_id) {
+                $this->cloudinaryService->delete([$user->avatar_public_id]);
+            }
+
+            $publicId = $this::CLOUDINARY_ROOT_PATH . "/" . $user->id;
+            $maxQuality = $this::AVATAR_MAX_QUALITY;
+            $uploadedResult = $this->cloudinaryService->upload($avatarUrl, $publicId, $maxQuality);
+
+            $user->avatar = $uploadedResult->getSecurePath();
+            $user->avatar_public_id = $uploadedResult->getPublicId();
+        } elseif ($isRemoveAvatar && $user->avatar_public_id) {
+            $this->cloudinaryService->delete([$user->avatar_public_id]);
+
+            $user->avatar = null;
+            $user->avatar_public_id = null;
+        }
+
+        $user->save();
     }
 
     public function handleForgot($email)

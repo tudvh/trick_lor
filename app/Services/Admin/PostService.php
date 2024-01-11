@@ -10,7 +10,7 @@ use App\Services\CloudinaryService;
 class PostService
 {
     protected $cloudinaryService;
-    private const CLOUDINARY_ROOT_PATH = "trick-lor/post";
+    private const CLOUDINARY_ROOT_PATH = "post";
     private const IMAGE_DESCRIPTION_MAX_QUALITY = 720;
 
     public function __construct(CloudinaryService $cloudinaryService)

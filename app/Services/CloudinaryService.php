@@ -6,9 +6,12 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class CloudinaryService
 {
+    private const ROOT_PATH = "trick-lor";
+
     public function getAllResourcesInFolder($folderPath)
     {
-        $imageResourcesInFolder = Cloudinary::admin()->assets(['type' => 'upload', 'prefix' => $folderPath])['resources'];
+        $path = $this::ROOT_PATH . "/" . $folderPath;
+        $imageResourcesInFolder = Cloudinary::admin()->assets(['type' => 'upload', 'prefix' => $path])['resources'];
 
         return $imageResourcesInFolder;
     }
@@ -17,7 +20,7 @@ class CloudinaryService
     {
         $options = [
             "crop" => "scale",
-            "public_id" => $publicId
+            "public_id" => $this::ROOT_PATH . "/" . $publicId
         ];
         $options = $this->handleQualityImage($options, $imageSrc, $maxQuality);
 
@@ -26,14 +29,15 @@ class CloudinaryService
         return $uploadedResult;
     }
 
-    public function delete(...$imagePublicIds)
+    public function delete(array $imagePublicIds)
     {
         Cloudinary::admin()->deleteAssets($imagePublicIds);
     }
 
     public function deleteFolder($folderPath)
     {
-        Cloudinary::admin()->deleteAssetsByPrefix($folderPath);
+        $path = $this::ROOT_PATH . "/" . $folderPath;
+        Cloudinary::admin()->deleteAssetsByPrefix($path);
     }
 
     private function handleQualityImage($options = [], $imageSrc, $maxQuality)

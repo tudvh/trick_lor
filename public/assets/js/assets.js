@@ -1,3 +1,15 @@
+const loadingOverlay = document.querySelector('.loading-overlay')
+
+const showLoadingOverlay = () => {
+  loadingOverlay.classList.remove('d-none')
+  document.body.classList.add('no-scroll')
+}
+
+const hideLoadingOverlay = () => {
+  loadingOverlay.classList.add('d-none')
+  document.body.classList.remove('no-scroll')
+}
+
 window.addEventListener('show-alert', e => {
   Swal.fire({
     icon: e.detail[0].icon,

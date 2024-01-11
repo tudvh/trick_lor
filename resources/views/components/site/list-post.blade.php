@@ -15,8 +15,8 @@ use App\Helpers\NumberHelper;
                 <h3 class="title">{{ $post->title }}</h3>
                 <span>{{ NumberHelper::formatView($post->postViews->count()) }} lượt xem • {{ DateHelper::formatTimeAgo($post->created_at) }}</span>
                 <div class="d-flex flex-wrap gap-2">
-                    @foreach ($post->postCategories as $postCategory)
-                    <div class="icon-box" title="{{ $postCategory->category->name }}">{!! $postCategory->category->icon_color !!}</div>
+                    @foreach ($post->categories as $category)
+                    <div class="icon-box" title="{{ $category->name }}">{!! $category->icon_color !!}</div>
                     @endforeach
                 </div>
             </div>

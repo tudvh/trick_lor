@@ -13,73 +13,7 @@
 
 @section('content')
 <div class="personal-wrapper">
-    <form class="mb-5 card" action="{{ route('site.personal.update') }}" method="POST" enctype="multipart/form-data">
-        <div class="row">
-            <h2 class="m-0 fw-bold">Thiết lập về tôi</h2>
-
-            @csrf
-            @method('PUT')
-
-            <div class="col-12 col-md-6 mt-4">
-                <div class="form-group image-chosen-wrapper">
-                    <label for="image-chosen-file" class="form-label">Ảnh đại diện</label>
-                    <input type="file" class="form-control d-none @if($errors->has('avatar')) is-invalid @endif" id="image-chosen-file" name="avatar" accept="image/*">
-                    <input type="checkbox" class="form-check-input d-none" id="is-remove-image" name="is_remove_avatar" value="Remove avatar">
-
-                    <div class="image-chosen-container gap-3">
-                        <div class="image-chosen-content-wrapper">
-                            <div class="image-chosen-content-container">
-                                <img src="{{ url('public/assets/img/user-avatar/user-avatar-default.png') }}" class="image-chosen-content-default">
-                                <div class="image-chosen-content">
-                                    @if($user->avatar)
-                                    <img src="{{ $user->avatar }}" alt="{{ $user->full_name }}">
-                                    @endif
-                                </div>
-                                <label for="image-chosen-file" class="image-choose">
-                                    <div class="icon-box">
-                                        <i class="fa-solid fa-camera"></i>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-danger gap-2 remove-image-btn" type="button">
-                            <i class="fas fa-trash"></i>
-                            <span>Xóa ảnh</span>
-                        </button>
-                    </div>
-
-                    @if ($errors->has('avatar'))
-                    <small class="text-danger">{{ $errors->first('avatar') }}</small>
-                    @elseif ($errors->any())
-                    <small class="text-warning">Nếu bạn đã chọn avatar trước đó, vui lòng chọn lại ảnh mới</small>
-                    @endif
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 mt-4 d-flex flex-column gap-4">
-                <div class="form-group">
-                    <label for="full-name" class="form-label">Họ và tên</label>
-                    <input type="text" class="form-control @if($errors->has('full_name')) is-invalid @endif" id="full-name" name="full_name" value="@if(old('title')){{ old('title') }}@else{{ $user->full_name }}@endif" autocomplete="off" required>
-                    @if ($errors->has('full_name'))
-                    <small class="text-danger">{{ $errors->first('full_name') }}</small>
-                    @endif
-                </div>
-
-                <div class="form-group">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email" value="{{ $user->email }}" disabled>
-                </div>
-            </div>
-
-            <div class="col-12">
-                <button type="submit" class="btn btn-success ms-auto mt-4 gap-2">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <span>Cập nhật thông tin</span>
-                </button>
-            </div>
-        </div>
-    </form>
+    <livewire:site.auth.personal :user="$user" />
 
     <form class="my-5 card" action="{{ route('site.auth.change-password') }}" method="POST">
         <div class="d-flex flex-column gap-4">
@@ -123,5 +57,4 @@
 @stop
 
 @section('js')
-<script src="{{ url('public/assets/js/image-chosen.js') }}"></script>
 @stop

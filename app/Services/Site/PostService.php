@@ -8,7 +8,8 @@ class PostService
 {
     public function getAll()
     {
-        return Post::where('active', 1)
+        return Post::where('status', 'public')
+            ->with(['author', 'categories', 'postViews'])
             ->orderBy('id', 'desc')
             ->paginate(12);
     }
@@ -17,7 +18,7 @@ class PostService
     {
         $searchKeyHandle = '%' . str_replace(' ', '%', $searchKey)  . '%';
 
-        $posts = Post::where('active', 1)
+        $posts = Post::where('status', 'public')
             ->orderBy('id', 'desc')
             ->where(function ($query) use ($searchKeyHandle) {
                 return $query->where('title', 'like', $searchKeyHandle)
@@ -36,7 +37,7 @@ class PostService
 
     public function getByCategorySlug($categorySlug)
     {
-        return Post::where('active', 1)
+        return Post::where('status', 'public')
             ->whereHas('categories', function ($query) use ($categorySlug) {
                 return $query->where('slug', $categorySlug);
             })
@@ -46,7 +47,9 @@ class PostService
 
     public function getBySlug($postSlug)
     {
-        $post = Post::where('slug', $postSlug)->firstOrFail();
+        $post = Post::where('slug', $postSlug)
+            ->where('status', 'public')
+            ->first();
 
         return $post;
     }
@@ -57,7 +60,7 @@ class PostService
         $oneWeekAgo = now()->subWeek();
         $oneMonthAgo = now()->subMonth();
 
-        $query = Post::where('active', 1);
+        $query = Post::where('status', 'public');
 
         if ($type === 'day') {
             $query->withCount(['postViews as views_count_day' => function ($query) use ($oneDayAgo) {
@@ -91,7 +94,7 @@ class PostService
     {
         $categoryIds = $post->postCategories->pluck('category_id')->toArray();
 
-        $suggestedPosts = Post::where('active', 1)
+        $suggestedPosts = Post::where('status', 'public')
             ->where('id', '!=', $post->id)
             ->whereHas('postCategories', function ($query) use ($categoryIds) {
                 $query->whereIn('category_id', $categoryIds);
@@ -104,7 +107,7 @@ class PostService
             $suggestedPostIds = $suggestedPosts->pluck('id')->toArray();
             $suggestedPostIds[] = $post->id;
 
-            $additionalPosts = Post::where('active', 1)
+            $additionalPosts = Post::where('status', 'public')
                 ->whereNotIn('id', $suggestedPostIds)
                 ->inRandomOrder()
                 ->take($limit - $suggestedPosts->count())

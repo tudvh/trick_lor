@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('site', ['only' => ['changePassword']]);
+        $this->middleware('site', ['only' => ['changePassword', 'personal']]);
     }
 
     public function verifyEmail(Request $request)
@@ -35,6 +35,14 @@ class AuthController extends Controller
         ]);
 
         return redirect()->route('site.home')->with('success-notification', 'Bạn đã xác minh email thành công.');
+    }
+
+    public function personal()
+    {
+        $userId = Auth::guard('site')->user()->id;
+        $user = User::where('id', $userId)->first();
+
+        return view('pages.site.personal', compact('user'));
     }
 
     public function logout()

@@ -33,7 +33,7 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a href="{{ route('site.personal') }}" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
+                        <a href="{{ route('site.auth.personal') }}" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
                             <div class="icon-box">
                                 <i class="fa-solid fa-user"></i>
                             </div>

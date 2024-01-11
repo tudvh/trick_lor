@@ -32,8 +32,6 @@ class PostSave extends Component
             'title' => $title,
             'text' => $text
         ]);
-
-        $this->skipRender();
     }
 
     public function showToast($icon, $title)
@@ -49,6 +47,7 @@ class PostSave extends Component
     {
         if (!$this->userId) {
             $this->showAlert('error', 'Lỗi', 'Vui lòng đăng nhập');
+            $this->skipRender();
             return;
         }
 
@@ -62,6 +61,7 @@ class PostSave extends Component
     {
         if (!$this->userId) {
             $this->showAlert('error', 'Lỗi', 'Vui lòng đăng nhập');
+            $this->skipRender();
             return;
         }
 

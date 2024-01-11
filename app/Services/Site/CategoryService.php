@@ -18,6 +18,8 @@ class CategoryService
 
     public function getBySlug($slug)
     {
-        return Category::where('slug', $slug)->first();
+        return Category::where('slug', $slug)
+            ->where('active', 1)
+            ->first();
     }
 }

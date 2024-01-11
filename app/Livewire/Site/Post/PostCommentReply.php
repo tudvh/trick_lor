@@ -29,8 +29,6 @@ class PostCommentReply extends Component
             'title' => $title,
             'text' => $text
         ]);
-
-        $this->skipRender();
     }
 
     public function loadMore()
@@ -40,8 +38,9 @@ class PostCommentReply extends Component
 
     public function sendCommentReply(PostCommentService $postCommentService)
     {
-        if (!$this->user->id) {
+        if (!$this->user) {
             $this->showAlert('error', 'Lỗi', 'Vui lòng đăng nhập');
+            $this->skipRender();
             return;
         }
 

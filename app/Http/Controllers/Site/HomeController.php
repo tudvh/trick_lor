@@ -54,6 +54,11 @@ class HomeController extends Controller
     public function category(string $categorySlug)
     {
         $category = $this->categoryService->getBySlug($categorySlug);
+
+        if (!$category) {
+            return redirect()->route('site.home')->with('error-notification', 'Danh mục này đã bị xóa hoặc bị ẩn.');
+        }
+
         $posts = $this->postService->getByCategorySlug($categorySlug);
 
         return view('pages.site.category', compact('posts', 'category'));
@@ -63,16 +68,15 @@ class HomeController extends Controller
     {
         $post = $this->postService->getBySlug($postSlug);
 
+        if (!$post) {
+            return redirect()->route('site.home')->with('error-notification', 'Bài viết này đã bị xóa hoặc bị ẩn.');
+        }
+
         $suggestedPosts = $this->postService->getSuggest($post, 6);
 
         // Add post view
-        // $this->postViewService->create($post->id);
+        $this->postViewService->create($post->id);
 
         return view('pages.site.post', compact('post', 'suggestedPosts'));
-    }
-
-    public function testLivewire()
-    {
-        return view('pages.site.livewire');
     }
 }

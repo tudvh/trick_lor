@@ -27,7 +27,7 @@ class PostComment extends Component
 
     public function reRender()
     {
-        // Gọi hàm này cho zui, chủ yếu để chạy hàm render()
+        // Gọi hàm này cho vui, chủ yếu để chạy hàm render()
         return;
     }
 
@@ -38,8 +38,6 @@ class PostComment extends Component
             'title' => $title,
             'text' => $text
         ]);
-
-        $this->skipRender();
     }
 
     public function showReply($commentId)
@@ -58,8 +56,9 @@ class PostComment extends Component
 
     public function sendComment(PostCommentService $postCommentService)
     {
-        if (!$this->user->id) {
+        if (!$this->user) {
             $this->showAlert('error', 'Lỗi', 'Vui lòng đăng nhập');
+            $this->skipRender();
             return;
         }
 
@@ -72,8 +71,9 @@ class PostComment extends Component
 
     public function deleteComment($commentId, PostCommentService $postCommentService)
     {
-        if (!$this->user->id) {
+        if (!$this->user) {
             $this->showAlert('error', 'Lỗi', 'Vui lòng đăng nhập');
+            $this->skipRender();
             return;
         }
 

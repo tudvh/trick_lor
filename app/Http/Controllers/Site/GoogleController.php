@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Services\Site\UserService;
+use App\Services\Site\AuthService;
 
 class GoogleController extends Controller
 {
-    protected $userService;
+    protected $authService;
 
-    public function __construct(UserService $userService)
+    public function __construct(AuthService $authService)
     {
-        $this->userService = $userService;
+        $this->authService = $authService;
     }
 
     public function redirectToGoogle()
@@ -48,15 +48,8 @@ class GoogleController extends Controller
                     $message = 'Đăng nhập thành công';
                 }
             } else {
-                $newUser = $this->userService->createWithSocial([
-                    'full_name' => $userGoogle->name,
-                    'email' => $userGoogle->email,
-                    'google_id' => $userGoogle->id,
-                    'avatar' => $userGoogle->avatar
-                ]);
-
+                $newUser = $this->authService->handleRegisterWithGoogle($userGoogle->name, $userGoogle->email, $userGoogle->id, $userGoogle->avatar);
                 Auth::guard('site')->login($newUser);
-
                 $message = 'Đăng ký tài khoản thành công';
             }
 

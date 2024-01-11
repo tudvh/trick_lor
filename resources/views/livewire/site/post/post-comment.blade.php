@@ -45,11 +45,12 @@ use App\Helpers\DateHelper
     <button wire:click="loadMore" class="load-more-comment text-start">Xem thêm bình luận</button>
     @endif
 
-    @if($user)
     <form class="form-comment d-flex gap-2" wire:submit="sendComment">
+        @if($user)
         <div class="user-avatar">
             <img src="{{ $user->avatar ?? 'https://storage.googleapis.com/laravel-img.appspot.com/user/customer-default.png' }}" alt="{{ $user->full_name }}">
         </div>
+        @endif
         <textarea class="form-control comment-write" rows="1" placeholder="Viết bình luận..." wire:model="commentContent"></textarea>
         <div class="d-flex align-items-start">
             <button type="submit" class="btn btn-success">
@@ -57,7 +58,6 @@ use App\Helpers\DateHelper
             </button>
         </div>
     </form>
-    @endif
 
     <div class="loading-overlay" wire:loading wire:target="sendComment, deleteComment" wire:loading.class="d-flex">
         <div class="loading-icon">

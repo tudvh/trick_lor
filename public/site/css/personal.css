@@ -21,12 +21,11 @@
   width: 144px;
 }
 
-.image-chosen-wrapper .image-chosen-content-container {
+.image-chosen-wrapper .image-chosen-content {
   padding-top: 100%;
 }
 
-.image-chosen-wrapper .image-chosen-content-container > *,
-.image-chosen-wrapper .image-chosen-content-container .image-chosen-content img {
+.image-chosen-wrapper .image-chosen-content > * {
   border-radius: 50%;
 }
 

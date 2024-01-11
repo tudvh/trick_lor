@@ -6,6 +6,8 @@
         body {
             font-family: 'Arial', sans-serif;
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         p {
@@ -37,7 +39,7 @@
 
         .wrapper {
             background-color: #f0f2f5;
-            padding: 3rem .1rem;
+            padding: 3rem 0.1rem;
         }
 
         .container {
