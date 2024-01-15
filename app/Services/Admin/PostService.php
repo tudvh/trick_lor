@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use DOMDocument;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Services\CloudinaryService;
 
@@ -18,25 +19,55 @@ class PostService
         $this->cloudinaryService = $cloudinaryService;
     }
 
-    public function create($request)
+    public function getByUserId($userId, Request $request)
+    {
+        $status = $request->input('status');
+        $category = $request->input('category');
+        $searchKey = $request->input('search-key');
+
+        $posts = Post::where('author_id', $userId)
+            ->with(['categories', 'postViews', 'postComments']);
+        if ($status != null) {
+            $posts = $posts->where('status', $status);
+        }
+        if ($category != null) {
+            $posts = $posts->whereHas('categories', function ($query) use ($category) {
+                return $query->where('slug', $category);
+            });
+        }
+        if ($searchKey != null) {
+            $searchKey = '%' . trim($searchKey) . '%';
+            $posts = $posts->where(function ($query) use ($searchKey) {
+                $query->where('id', 'like', $searchKey)
+                    ->orWhere('title', 'like', $searchKey)
+                    ->orWhere('description', 'like', $searchKey)
+                    ->orWhere('youtube_id', 'like', $searchKey);
+            });
+        }
+        $posts = $posts->orderBy('id', 'desc')->paginate(20);
+
+        return $posts;
+    }
+
+    public function create($title, $authorId, $youtubeId = null, $description = null, $thumbnailCustom)
     {
         $post = new Post();
-        $post->title = Str::ucfirst(trim($request->title));
+        $post->title = Str::ucfirst(trim($title));
         $post->slug = Str::slug($post->title);
-        $post->youtube_id = $request->input('youtube_id');
-        $post->active = $request->active;
-        $post->description = $this->handleDescription(trim($request->input('description')), $post->id, $post->title);
+        $post->author_id = $authorId;
+        $post->youtube_id = $youtubeId;
+        $post->description = $this->handleDescription(trim($description), $post->id, $post->title);
 
-        if ($request->youtube_id) {
+        if ($youtubeId) {
             $post->thumbnails = [
-                "https://i.ytimg.com/vi/{$request->youtube_id}/mqdefault.jpg",
-                "https://i.ytimg.com/vi/{$request->youtube_id}/hqdefault.jpg",
-                "https://i.ytimg.com/vi/{$request->youtube_id}/maxresdefault.jpg"
+                "https://i.ytimg.com/vi/{$youtubeId}/mqdefault.jpg",
+                "https://i.ytimg.com/vi/{$youtubeId}/hqdefault.jpg",
+                "https://i.ytimg.com/vi/{$youtubeId}/maxresdefault.jpg"
             ];
         }
 
-        if ($request->file('thumbnail')) {
-            $post->thumbnails_custom = $this->handleThumbnailCustom($request->file('thumbnail'), $post->id);
+        if ($thumbnailCustom) {
+            $post->thumbnails_custom = $this->handleThumbnailCustom($thumbnailCustom, $post->id);
         }
 
         $post->save();
@@ -83,7 +114,7 @@ class PostService
         }
 
         $apiKey = env('YOUTUBE_API_KEY');
-        $url = "https://www.googleapis.com/youtube/v3/videos?id=$youtubeId&key=$apiKey&part=status";
+        $url = "https://www.googleapis.com/youtube/v3/videos?id={$youtubeId}&key={$apiKey}&part=status";
 
         $client = new \GuzzleHttp\Client();
 
@@ -101,16 +132,15 @@ class PostService
         return false;
     }
 
-    private function handleThumbnailCustom($thumbnailFile, $postId)
+    private function handleThumbnailCustom($thumbnailCustomUrl, $postId)
     {
         $thumbnailSizes = ['mqdefault' => 180, 'hqdefault' => 360, 'maxresdefault' => 720];
         $thumbnails = [];
 
         foreach ($thumbnailSizes as $size => $maxQuality) {
-            $thumbnailSrc = $thumbnailFile->getRealPath();
             $publicId = $this::CLOUDINARY_ROOT_PATH . "/$postId/post-thumbnail/$size";
             $maxQuality = $maxQuality;
-            $uploadedSrc = $this->cloudinaryService->upload($thumbnailSrc, $publicId, $maxQuality)->getSecurePath();
+            $uploadedSrc = $this->cloudinaryService->upload($thumbnailCustomUrl, $publicId, $maxQuality)->getSecurePath();
 
             $thumbnails[] = $uploadedSrc;
         }

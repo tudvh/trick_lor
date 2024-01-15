@@ -6,29 +6,33 @@ Trick LoR is a blogging website project built on the PHP Laravel framework, util
 
 ## Key Features
 
-1. **Articles:**
+1. **Posts:**
 
-   - Display a list of articles.
-   - Search for articles by keyword.
-   - View lists of popular articles.
-   - Explore articles by category.
-   - Add, edit, and delete articles (currently only accessible to admins).
+   - View a list of posts.
+   - Effortlessly search for posts by keywords.
+   - View popular posts.
+   - Categorize and view posts by specific topics.
+   - Perform post management tasks such as adding, editing, and deleting (currently restricted to admin access).
 
 2. **User Management:**
 
-   - User registration and login.
-   - Manage personal information and change passwords.
+   - User registration.
+   - User login.
+   - User forgot password.
+   - User change password.
+   - Manage personal information.
    - View history (viewed articles, saved articles).
 
-3. **Comments and Feedback: (Under Development)**
+3. **Comments and Feedback: **
 
-   - Comment and share opinions on articles.
-   - Admin management of comments, including deletion.
+   - Real-time posts commenting facilitated through Pusher technology.
+   - Admin management of comments, including deletion (Under Development).
 
 4. **User Interface:**
 
    - User-friendly and responsive design.
-   - Mobile compatibility for a seamless user experience across all devices.
+   - Choose between dark and light themes (Under Development).
+   - Seamless mobile compatibility ensures a consistent user experience across all devices.
 
 5. **Security:**
    - User authentication and access control.
@@ -40,11 +44,12 @@ Trick LoR is a blogging website project built on the PHP Laravel framework, util
 
    - PHP 8.0 or higher
    - Composer
+   - XAMPP
    - MySQL
 
 2. **Installation and Running the Application:**
 
-   - **Method 1: Using Composer**
+   - **Method 1: Using XAMPP and Composer**
 
      - Clone the project from GitHub: `git clone https://github.com/Toanf2103/trick_lor.git`
      - Navigate to the project directory: `cd trick_lor`

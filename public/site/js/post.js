@@ -27,7 +27,7 @@ copyCurrentLinkBtn.addEventListener('click', async () => {
     Swal.fire({
       icon: 'error',
       title: 'Lỗi',
-      text: 'Có lỗi trong lúc sao chép liên kết, vui lòng thử lại',
+      text: 'Có lỗi trong lúc sao chép liên kết. Vui lòng thử lại',
     })
   }
 })

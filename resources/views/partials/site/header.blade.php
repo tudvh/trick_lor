@@ -35,17 +35,33 @@
                     <li>
                         <a href="{{ route('site.auth.personal') }}" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
                             <div class="icon-box">
-                                <i class="fa-solid fa-user"></i>
+                                <i class="fa-solid fa-circle-user"></i>
                             </div>
-                            <span class="w-100">Tài khoản</span>
+                            <span class="w-100">Trang cá nhân</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('site.my-posts.index') }}" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-blog"></i>
+                            </div>
+                            <span class="w-100">Bài đăng của tôi</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('site.activities.view') }}" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
                             <div class="icon-box">
-                                <i class="fa-solid fa-list-ul"></i>
+                                <i class="fa-sharp fa-solid fa-clock-rotate-left"></i>
                             </div>
                             <span class="w-100">Nhật ký hoạt động</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('site.auth.personal') }}" class="dropdown-item d-flex justify-content-center align-items-center gap-3">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span class="w-100">Tài khoản</span>
                         </a>
                     </li>
                     <li>

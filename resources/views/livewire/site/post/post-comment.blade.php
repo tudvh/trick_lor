@@ -81,7 +81,6 @@ use App\Helpers\DateHelper
             autoResize(textarea);
         });
     }
-    autoResizeTextAreas();
 
     // Auto resize textarea when typing
     $wire.on('add-event-textarea', () => {
@@ -106,7 +105,7 @@ use App\Helpers\DateHelper
     })
 
     // Event pusher
-    Pusher.logToConsole = true;
+    Pusher.logToConsole = false;
     var pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
         cluster: 'ap1'
     });

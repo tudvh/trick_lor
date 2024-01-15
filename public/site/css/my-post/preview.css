@@ -1,0 +1,19 @@
+.modal-content {
+  height: 100%;
+}
+
+.modal-content .preview-loading-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content .loading-icon {
+  font-size: 4.5rem;
+}
+
+.modal-content .loading-icon i {
+  animation: spinner 0.7s linear infinite;
+}

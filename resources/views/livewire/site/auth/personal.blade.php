@@ -1,8 +1,8 @@
-<form class="mb-5 card" wire:submit="save">
-    <div class="row">
-        <h2 class="m-0 fw-bold">Thiết lập về tôi</h2>
+<div class="card mb-5">
+    <form class="row g-4" wire:submit="save">
+        <h2 class="mb-0 fw-bold">Thiết lập về tôi</h2>
 
-        <div class="col-12 col-md-6 mt-4">
+        <div class="col-12 col-md-6">
             <div class="form-group image-chosen-wrapper">
                 <label for="image-chosen-file" class="form-label">Ảnh đại diện</label>
                 <input type="file" class="form-control d-none" id="image-chosen-file" accept="image/*" wire:model="avatarFile">
@@ -27,13 +27,13 @@
 
                 @error('avatarFile')
                 <div class="mt-2">
-                    <small class="text-danger mt-1">{{ $message }}</small>
+                    <small class="text-danger">{{ $message }}</small>
                 </div>
                 @enderror
             </div>
         </div>
 
-        <div class="col-12 col-md-6 mt-4 d-flex flex-column gap-4">
+        <div class="col-12 col-md-6 d-flex flex-column gap-4">
             <div class="form-group">
                 <label for="full-name" class="form-label">Họ và tên</label>
                 <input type="text" class="form-control @error('fullName') is-invalid @enderror" id="full-name" autocomplete="off" wire:model="fullName">
@@ -52,14 +52,14 @@
                 <span>Cập nhật thông tin</span>
             </button>
         </div>
-    </div>
+    </form>
 
     <div class="loading-overlay" wire:loading wire:target="avatarFile, save" wire:loading.class="d-flex">
         <div class="loading-icon">
             <i class="fa-light fa-loader"></i>
         </div>
     </div>
-</form>
+</div>
 
 @script
 <script>

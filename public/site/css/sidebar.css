@@ -1,12 +1,10 @@
 aside {
-  width: var(--sidebar-width);
-  height: 100vh;
   position: sticky;
-  top: 0;
-  bottom: 0;
+  top: calc(var(--header-height) + 50px);
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height) - 50px);
   display: flex;
   flex-direction: column;
-  padding-top: calc(var(--header-height) + 50px);
   z-index: 5;
 }
 
@@ -68,8 +66,10 @@ aside li a span {
 @media (max-width: 991px) {
   aside {
     position: fixed;
+    top: 0;
     left: 0;
     width: var(--sidebar-mobile-width);
+    height: 100vh;
     padding-top: 0;
     margin-left: calc(0px - var(--sidebar-mobile-width));
     background-color: var(--bg-color-secondary);

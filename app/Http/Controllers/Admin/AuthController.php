@@ -16,11 +16,11 @@ class AuthController extends Controller
 {
     protected $userService;
 
-    public function __construct(UserService $userService)
+    public function __construct()
     {
         $this->middleware('admin', ['only' => ['personal', 'updatePersonal', 'changePassword']]);
 
-        $this->userService = $userService;
+        // $this->userService = $userService;
     }
 
     public function login()
@@ -77,11 +77,11 @@ class AuthController extends Controller
         return view('pages.admin.personal', compact('user'));
     }
 
-    public function updatePersonal(UpdatePersonalRequest $request)
-    {
-        $user = User::where('id', Auth::guard('admin')->user()->id)->first();
-        $this->userService->update($request, $user);
+    // public function updatePersonal(UpdatePersonalRequest $request)
+    // {
+    //     $user = User::where('id', Auth::guard('admin')->user()->id)->first();
+    //     $this->userService->update($request, $user);
 
-        return redirect()->back()->with('success', 'Cập nhật thông tin thành công');
-    }
+    //     return redirect()->back()->with('success', 'Cập nhật thông tin thành công');
+    // }
 }

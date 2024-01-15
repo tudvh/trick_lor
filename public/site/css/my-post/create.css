@@ -1,0 +1,27 @@
+.content {
+  width: 100%;
+}
+
+.content label {
+  font-weight: bold;
+}
+
+.vscomp-ele {
+  max-width: 100%;
+}
+
+.vscomp-toggle-button {
+  border-radius: 0.375rem;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.vscomp-wrapper.focused .vscomp-toggle-button,
+.vscomp-wrapper:focus .vscomp-toggle-button {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.content #description.is-invalid ~ .tox.tox-tinymce {
+  border-color: var(--bs-red);
+}

@@ -87,6 +87,12 @@ Route::group(['prefix' => ''], function () {
         Route::get('/google', [Site\GoogleController::class, 'redirectToGoogle']);
         Route::get('/google/callback', [Site\GoogleController::class, 'handleGoogleCallback']);
     });
+
+    // Post
+    Route::group(['prefix' => 'my-posts'], function () {
+        Route::get('/', [Site\PostController::class, 'index'])->name('site.my-posts.index');
+        Route::get('/new', [Site\PostController::class, 'create'])->name('site.my-posts.create');
+    });
 });
 
 // Livewire
