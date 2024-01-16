@@ -16,7 +16,7 @@ $lastPage = $paginator->lastPage();
             </li>
             @else
             <li class="page-item">
-                <a class="page-link" href="{{ $paginator->url($page) }}">{{ $page }}</a>
+                <button type="button" class="page-link" wire:click="setPage({{ $page }})">{{ $page }}</button>
             </li>
             @endif
             @endforeach

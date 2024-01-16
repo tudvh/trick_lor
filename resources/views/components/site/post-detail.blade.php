@@ -7,7 +7,7 @@ use App\Helpers\NumberHelper;
     <h2 class="post-title">{{ $post->title }}</h2>
     <div class="d-flex gap-3">
         <span class="post-info">{{ NumberHelper::format($post->postViews->count()) }} lượt xem • {{ DateHelper::formatTimeAgo($post->created_at) }}</span>
-        <div class="post-more d-flex">
+        <div class="post-more ms-auto d-flex">
             <livewire:site.post.post-save :post="$post" />
             <button type="button" class="dropdown-toggle post-more-btn" data-bs-toggle="dropdown" aria-expanded="false" title="Chia sẻ">
                 <i class="fa-sharp fa-solid fa-share-nodes"></i>

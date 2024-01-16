@@ -75,7 +75,7 @@ class HomeController extends Controller
         $suggestedPosts = $this->postService->getSuggest($post, 6);
 
         // Add post view
-        $this->postViewService->create($post->id);
+        // $this->postViewService->create($post->id);
 
         return view('pages.site.post', compact('post', 'suggestedPosts'));
     }

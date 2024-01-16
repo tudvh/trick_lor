@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 08, 2024 lúc 03:30 AM
+-- Thời gian đã tạo: Th1 16, 2024 lúc 03:33 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -66,7 +66,7 @@ CREATE TABLE `posts` (
   `description` text DEFAULT NULL,
   `thumbnails` text DEFAULT NULL,
   `thumbnails_custom` text DEFAULT NULL,
-  `status` enum('public','private','blocked') DEFAULT 'public',
+  `status` enum('waiting','public','private','blocked') DEFAULT 'waiting',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -100,7 +100,12 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `author_id`, `youtube_id`, `descript
 (23, 'Tài liệu học tập 66', 'tai-lieu-hoc-tap-66', 1, NULL, '<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696317672/trick-lor/post/23/post-description/651bc0e50ce65.jpg\" alt=\"Tài liệu học tập 66\" data-public-id=\"trick-lor/post/23/post-description/651bc0e50ce65\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696317675/trick-lor/post/23/post-description/651bc0e80edef.jpg\" alt=\"Tài liệu học tập 66\" data-public-id=\"trick-lor/post/23/post-description/651bc0e80edef\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1696317677/trick-lor/post/23/post-description/651bc0eaa0c27.jpg\" alt=\"Tài liệu học tập 66\" data-public-id=\"trick-lor/post/23/post-description/651bc0eaa0c27\"></p>', NULL, '[\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1696756068\\/trick-lor\\/post\\/23\\/post-thumbnail\\/mqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1696756070\\/trick-lor\\/post\\/23\\/post-thumbnail\\/hqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1696756073\\/trick-lor\\/post\\/23\\/post-thumbnail\\/maxresdefault.jpg\"]', 'private', '2023-10-02 16:21:00', '2023-11-09 11:09:17'),
 (24, 'Test category', 'test-category', 1, NULL, '<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1698747299/trick-lor/post/24/post-description/6540d39ab5da2.jpg\" alt=\"Test category\" data-public-id=\"trick-lor/post/24/post-description/6540d39ab5da2\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1698754564/trick-lor/post/24/post-description/6540effdf395b.jpg\" data-public-id=\"trick-lor/post/24/post-description/6540effdf395b\" alt=\"Test category\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1698754566/trick-lor/post/24/post-description/6540f00486cfd.jpg\" data-public-id=\"trick-lor/post/24/post-description/6540f00486cfd\" alt=\"Test category\"></p>\r\n<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1698754568/trick-lor/post/24/post-description/6540f0072cf62.jpg\" data-public-id=\"trick-lor/post/24/post-description/6540f0072cf62\" alt=\"Test category\"></p>', NULL, '[\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1698747944\\/trick-lor\\/post\\/24\\/post-thumbnail\\/mqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1698747946\\/trick-lor\\/post\\/24\\/post-thumbnail\\/hqdefault.jpg\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1698747949\\/trick-lor\\/post\\/24\\/post-thumbnail\\/maxresdefault.jpg\"]', 'private', '2023-10-17 09:17:30', '2023-11-09 11:22:28'),
 (25, 'Test category 2', 'test-category-2', 1, NULL, '<p>aaaaa</p>', NULL, NULL, 'private', '2023-10-17 09:22:52', '2024-01-02 17:13:35'),
-(26, 'Test category 3', 'test-category-3', 1, NULL, '<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1701868432/trick-lor/post/26/post-description/65707385f2bc3.png\" alt=\"Test category 3\" data-public-id=\"trick-lor/post/26/post-description/65707385f2bc3\"></p>', NULL, NULL, 'private', '2023-10-17 09:23:33', '2024-01-02 17:11:02');
+(26, 'Test category 3', 'test-category-3', 1, NULL, '<p><img src=\"https://res.cloudinary.com/tudvh/image/upload/v1701868432/trick-lor/post/26/post-description/65707385f2bc3.png\" alt=\"Test category 3\" data-public-id=\"trick-lor/post/26/post-description/65707385f2bc3\"></p>', NULL, NULL, 'private', '2023-10-17 09:23:33', '2024-01-02 17:11:02'),
+(27, 'Test 1', 'test-1', 5, NULL, '<p>àdsafdsafsda</p>', NULL, NULL, 'blocked', '2024-01-15 18:08:05', '2024-01-15 18:08:05'),
+(28, 'Test 2', 'test-2', 5, NULL, '<p>sadfsadfsad</p>', NULL, NULL, 'waiting', '2024-01-15 18:09:52', '2024-01-15 18:09:52'),
+(29, 'Test 3', 'test-3', 5, NULL, '<p>sadfasdfasdfasdfas</p>', NULL, NULL, 'waiting', '2024-01-15 18:16:34', '2024-01-15 18:16:34');
+INSERT INTO `posts` (`id`, `title`, `slug`, `author_id`, `youtube_id`, `description`, `thumbnails`, `thumbnails_custom`, `status`, `created_at`, `updated_at`) VALUES
+(30, 'Test 4', 'test-4', 5, NULL, '<p>sadfsadfsad</p>', NULL, '[\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1705317518\\/trick-lor\\/post\\/post-thumbnail\\/mqdefault.png\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1705317520\\/trick-lor\\/post\\/post-thumbnail\\/hqdefault.png\",\"https:\\/\\/res.cloudinary.com\\/tudvh\\/image\\/upload\\/v1705317522\\/trick-lor\\/post\\/post-thumbnail\\/maxresdefault.png\"]', 'waiting', '2024-01-15 18:18:43', '2024-01-15 18:18:43');
 
 -- --------------------------------------------------------
 
@@ -149,7 +154,13 @@ INSERT INTO `post_categories` (`post_id`, `category_id`, `created_at`, `updated_
 (23, 1, '2023-10-02 16:21:00', '2023-10-02 16:21:00'),
 (24, 1, '2023-10-17 09:24:40', '2023-10-17 09:24:40'),
 (25, 1, '2023-10-17 09:24:24', '2023-10-17 09:24:24'),
-(26, 1, '2023-10-17 09:24:47', '2023-10-17 09:24:47');
+(26, 1, '2023-10-17 09:24:47', '2023-10-17 09:24:47'),
+(27, 5, '2024-01-15 18:08:05', '2024-01-15 18:08:05'),
+(28, 5, '2024-01-15 18:09:52', '2024-01-15 18:09:52'),
+(29, 1, '2024-01-15 18:16:34', '2024-01-15 18:16:34'),
+(29, 2, '2024-01-15 18:16:34', '2024-01-15 18:16:34'),
+(30, 1, '2024-01-15 18:18:43', '2024-01-15 18:18:43'),
+(30, 2, '2024-01-15 18:18:43', '2024-01-15 18:18:43');
 
 -- --------------------------------------------------------
 
@@ -697,7 +708,10 @@ INSERT INTO `post_views` (`id`, `user_id`, `post_id`, `created_at`, `updated_at`
 (522, 5, 16, '2024-01-04 10:50:04', '2024-01-04 10:50:04'),
 (523, 5, 4, '2024-01-04 11:02:09', '2024-01-04 11:02:09'),
 (524, 5, 15, '2024-01-04 11:04:19', '2024-01-04 11:04:19'),
-(525, NULL, 12, '2024-01-07 07:13:19', '2024-01-07 07:13:19');
+(525, NULL, 12, '2024-01-07 07:13:19', '2024-01-07 07:13:19'),
+(526, 5, 15, '2024-01-11 11:46:16', '2024-01-11 11:46:16'),
+(527, 5, 15, '2024-01-11 11:46:19', '2024-01-11 11:46:19'),
+(528, NULL, 15, '2024-01-11 11:46:34', '2024-01-11 11:46:34');
 
 -- --------------------------------------------------------
 
@@ -731,7 +745,7 @@ INSERT INTO `users` (`id`, `full_name`, `avatar`, `avatar_public_id`, `email`, `
 (2, 'Đặng Văn Hoài Tú', NULL, NULL, 'tudvh@gmail.com', 'tudvh', '$2y$10$ogYedV2pQzDlx9vmD7eBqeVy6pgykXZjL5djXBjfBcnpdaAMhzDTK', 'admin', NULL, 'verified', NULL, NULL, '2023-10-05 10:29:40', '2023-10-05 10:29:40'),
 (3, 'Nguyễn Đắc Toàn', NULL, NULL, 'toannd@gmail.com', 'toannd', '$2y$10$ogYedV2pQzDlx9vmD7eBqeVy6pgykXZjL5djXBjfBcnpdaAMhzDTK', 'admin', NULL, 'verified', NULL, NULL, '2023-10-05 10:31:45', '2023-10-05 10:31:45'),
 (4, 'Nguyễn User', NULL, NULL, 'user@gmail.com', NULL, '$2y$10$vwikvnz4S4282g0Ap5Y8FuASh4vFuIyHUw72o7VO.ybnS6cFXhuw2', 'user', NULL, 'verified', NULL, NULL, '2023-10-06 19:27:39', '2023-10-08 22:13:50'),
-(5, 'Đặng Văn Hoài Tú', 'https://res.cloudinary.com/tudvh/image/upload/v1704260764/trick-lor/user-avatar/5.png', 'trick-lor/user-avatar/5', 'tudang9520@gmail.com', NULL, '$2y$10$xyMU2Eb/nL.J4qHz4iD5puWHlPUcad9KiqOcz7g3rVmIxbRRA3Z4i', 'user', '114947229524934029235', 'verified', NULL, '2024-01-07 17:04:38', '2023-10-13 09:53:21', '2024-01-07 17:04:38');
+(5, 'Đặng Văn Hoài Tú', 'https://res.cloudinary.com/tudvh/image/upload/v1704947298/trick-lor/user-avatar/5.png', 'trick-lor/user-avatar/5', 'tudang9520@gmail.com', NULL, '$2y$10$otjbq0mpNtcdo6Ua9ZQ9HO6RHqcjnB0mtORe7D3.J1tRgoVuV3cUC', 'user', '114947229524934029235', 'verified', NULL, '2024-01-15 13:40:14', '2023-10-13 09:53:21', '2024-01-15 14:59:28');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -804,7 +818,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT cho bảng `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `post_comments`
@@ -816,7 +830,7 @@ ALTER TABLE `post_comments`
 -- AUTO_INCREMENT cho bảng `post_views`
 --
 ALTER TABLE `post_views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=526;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=529;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

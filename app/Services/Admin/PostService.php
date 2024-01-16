@@ -6,6 +6,7 @@ use DOMDocument;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\PostCategory;
 use App\Services\CloudinaryService;
 
 class PostService
@@ -19,20 +20,16 @@ class PostService
         $this->cloudinaryService = $cloudinaryService;
     }
 
-    public function getByUserId($userId, Request $request)
+    public function getByUserId($userId, $searchKey, $searchCategory, $searchStatus)
     {
-        $status = $request->input('status');
-        $category = $request->input('category');
-        $searchKey = $request->input('search-key');
-
         $posts = Post::where('author_id', $userId)
             ->with(['categories', 'postViews', 'postComments']);
-        if ($status != null) {
-            $posts = $posts->where('status', $status);
+        if ($searchStatus != null) {
+            $posts = $posts->where('status', $searchStatus);
         }
-        if ($category != null) {
-            $posts = $posts->whereHas('categories', function ($query) use ($category) {
-                return $query->where('slug', $category);
+        if ($searchCategory != null) {
+            $posts = $posts->whereHas('categories', function ($query) use ($searchCategory) {
+                return $query->where('slug', $searchCategory);
             });
         }
         if ($searchKey != null) {
@@ -47,6 +44,35 @@ class PostService
         $posts = $posts->orderBy('id', 'desc')->paginate(20);
 
         return $posts;
+    }
+
+    public function getBySlug($postSlug)
+    {
+        $post = Post::where('slug', $postSlug)
+            ->first();
+
+        return $post;
+    }
+
+    public function createToPreview($title, $authorId, $youtubeId = null, $description = null, $categories)
+    {
+        $post = new Post([
+            'id' => 999999,
+            'title' => Str::ucfirst(trim($title)),
+            'author_id' => $authorId,
+            'youtube_id' => trim($youtubeId),
+            'description' => trim($description),
+        ]);
+
+        $postCategories = collect($categories)->map(function ($categoryId) use ($post) {
+            return new PostCategory([
+                'post_id' => $post->id,
+                'category_id' => $categoryId
+            ]);
+        });
+        $post->postCategories = $postCategories;
+
+        return $post;
     }
 
     public function create($title, $authorId, $youtubeId = null, $description = null, $thumbnailCustom)
@@ -139,7 +165,6 @@ class PostService
 
         foreach ($thumbnailSizes as $size => $maxQuality) {
             $publicId = $this::CLOUDINARY_ROOT_PATH . "/$postId/post-thumbnail/$size";
-            $maxQuality = $maxQuality;
             $uploadedSrc = $this->cloudinaryService->upload($thumbnailCustomUrl, $publicId, $maxQuality)->getSecurePath();
 
             $thumbnails[] = $uploadedSrc;

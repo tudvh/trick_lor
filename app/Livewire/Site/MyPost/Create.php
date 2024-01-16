@@ -25,7 +25,7 @@ class Create extends Component
 
     public function mount($allCategories)
     {
-        $this->allCategories = $allCategories;
+        $this->allCategories = $allCategories->toArray();
         $this->authorId = Auth::guard('site')->user()->id;
     }
 
@@ -39,17 +39,6 @@ class Create extends Component
     {
         $this->description = $description;
         $this->skipRender();
-    }
-
-    public function updatedYoutubeId(PostService $postService)
-    {
-        $result = $postService->checkYoutubeId($this->youtubeId);
-
-        if (!$result) {
-            $this->addError('youtubeId', 'Video Youtube không tồn tại hoặc không được phép nhúng');
-        } else {
-            $this->resetValidation('youtubeId');
-        }
     }
 
     public function updatedThumbnailCustomFile()
@@ -71,7 +60,7 @@ class Create extends Component
 
     public function removeThumbnailCustom()
     {
-        if ($this->thumbnailCustomUrl) {
+        if ($this->thumbnailCustomUrl || $this->thumbnailCustomUrlPreview) {
             $this->thumbnailCustomUrl = null;
             $this->thumbnailCustomUrlPreview = null;
         } else {
@@ -79,7 +68,7 @@ class Create extends Component
         }
     }
 
-    public function save(PostService $postService, PostCategoryService $postCategoryService)
+    public function validation($postService)
     {
         $this->validate([
             'title' => ['required', 'unique:posts,title'],
@@ -92,6 +81,37 @@ class Create extends Component
             'description.required' => 'Vui lòng nhập mô tả',
         ]);
 
+        $checkYoutubeId = $postService->checkYoutubeId($this->youtubeId);
+        if (!$checkYoutubeId) {
+            $this->addError('youtubeId', 'Video Youtube không tồn tại hoặc không được phép nhúng');
+            return;
+        }
+    }
+
+    public function preview(PostService $postService)
+    {
+        $this->validation($postService);
+
+        if ($this->getErrorBag()->first()) {
+            return;
+        }
+
+        $post = $postService->createToPreview($this->title, $this->authorId, $this->youtubeId, $this->description, $this->categories);
+
+        $dataPreview = view('components.post-detail-preview', compact('post'))->render();
+        $this->dispatch('preview', dataPreview: $dataPreview);
+
+        $this->skipRender();
+    }
+
+    public function save(PostService $postService, PostCategoryService $postCategoryService)
+    {
+        $this->validation($postService);
+
+        if ($this->getErrorBag()->first()) {
+            return;
+        }
+
         $newPost = $postService->create($this->title, $this->authorId, $this->youtubeId, $this->description, $this->thumbnailCustomUrl);
         $postCategoryService->createList($newPost, $this->categories);
 
@@ -100,8 +120,6 @@ class Create extends Component
 
     public function render()
     {
-        $this->dispatch('init', allCategories: $this->allCategories);
-
         return view('livewire.site.my-post.create');
     }
 }

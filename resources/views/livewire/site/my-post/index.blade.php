@@ -3,16 +3,6 @@ use \App\Helpers\DateHelper;
 use \App\Helpers\NumberHelper;
 @endphp
 
-
-@extends('layouts.site.header-only')
-
-@section('title', 'Bài đăng của tôi - Trick loR')
-
-@section('css')
-<link rel="stylesheet" href="{{ url('public/site/css/my-post/index.css') }}">
-@stop
-
-@section('content')
 <div class="card d-flex flex-column gap-4">
     <h2 class="mb-0 fw-bold">Bài đăng của tôi</h2>
 
@@ -25,36 +15,30 @@ use \App\Helpers\NumberHelper;
 
         <form class="d-flex flex-wrap algin-items-center gap-2 gap-md-3">
             <div class="col-12 col-md-auto">
-                <input class="form-control" type="text" name="search-key" autocomplete="off" placeholder="Tìm kiếm...">
+                <input type="text" class="form-control" autocomplete="off" placeholder="Tìm kiếm..." wire:model.live.debounce="searchKey">
             </div>
             <div class="col-12 col-md-auto">
-                <select name="category" class="form-select">
+                <select class="form-select" wire:model.live="searchCategory">
                     <option value="">Danh mục</option>
                     @foreach($listCategories as $category)
-                    <option value="{{ $category->slug }}" {{ request()->input('category') == $category->slug ? 'selected' : '' }}>{{ $category->name }}</option>
+                    <option value="{{ $category->slug }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-12 col-md-auto">
-                <select name="status" class="form-select">
+                <select class="form-select" wire:model.live="searchStatus">
                     <option value="">Chế độ hiển thị</option>
-                    <option value="public" {{ request()->input('status') == 'waiting' ? 'selected' : '' }}>Đang chờ duyệt</option>
+                    <option value="waiting" {{ request()->input('status') == 'waiting' ? 'selected' : '' }}>Đang chờ duyệt</option>
                     <option value="public" {{ request()->input('status') == 'public' ? 'selected' : '' }}>Công khai</option>
                     <option value="private" {{ request()->input('status') == 'private' ? 'selected' : '' }}>Riêng tư</option>
                     <option value="blocked" {{ request()->input('status') == 'blocked' ? 'selected' : '' }}>Bị cấm</option>
                 </select>
             </div>
             <div class="col-md-auto">
-                <button class="btn btn-info gap-2" type="submit">
-                    <i class="fa-solid fa-filter"></i>
-                    <span>Lọc</span>
-                </button>
-            </div>
-            <div class="col-md-auto">
-                <a href="{{ route('site.my-posts.index') }}" class="btn btn-primary gap-2" type="button">
+                <button type="button" class="btn btn-primary gap-2" wire:click="refreshFilter">
                     <i class="fa-solid fa-rotate"></i>
                     <span>Làm mới</span>
-                </a>
+                </button>
             </div>
             <div class="col-md-auto">
                 <a href="{{ route('site.my-posts.create') }}" class="btn btn-success gap-2">
@@ -128,7 +112,7 @@ use \App\Helpers\NumberHelper;
                                     <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class='btn btn-primary' title="Chỉnh sửa bài đăng">
                                         <i class="fa-light fa-pen-to-square"></i>
                                     </a>
-                                    <button class='btn btn-info' title="Preview">
+                                    <button type="button" class='btn btn-info' title="Preview" wire:click="preview('{{ $post->slug }}')">
                                         <i class="fa-light fa-eye"></i>
                                     </button>
                                 </div>
@@ -139,14 +123,47 @@ use \App\Helpers\NumberHelper;
                 </table>
             </div>
 
-            {{ $posts->withQueryString()->links('partials.paginate-custom', ['onEachSide' => 3]) }}
+            {{ $posts->links('partials.paginate-custom-livewire') }}
         </div>
         @else
         <h4 class="text-center m-0">Danh sách bài đăng trống</h4>
         @endif
     </div>
-</div>
-@stop
 
-@section('js')
-@stop
+    <div class="modal fade" id="preview" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content h-100">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Preview</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body post-wrapper d-flex flex-column gap-5"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" wire:loading wire:target="searchKey, searchCategory, searchStatus, refreshFilter, setPage" wire:loading.class="d-flex">
+        <div class="loading-icon">
+            <i class="fa-light fa-loader"></i>
+        </div>
+    </div>
+</div>
+
+@script
+<script>
+    // Preview
+    previewWrapper = document.querySelector('#preview')
+    previewBody = previewWrapper.querySelector('.modal-body')
+    previewModal = new bootstrap.Modal(previewWrapper, {});
+
+    $wire.on('preview', (e) => {
+        previewBody.innerHTML = e.dataPreview
+        previewModal.show()
+        Prism.highlightAll();
+    })
+
+    previewWrapper.addEventListener('hidden.bs.modal', event => {
+        previewBody.innerHTML = ''
+    })
+</script>
+@endscript

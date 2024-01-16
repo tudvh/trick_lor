@@ -21,7 +21,7 @@ use App\Helpers\ThumbnailHelper;
 @section('content')
 <div class="post-wrapper d-flex flex-column gap-5">
     <div class="d-flex flex-column gap-5 card">
-        <x-post-detail :post="$post" />
+        <x-site.post-detail :post="$post" />
     </div>
 
     <div class="card">

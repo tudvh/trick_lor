@@ -20,21 +20,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(CategoryService $categoryService): void
     {
-        $views = ['pages.site.*', 'pages.admin.posts.create', 'pages.admin.posts.edit'];
-        foreach ($views as $view) {
-            view()->composer($view, function ($view) use ($categoryService) {
-                $view->with([
-                    'listCategories' => $categoryService->getByActive(true)
-                ]);
-            });
-        }
+        $categoryData = [
+            'pages.site.activities.*' => $categoryService->getByActive(1),
+            'pages.site.category' => $categoryService->getByActive(1),
+            'pages.site.home' => $categoryService->getByActive(1),
+            'pages.site.personal' => $categoryService->getByActive(1),
+            'pages.site.post' => $categoryService->getByActive(1),
+            'pages.site.reset-password' => $categoryService->getByActive(1),
+            'pages.site.trending' => $categoryService->getByActive(1),
+            'pages.site.my-posts.index' => $categoryService->getAll(),
+            'pages.site.my-posts.create' => $categoryService->getByActive(1),
+            'pages.site.my-posts.edit' => $categoryService->getByActive(1),
+            'pages.admin.posts.create'   => $categoryService->getByActive(1),
+            'pages.admin.posts.edit'     => $categoryService->getByActive(1),
+            'pages.admin.posts.index'    => $categoryService->getAll(),
+        ];
 
-        $views = ['pages.admin.posts.index'];
-        foreach ($views as $view) {
-            view()->composer($view, function ($view) use ($categoryService) {
-                $view->with([
-                    'listCategories' => $categoryService->getAll()
-                ]);
+        foreach ($categoryData as $view => $categories) {
+            view()->composer($view, function ($view) use ($categories) {
+                $view->with(['listCategories' => $categories]);
             });
         }
     }

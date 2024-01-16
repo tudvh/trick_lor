@@ -45,15 +45,6 @@ class PostService
             ->paginate(12);
     }
 
-    public function getBySlug($postSlug)
-    {
-        $post = Post::where('slug', $postSlug)
-            ->where('status', 'public')
-            ->first();
-
-        return $post;
-    }
-
     public function getTrending($type)
     {
         $oneDayAgo = now()->subDay();
@@ -117,5 +108,14 @@ class PostService
         }
 
         return $suggestedPosts;
+    }
+
+    public function getBySlug($postSlug)
+    {
+        $post = Post::where('slug', $postSlug)
+            ->where('status', 'public')
+            ->first();
+
+        return $post;
     }
 }

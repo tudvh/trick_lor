@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="{{ url('public/site/css/post.css') }}">
 
 <link rel="stylesheet" href="{{ url('public/assets/css/image-chosen.css') }}">
-<link rel="stylesheet" href="{{ url('public/site/css/my-post/preview.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/my-post/create.css') }}">
 
 <script src="{{ url('public/assets/js/virtual-select.min.js') }}"></script>

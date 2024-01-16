@@ -23,7 +23,7 @@ Trick LoR is a blogging website project built on the PHP Laravel framework, util
    - Manage personal information.
    - View history (viewed articles, saved articles).
 
-3. **Comments and Feedback: **
+3. **Comments and Feedback:**
 
    - Real-time posts commenting facilitated through Pusher technology.
    - Admin management of comments, including deletion (Under Development).
