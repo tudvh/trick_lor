@@ -24,4 +24,9 @@ class PostController extends Controller
     {
         return view('pages.site.my-posts.create');
     }
+
+    public function edit(string $postId)
+    {
+        return view('pages.site.my-posts.edit', compact('postId'));
+    }
 }

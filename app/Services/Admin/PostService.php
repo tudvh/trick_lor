@@ -46,9 +46,9 @@ class PostService
         return $posts;
     }
 
-    public function getBySlug($postSlug)
+    public function getById($postId)
     {
-        $post = Post::where('slug', $postSlug)
+        $post = Post::where('id', $postId)
             ->first();
 
         return $post;
@@ -77,11 +77,15 @@ class PostService
 
     public function create($title, $authorId, $youtubeId = null, $description = null, $thumbnailCustom)
     {
-        $post = new Post();
-        $post->title = Str::ucfirst(trim($title));
-        $post->slug = Str::slug($post->title);
-        $post->author_id = $authorId;
-        $post->youtube_id = $youtubeId;
+        $postTitle = Str::ucfirst(trim($title));
+
+        $post = Post::create([
+            'title' => $postTitle,
+            'slug' => Str::slug($postTitle),
+            'author_id' => $authorId,
+            'youtube_id' => $youtubeId,
+        ]);
+
         $post->description = $this->handleDescription(trim($description), $post->id, $post->title);
 
         if ($youtubeId) {
@@ -101,29 +105,29 @@ class PostService
         return $post;
     }
 
-    public function update($request, Post $post)
+    public function update(Post $post, $title, $youtubeId = null, $status, $description = null, $thumbnailCustom, $isRemoveThumbnailCustom)
     {
-        $post->title = Str::ucfirst(trim($request->title));
+        $post->title = Str::ucfirst(trim($title));
         $post->slug = Str::slug($post->title);
-        $post->youtube_id = $request->input('youtube_id');
-        $post->active = $request->active;
+        $post->youtube_id = $youtubeId;
+        $post->status = $status;
 
-        $post->description = $this->handleDescription(trim($request->input('description')), $post->id, $post->title);
+        $post->description = $this->handleDescription(trim($description), $post->id, $post->title);
         $this->deleteImageDescriptionOld($post->id, $post->description);
 
-        if ($request->youtube_id) {
+        if ($youtubeId) {
             $post->thumbnails = [
-                "https://i.ytimg.com/vi/{$request->youtube_id}/mqdefault.jpg",
-                "https://i.ytimg.com/vi/{$request->youtube_id}/hqdefault.jpg",
-                "https://i.ytimg.com/vi/{$request->youtube_id}/maxresdefault.jpg"
+                "https://i.ytimg.com/vi/{$youtubeId}/mqdefault.jpg",
+                "https://i.ytimg.com/vi/{$youtubeId}/hqdefault.jpg",
+                "https://i.ytimg.com/vi/{$youtubeId}/maxresdefault.jpg"
             ];
         } else {
             $post->thumbnails = null;
         }
 
-        if ($request->file('thumbnail')) {
-            $post->thumbnails_custom = $this->handleThumbnailCustom($request->file('thumbnail'), $post->id);
-        } elseif ($request->is_remove_thumbnail && $post->thumbnails_custom) {
+        if ($thumbnailCustom) {
+            $post->thumbnails_custom = $this->handleThumbnailCustom($thumbnailCustom, $post->id);
+        } elseif ($isRemoveThumbnailCustom && $post->thumbnails_custom) {
             $folderPath = $this::CLOUDINARY_ROOT_PATH . "/" . $post->id . "/post-thumbnail";
             $this->cloudinaryService->deleteFolder($folderPath);
 
@@ -131,6 +135,18 @@ class PostService
         }
 
         $post->save();
+    }
+
+    public function delete($postId)
+    {
+        $post = $this->getById($postId);
+
+        // Delete image in Cloudinary
+        $folderPath = $this::CLOUDINARY_ROOT_PATH . "/" . $postId;
+        $this->cloudinaryService->deleteFolder($folderPath);
+
+        // Delete in DB
+        $post->delete();
     }
 
     public function checkYoutubeId($youtubeId)
@@ -230,7 +246,7 @@ class PostService
         }
 
         if (count($publicIdsDelete) > 0) {
-            $this->cloudinaryService->delete(...$publicIdsDelete);
+            $this->cloudinaryService->delete($publicIdsDelete);
         }
     }
 

@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Create extends Component
+class Edit extends Component
 {
     use WithFileUploads;
 
     public $allCategories;
+    public $post;
     public $authorId;
 
     public $title;
@@ -21,12 +22,22 @@ class Create extends Component
     public $thumbnailCustomFile;
     public $thumbnailCustomUrl;
     public $thumbnailCustomUrlPreview;
+    public $isRemoveThumbnailCustom = false;
     public $description;
+    public $status;
 
-    public function mount($allCategories)
+    public function mount($allCategories, $postId, PostService $postService)
     {
         $this->allCategories = $allCategories->toArray();
         $this->authorId = Auth::guard('site')->user()->id;
+        $this->post = $postService->getById($postId);
+
+        $this->title = $this->post->title;
+        $this->youtubeId = $this->post->youtube_id;
+        $this->categories = $this->post->postCategories->pluck('category_id');
+        $this->thumbnailCustomUrlPreview = data_get(optional($this->post->thumbnails_custom), 2);
+        $this->description = $this->post->description;
+        $this->status = $this->post->status;
     }
 
     public function setCategories($categories)
@@ -55,14 +66,16 @@ class Create extends Component
             $this->thumbnailCustomUrlPreview = $this->thumbnailCustomFile->temporaryUrl();
         } finally {
             $this->thumbnailCustomFile = null;
+            $this->isRemoveThumbnailCustom = false;
         }
     }
 
     public function removeThumbnailCustom()
     {
-        if ($this->thumbnailCustomUrl || $this->thumbnailCustomUrlPreview) {
+        if (!$this->isRemoveThumbnailCustom) {
             $this->thumbnailCustomUrl = null;
             $this->thumbnailCustomUrlPreview = null;
+            $this->isRemoveThumbnailCustom = true;
         } else {
             $this->skipRender();
         }
@@ -71,7 +84,7 @@ class Create extends Component
     public function validation($postService)
     {
         $this->validate([
-            'title' => ['required', 'unique:posts,title'],
+            'title' => ['required', "unique:posts,title,{$this->post->id}"],
             'categories' => ['required', 'array', 'min:1'],
             'description' => ['required'],
         ], [
@@ -112,14 +125,14 @@ class Create extends Component
             return;
         }
 
-        $newPost = $postService->create($this->title, $this->authorId, $this->youtubeId, $this->description, $this->thumbnailCustomUrl);
-        $postCategoryService->createList($newPost, $this->categories);
+        $postService->update($this->post, $this->title, $this->youtubeId, $this->status, $this->description, $this->thumbnailCustomUrl, $this->isRemoveThumbnailCustom);
+        $postCategoryService->updateList($this->post, $this->categories);
 
-        return redirect()->route('site.my-posts.index')->with('success', 'Thêm mới bài đăng thành công. Chúng tôi sẽ xem xét bài đăng của bạn trong thời gian sớm nhất!');
+        $this->dispatch('update-success');
     }
 
     public function render()
     {
-        return view('livewire.site.my-post.create');
+        return view('livewire.site.my-post.edit');
     }
 }

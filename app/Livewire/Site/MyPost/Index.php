@@ -30,14 +30,21 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function preview($postSlug, PostService $postService)
+    public function preview($postId, PostService $postService)
     {
-        $post = $postService->getBySlug($postSlug);
+        $post = $postService->getById($postId);
 
         $dataPreview = view('components.post-detail-preview', compact('post'))->render();
         $this->dispatch('preview', dataPreview: $dataPreview);
 
         $this->skipRender();
+    }
+
+    public function delete($postId, PostService $postService)
+    {
+        $postService->delete($postId);
+
+        $this->dispatch('delete-success');
     }
 
     public function render(PostService $postService)

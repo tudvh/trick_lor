@@ -92,6 +92,7 @@ Route::group(['prefix' => ''], function () {
     Route::group(['prefix' => 'my-posts'], function () {
         Route::get('/', [Site\PostController::class, 'index'])->name('site.my-posts.index');
         Route::get('/new', [Site\PostController::class, 'create'])->name('site.my-posts.create');
+        Route::get('/{post}/edit', [Site\PostController::class, 'edit'])->name('site.my-posts.edit');
     });
 });
 

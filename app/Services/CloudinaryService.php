@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Exception;
 
 class CloudinaryService
 {
@@ -37,7 +38,16 @@ class CloudinaryService
     public function deleteFolder($folderPath)
     {
         $path = $this::ROOT_PATH . "/" . $folderPath;
+
+        // Delete all images in folder
         Cloudinary::admin()->deleteAssetsByPrefix($path);
+
+        // Delete folder
+        try {
+            Cloudinary::admin()->deleteFolder($path);
+        } catch (Exception $e) {
+            return;
+        }
     }
 
     private function handleQualityImage($options = [], $imageSrc, $maxQuality)

@@ -109,11 +109,14 @@ use \App\Helpers\NumberHelper;
                             <td>{{ NumberHelper::format($post->postComments->count()) }}</td>
                             <td>
                                 <div class='d-flex justify-content-center align-items-center gap-2'>
-                                    <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class='btn btn-primary' title="Chỉnh sửa bài đăng">
+                                    <a href="{{ route('site.my-posts.edit', ['post' => $post->id]) }}" class='btn btn-primary' title="Chỉnh sửa bài đăng">
                                         <i class="fa-light fa-pen-to-square"></i>
                                     </a>
-                                    <button type="button" class='btn btn-info' title="Preview" wire:click="preview('{{ $post->slug }}')">
+                                    <button type="button" class='btn btn-info' title="Preview" wire:click="preview('{{ $post->id }}')">
                                         <i class="fa-light fa-eye"></i>
+                                    </button>
+                                    <button type="button" class='btn btn-danger' title="Xóa bài đăng" wire:click="$dispatch('show-confirm-delete-post', {postId: {{ $post->id }}})">
+                                        <i class="fa-light fa-trash-can"></i>
                                     </button>
                                 </div>
                             </td>
@@ -142,7 +145,7 @@ use \App\Helpers\NumberHelper;
         </div>
     </div>
 
-    <div class="loading-overlay" wire:loading wire:target="searchKey, searchCategory, searchStatus, refreshFilter, setPage" wire:loading.class="d-flex">
+    <div class="loading-overlay" wire:loading wire:target="searchKey, searchCategory, searchStatus, refreshFilter, setPage, preview, delete" wire:loading.class="d-flex">
         <div class="loading-icon">
             <i class="fa-light fa-loader"></i>
         </div>
@@ -164,6 +167,33 @@ use \App\Helpers\NumberHelper;
 
     previewWrapper.addEventListener('hidden.bs.modal', event => {
         previewBody.innerHTML = ''
+    })
+
+    // Event confirm delete post
+    $wire.on('show-confirm-delete-post', async (e) => {
+        const result = await Swal.fire({
+            title: "Bạn chắc chứ",
+            text: "Bạn có chắc muốn xóa bài đăng này không?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Chắc chắn",
+            cancelButtonText: "Hủy"
+        })
+
+        if (result.isConfirmed) {
+            $wire.delete(e.postId)
+        }
+    })
+
+    // Event when delete successfully
+    $wire.on('delete-success', async () => {
+        await Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Xóa bài đăng thành công",
+            showConfirmButton: false,
+            timer: 2000
+        })
     })
 </script>
 @endscript

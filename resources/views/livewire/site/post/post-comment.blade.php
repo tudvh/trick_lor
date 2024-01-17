@@ -99,8 +99,7 @@ use App\Helpers\DateHelper
         })
 
         if (result.isConfirmed) {
-            const commentId = e.commentId
-            $wire.deleteComment(commentId)
+            $wire.deleteComment(e.commentId)
         }
     })
 
