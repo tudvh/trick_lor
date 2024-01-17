@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  app:
+  web:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
@@ -9,7 +9,6 @@ services:
     ports:
       - "80:80"
     volumes:
-      - .:/var/www/html
       - ./docker/nginx_log:/var/log/nginx
       - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
       - ./docker/config/app.conf:/etc/nginx/conf.d/app.conf

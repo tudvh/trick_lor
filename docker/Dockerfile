@@ -6,4 +6,6 @@ COPY . /var/www/html
 
 WORKDIR /var/www/html
 
-RUN composer install
+RUN composer install --no-dev --optimize-autoloader
+
+RUN chmod o+w ./storage/ -R
