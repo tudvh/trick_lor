@@ -55,6 +55,6 @@ class CategoryController extends Controller
             'active' => $request->active,
         ]);
 
-        return redirect()->back()->with("success", "Cập nhật bài đăng thành công!");
+        return redirect()->back()->with("success", "Cập nhật danh mục thành công!");
     }
 }

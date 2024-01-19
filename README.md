@@ -42,21 +42,23 @@ Trick LoR is an innovative blogging website project developed using the PHP Lara
 
 2. **Management categories:**
 
-- Add, edit and switch status of categories
+- View all categories
+- Add and edit category
 
 3. **Management posts:**
 
 - View all posts
-- Approve posts
+- Sort and filter posts
+- Approve post
 - Block post
 
 4. **User Management (Under Development):**
 
-   - View all users and implement user blocking.
+- View all users and implement user blocking.
 
 5. **Comments Management (Under Development):**
 
-   - View all comments and delete inappropriate comments.
+- View all comments and delete inappropriate comments.
 
 ### User Interface
 
@@ -77,7 +79,6 @@ Trick LoR is an innovative blogging website project developed using the PHP Lara
 - PHP 8.0 or higher
 - Composer
 - XAMPP
-- MySQL
 
 **Installation Steps:**
 

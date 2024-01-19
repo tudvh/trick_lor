@@ -19,14 +19,15 @@ class PostService
         $searchKeyHandle = '%' . str_replace(' ', '%', $searchKey)  . '%';
 
         $posts = Post::where('status', 'public')
-            ->orderBy('id', 'desc')
             ->where(function ($query) use ($searchKeyHandle) {
                 return $query->where('title', 'like', $searchKeyHandle)
                     ->orWhere('description', 'like', $searchKeyHandle)
                     ->orWhereHas('postCategories.category', function ($query) use ($searchKeyHandle) {
                         return $query->where('name', 'like', $searchKeyHandle);
                     });
-            });
+            })
+            ->with(['author', 'categories', 'postViews'])
+            ->orderBy('id', 'desc');
 
         if ($isPagination) {
             return $posts->paginate($limit);
@@ -41,6 +42,7 @@ class PostService
             ->whereHas('categories', function ($query) use ($categorySlug) {
                 return $query->where('slug', $categorySlug);
             })
+            ->with(['author', 'categories', 'postViews'])
             ->orderBy('id', 'desc')
             ->paginate(12);
     }
@@ -77,6 +79,7 @@ class PostService
         return  $query->withCount(['postViews as views_count_all'])
             ->orderBy('views_count_all', 'desc')
             ->orderBy('id', 'desc')
+            ->with(['author', 'categories', 'postViews'])
             ->take(12)
             ->get();
     }
@@ -90,6 +93,7 @@ class PostService
             ->whereHas('postCategories', function ($query) use ($categoryIds) {
                 $query->whereIn('category_id', $categoryIds);
             })
+            ->with(['author', 'categories', 'postViews'])
             ->inRandomOrder()
             ->take($limit)
             ->get();
@@ -100,6 +104,7 @@ class PostService
 
             $additionalPosts = Post::where('status', 'public')
                 ->whereNotIn('id', $suggestedPostIds)
+                ->with(['author', 'categories', 'postViews'])
                 ->inRandomOrder()
                 ->take($limit - $suggestedPosts->count())
                 ->get();
@@ -114,6 +119,7 @@ class PostService
     {
         $post = Post::where('slug', $postSlug)
             ->where('status', 'public')
+            ->with(['author', 'categories', 'postViews'])
             ->first();
 
         return $post;

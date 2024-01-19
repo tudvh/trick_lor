@@ -20,10 +20,10 @@ class PostService
         $this->cloudinaryService = $cloudinaryService;
     }
 
-    public function getByUserId($userId, $searchKey, $searchCategory, $searchStatus)
+    public function getAll($searchKey, $searchCategory, $searchStatus, $sortBy)
     {
-        $posts = Post::where('author_id', $userId)
-            ->with(['categories', 'postViews', 'postComments']);
+        $posts = Post::query();
+
         if ($searchStatus != null) {
             $posts = $posts->where('status', $searchStatus);
         }
@@ -41,7 +41,47 @@ class PostService
                     ->orWhere('youtube_id', 'like', $searchKey);
             });
         }
-        $posts = $posts->orderBy('id', 'desc')->paginate(20);
+        if ($sortBy == 'most-popular') {
+            $posts = $posts->withCount(['postViews as views'])
+                ->orderBy('views', 'desc');
+        }
+
+        $posts = $posts->with(['categories', 'postViews', 'postComments'])
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+
+        return $posts;
+    }
+
+    public function getByUserId($userId, $searchKey, $searchCategory, $searchStatus, $sortBy)
+    {
+        $posts = Post::where('author_id', $userId);
+
+        if ($searchStatus != null) {
+            $posts = $posts->where('status', $searchStatus);
+        }
+        if ($searchCategory != null) {
+            $posts = $posts->whereHas('categories', function ($query) use ($searchCategory) {
+                return $query->where('slug', $searchCategory);
+            });
+        }
+        if ($searchKey != null) {
+            $searchKey = '%' . trim($searchKey) . '%';
+            $posts = $posts->where(function ($query) use ($searchKey) {
+                $query->where('id', 'like', $searchKey)
+                    ->orWhere('title', 'like', $searchKey)
+                    ->orWhere('description', 'like', $searchKey)
+                    ->orWhere('youtube_id', 'like', $searchKey);
+            });
+        }
+        if ($sortBy == 'most-popular') {
+            $posts = $posts->withCount(['postViews as views'])
+                ->orderBy('views', 'desc');
+        }
+
+        $posts = $posts->with(['categories', 'postViews', 'postComments'])
+            ->orderBy('id', 'desc')
+            ->paginate(20);
 
         return $posts;
     }
@@ -134,6 +174,12 @@ class PostService
             $post->thumbnails_custom = null;
         }
 
+        $post->save();
+    }
+
+    public function updateStatus($post, $status)
+    {
+        $post->status = $status;
         $post->save();
     }
 

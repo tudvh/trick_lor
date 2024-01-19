@@ -17,6 +17,7 @@ class Index extends Component
     public $searchKey;
     public $searchCategory;
     public $searchStatus;
+    public $sortBy = 'latest';
 
     public function mount($listCategories)
     {
@@ -26,7 +27,7 @@ class Index extends Component
 
     public function refreshFilter()
     {
-        $this->reset('searchKey', 'searchCategory', 'searchStatus');
+        $this->reset('searchKey', 'searchCategory', 'searchStatus', 'sortBy');
         $this->resetPage();
     }
 
@@ -50,7 +51,7 @@ class Index extends Component
     public function render(PostService $postService)
     {
         return view('livewire.site.my-post.index', [
-            'posts' => $postService->getByUserId($this->userId, $this->searchKey, $this->searchCategory, $this->searchStatus)
+            'posts' => $postService->getByUserId($this->userId, $this->searchKey, $this->searchCategory, $this->searchStatus, $this->sortBy)
         ]);
     }
 }

@@ -16,8 +16,6 @@ class ForgotPassword extends Component
             'title' => $title,
             'text' => $text
         ]);
-
-        $this->skipRender();
     }
 
     public function forgot(AuthService $authService)
@@ -35,6 +33,7 @@ class ForgotPassword extends Component
             $this->dispatch('handle-forgot-success');
         } else {
             $this->showAlert('error', 'Lỗi', $result->getData()->message);
+            $this->skipRender();
         }
     }
 

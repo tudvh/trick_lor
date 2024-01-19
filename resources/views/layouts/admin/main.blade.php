@@ -35,9 +35,6 @@
         @include('partials/admin/sidebar')
 
         <div class="main">
-            <div class="main-header">
-                <h1 class="main-header-title">@yield('title-content')</h1>
-            </div>
             <div class="content">
                 @yield('content')
             </div>

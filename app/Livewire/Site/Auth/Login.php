@@ -17,8 +17,6 @@ class Login extends Component
             'title' => $title,
             'text' => $text
         ]);
-
-        $this->skipRender();
     }
 
     public function login(AuthService $authService)
@@ -37,6 +35,7 @@ class Login extends Component
             $this->dispatch('login-success');
         } else {
             $this->showAlert('error', 'Lỗi', $result->getData()->message);
+            $this->skipRender();
         }
     }
 

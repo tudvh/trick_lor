@@ -19,8 +19,6 @@ class Register extends Component
             'title' => $title,
             'text' => $text
         ]);
-
-        $this->skipRender();
     }
 
     public function register(AuthService $authService)
@@ -46,6 +44,7 @@ class Register extends Component
             $this->dispatch('register-success');
         } else {
             $this->showAlert('error', 'Lỗi', $result->getData()->message);
+            $this->skipRender();
         }
     }
 

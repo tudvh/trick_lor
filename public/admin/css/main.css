@@ -6,22 +6,20 @@ body {
   min-height: 100vh;
   margin-left: var(--sidebar-width);
   padding: 5rem 0;
-  padding-top: var(--header-height);
+  padding-top: calc(var(--header-height) + 4rem);
 }
 
 .main .main-header {
-  padding: 3rem 2rem;
-  z-index: 20;
+  padding: 2rem 1rem;
 }
 
 .main .main-header-title {
-  font-weight: bold;
   font-size: 1.8rem;
   margin: 0;
 }
 
 .main .content {
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 /* Tablet */
