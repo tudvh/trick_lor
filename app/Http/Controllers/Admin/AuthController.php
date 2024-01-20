@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\LoginRequest;
-use App\Http\Requests\Site\Auth\ChangePasswordRequest;
-use App\Http\Requests\Site\Auth\UpdatePersonalRequest;
-use App\Services\Site\UserService;
-use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -18,9 +13,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('admin', ['only' => ['personal', 'updatePersonal', 'changePassword']]);
-
-        // $this->userService = $userService;
+        $this->middleware('admin', ['only' => []]);
     }
 
     public function login()
@@ -51,37 +44,4 @@ class AuthController extends Controller
 
         return redirect()->route('admin.auth.login');
     }
-
-    public function changePassword(ChangePasswordRequest $request)
-    {
-        $user = User::where('id', Auth::guard('admin')->user()->id)->first();
-
-        if (!Hash::check($request->input('password_old'), $user->password)) {
-            return redirect()
-                ->back()
-                ->withErrors(['password_old' => 'Mật khẩu cũ không đúng'])
-                ->withInput();
-        }
-
-        $user->update([
-            'password' => bcrypt($request->input('password_new'))
-        ]);
-
-        return redirect()->back()->with('success', 'Đổi mật khẩu thành công');
-    }
-
-    public function personal()
-    {
-        $user = User::where('id', Auth::guard('admin')->user()->id)->first();
-
-        return view('pages.admin.personal', compact('user'));
-    }
-
-    // public function updatePersonal(UpdatePersonalRequest $request)
-    // {
-    //     $user = User::where('id', Auth::guard('admin')->user()->id)->first();
-    //     $this->userService->update($request, $user);
-
-    //     return redirect()->back()->with('success', 'Cập nhật thông tin thành công');
-    // }
 }

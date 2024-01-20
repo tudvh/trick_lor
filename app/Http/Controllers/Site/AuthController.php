@@ -67,7 +67,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->input('password_new'))
         ]);
 
-        return redirect()->back()->with('success-notification', 'Đổi mật khẩu thành công');
+        return redirect()->route('site.home')->with('success-notification', 'Đổi mật khẩu thành công');
     }
 
     public function resetPassword(Request $request)

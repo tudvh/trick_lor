@@ -16,13 +16,13 @@ class PostService
 
     public function getBySearch($searchKey, $isPagination, $limit = 5)
     {
-        $searchKeyHandle = '%' . str_replace(' ', '%', $searchKey)  . '%';
+        $searchKeyHandle = '%' . str_replace(' ', '%', trim($searchKey))  . '%';
 
         $posts = Post::where('status', 'public')
             ->where(function ($query) use ($searchKeyHandle) {
                 return $query->where('title', 'like', $searchKeyHandle)
                     ->orWhere('description', 'like', $searchKeyHandle)
-                    ->orWhereHas('postCategories.category', function ($query) use ($searchKeyHandle) {
+                    ->orWhereHas('categories', function ($query) use ($searchKeyHandle) {
                         return $query->where('name', 'like', $searchKeyHandle);
                     });
             })

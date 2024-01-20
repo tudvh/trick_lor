@@ -18,6 +18,11 @@ class User extends Authenticatable
 
     protected $hidden = ['password', 'verification_token', 'last_email_sent_at'];
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author_id', 'id');
+    }
+
     public function postViews()
     {
         return $this->hasMany(PostView::class, 'user_id', 'id');

@@ -133,7 +133,7 @@ use \App\Helpers\NumberHelper;
                                 <i class="fa-light fa-lock"></i>
                             </button>
                             @elseif($post->status == 'blocked')
-                            <button type="button" class='btn btn-success' title="Gỡ lệnh cấm bài đăng" wire:click="$dispatch('show-confirm-unBan-post', {postId: {{ $post->id }}})">
+                            <button type="button" class='btn btn-success' title="Gỡ lệnh cấm bài đăng" wire:click="$dispatch('show-confirm-un-ban-post', {postId: {{ $post->id }}})">
                                 <i class="fa-light fa-unlock"></i>
                             </button>
                             @endif
@@ -234,8 +234,8 @@ use \App\Helpers\NumberHelper;
         }
     })
 
-    // Event confirm ban post
-    $wire.on('show-confirm-unBan-post', async (e) => {
+    // Event confirm un ban post
+    $wire.on('show-confirm-un-ban-post', async (e) => {
         const result = await Swal.fire({
             title: "Bạn chắc chứ",
             text: "Bạn có chắc muốn gỡ lệnh cấm bài đăng này không?",

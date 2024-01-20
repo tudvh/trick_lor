@@ -33,10 +33,16 @@ class PostService
             });
         }
         if ($searchKey != null) {
-            $searchKey = '%' . trim($searchKey) . '%';
+            $searchKey = '%' . str_replace(' ', '%', trim($searchKey))  . '%';
             $posts = $posts->where(function ($query) use ($searchKey) {
                 $query->where('id', 'like', $searchKey)
                     ->orWhere('title', 'like', $searchKey)
+                    ->orWhereHas('categories', function ($query) use ($searchKey) {
+                        return $query->where('name', 'like', $searchKey);
+                    })
+                    ->orWhereHas('author', function ($query) use ($searchKey) {
+                        return $query->where('full_name', 'like', $searchKey);
+                    })
                     ->orWhere('description', 'like', $searchKey)
                     ->orWhere('youtube_id', 'like', $searchKey);
             });
