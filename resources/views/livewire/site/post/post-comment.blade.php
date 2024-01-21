@@ -19,8 +19,10 @@ use App\Helpers\DateHelper
                     </div>
                 </div>
                 <div class="comment-item-more d-flex align-items-center justify-content-start gap-3">
-                    @if($user && $user->id == $comment->user_id)
+                    @if($user)
                     <button type="button" wire:click="showReply({{ $comment->id }})">Phản hồi</button>
+                    @endif
+                    @if($user && $user->id == $comment->user_id)
                     <button type="button" wire:click="$dispatch('show-confirm-delete-comment', {commentId: {{ $comment->id }}})">Xóa</button>
                     @endif
                     <span>{{ DateHelper::formatTimeAgo($comment->created_at) }}</span>

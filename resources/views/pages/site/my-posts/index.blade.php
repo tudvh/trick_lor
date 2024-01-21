@@ -4,13 +4,13 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/assets/css/prism.css') }}">
-<link rel="stylesheet" href="{{ url('public/site/css/post.css') }}">
+<link rel="stylesheet" href="{{ url('public/site/css/post-detail.css') }}">
 
 <link rel="stylesheet" href="{{ url('public/site/css/my-post/index.css') }}">
 @stop
 
 @section('content')
-<livewire:site.my-post.index :listCategories="$listCategories" />
+<livewire:site.my-posts.index :listCategories="$listCategories" />
 @stop
 
 @section('js')

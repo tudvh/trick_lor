@@ -8,22 +8,25 @@
   font-size: 0.93rem;
 }
 
-.content table .post-title {
-  min-width: 300px;
+.content table .comment-post {
+  min-width: 250px;
 }
 
-.content table .post-author {
+.content table .comment-user {
   min-width: 200px;
 }
 
-.content table .post-category {
-  min-width: 150px;
+.content table .comment-content {
+  min-width: 300px;
 }
 
-.content table .post-title span,
-.content table .post-author span {
+.content table .comment-post button,
+.content table .comment-user button {
   flex: 1;
-  text-align: start;
+}
+
+.content table .comment-post span,
+.content table .comment-user span {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -32,7 +35,7 @@
 }
 
 .content table .thumbnail-container {
-  width: 120px;
+  width: 100px;
 }
 
 .content table .thumbnail-box {
@@ -71,4 +74,16 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.content table button.a {
+  text-decoration: underline;
+}
+
+.content table button.a.comment-link {
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+}
+
+.content table button.a.comment-link:hover {
+  --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
 }

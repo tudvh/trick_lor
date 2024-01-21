@@ -129,7 +129,7 @@ class PostService
             'title' => $postTitle,
             'slug' => Str::slug($postTitle),
             'author_id' => $authorId,
-            'youtube_id' => $youtubeId,
+            'youtube_id' => $youtubeId ? $youtubeId : null,
         ]);
 
         $post->description = $this->handleDescription(trim($description), $post->id, $post->title);
@@ -155,7 +155,7 @@ class PostService
     {
         $post->title = Str::ucfirst(trim($title));
         $post->slug = Str::slug($post->title);
-        $post->youtube_id = $youtubeId;
+        $post->youtube_id = $youtubeId ? $youtubeId : null;
         $post->status = $status;
 
         $post->description = $this->handleDescription(trim($description), $post->id, $post->title);

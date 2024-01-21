@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Site\MyPost;
+namespace App\Livewire\Site\MyPosts;
 
 use App\Services\Admin\PostCategoryService;
 use App\Services\Admin\PostService;
@@ -120,6 +120,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.site.my-post.create');
+        return view('livewire.site.my-posts.create');
     }
 }

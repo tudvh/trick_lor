@@ -68,7 +68,7 @@ use \App\Helpers\NumberHelper;
                 <tr>
                     <th>{{ $post->id }}</th>
                     <td class="post-title" title="{{ $post->title }}">
-                        <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-2">
                             <div class="thumbnail-container">
                                 <div class="thumbnail-box">
                                     @if($post->thumbnails_custom)
@@ -76,11 +76,11 @@ use \App\Helpers\NumberHelper;
                                     @elseif($post->thumbnails)
                                     <x-thumbnail :thumbnails="$post->thumbnails" :alt="$post->title" />
                                     @else
-                                    <img src="{{ url('public/admin/img/post-default.png') }}" class="thumbnail-content-default">
+                                    <img src="{{ url('public/admin/img/post-default.png') }}" class="thumbnail-content-default" alt="{{ $post->title }}">
                                     @endif
                                 </div>
                             </div>
-                            <span class="post-title-text">{{ $post->title }}</span>
+                            <span>{{ $post->title }}</span>
                         </div>
                     </td>
                     <td class="post-author" title="{{ $post->author->full_name }}">
@@ -90,7 +90,7 @@ use \App\Helpers\NumberHelper;
                                     <img src="{{ $post->author->avatar ?? url('public/assets/img/user-avatar/user-avatar-default.png') }}" alt="{{ $post->author->full_name }}">
                                 </div>
                             </div>
-                            <span class="post-author-full-name">{{ $post->author->full_name }}</span>
+                            <span>{{ $post->author->full_name }}</span>
                         </div>
                     </td>
                     <td class="post-category">
@@ -137,6 +137,9 @@ use \App\Helpers\NumberHelper;
                                 <i class="fa-light fa-unlock"></i>
                             </button>
                             @endif
+                            <a href="{{ route('admin.comments.index', ['post-id' => $post->id]) }}" type="button" class='btn btn-info' title="Xem danh sách bình luận của bài đăng này">
+                                <i class="fa-light fa-message-lines"></i>
+                            </a>
                         </div>
                     </td>
                 </tr>

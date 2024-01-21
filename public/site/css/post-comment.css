@@ -78,6 +78,8 @@
 .form-comment button[type='submit'] {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
+  width: 60px;
+  height: 40px;
 }
 
 .form-comment button[type='submit']:hover {

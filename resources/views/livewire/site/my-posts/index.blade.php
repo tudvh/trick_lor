@@ -73,7 +73,7 @@ use \App\Helpers\NumberHelper;
                     @foreach($posts as $post)
                     <tr>
                         <td class="post-title" title="{{ $post->title }}">
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center gap-2">
                                 <div class="thumbnail-container">
                                     <div class="thumbnail-box">
                                         @if($post->thumbnails_custom)
@@ -85,7 +85,7 @@ use \App\Helpers\NumberHelper;
                                         @endif
                                     </div>
                                 </div>
-                                <span class="post-title-text">{{ $post->title }}</span>
+                                <span>{{ $post->title }}</span>
                             </div>
                         </td>
                         <td class="post-category">

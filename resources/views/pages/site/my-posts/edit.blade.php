@@ -5,7 +5,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ url('public/assets/css/prism.css') }}">
 <link rel="stylesheet" href="{{ url('public/assets/css/virtual-select.min.css') }}">
-<link rel="stylesheet" href="{{ url('public/site/css/post.css') }}">
+<link rel="stylesheet" href="{{ url('public/site/css/post-detail.css') }}">
 
 <link rel="stylesheet" href="{{ url('public/assets/css/image-chosen.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/my-post/create.css') }}">
@@ -15,7 +15,7 @@
 @stop
 
 @section('content')
-<livewire:site.my-post.edit :allCategories="$listCategories" :postId="$postId" />
+<livewire:site.my-posts.edit :allCategories="$listCategories" :postId="$postId" />
 @stop
 
 @section('js')

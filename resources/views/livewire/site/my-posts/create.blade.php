@@ -1,16 +1,6 @@
 <div class="card">
     <form class="row g-4" wire:submit="save">
-        <h2 class="mb-0 fw-bold">Cập nhật bài đăng</h2>
-
-        @if($status == 'waiting')
-        <div class="col-12">
-            <div class="alert alert-warning m-0">Bài đăng của bạn đang được chúng tôi xem xét!</div>
-        </div>
-        @elseif($status == 'blocked')
-        <div class="col-12">
-            <div class="alert alert-danger m-0">Bài đăng của bạn đã bị cấm!</div>
-        </div>
-        @endif
+        <h2 class="mb-0 fw-bold">Thêm mới bài đăng</h2>
 
         <div class="col-12">
             <div class="d-flex justify-content-end gap-3">
@@ -20,24 +10,16 @@
                 </button>
                 <button type="submit" class="btn btn-success gap-2">
                     <i class="fa-solid fa-check"></i>
-                    <span>Lưu thay đổi</span>
+                    <span>Tạo mới</span>
                 </button>
             </div>
         </div>
 
-        <div class="col-12 col-lg-6">
+        <div class="col-12">
             <div class="form-group">
                 <label for="title" class="form-label">Tiêu đề <span class="text-danger">*</span></label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Nhập tiêu đề" autocomplete="off" wire:model="title">
                 @error('title')<small class="text-danger">{{ $message }}</small>@enderror
-            </div>
-        </div>
-
-        <div class="col-12 col-lg-6">
-            <div class="form-group">
-                <label for="youtube-id" class="form-label">Youtube id</label>
-                <input type="text" class="form-control @error('youtubeId') is-invalid @enderror" id="youtube-id" placeholder="Nhập youtube id" autocomplete="off" wire:model="youtubeId">
-                @error('youtubeId')<small class="text-danger">{{ $message }}</small>@enderror
             </div>
         </div>
 
@@ -49,18 +31,13 @@
             </div>
         </div>
 
-        @if($status == 'public' || $status == 'private')
         <div class="col-12 col-lg-6">
             <div class="form-group">
-                <label for="status" class="form-label">Trạng thái <span class="text-danger">*</span></label>
-                <select class="form-select @error('status') is-invalid @enderror" id="status" wire:model="status">
-                    <option value="public">Công khai</option>
-                    <option value="private">Riêng tư</option>
-                </select>
-                @error('status')<small class="text-danger">{{ $message }}</small>@enderror
+                <label for="youtube-id" class="form-label">Youtube id</label>
+                <input type="text" class="form-control @error('youtubeId') is-invalid @enderror" id="youtube-id" placeholder="Nhập youtube id" autocomplete="off" wire:model="youtubeId">
+                @error('youtubeId')<small class="text-danger">{{ $message }}</small>@enderror
             </div>
         </div>
-        @endif
 
         <div class="col-12 col-lg-6">
             <div class="form-group image-chosen-wrapper">
@@ -122,7 +99,6 @@
             'label': category.name
         }
     })
-    categoriesSelected = Array.from($wire.categories)
 
     VirtualSelect.init({
         ele: '#categories',
@@ -132,7 +108,7 @@
         required: true,
         placeholder: 'Chọn danh mục',
         options: allCategories,
-        selectedValue: categoriesSelected,
+        name: 'categories'
     })
 
     document.querySelector('#categories').addEventListener('change', async function() {
@@ -168,18 +144,6 @@
 
     previewWrapper.addEventListener('hidden.bs.modal', event => {
         previewBody.innerHTML = ''
-    })
-
-    // Event when update successfully
-    $wire.on('update-success', async () => {
-        await Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Cập nhật thành công",
-            showConfirmButton: false,
-            timer: 2000
-        })
-        location.reload()
     })
 </script>
 @endscript

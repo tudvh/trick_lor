@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Site\MyPost;
+namespace App\Livewire\Site\MyPosts;
 
 use App\Services\Admin\PostService;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +50,7 @@ class Index extends Component
 
     public function render(PostService $postService)
     {
-        return view('livewire.site.my-post.index', [
+        return view('livewire.site.my-posts.index', [
             'posts' => $postService->getByUserId($this->userId, $this->searchKey, $this->searchCategory, $this->searchStatus, $this->sortBy)
         ]);
     }

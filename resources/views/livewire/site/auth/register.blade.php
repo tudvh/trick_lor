@@ -1,25 +1,25 @@
 <div id="register-container">
     <div class="form-container d-flex flex-column gap-3">
         <h1 class="title">Đăng ký</h1>
-        <form id="register-form" class="form d-flex flex-column gap-4" wire:submit="register">
+        <form class="form d-flex flex-column gap-4" wire:submit="register">
             <div class="form-group">
-                <label for="register-full-name">Họ và tên</label>
-                <input type="text" name="register_full_name" id="register-full-name" placeholder="Nhập họ và tên..." wire:model="fullName">
+                <label for="full-name">Họ và tên</label>
+                <input type="text" id="full-name" class="@error('fullName') is-invalid @enderror" placeholder="Nhập họ và tên..." wire:model="fullName">
                 @error('fullName')<small class="text-danger">{{ $message }}</small>@enderror
             </div>
             <div class="form-group">
-                <label for="register-email">Email</label>
-                <input type="email" name="register_email" id="register-email" placeholder="Nhập email..." wire:model="email">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="@error('email') is-invalid @enderror" placeholder="Nhập email..." wire:model="email">
                 @error('email')<small class="text-danger">{{ $message }}</small>@enderror
             </div>
             <div class="form-group">
-                <label for="register-password">Mật khẩu</label>
-                <input type="password" name="register_password" id="register-password" placeholder="Nhập mật khẩu..." wire:model="password">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" class="@error('password') is-invalid @enderror" placeholder="Nhập mật khẩu..." wire:model="password">
                 @error('password')<small class="text-danger">{{ $message }}</small>@enderror
             </div>
             <div class="form-group">
-                <label for="register-password-confirm">Mật khẩu xác nhận</label>
-                <input type="password" name="register_password_confirm" id="register-password-confirm" placeholder="Nhập mật khẩu xác nhận..." wire:model="passwordConfirm">
+                <label for="password-confirm">Mật khẩu xác nhận</label>
+                <input type="password" id="password-confirm" class="@error('passwordConfirm') is-invalid @enderror" placeholder="Nhập mật khẩu xác nhận..." wire:model="passwordConfirm">
                 @error('passwordConfirm')<small class="text-danger">{{ $message }}</small>@enderror
             </div>
             <button type="submit" class="submit">ĐĂNG KÝ</button>

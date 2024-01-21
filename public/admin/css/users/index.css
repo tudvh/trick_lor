@@ -4,7 +4,7 @@
   vertical-align: middle;
 }
 
-.content table .user-avatar {
+.content table .user {
   text-align: start;
   min-width: 200px;
 }
@@ -28,4 +28,14 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.content table .user span {
+  text-align: start;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }

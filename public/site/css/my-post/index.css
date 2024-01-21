@@ -1,7 +1,3 @@
-.content {
-  width: 100%;
-}
-
 .content table th,
 .content table td {
   text-align: center;
@@ -13,12 +9,21 @@
 }
 
 .content table .post-title {
-  text-align: start;
   min-width: 300px;
 }
 
 .content table .post-category {
   min-width: 150px;
+}
+
+.content table .post-title span {
+  flex: 1;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .content table .thumbnail-container {

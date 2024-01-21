@@ -47,6 +47,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', [Admin\UserController::class, 'index'])->name('admin.users.index');
     });
+
+    // Comment
+    Route::group(['prefix' => 'comments'], function () {
+        Route::get('/', [Admin\CommentController::class, 'index'])->name('admin.comments.index');
+    });
 });
 
 // Site

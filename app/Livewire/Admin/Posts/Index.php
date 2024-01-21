@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Post;
+namespace App\Livewire\Admin\Posts;
 
 use App\Services\Admin\PostService;
 use Livewire\Component;
@@ -105,7 +105,7 @@ class Index extends Component
 
     public function render(PostService $postService)
     {
-        return view('livewire.admin.post.index', [
+        return view('livewire.admin.posts.index', [
             'posts' => $postService->getAll($this->searchKey, $this->searchCategory, $this->searchStatus, $this->sortBy)
         ]);
     }

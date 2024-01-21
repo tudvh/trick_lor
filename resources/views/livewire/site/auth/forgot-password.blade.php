@@ -1,10 +1,10 @@
 <div id="forgot-container">
     <div class="form-container d-flex flex-column gap-3">
         <h1 class="title">Quên mật khẩu</h1>
-        <form id="forgot-form" class="form d-flex flex-column gap-4" wire:submit="forgot">
+        <form class="form d-flex flex-column gap-4" wire:submit="forgot">
             <div class="form-group">
-                <label for="forgot-email">Email</label>
-                <input type="text" name="forgot_email" id="forgot-email" placeholder="Nhập email của bạn..." wire:model="email">
+                <label for="email">Email</label>
+                <input type="text" id="email" class="@error('email') is-invalid @enderror" placeholder="Nhập email của bạn..." wire:model="email">
                 @error('email')<small class="text-danger">{{ $message }}</small>@enderror
             </div>
             <button type="submit" class="submit">XÁC NHẬN</button>

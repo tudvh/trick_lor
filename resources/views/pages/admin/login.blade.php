@@ -9,7 +9,7 @@
 @section('content')
 <div class="login-container">
     <form method="POST">
-        <div class="d-flex flex-column gap-4 p-5">
+        <div class="d-flex flex-column gap-4 py-5 px-4 px-md-5">
             <h1 class="title">Đăng nhập Admin</h1>
 
             @csrf

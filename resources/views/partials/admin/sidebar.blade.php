@@ -54,6 +54,16 @@
             </a>
         </li>
         <li>
+            <a class="d-flex align-items-center gap-2 @if(request()->is('admin/comments*')){{ 'active' }}@endif" href="{{ route('admin.comments.index') }}">
+                @if(request()->is('admin/comments*'))
+                <i class="fa-solid fa-message-lines nav-icon"></i>
+                @else
+                <i class="fa-light fa-message-lines nav-icon"></i>
+                @endif
+                <span>Bình luận</span>
+            </a>
+        </li>
+        <li>
             <a class="d-flex align-items-center gap-2" href="{{ route('admin.auth.logout') }}">
                 <i class="fa-light fa-right-from-bracket nav-icon"></i>
                 <span>Đăng xuất</span>

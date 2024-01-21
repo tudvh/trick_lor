@@ -15,6 +15,7 @@ use App\Helpers\ThumbnailHelper;
 <link rel="stylesheet" href="{{ url('public/assets/css/prism.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/list-post.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/post.css') }}">
+<link rel="stylesheet" href="{{ url('public/site/css/post-detail.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/post-comment.css') }}">
 @stop
 

@@ -50,14 +50,14 @@ use \App\Helpers\NumberHelper;
                 @foreach($users as $user)
                 <tr>
                     <th>{{ $user->id }}</th>
-                    <td class="user-avatar" title="{{ $user->full_name }}">
+                    <td class="user" title="{{ $user->full_name }}">
                         <div class="d-flex align-items-center gap-2">
                             <div class="avatar-container">
                                 <div class="avatar-box">
                                     <img src="{{ $user->avatar ?? url('public/assets/img/user-avatar/user-avatar-default.png') }}" alt="{{ $user->full_name }}">
                                 </div>
                             </div>
-                            <span class="post-author-full-name">{{ $user->full_name }}</span>
+                            <span>{{ $user->full_name }}</span>
                         </div>
                     </td>
                     <td>{{ $user->email }}</td>
@@ -74,6 +74,9 @@ use \App\Helpers\NumberHelper;
                     <td>{{ DateHelper::convertDateFormat($user->created_at) }}</td>
                     <td>
                         <div class='d-flex justify-content-center align-items-center gap-2'>
+                            <a href="{{ route('admin.comments.index', ['user-id' => $user->id]) }}" type="button" class='btn btn-info' title="Xem danh sách bình luận của người dùng này">
+                                <i class="fa-light fa-message-lines"></i>
+                            </a>
                             @if($user->status == 'verified')
                             <button type="button" class='btn btn-danger' title="Cấm người dùng" wire:click="$dispatch('show-confirm-ban-user', {userId: {{ $user->id }}})">
                                 <i class="fa-light fa-lock"></i>

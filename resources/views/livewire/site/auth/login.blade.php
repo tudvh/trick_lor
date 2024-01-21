@@ -1,15 +1,15 @@
 <div id="login-container">
     <div class="form-container d-flex flex-column gap-3">
         <h1 class="title">Đăng nhập</h1>
-        <form id="login-form" class="form d-flex flex-column gap-4" wire:submit="login">
+        <form class="form d-flex flex-column gap-4" wire:submit="login">
             <div class="form-group">
-                <label for="login-email">Email</label>
-                <input type="email" name="login_email" id="login-email" placeholder="Nhập email..." wire:model="email">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="@error('email') is-invalid @enderror" placeholder="Nhập email..." wire:model="email">
                 @error('email')<small class="text-danger">{{ $message }}</small>@enderror
             </div>
             <div class="form-group">
-                <label for="login-password">Mật khẩu</label>
-                <input type="password" name="login_password" id="login-password" placeholder="Nhập mật khẩu..." wire:model="password">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" class="@error('password') is-invalid @enderror" placeholder="Nhập mật khẩu..." wire:model="password">
                 @error('password')<small class="text-danger">{{ $message }}</small>@enderror
                 <div class="forgot ms-auto">
                     <button type="button" wire:click="$parent.switchScreen('forgot-password')">Quên mật khẩu?</button>
