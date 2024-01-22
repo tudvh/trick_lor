@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
             'pages.site.trending',
             'pages.site.my-posts.create',
             'pages.site.my-posts.edit',
+            'pages.site.profile',
             'pages.admin.posts.create',
             'pages.admin.posts.edit'
         ];

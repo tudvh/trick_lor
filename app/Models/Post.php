@@ -47,4 +47,17 @@ class Post extends Model
     {
         return $this->hasMany(PostComment::class, 'post_id', 'id');
     }
+
+    public function scopePublic($query)
+    {
+        $query->where('status', 'public');
+        return $query;
+    }
+
+    public function scopeAuthorVerified($query)
+    {
+        return $query->whereHas('author', function ($query) {
+            $query->where('status', 'verified');
+        });
+    }
 }

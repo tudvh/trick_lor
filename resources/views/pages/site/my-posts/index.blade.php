@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ url('public/assets/css/prism.css') }}">
 <link rel="stylesheet" href="{{ url('public/site/css/post-detail.css') }}">
 
-<link rel="stylesheet" href="{{ url('public/site/css/my-post/index.css') }}">
+<link rel="stylesheet" href="{{ url('public/site/css/my-posts/index.css') }}">
 @stop
 
 @section('content')

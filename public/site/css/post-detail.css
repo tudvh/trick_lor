@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.post-wrapper .post-more > button:hover {
+.post-wrapper .post-more .post-more-btn:hover {
   color: #292929;
 }
 

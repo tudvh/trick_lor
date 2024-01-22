@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{ url('public/site/css/post-detail.css') }}">
 
 <link rel="stylesheet" href="{{ url('public/assets/css/image-chosen.css') }}">
-<link rel="stylesheet" href="{{ url('public/site/css/my-post/create.css') }}">
+<link rel="stylesheet" href="{{ url('public/site/css/my-posts/create.css') }}">
 
 <script src="{{ url('public/assets/js/virtual-select.min.js') }}"></script>
 <script src="https://cdn.tiny.cloud/1/{{ env('TINYMCE_API_KEY') }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>

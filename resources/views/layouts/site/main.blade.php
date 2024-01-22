@@ -49,12 +49,6 @@
 
         <div class="overlay"></div>
 
-        <div class="loading-overlay d-none">
-            <div class="loading-icon">
-                <i class="fa-light fa-loader"></i>
-            </div>
-        </div>
-
         @if (session('error-notification'))
         <script>
             Swal.fire({

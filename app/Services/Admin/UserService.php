@@ -29,6 +29,15 @@ class UserService
         return $users;
     }
 
+    public function getByUsername($userName)
+    {
+        $users = User::where('username', $userName)
+            ->where('status', 'verified')
+            ->firstOrFail();
+
+        return $users;
+    }
+
     public function getById($userId)
     {
         $user = User::where('id', $userId)

@@ -2,10 +2,9 @@
 
 namespace App\Livewire\Site\Post;
 
-use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Post;
 use App\Services\Site\PostSaveService;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class PostSave extends Component
 {
@@ -13,9 +12,9 @@ class PostSave extends Component
     public $userId = null;
     public $postId = null;
 
-    public function mount(Post $post, PostSaveService $postSaveService)
+    public function mount($postId, PostSaveService $postSaveService)
     {
-        $this->postId = $post->id;
+        $this->postId = $postId;
 
         if (Auth::guard('site')->check()) {
             $this->userId = Auth::guard('site')->user()->id;

@@ -7,18 +7,21 @@ use App\Http\Controllers\Controller;
 use App\Services\Site\CategoryService;
 use App\Services\Site\PostService;
 use App\Services\Site\PostViewService;
+use App\Services\Admin\UserService;
 
 class HomeController extends Controller
 {
     protected $postService;
     protected $postViewService;
     protected $categoryService;
+    protected $userService;
 
-    public function __construct(PostService $postService, PostViewService $postViewService, CategoryService $categoryService)
+    public function __construct(PostService $postService, PostViewService $postViewService, CategoryService $categoryService, UserService $userService)
     {
         $this->postService = $postService;
         $this->postViewService = $postViewService;
         $this->categoryService = $categoryService;
+        $this->userService = $userService;
     }
 
     public function home()
@@ -78,5 +81,12 @@ class HomeController extends Controller
         $this->postViewService->create($post->id);
 
         return view('pages.site.post', compact('post', 'suggestedPosts'));
+    }
+
+    public function profile($username)
+    {
+        $user = $this->userService->getByUsername($username);
+
+        return view('pages.site.profile', compact('user'));
     }
 }

@@ -36,17 +36,7 @@
         @include('partials/site/header')
 
         <div class="main">
-            <div class="container">
-                <div class="content">
-                    @yield('content')
-                </div>
-            </div>
-        </div>
-
-        <div class="loading-overlay d-none">
-            <div class="loading-icon">
-                <i class="fa-light fa-loader"></i>
-            </div>
+            @yield('content')
         </div>
 
         @if (session('error-notification'))

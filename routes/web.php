@@ -61,6 +61,7 @@ Route::group(['prefix' => ''], function () {
     Route::get('/trending', [Site\HomeController::class, 'trending'])->name('site.trending');
     Route::get('/post/{post}', [Site\HomeController::class, 'post'])->name('site.post');
     Route::get('/category/{category}', [Site\HomeController::class, 'category'])->name('site.category');
+    Route::get('/@{username}', [Site\HomeController::class, 'profile'])->name('site.profile');
 
     // Activity
     Route::group(['prefix' => 'activities'], function () {

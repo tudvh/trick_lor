@@ -78,10 +78,9 @@ class AuthService
             'status' => 'verified'
         ]);
 
-        $imageSrc = $avatar;
         $publicId = $this::CLOUDINARY_ROOT_PATH . "/" . $user->id;
         $maxQuality = $this::AVATAR_MAX_QUALITY;
-        $uploadedResult = $this->cloudinaryService->upload($imageSrc, $publicId, $maxQuality);
+        $uploadedResult = $this->cloudinaryService->upload($avatar, $publicId, $maxQuality);
 
         $user->avatar = $uploadedResult->getSecurePath();
         $user->avatar_public_id = $uploadedResult->getPublicId();

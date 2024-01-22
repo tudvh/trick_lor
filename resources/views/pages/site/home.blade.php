@@ -13,10 +13,8 @@
 
 @section('content')
 @if ($posts->count() > 0)
-<div class="card">
+<div class="card d-flex flex-column gap-5">
     <x-site.list-post :colLg="4" :colSm="6" :posts="$posts" />
-</div>
-<div class="my-5">
     {{ $posts->withQueryString()->links('partials.paginate-custom', ['onEachSide' => 3]) }}
 </div>
 @else

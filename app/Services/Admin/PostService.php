@@ -15,9 +15,9 @@ class PostService
     private const CLOUDINARY_ROOT_PATH = "post";
     private const IMAGE_DESCRIPTION_MAX_QUALITY = 720;
 
-    public function __construct(CloudinaryService $cloudinaryService)
+    public function __construct()
     {
-        $this->cloudinaryService = $cloudinaryService;
+        $this->cloudinaryService = new CloudinaryService();
     }
 
     public function getAll($searchKey, $searchCategory, $searchStatus, $sortBy)
@@ -25,16 +25,16 @@ class PostService
         $posts = Post::query();
 
         if ($searchStatus != null) {
-            $posts = $posts->where('status', $searchStatus);
+            $posts->where('status', $searchStatus);
         }
         if ($searchCategory != null) {
-            $posts = $posts->whereHas('categories', function ($query) use ($searchCategory) {
+            $posts->whereHas('categories', function ($query) use ($searchCategory) {
                 return $query->where('slug', $searchCategory);
             });
         }
         if ($searchKey != null) {
             $searchKey = '%' . str_replace(' ', '%', trim($searchKey))  . '%';
-            $posts = $posts->where(function ($query) use ($searchKey) {
+            $posts->where(function ($query) use ($searchKey) {
                 $query->where('id', 'like', $searchKey)
                     ->orWhere('title', 'like', $searchKey)
                     ->orWhereHas('categories', function ($query) use ($searchKey) {
@@ -48,12 +48,17 @@ class PostService
             });
         }
         if ($sortBy == 'most-popular') {
-            $posts = $posts->withCount(['postViews as views'])
+            $posts->withCount(['postViews as views'])
                 ->orderBy('views', 'desc');
         }
 
-        $posts = $posts->with(['categories', 'postViews', 'postComments'])
-            ->orderBy('id', 'desc')
+        $posts = $posts->with([
+            'author',
+            'categories:name,icon_color',
+            'postViews',
+            'postComments'
+        ])
+            ->latest('id')
             ->paginate(20);
 
         return $posts;
@@ -64,29 +69,37 @@ class PostService
         $posts = Post::where('author_id', $userId);
 
         if ($searchStatus != null) {
-            $posts = $posts->where('status', $searchStatus);
+            $posts->where('status', $searchStatus);
         }
         if ($searchCategory != null) {
-            $posts = $posts->whereHas('categories', function ($query) use ($searchCategory) {
+            $posts->whereHas('categories', function ($query) use ($searchCategory) {
                 return $query->where('slug', $searchCategory);
             });
         }
         if ($searchKey != null) {
-            $searchKey = '%' . trim($searchKey) . '%';
-            $posts = $posts->where(function ($query) use ($searchKey) {
+            $searchKey = '%' . str_replace(' ', '%', trim($searchKey))  . '%';
+
+            $posts->where(function ($query) use ($searchKey) {
                 $query->where('id', 'like', $searchKey)
                     ->orWhere('title', 'like', $searchKey)
                     ->orWhere('description', 'like', $searchKey)
-                    ->orWhere('youtube_id', 'like', $searchKey);
+                    ->orWhere('youtube_id', 'like', $searchKey)
+                    ->orWhereHas('categories', function ($query) use ($searchKey) {
+                        return $query->where('name', 'like', $searchKey);
+                    });
             });
         }
         if ($sortBy == 'most-popular') {
-            $posts = $posts->withCount(['postViews as views'])
+            $posts->withCount(['postViews as views'])
                 ->orderBy('views', 'desc');
         }
 
-        $posts = $posts->with(['categories', 'postViews', 'postComments'])
-            ->orderBy('id', 'desc')
+        $posts = $posts->with([
+            'categories:name,icon_color',
+            'postViews',
+            'postComments'
+        ])
+            ->latest('id')
             ->paginate(20);
 
         return $posts;
