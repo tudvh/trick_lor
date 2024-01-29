@@ -3,16 +3,12 @@
   margin: 0;
 }
 
-.list-post > .item {
+.list-post .item {
   padding-bottom: 2rem;
   border-radius: 5px;
 }
 
-.list-post > .item a {
-  overflow: hidden;
-}
-
-.list-post .img-box {
+.list-post .item .thumbnail-box {
   position: relative;
   width: 100%;
   height: 0;
@@ -21,7 +17,7 @@
   overflow: hidden;
 }
 
-.list-post > .item img {
+.list-post .item .thumbnail-box img {
   position: absolute;
   top: 0;
   left: 0;
@@ -31,21 +27,42 @@
   transition: scale 0.2s ease;
 }
 
-.list-post > .item a:hover img {
+.list-post .item:hover .thumbnail-box img {
   width: 100%;
-  scale: 1.1;
+  scale: 1.2;
   transition: scale 0.1s ease;
 }
 
-.list-post > .item .info {
-  padding: 0 0.5rem;
-  margin-top: 0.5rem;
+.list-post .item .avatar-container {
+  width: 36px;
 }
 
-.list-post > .item .info .title {
+.list-post .item .avatar-box {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+}
+
+.list-post .item .avatar-box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: #000;
+}
+
+.list-post .item .info {
+  flex: 1;
+}
+
+.list-post .item .info .title {
   margin-bottom: 0;
   font-size: 1rem;
-  line-height: 1.7rem;
+  line-height: 22px;
   font-weight: bold;
   transition: color 0.2s ease;
   overflow: hidden;
@@ -55,13 +72,13 @@
   -webkit-box-orient: vertical;
 }
 
-.list-post > .item a:hover .info .title {
+.list-post .item:hover .info .title {
   color: var(--color-primary);
   transition: color 0.1s ease;
 }
 
-.list-post > .item .info span {
+.list-post .item .info span {
   display: block;
-  font-size: 0.8rem;
-  margin-bottom: 0.3rem;
+  font-size: 14px;
+  color: #737373;
 }

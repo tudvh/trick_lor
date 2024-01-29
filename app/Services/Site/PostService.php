@@ -11,7 +11,7 @@ class PostService
         $posts = Post::public()
             ->authorVerified()
             ->with([
-                'author:full_name,avatar,username',
+                'author',
                 'categories:name,icon_color',
                 'postViews'
             ])
@@ -38,7 +38,7 @@ class PostService
                     });
             })
             ->with([
-                'author:full_name,avatar,username',
+                'author',
                 'categories:name,icon_color',
                 'postViews'
             ])
@@ -55,7 +55,7 @@ class PostService
                 return $query->where('slug', $categorySlug);
             })
             ->with([
-                'author:full_name,avatar,username',
+                'author',
                 'categories:name,icon_color',
                 'postViews'
             ])
@@ -74,7 +74,7 @@ class PostService
         $posts = Post::public()
             ->authorVerified()
             ->with([
-                'author:full_name,avatar,username',
+                'author',
                 'categories:name,icon_color',
                 'postViews'
             ]);
@@ -98,7 +98,7 @@ class PostService
             $posts->orderBy('views_count_month', 'desc');
         }
 
-        $posts->withCount(['postViews as views_count_all'])
+        $posts = $posts->withCount(['postViews as views_count_all'])
             ->orderBy('views_count_all', 'desc')
             ->latest('id')
             ->take(12)
@@ -107,50 +107,47 @@ class PostService
         return $posts;
     }
 
-    public function getSuggest(Post $post, int $limit)
+    private function getSuggestedPosts(Post $post)
     {
-        $categoryIds = $post
-            ->postCategories
-            ->pluck('category_id')
-            ->toArray();
-
-        $suggestedPosts = Post::public()
+        return Post::public()
             ->authorVerified()
             ->where('id', '!=', $post->id)
-            ->whereHas('postCategories', function ($query) use ($categoryIds) {
-                $query->whereIn('category_id', $categoryIds);
-            })
             ->with([
-                'author:full_name,avatar,username',
+                'author',
                 'categories:name,icon_color',
                 'postViews'
-            ])
+            ]);
+    }
+
+    public function getSuggest(Post $post, int $limit)
+    {
+        // Get suggest with author
+        $suggestedPostsWithAuthor = $this->getSuggestedPosts($post)
+            ->where('author_id', $post->author_id)
             ->inRandomOrder()
             ->take($limit)
             ->get();
 
-        if ($suggestedPosts->count() < $limit) {
-            $suggestedPostIds = $suggestedPosts
-                ->pluck('id')
-                ->toArray();
-            $suggestedPostIds[] = $post->id;
+        // Get suggest with category
+        $suggestedPostsWithCategory = $this->getSuggestedPosts($post)
+            ->whereNotIn('id', $suggestedPostsWithAuthor->pluck('id'))
+            ->whereHas('postCategories', function ($query) use ($post) {
+                $query->whereIn('category_id', $post->postCategories->pluck('category_id'));
+            })
+            ->inRandomOrder()
+            ->take($limit - $suggestedPostsWithAuthor->count())
+            ->get();
 
-            $additionalPosts = Post::public()
-                ->authorVerified()
-                ->whereNotIn('id', $suggestedPostIds)
-                ->with([
-                    'author:full_name,avatar,username',
-                    'categories:name,icon_color',
-                    'postViews'
-                ])
-                ->inRandomOrder()
-                ->take($limit - $suggestedPosts->count())
-                ->get();
+        // Get suggest with popular
+        $suggestedPostsWithPopular = $this->getSuggestedPosts($post)
+            ->whereNotIn('id', $suggestedPostsWithAuthor->pluck('id')->merge($suggestedPostsWithCategory->pluck('id')))
+            ->withCount(['postViews as views'])
+            ->orderBy('views', 'desc')
+            ->inRandomOrder()
+            ->take($limit - $suggestedPostsWithAuthor->count() - $suggestedPostsWithCategory->count())
+            ->get();
 
-            $suggestedPosts = $suggestedPosts->concat($additionalPosts);
-        }
-
-        return $suggestedPosts;
+        return $suggestedPostsWithAuthor->concat($suggestedPostsWithCategory)->concat($suggestedPostsWithPopular);
     }
 
     public function getByUserId($userId, $searchKey, $searchCategory, $sortBy)
@@ -181,7 +178,7 @@ class PostService
         }
 
         $posts = $posts->with([
-            'author:full_name,avatar,username',
+            'author',
             'categories:name,icon_color',
             'postViews'
         ])
@@ -197,8 +194,8 @@ class PostService
             ->authorVerified()
             ->where('slug', $postSlug)
             ->with([
-                'author:full_name,avatar,username',
-                'categories:name,icon_color',
+                'author',
+                'categories:name,slug,icon_color',
                 'postViews'
             ])
             ->first();

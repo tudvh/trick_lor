@@ -5,8 +5,33 @@
 }
 
 .post-wrapper .post-info {
-  font-size: 1rem;
+  font-size: 14px;
   color: #757575;
+}
+
+.post-wrapper .post-author .avatar-container {
+  background-image: linear-gradient(var(--color-secondary), var(--color-primary));
+  width: 60px;
+  padding: 2px;
+  border-radius: 50%;
+}
+
+.post-wrapper .post-author .avatar-box {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+}
+
+.post-wrapper .post-author .avatar-box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: #000;
 }
 
 .post-wrapper .post-more .post-more-btn {

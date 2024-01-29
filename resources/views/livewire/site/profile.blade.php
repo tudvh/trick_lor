@@ -64,7 +64,7 @@ use App\Helpers\DateHelper;
                         </div>
 
                         @if($posts->count() > 0)
-                        <x-site.list-post :colLg="4" :colSm="6" :posts="$posts" />
+                        <x-site.list-post :colLg="4" :colSm="6" :posts="$posts" showAuthor="false" />
                         {{ $posts->links('partials.paginate-custom-livewire') }}
                         @else
                         <span>Danh sách bài đăng trống</span>
