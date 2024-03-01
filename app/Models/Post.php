@@ -20,7 +20,7 @@ class Post extends Model
 
     public function author()
     {
-        return $this->hasOne(User::class, 'id', 'author_id');
+        return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
     public function postCategories()
@@ -30,7 +30,7 @@ class Post extends Model
 
     public function categories()
     {
-        return $this->hasManyThrough(Category::class, PostCategory::class, 'post_id', 'id', 'id', 'category_id');
+        return $this->belongsToMany(Category::class, 'post_categories', 'post_id', 'category_id');
     }
 
     public function postViews()
@@ -50,8 +50,7 @@ class Post extends Model
 
     public function scopePublic($query)
     {
-        $query->where('status', 'public');
-        return $query;
+        return $query->where('status', 'public');
     }
 
     public function scopeAuthorVerified($query)

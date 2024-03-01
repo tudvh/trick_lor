@@ -9,7 +9,6 @@ $showAuthor = $showAuthor ?? true;
 $showAuthor = filter_var($showAuthor, FILTER_VALIDATE_BOOLEAN);
 @endphp
 
-
 <div class="list-post row">
     @foreach ($posts as $index => $post)
     <div class="col-12 col-sm-{{ $colSm }} col-lg-{{ $colLg }} item" title="{{ $post->title }}">

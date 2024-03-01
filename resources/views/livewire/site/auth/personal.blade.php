@@ -41,6 +41,12 @@
             </div>
 
             <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" autocomplete="off" wire:model="username">
+                @error('username')<small class="text-danger">{{ $message }}</small>@enderror
+            </div>
+
+            <div class="form-group">
                 <label for="email" class="form-label">Email</label>
                 <input type="text" class="form-control" id="email" value="{{ $user->email }}" disabled>
             </div>

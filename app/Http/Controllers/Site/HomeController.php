@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Site;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Site\CategoryService;
 use App\Services\Site\PostService;
 use App\Services\Site\PostViewService;
 use App\Services\Admin\UserService;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {

@@ -2,10 +2,12 @@
 
 namespace App\Services\Site;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use App\Helpers\StringHelper;
 use App\Models\User;
 use App\Services\CloudinaryService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class AuthService
 {
@@ -42,9 +44,12 @@ class AuthService
 
     public function handleRegister($fullName, $email, $password)
     {
+        $fullName = StringHelper::handleName($fullName);
+
         $user = User::create([
-            'full_name' => mb_convert_case(ucwords(trim($fullName)), MB_CASE_TITLE, "UTF-8"),
+            'full_name' => $fullName,
             'email' => trim($email),
+            'username' => Str::slug($fullName) . '-' . uniqid(),
             'password' => bcrypt(trim($password)),
         ]);
 
@@ -74,6 +79,7 @@ class AuthService
         $user = User::create([
             'full_name' => $fullName,
             'email' => $email,
+            'username' => Str::slug($fullName) . '-' . uniqid(),
             'google_id' => $googleId,
             'status' => 'verified'
         ]);
@@ -90,9 +96,10 @@ class AuthService
         return $user;
     }
 
-    public function handleUpdatePersonal($user, $fullName, $avatarUrl, $isRemoveAvatar)
+    public function handleUpdatePersonal($user, $fullName, $username, $avatarUrl, $isRemoveAvatar)
     {
-        $user->full_name = mb_convert_case(ucwords(trim($fullName)), MB_CASE_TITLE, "UTF-8");
+        $user->full_name = StringHelper::handleName($fullName);
+        $user->username = $username;
 
         if ($avatarUrl) {
             if ($user->avatar_public_id) {

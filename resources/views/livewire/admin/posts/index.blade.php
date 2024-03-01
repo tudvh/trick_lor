@@ -95,9 +95,9 @@ use \App\Helpers\NumberHelper;
                     </td>
                     <td class="post-category">
                         <div class="d-flex flex-wrap justify-content-center gap-2">
-                            @foreach($post->postCategories as $postCategory)
-                            <div class="icon-box" title="{{ $postCategory->category->name }}">
-                                {!! $postCategory->category->icon_color !!}
+                            @foreach($post->categories as $category)
+                            <div class="icon-box" title="{{ $category->name }}">
+                                {!! $category->icon_color !!}
                             </div>
                             @endforeach
                         </div>
@@ -114,8 +114,8 @@ use \App\Helpers\NumberHelper;
                         @endif
                     </td>
                     <td>{{ DateHelper::convertDateFormat($post->created_at) }}</td>
-                    <td>{{ NumberHelper::format($post->postViews->count()) }}</td>
-                    <td>{{ NumberHelper::format($post->postComments->count()) }}</td>
+                    <td>{{ NumberHelper::format($post->post_views_count) }}</td>
+                    <td>{{ NumberHelper::format($post->post_comments_count) }}</td>
                     <td>
                         <div class='d-flex justify-content-center align-items-center gap-2'>
                             <button type="button" class='btn btn-primary' title="Preview" wire:click="preview('{{ $post->id }}')">

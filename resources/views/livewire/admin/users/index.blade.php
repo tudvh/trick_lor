@@ -40,6 +40,7 @@ use \App\Helpers\NumberHelper;
                     <th>Id</th>
                     <th>Họ và tên</th>
                     <th>Email</th>
+                    <th>Username</th>
                     <th>Trạng thái</th>
                     <th>Số lượng bài đăng</th>
                     <th>Ngày tạo</th>
@@ -61,6 +62,7 @@ use \App\Helpers\NumberHelper;
                         </div>
                     </td>
                     <td>{{ $user->email }}</td>
+                    <td>{{ $user->username }}</td>
                     <td>
                         @if($user->status == 'registered')
                         <span class='badge bg-warning'>Đã đăng ký</span>

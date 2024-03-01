@@ -46,7 +46,7 @@
                     <td>
                         <div class="icon-box ms-auto me-auto">{!! $category->icon_color !!}</div>
                     </td>
-                    <td>{{ $category->postCategories()->count() }}</td>
+                    <td>{{ $category->postCategories->count() }}</td>
                     <td>
                         @if($category->active)
                         <span class='badge bg-success'>Công khai</span>

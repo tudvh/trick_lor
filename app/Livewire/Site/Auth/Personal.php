@@ -12,6 +12,7 @@ class Personal extends Component
 
     public $user;
     public $fullName;
+    public $username;
     public $avatarFile;
     public $avatarUrl;
     public $avatarUrlPreview;
@@ -21,6 +22,7 @@ class Personal extends Component
     {
         $this->user = $user;
         $this->fullName = $user->full_name;
+        $this->username = $user->username;
         $this->avatarUrlPreview = $user->avatar;
     }
 
@@ -64,10 +66,15 @@ class Personal extends Component
 
     public function save(AuthService $authService)
     {
+        $userId = $this->user->id;
+
         $this->validate([
-            'fullName' => ['required']
+            'fullName' => ['required'],
+            'username' => ['required', "unique:users,username,$userId"]
         ], [
             'fullName.required' => 'Vui lòng nhập họ tên',
+            'username.required' => 'Vui lòng nhập username',
+            'username.unique' => 'Username này đã tồn tại',
         ]);
 
         if (!$this->user) {
@@ -76,7 +83,7 @@ class Personal extends Component
             return;
         }
 
-        $authService->handleUpdatePersonal($this->user, $this->fullName, $this->avatarUrl, $this->isRemoveAvatar);
+        $authService->handleUpdatePersonal($this->user, $this->fullName, $this->username, $this->avatarUrl, $this->isRemoveAvatar);
 
         $this->dispatch('update-personal-success');
     }

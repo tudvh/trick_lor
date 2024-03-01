@@ -2,12 +2,13 @@
 
 namespace App\Services\Admin;
 
-use DOMDocument;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use App\Helpers\StringHelper;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Services\CloudinaryService;
+use DOMDocument;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostService
 {
@@ -55,6 +56,7 @@ class PostService
         $posts = $posts->with([
             'author',
             'categories:name,icon_color',
+        ])->withCount([
             'postViews',
             'postComments'
         ])
@@ -108,6 +110,7 @@ class PostService
     public function getById($postId)
     {
         $post = Post::where('id', $postId)
+            ->with(['categories'])
             ->first();
 
         return $post;
@@ -136,7 +139,7 @@ class PostService
 
     public function create($title, $authorId, $youtubeId = null, $description = null, $thumbnailCustom)
     {
-        $postTitle = Str::ucfirst(trim($title));
+        $postTitle = StringHelper::handleTitle($title);
 
         $post = Post::create([
             'title' => $postTitle,
@@ -166,7 +169,7 @@ class PostService
 
     public function update(Post $post, $title, $youtubeId = null, $status, $description = null, $thumbnailCustom, $isRemoveThumbnailCustom)
     {
-        $post->title = Str::ucfirst(trim($title));
+        $post->title = StringHelper::handleTitle($title);
         $post->slug = Str::slug($post->title);
         $post->youtube_id = $youtubeId ? $youtubeId : null;
         $post->status = $status;

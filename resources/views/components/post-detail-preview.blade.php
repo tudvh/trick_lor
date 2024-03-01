@@ -6,9 +6,9 @@ use App\Helpers\NumberHelper;
 <div class="post-header">
     <h2 class="post-title">{{ $post->title }}</h2>
     <div class="post-category d-flex flex-wrap gap-2 mt-2">
-        @foreach($post->postCategories as $postCategory)
-        <button class="icon-box" title="{{ $postCategory->category->name }}">
-            {!! $postCategory->category->icon_color !!}
+        @foreach($post->categories as $category)
+        <button class="icon-box" title="{{ $category->name }}">
+            {!! $category->icon_color !!}
         </button>
         @endforeach
     </div>
