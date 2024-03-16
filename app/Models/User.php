@@ -14,19 +14,25 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    protected $fillable = ['full_name', 'avatar', 'avatar_public_id', 'email', 'username', 'password', 'role', 'google_id', 'status', 'verification_token', 'last_email_sent_at'];
+    protected $fillable = [
+        'full_name',
+        'avatar',
+        'avatar_public_id',
+        'email',
+        'username',
+        'password',
+        'role',
+        'google_id',
+        'status',
+        'verification_token',
+        'last_email_sent_at',
+    ];
 
-    protected $hidden = ['password', 'verification_token', 'last_email_sent_at'];
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'author_id', 'id');
-    }
-
-    public function postViews()
-    {
-        return $this->hasMany(PostView::class, 'user_id', 'id');
-    }
+    protected $hidden = [
+        'password',
+        'verification_token',
+        'last_email_sent_at'
+    ];
 
     public function hasPassword()
     {

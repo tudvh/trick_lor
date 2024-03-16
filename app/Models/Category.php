@@ -2,24 +2,46 @@
 
 namespace App\Models;
 
+use App\Enums\Category\CategoryStatus;
+use App\Traits\Category\CategoryRelationship;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, CategoryRelationship;
 
     protected $table = 'categories';
 
-    protected $fillable = ['name', 'slug', 'icon', 'icon_color', 'active'];
+    protected $fillable = [
+        'name',
+        'slug',
+        'icon',
+        'icon_color',
+        'status',
+    ];
 
-    public function postCategories()
+    protected $cats = [
+        'status' => CategoryStatus::class
+    ];
+
+    protected function name(): Attribute
     {
-        return $this->hasMany(PostCategory::class, 'category_id', 'id');
+        return Attribute::make(
+            set: fn (string $value) => trim($value),
+        );
     }
 
-    public function posts()
+    protected static function booted(): void
     {
-        return $this->hasManyThrough(Post::class, PostCategory::class, 'category_id', 'id', 'id', 'post_id');
+        static::creating(function (Category $category) {
+            $category->slug = Str::slug($category->name);
+        });
+
+        static::updating(function (Category $category) {
+            $category->slug = Str::slug($category->name);
+        });
     }
 }

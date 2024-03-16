@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Category;
 
+use App\Enums\Category\CategoryStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCategoryRequest extends FormRequest
@@ -21,20 +22,26 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('category')->id;
+
         return [
-            'name' => 'required|unique:categories,name,' . request()->id,
-            'icon' => 'required',
-            'icon_color' => 'required'
+            'name' => ['required', "unique:categories,name,{$id}"],
+            'icon' => ['required'],
+            'icon_color' => ['required'],
+            'status' => [
+                'required',
+                'in:' . implode(',', CategoryStatus::getValues()),
+            ],
         ];
     }
 
-    public function messages(): array
+    public function attributes(): array
     {
         return [
-            'name.required' => 'Vui lòng nhập tên danh mục',
-            'name.unique' => 'Tên danh mục đã tồn tại',
-            'icon.required' => 'Vui lòng nhập icon',
-            'icon_color.required' => 'Vui lòng nhập icon color'
+            'name' => 'tên danh mục',
+            'icon' => 'icon',
+            'icon_color' => 'icon color',
+            'status' => 'trạng thái',
         ];
     }
 }

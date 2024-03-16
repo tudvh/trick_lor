@@ -6,21 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\CreateCategoryRequest;
 use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Services\Admin\CategoryService;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(
+        protected CategoryService $categoryService
+    ) {
         $this->middleware('admin');
     }
 
     public function index()
     {
-        $categories = Category::with(['postCategories'])
-            ->orderBy('id', 'desc')
-            ->paginate(20);
-
+        $categories = $this->categoryService->list();
         return view('pages.admin.categories.index', compact('categories'));
     }
 
@@ -31,14 +29,7 @@ class CategoryController extends Controller
 
     public function store(CreateCategoryRequest $request)
     {
-        Category::create([
-            'name' => trim($request->name),
-            'slug' => str()->slug(trim($request->name)),
-            'icon' => $request->icon,
-            'icon_color' => $request->icon_color,
-            'active' => $request->active,
-        ]);
-
+        $this->categoryService->setRequest($request)->create();
         return redirect()->route('admin.categories.index')->with("success", "Thêm danh mục thành công!");
     }
 
@@ -49,14 +40,7 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $category->update([
-            'name' => trim($request->name),
-            'slug' => str()->slug(trim($request->name)),
-            'icon' => $request->icon,
-            'icon_color' => $request->icon_color,
-            'active' => $request->active,
-        ]);
-
+        $this->categoryService->setRequest($request)->update($category);
         return redirect()->back()->with("success", "Cập nhật danh mục thành công!");
     }
 }

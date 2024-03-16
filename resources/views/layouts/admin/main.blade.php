@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="root-url" data-index="{{ URL::to('/'); }}">
-    <meta property="og:image" content="{{ url('public/assets/img/post-thumbnail/post-thumbnail-primary/maxresdefault.png') }}">
+    <meta name="root-url" data-index="{{ URL::to('/') }}">
+    <meta property="og:image"
+        content="{{ url('public/assets/img/post-thumbnail/post-thumbnail-primary/maxresdefault.png') }}">
     @yield('meta')
     <title>@yield('title') - Trick loR Admin</title>
     <link rel="icon" href="{{ url('public/assets/img/logo-icon.png') }}">
@@ -43,22 +44,22 @@
         <div class="overlay"></div>
 
         @if (session('error-notification'))
-        <script>
-            Swal.fire({
-                icon: "error",
-                title: "Lỗi...",
-                text: "{{ session('error-notification') }}",
-            });
-        </script>
+            <script>
+                Swal.fire({
+                    icon: "error",
+                    title: "Lỗi...",
+                    text: "{{ session('error-notification') }}",
+                });
+            </script>
         @endif
         @if (session('success-notification'))
-        <script>
-            Swal.fire({
-                icon: "success",
-                title: "Thành công",
-                text: "{{ session('success-notification') }}",
-            });
-        </script>
+            <script>
+                Swal.fire({
+                    icon: "success",
+                    title: "Thành công",
+                    text: "{{ session('success-notification') }}",
+                });
+            </script>
         @endif
     </div>
 
@@ -71,6 +72,5 @@
     <!-- <script src="{{ url('public/assets/js/hide-logo.js') }}"></script> -->
     @yield('js')
 </body>
-
 
 </html>

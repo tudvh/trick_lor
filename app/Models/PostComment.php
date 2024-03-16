@@ -2,29 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\PostComment\PostCommentRelationship;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PostComment extends Model
 {
-    use HasFactory;
+    use HasFactory, PostCommentRelationship;
 
     protected $table = 'post_comments';
 
-    protected $fillable = ['user_id', 'post_id', 'content', 'reply_id'];
-
-    public function post()
-    {
-        return $this->hasOne(Post::class, 'id', 'post_id');
-    }
-
-    public function user()
-    {
-        return $this->hasOne(User::class, 'id', 'user_id');
-    }
-
-    public function replies()
-    {
-        return $this->hasMany(PostComment::class, 'reply_id', 'id');
-    }
+    protected $fillable = [
+        'user_id',
+        'post_id',
+        'content',
+        'reply_id',
+    ];
 }
