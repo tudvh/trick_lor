@@ -20,7 +20,7 @@ trait PostRelationship
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class, 'post_categories', 'post_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'category_post', 'post_id', 'category_id');
     }
 
     public function postViews(): HasMany

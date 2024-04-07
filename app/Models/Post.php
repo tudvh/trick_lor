@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Post\PostStatus;
 use App\Traits\Post\PostRelationship;
 use App\Traits\Post\PostScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,5 +28,6 @@ class Post extends Model
     protected $casts = [
         'thumbnails' => 'array',
         'thumbnails_custom' => 'array',
+        'status' => PostStatus::class,
     ];
 }

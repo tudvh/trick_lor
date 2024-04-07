@@ -11,12 +11,6 @@
         <h2 class="m-0 fw-bold">Cập nhật danh mục</h2>
 
         <div class="col-12 d-flex">
-            @if (url()->previous() != url()->current())
-                <a href="{{ url()->previous() }}" class="btn btn-primary gap-2">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Quay lại</span>
-                </a>
-            @endif
             <button type="submit" class="btn btn-success gap-2 ms-auto">
                 <i class="fa-solid fa-check"></i>
                 <span>Lưu thay đổi</span>

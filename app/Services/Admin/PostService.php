@@ -3,67 +3,34 @@
 namespace App\Services\Admin;
 
 use App\Helpers\StringHelper;
+use App\Models\CategoryPost;
 use App\Models\Post;
-use App\Models\PostCategory;
+use App\Repositories\Post\PostRepository;
 use App\Services\CloudinaryService;
 use DOMDocument;
-use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 
 class PostService
 {
-    protected $cloudinaryService;
     private const CLOUDINARY_ROOT_PATH = "post";
     private const IMAGE_DESCRIPTION_MAX_QUALITY = 720;
 
-    public function __construct()
-    {
-        $this->cloudinaryService = new CloudinaryService();
+    public function __construct(
+        protected CloudinaryService $cloudinaryService,
+        protected PostRepository $postRepository
+    ) {
     }
 
-    public function getAll($searchKey, $searchCategory, $searchStatus, $sortBy)
+    /**
+     * Get a list of posts based on the search criteria
+     *
+     * @param array $dataSearch
+     * @return LengthAwarePaginator
+     */
+    public function getList(array $dataSearch): LengthAwarePaginator
     {
-        $posts = Post::query();
-
-        if ($searchStatus != null) {
-            $posts->where('status', $searchStatus);
-        }
-        if ($searchCategory != null) {
-            $posts->whereHas('categories', function ($query) use ($searchCategory) {
-                return $query->where('slug', $searchCategory);
-            });
-        }
-        if ($searchKey != null) {
-            $searchKey = '%' . str_replace(' ', '%', trim($searchKey))  . '%';
-            $posts->where(function ($query) use ($searchKey) {
-                $query->where('id', 'like', $searchKey)
-                    ->orWhere('title', 'like', $searchKey)
-                    ->orWhereHas('categories', function ($query) use ($searchKey) {
-                        return $query->where('name', 'like', $searchKey);
-                    })
-                    ->orWhereHas('author', function ($query) use ($searchKey) {
-                        return $query->where('full_name', 'like', $searchKey);
-                    })
-                    ->orWhere('description', 'like', $searchKey)
-                    ->orWhere('youtube_id', 'like', $searchKey);
-            });
-        }
-        if ($sortBy == 'most-popular') {
-            $posts->withCount(['postViews as views'])
-                ->orderBy('views', 'desc');
-        }
-
-        $posts = $posts->with([
-            'author',
-            'categories:name,icon_color',
-        ])->withCount([
-            'postViews',
-            'postComments'
-        ])
-            ->latest('id')
-            ->paginate(20);
-
-        return $posts;
+        return $this->postRepository->getListForAdmin($dataSearch);
     }
 
     public function getByUserId($userId, $searchKey, $searchCategory, $searchStatus, $sortBy)
@@ -107,13 +74,15 @@ class PostService
         return $posts;
     }
 
-    public function getById($postId)
+    /**
+     * Get a single post by its ID
+     *
+     * @param int $id
+     * @return Post
+     */
+    public function findById(int $id): Post
     {
-        $post = Post::where('id', $postId)
-            ->with(['categories'])
-            ->first();
-
-        return $post;
+        return $this->postRepository->findBy($id, 'id');
     }
 
     public function createToPreview($title, $authorId, $youtubeId = null, $description = null, $categories)
@@ -127,7 +96,7 @@ class PostService
         ]);
 
         $postCategories = collect($categories)->map(function ($categoryId) use ($post) {
-            return new PostCategory([
+            return new CategoryPost([
                 'post_id' => $post->id,
                 'category_id' => $categoryId
             ]);
@@ -167,47 +136,53 @@ class PostService
         return $post;
     }
 
-    public function update(Post $post, $title, $youtubeId = null, $status, $description = null, $thumbnailCustom, $isRemoveThumbnailCustom)
+    // public function update(Post $post, $title, $youtubeId = null, $status, $description = null, $thumbnailCustom, $isRemoveThumbnailCustom)
+    // {
+    //     $post->title = StringHelper::handleTitle($title);
+    //     $post->slug = Str::slug($post->title);
+    //     $post->youtube_id = $youtubeId ? $youtubeId : null;
+    //     $post->status = $status;
+
+    //     $post->description = $this->handleDescription(trim($description), $post->id, $post->title);
+    //     $this->deleteImageDescriptionOld($post->id, $post->description);
+
+    //     if ($youtubeId) {
+    //         $post->thumbnails = [
+    //             "https://i.ytimg.com/vi/{$youtubeId}/mqdefault.jpg",
+    //             "https://i.ytimg.com/vi/{$youtubeId}/hqdefault.jpg",
+    //             "https://i.ytimg.com/vi/{$youtubeId}/maxresdefault.jpg"
+    //         ];
+    //     } else {
+    //         $post->thumbnails = null;
+    //     }
+
+    //     if ($thumbnailCustom) {
+    //         $post->thumbnails_custom = $this->handleThumbnailCustom($thumbnailCustom, $post->id);
+    //     } elseif ($isRemoveThumbnailCustom && $post->thumbnails_custom) {
+    //         $folderPath = $this::CLOUDINARY_ROOT_PATH . "/" . $post->id . "/post-thumbnail";
+    //         $this->cloudinaryService->deleteFolder($folderPath);
+
+    //         $post->thumbnails_custom = null;
+    //     }
+
+    //     $post->save();
+    // }
+
+    /**
+     * Update post.
+     *
+     * @param  Post $post
+     * @param  array $attributes
+     * @return void
+     */
+    public function update(Post $post, array $attributes): void
     {
-        $post->title = StringHelper::handleTitle($title);
-        $post->slug = Str::slug($post->title);
-        $post->youtube_id = $youtubeId ? $youtubeId : null;
-        $post->status = $status;
-
-        $post->description = $this->handleDescription(trim($description), $post->id, $post->title);
-        $this->deleteImageDescriptionOld($post->id, $post->description);
-
-        if ($youtubeId) {
-            $post->thumbnails = [
-                "https://i.ytimg.com/vi/{$youtubeId}/mqdefault.jpg",
-                "https://i.ytimg.com/vi/{$youtubeId}/hqdefault.jpg",
-                "https://i.ytimg.com/vi/{$youtubeId}/maxresdefault.jpg"
-            ];
-        } else {
-            $post->thumbnails = null;
-        }
-
-        if ($thumbnailCustom) {
-            $post->thumbnails_custom = $this->handleThumbnailCustom($thumbnailCustom, $post->id);
-        } elseif ($isRemoveThumbnailCustom && $post->thumbnails_custom) {
-            $folderPath = $this::CLOUDINARY_ROOT_PATH . "/" . $post->id . "/post-thumbnail";
-            $this->cloudinaryService->deleteFolder($folderPath);
-
-            $post->thumbnails_custom = null;
-        }
-
-        $post->save();
-    }
-
-    public function updateStatus($post, $status)
-    {
-        $post->status = $status;
-        $post->save();
+        $this->postRepository->update($post, $attributes);
     }
 
     public function delete($postId)
     {
-        $post = $this->getById($postId);
+        $post = $this->findById($postId);
 
         // Delete image in Cloudinary
         $folderPath = $this::CLOUDINARY_ROOT_PATH . "/" . $postId;

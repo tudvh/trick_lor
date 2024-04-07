@@ -3,7 +3,6 @@
 @section('title', 'Danh sách danh mục')
 
 @section('css')
-    <link rel="stylesheet" href="{{ url('public/admin/css/categories/index.css') }}">
 @stop
 
 @section('content')
@@ -25,7 +24,7 @@
             <table class="table table-hover align-middle m-0">
                 <thead class="table-secondary">
                     <tr>
-                        <th>Id</th>
+                        <th>ID</th>
                         <th>Tên danh mục</th>
                         <th>Icon</th>
                         <th>Icon color</th>

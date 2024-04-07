@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 interface RepositoryInterface
 {
-    public function all();
+    public function getAll();
 
     public function find($id);
+
+    public function findBy($value, $column, $contributor);
 
     public function create($attributes = []);
 

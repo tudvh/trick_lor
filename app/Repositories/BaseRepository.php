@@ -23,7 +23,7 @@ abstract class BaseRepository implements RepositoryInterface
         );
     }
 
-    public function all()
+    public function getAll()
     {
         return $this->model->all();
     }
@@ -31,6 +31,11 @@ abstract class BaseRepository implements RepositoryInterface
     public function find($id)
     {
         return $this->model->find($id);
+    }
+
+    public function findBy($value, $column = 'name', $contributor = '=')
+    {
+        return $this->model->where($column, $contributor, $value)->first();
     }
 
     public function create($attributes = [])

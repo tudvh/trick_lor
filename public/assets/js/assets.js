@@ -19,11 +19,18 @@ window.addEventListener('show-alert', e => {
 })
 
 window.addEventListener('show-toast', e => {
-  Swal.fire({
+  Swal.mixin({
+    toast: true,
     position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: toast => {
+      toast.onmouseenter = Swal.stopTimer
+      toast.onmouseleave = Swal.resumeTimer
+    },
+  }).fire({
     icon: e.detail[0].icon,
     title: e.detail[0].title,
-    showConfirmButton: false,
-    timer: e.detail[0].timer,
   })
 })

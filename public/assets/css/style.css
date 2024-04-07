@@ -188,6 +188,14 @@ ul .dropdown-item .icon-box {
   box-shadow: none;
 }
 
+/* table */
+table th,
+table td {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.875rem;
+}
+
 /* Scrollbar css */
 ::-webkit-scrollbar {
   width: 13px;
