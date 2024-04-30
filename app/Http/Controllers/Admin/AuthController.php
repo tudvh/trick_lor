@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\User\UserRole;
+use App\Enums\User\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\LoginRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -26,11 +27,11 @@ class AuthController extends Controller
         if (!Auth::guard('admin')->attempt($request->only('username', 'password'))) {
             return redirect()->back()->with('error', 'Đăng nhập thất bại!');
         }
-        if (Auth::guard('admin')->user()->status == 'blocked') {
+        if (Auth::guard('admin')->user()->status == UserStatus::BLOCKED) {
             Auth::guard('admin')->logout();
             return redirect()->back()->with('error', 'Tài khoản của bạn đã bị cấm sử dụng!');
         }
-        if (Auth::guard('admin')->user()->role != 'admin') {
+        if (Auth::guard('admin')->user()->role != UserRole::ADMIN) {
             Auth::guard('admin')->logout();
             return redirect()->back()->with('error', 'Bạn không có quyền truy cập vào trang này!');
         }

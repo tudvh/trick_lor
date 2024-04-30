@@ -3,30 +3,25 @@
 namespace App\Services\Admin;
 
 use App\Models\User;
+use App\Repositories\User\UserRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserService
 {
-    public function getAll($searchKey, $searchStatus)
+    public function __construct(
+        protected UserRepository $userRepository
+    ) {
+    }
+
+    /**
+     * Get list
+     *
+     * @param array $dataSearch
+     * @return LengthAwarePaginator
+     */
+    public function getList(array $dataSearch): LengthAwarePaginator
     {
-        $users = User::where('role', 'user');
-
-        if ($searchStatus != null) {
-            $users = $users->where('status', $searchStatus);
-        }
-        if ($searchKey != null) {
-            $searchKey = '%' . str_replace(' ', '%', trim($searchKey))  . '%';
-            $users = $users->where(function ($query) use ($searchKey) {
-                $query->where('id', 'like', $searchKey)
-                    ->orWhere('full_name', 'like', $searchKey)
-                    ->orWhere('email', 'like', $searchKey);
-            });
-        }
-
-        $users = $users->with(['posts'])
-            ->orderBy('id', 'desc')
-            ->paginate(20);
-
-        return $users;
+        return $this->userRepository->getList($dataSearch);
     }
 
     public function getByUsername($userName)
@@ -38,17 +33,26 @@ class UserService
         return $users;
     }
 
-    public function getById($userId)
+    /**
+     * Find by id
+     *
+     * @param int $id
+     * @return User
+     */
+    public function findById(int $id): User
     {
-        $user = User::where('id', $userId)
-            ->first();
-
-        return $user;
+        return $this->userRepository->findBy($id, 'id');
     }
 
-    public function updateStatus($user, $status)
+    /**
+     * Update
+     *
+     * @param User $user
+     * @param array $attributes
+     * @return void
+     */
+    public function update(User $user, array $attributes): void
     {
-        $user->status = $status;
-        $user->save();
+        $this->userRepository->update($user, $attributes);
     }
 }

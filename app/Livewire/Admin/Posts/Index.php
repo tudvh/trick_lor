@@ -17,7 +17,7 @@ class Index extends Component
         [
             'name' => 'id',
             'displayName' => 'ID',
-            'isSort' => false,
+            'isSort' => true,
         ],
         [
             'name' => 'title',
@@ -36,7 +36,7 @@ class Index extends Component
         ],
         [
             'name' => 'status',
-            'displayName' => 'Chế độ hiển thị',
+            'displayName' => 'Trạng thái',
             'isSort' => false,
         ],
         [

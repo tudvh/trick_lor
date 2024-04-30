@@ -26,7 +26,7 @@
         </div>
         <div class="col-12 col-md-auto">
             <select class="form-select" wire:model.live="searchStatus">
-                <option value="">Chế độ hiển thị</option>
+                <option value="">Trạng thái</option>
                 @foreach (PostStatus::getValues() as $index => $id)
                     <option value="{{ $id }}" {{ $searchStatus === $id ? 'selected' : '' }}>
                         {{ PostStatusText::getValues()[$index] }}

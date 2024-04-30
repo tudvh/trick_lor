@@ -23,7 +23,7 @@ class PostService
     }
 
     /**
-     * Get a list of posts based on the search criteria
+     * Get list
      *
      * @param array $dataSearch
      * @return LengthAwarePaginator
@@ -75,7 +75,7 @@ class PostService
     }
 
     /**
-     * Get a single post by its ID
+     * Find by id
      *
      * @param int $id
      * @return Post
