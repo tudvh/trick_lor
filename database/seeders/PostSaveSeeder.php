@@ -15,7 +15,7 @@ class PostSaveSeeder extends Seeder
     public function run(): void
     {
         for ($i = 0; $i < 300; $i++) {
-            $createdAt = now()->subDays(rand(0, 365 * 5));
+            $createdAt = fake()->dateTimeBetween('2020-01-01 00:00:00', now());
 
             do {
                 $user = User::inRandomOrder()->first();

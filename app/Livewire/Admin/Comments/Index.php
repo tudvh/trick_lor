@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Comments;
 
 use App\Services\Site\PostCommentService;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -10,15 +11,21 @@ class Index extends Component
 {
     use WithPagination;
 
+    #[Url(as: 'q')]
     public $searchKey;
+    #[Url(as: 'comment-id')]
     public $searchCommentId;
+    #[Url(as: 'user-id')]
     public $searchUserId;
+    #[Url(as: 'post-id')]
     public $searchPostId;
 
-    public function mount($searchUserId, $searchPostId)
+    public function showToast($icon, $title)
     {
-        $this->searchUserId = $searchUserId;
-        $this->searchPostId = $searchPostId;
+        $this->dispatch('show-toast', [
+            'icon' => $icon,
+            'title' => $title,
+        ]);
     }
 
     public function refreshFilter()
@@ -27,32 +34,25 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function setSearchCommentId($searchCommentId)
-    {
-        $this->searchCommentId = $searchCommentId;
-    }
-
-    public function setSearchUserId($searchUserId)
-    {
-        $this->searchUserId = $searchUserId;
-    }
-
-    public function setSearchPostId($searchPostId)
-    {
-        $this->searchPostId = $searchPostId;
-    }
-
     public function delete($commendId, PostCommentService $postCommentService)
     {
-        $postCommentService->delete($commendId);
+        $comment = $postCommentService->findById($commendId);
+        $postCommentService->delete($comment);
 
-        $this->dispatch('delete-success');
+        $this->showToast('success', 'Thành công');
     }
 
     public function render(PostCommentService $postCommentService)
     {
+        $dataSearch = [
+            'key' => $this->searchKey,
+            'id' => $this->searchCommentId,
+            'post' => $this->searchPostId,
+            'user' => $this->searchUserId,
+        ];
+
         return view('livewire.admin.comments.index', [
-            'postComments' => $postCommentService->getAll($this->searchKey, $this->searchCommentId, $this->searchUserId, $this->searchPostId)
+            'postComments' => $postCommentService->getList($dataSearch)
         ]);
     }
 }

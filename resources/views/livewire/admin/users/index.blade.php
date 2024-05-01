@@ -47,7 +47,7 @@
                             <th>{{ $user->id }}</th>
                             <td class="user" title="{{ $user->full_name }}">
                                 <div class="d-flex align-items-center gap-2">
-                                    <img src="{{ $user->avatar ?? url('public/assets/img/user-avatar/user-avatar-default.png') }}"
+                                    <img src="{{ $user->avatar ?? url('assets/img/user-avatar/user-avatar-default.png') }}"
                                         alt="{{ $user->full_name }}" class="avatar rounded-circle">
                                     <span>{{ $user->full_name }}</span>
                                 </div>
@@ -56,22 +56,24 @@
                             <td>{{ $user->username }}</td>
                             <td>
                                 @if ($user->status == UserStatus::REGISTER)
-                                    <span class='badge bg-warning'>Đã đăng ký</span>
+                                    <span class='badge bg-warning'>{{ UserStatusText::REGISTER }}</span>
                                 @elseif($user->status == UserStatus::VERIFIED)
-                                    <span class='badge bg-success'>Đã xác nhận</span>
+                                    <span class='badge bg-success'>{{ UserStatusText::VERIFIED }}</span>
                                 @elseif($user->status == UserStatus::BLOCKED)
-                                    <span class='badge bg-danger'>Bị cấm</span>
+                                    <span class='badge bg-danger'>{{ UserStatusText::BLOCKED }}</span>
                                 @endif
                             </td>
                             <td>{{ NumberHelper::format($user->posts_count) }}</td>
                             <td>{{ DateHelper::convertDateFormat($user->created_at) }}</td>
                             <td>
                                 <div class='d-flex justify-content-center align-items-center gap-2'>
-                                    <a href="{{ route('admin.comments.index', ['user-id' => $user->id]) }}"
-                                        type="button" class='btn btn-info'
-                                        title="Xem danh sách bình luận của người dùng này">
-                                        <i class="fa-light fa-message-lines"></i>
-                                    </a>
+                                    @if ($user->status != UserStatus::REGISTER)
+                                        <a href="{{ route('admin.comments.index', ['user-id' => $user->id]) }}"
+                                            type="button" class='btn btn-info'
+                                            title="Xem danh sách bình luận của người dùng này">
+                                            <i class="fa-light fa-message-lines"></i>
+                                        </a>
+                                    @endif
                                     @if ($user->status == UserStatus::VERIFIED)
                                         <button type="button" class='btn btn-danger' title="Cấm người dùng"
                                             wire:click="$dispatch('show-confirm-ban-user', {userId: {{ $user->id }}})">

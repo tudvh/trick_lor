@@ -16,8 +16,10 @@ class PostCommentSeeder extends Seeder
     public function run(): void
     {
         for ($i = 0; $i < 200; $i++) {
-            $replyId = fake()->randomElement([0, 1]) ? PostComment::inRandomOrder()->first()?->id : null;
-            $createdAt = now()->subDays(rand(0, 365 * 5));
+            $replyId = fake()->randomElement([0, 1])
+                ? PostComment::whereNull('reply_id')->inRandomOrder()->first()?->id
+                : null;
+            $createdAt = fake()->dateTimeBetween('2020-01-01 00:00:00', now());
 
             PostComment::create([
                 'user_id' => User::where('status', '<>', UserStatus::REGISTER)->inRandomOrder()->first()->id,

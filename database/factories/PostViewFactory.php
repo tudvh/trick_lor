@@ -19,7 +19,7 @@ class PostViewFactory extends Factory
     public function definition(): array
     {
         $userId = fake()->randomElement([0, 1]) ? User::select('id')->inRandomOrder()->first() : null;
-        $createdAt = now()->subDays(rand(0, 365 * 5));
+        $createdAt = fake()->dateTimeBetween('2020-01-01 00:00:00', now());
 
         return [
             'user_id' => $userId,

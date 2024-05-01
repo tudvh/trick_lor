@@ -62,7 +62,7 @@
                             </td>
                             <td class="post-author" title="{{ $post->author->full_name }}">
                                 <div class="d-flex align-items-center gap-2">
-                                    <img src="{{ $post->author->avatar ?? url('public/assets/img/user-avatar/user-avatar-default.png') }}"
+                                    <img src="{{ $post->author->avatar ?? url('assets/img/user-avatar/user-avatar-default.png') }}"
                                         alt="{{ $post->author->full_name }}" class="avatar rounded-circle">
                                     <span>{{ $post->author->full_name }}</span>
                                 </div>
@@ -78,13 +78,13 @@
                             </td>
                             <td>
                                 @if ($post->status == PostStatus::WAITING)
-                                    <span class='badge bg-warning'>Đang chờ duyệt</span>
+                                    <span class='badge bg-warning'>{{ PostStatusText::WAITING }}</span>
                                 @elseif($post->status == PostStatus::PUBLIC)
-                                    <span class='badge bg-success'>Công khai</span>
+                                    <span class='badge bg-success'>{{ PostStatusText::PUBLIC }}</span>
                                 @elseif($post->status == PostStatus::PRIVATE)
-                                    <span class='badge bg-secondary'>Riêng tư</span>
+                                    <span class='badge bg-secondary'>{{ PostStatusText::PRIVATE }}</span>
                                 @elseif($post->status == PostStatus::BLOCKED)
-                                    <span class='badge bg-danger'>Bị cấm</span>
+                                    <span class='badge bg-danger'>{{ PostStatusText::BLOCKED }}</span>
                                 @endif
                             </td>
                             <td>{{ DateHelper::convertDateFormat($post->created_at) }}</td>

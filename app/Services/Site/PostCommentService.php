@@ -4,44 +4,25 @@ namespace App\Services\Site;
 
 use App\Events\PostCommentEvent;
 use App\Models\PostComment;
+use App\Repositories\PostComment\PostCommentRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostCommentService
 {
-    public function getAll($searchKey, $searchCommentId, $searchUserId, $searchPostId)
+    public function __construct(
+        protected PostCommentRepository $postCommentRepository
+    ) {
+    }
+
+    /**
+     * Get list
+     *
+     * @param array $dataSearch
+     * @return LengthAwarePaginator
+     */
+    public function getList(array $dataSearch): LengthAwarePaginator
     {
-        $postComments = PostComment::query();
-
-        if ($searchPostId != null) {
-            $postComments = $postComments->where('post_id', $searchPostId);
-        }
-        if ($searchUserId != null) {
-            $postComments = $postComments->where('user_id', $searchUserId);
-        }
-        if ($searchCommentId != null) {
-            $postComments = $postComments->where('id', $searchCommentId)
-                ->orWhere('reply_id', $searchCommentId)
-                ->orderBy('id', 'asc');
-        }
-        if ($searchKey != null) {
-            $searchKey = '%' . str_replace(' ', '%', trim($searchKey))  . '%';
-
-            $postComments = $postComments->where(function ($query) use ($searchKey) {
-                $query->where('id', 'like', $searchKey)
-                    ->orWhere('content', 'like', $searchKey)
-                    ->orWhereHas('user', function ($query) use ($searchKey) {
-                        return $query->where('full_name', 'like', $searchKey);
-                    })
-                    ->orWhereHas('post', function ($query) use ($searchKey) {
-                        return $query->where('title', 'like', $searchKey);
-                    });
-            });
-        }
-
-        $postComments = $postComments->with(['user', 'post', 'replies'])
-            ->orderBy('id', 'desc')
-            ->paginate(20);
-
-        return $postComments;
+        return $this->postCommentRepository->getList($dataSearch);
     }
 
     public function getByPostId($postId, $limit = 5)
@@ -65,6 +46,17 @@ class PostCommentService
         return $postComments;
     }
 
+    /**
+     * Find by id
+     *
+     * @param int $id
+     * @return PostComment
+     */
+    public function findById(int $id): PostComment
+    {
+        return $this->postCommentRepository->findBy($id, 'id');
+    }
+
     public function create($postId, $userId, $content, $replyId)
     {
         PostComment::create([
@@ -77,13 +69,15 @@ class PostCommentService
         event(new PostCommentEvent($postId, $userId));
     }
 
-    public function delete($commentId)
+    /**
+     * Delete
+     *
+     * @param PostComment $comment
+     * @return void
+     */
+    public function delete(PostComment $comment): void
     {
-        $comment = PostComment::find($commentId);
-
-        if ($comment) {
-            $comment->delete();
-            event(new PostCommentEvent($comment->post->id, $comment->user->id));
-        }
+        $this->postCommentRepository->delete($comment);
+        event(new PostCommentEvent($comment->post->id, $comment->user->id));
     }
 }
