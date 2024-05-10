@@ -3,22 +3,25 @@
 namespace App\Services\Site;
 
 use App\Models\Post;
+use App\Repositories\Post\PostRepository;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostService
 {
-    public function getAll()
-    {
-        $posts = Post::public()
-            ->authorVerified()
-            ->with([
-                'author',
-                'categories:name,icon_color',
-                'postViews'
-            ])
-            ->latest('id')
-            ->paginate(12);
+    public function __construct(
+        protected PostRepository $postRepository
+    ) {
+    }
 
-        return $posts;
+    /**
+     * Get list
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getList(): LengthAwarePaginator
+    {
+        return $this->postRepository->getListForUser();
     }
 
     public function getBySearch($searchKey, $isPagination, $limit = 5)
@@ -65,46 +68,15 @@ class PostService
         return $posts;
     }
 
-    public function getTrending($type)
+    /**
+     * Get list for trending
+     *
+     * @param string $type
+     * @return Collection
+     */
+    public function getTrending(string $type): Collection
     {
-        $oneDayAgo = now()->subDay();
-        $oneWeekAgo = now()->subWeek();
-        $oneMonthAgo = now()->subMonth();
-
-        $posts = Post::public()
-            ->authorVerified()
-            ->with([
-                'author',
-                'categories:name,icon_color',
-                'postViews'
-            ]);
-
-        if ($type === 'day') {
-            $posts->withCount(['postViews as views_count_day' => function ($query) use ($oneDayAgo) {
-                $query->where('created_at', '>=', $oneDayAgo);
-            }]);
-            $posts->orderBy('views_count_day', 'desc');
-        }
-        if ($type === 'week' || $type === 'day') {
-            $posts->withCount(['postViews as views_count_week' => function ($query) use ($oneWeekAgo) {
-                $query->where('created_at', '>=', $oneWeekAgo);
-            }]);
-            $posts->orderBy('views_count_week', 'desc');
-        }
-        if ($type === 'month' || $type === 'week' || $type === 'day') {
-            $posts->withCount(['postViews as views_count_month' => function ($query) use ($oneMonthAgo) {
-                $query->where('created_at', '>=', $oneMonthAgo);
-            }]);
-            $posts->orderBy('views_count_month', 'desc');
-        }
-
-        $posts = $posts->withCount(['postViews as views_count_all'])
-            ->orderBy('views_count_all', 'desc')
-            ->latest('id')
-            ->take(12)
-            ->get();
-
-        return $posts;
+        return $this->postRepository->getListForTrending($type);
     }
 
     private function getSuggestedPosts(Post $post)

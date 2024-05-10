@@ -5,6 +5,7 @@ namespace App\Services\Admin;
 use App\Models\Category;
 use App\Repositories\Category\CategoryRepository;
 use App\Services\BaseService;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryService extends BaseService
 {
@@ -13,18 +14,35 @@ class CategoryService extends BaseService
     ) {
     }
 
-    public function list()
+    /**
+     * Get list
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getList(): LengthAwarePaginator
     {
-        return $this->categoryRepository->list();
+        return $this->categoryRepository->getList();
     }
 
-    public function create()
+    /**
+     * Create
+     *
+     * @return void
+     */
+    public function create(): void
     {
-        return $this->categoryRepository->create($this->data);
+        $this->categoryRepository->create($this->data);
     }
 
-    public function update(Category $category)
+    /**
+     * Update
+     *
+     * @param Category $category
+     *
+     * @return void
+     */
+    public function update(Category $category): void
     {
-        return $this->categoryRepository->update($category, $this->data);
+        $this->categoryRepository->update($category, $this->data);
     }
 }

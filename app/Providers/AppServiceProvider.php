@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\Category\CategoryStatus;
 use Illuminate\Support\ServiceProvider;
 use App\Services\Site\CategoryService;
 
@@ -37,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         foreach ($views as $view) {
             view()->composer($view, function ($view) use ($categoryService) {
                 $view->with([
-                    'listCategories' => $categoryService->getByActive(1)
+                    'listCategories' => $categoryService->getByStatus(CategoryStatus::PUBLIC)
                 ]);
             });
         }

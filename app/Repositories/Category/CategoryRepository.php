@@ -2,8 +2,11 @@
 
 namespace App\Repositories\Category;
 
+use App\Enums\Category\CategoryStatus;
 use App\Models\Category;
 use App\Repositories\BaseRepository;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
@@ -12,11 +15,39 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         return Category::class;
     }
 
-    public function list()
+    /**
+     * Get all
+     *
+     * @return Collection
+     */
+    public function getAll(): Collection
+    {
+        return $this->model->all();
+    }
+
+    /**
+     * Get list
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getList(): LengthAwarePaginator
     {
         return $this->model
             ->withCount(['posts'])
             ->orderBy('id', 'desc')
             ->paginate(config('define.pagination.default'));
+    }
+
+    /**
+     * Get by status
+     *
+     * @param CategoryStatus $status
+     * @return Collection
+     */
+    public function getByStatus(CategoryStatus $status): Collection
+    {
+        return $this->model
+            ->where('status', $status)
+            ->get();
     }
 }

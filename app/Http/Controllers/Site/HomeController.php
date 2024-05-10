@@ -11,22 +11,17 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    protected $postService;
-    protected $postViewService;
-    protected $categoryService;
-    protected $userService;
-
-    public function __construct(PostService $postService, PostViewService $postViewService, CategoryService $categoryService, UserService $userService)
-    {
-        $this->postService = $postService;
-        $this->postViewService = $postViewService;
-        $this->categoryService = $categoryService;
-        $this->userService = $userService;
+    public function __construct(
+        protected PostService $postService,
+        protected PostViewService $postViewService,
+        protected CategoryService $categoryService,
+        protected UserService $userService
+    ) {
     }
 
     public function home()
     {
-        $posts = $this->postService->getAll();
+        $posts = $this->postService->getList();
 
         return view('pages.site.home', compact('posts'));
     }
@@ -44,14 +39,9 @@ class HomeController extends Controller
         return view('pages.site.home', compact('posts', 'titleWeb', 'searchKey'));
     }
 
-    public function trending(Request $request)
+    public function trending()
     {
-        $trendingPostsDay = $this->postService->getTrending('day');
-        $trendingPostsWeek = $this->postService->getTrending('week');
-        $trendingPostsMonth = $this->postService->getTrending('month');
-        $trendingPosts = $this->postService->getTrending('all');
-
-        return view('pages.site.trending', compact('trendingPostsDay', 'trendingPostsWeek', 'trendingPostsMonth', 'trendingPosts'));
+        return view('pages.site.trending');
     }
 
     public function category(string $categorySlug)
