@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Enums\Category\CategoryStatus;
 use Illuminate\Support\ServiceProvider;
 use App\Services\Site\CategoryService;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(CategoryService $categoryService): void
     {
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+
         $views = [
             'pages.site.activities.*',
             'pages.site.category',

@@ -52,7 +52,7 @@ class HomeController extends Controller
             return redirect()->route('site.home')->with('error-notification', 'Danh mục này đã bị xóa hoặc bị ẩn.');
         }
 
-        $posts = $this->postService->getByCategorySlug($categorySlug);
+        $posts = $this->postService->getListByCategoryId($category->id);
 
         return view('pages.site.category', compact('posts', 'category'));
     }

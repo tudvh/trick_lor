@@ -79,7 +79,6 @@
     <script src="{{ url('assets/js/assets.js') }}"></script>
     <script src="{{ url('site/js/header-open-search.js') }}"></script>
     <script src="{{ url('assets/js/sidebar-mobile.js') }}"></script>
-    <!-- <script src="{{ url('assets/js/hide-logo.js') }}"></script> -->
     @yield('js')
 </body>
 

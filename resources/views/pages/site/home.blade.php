@@ -2,7 +2,7 @@
 
 @section('meta')
     <meta property="og:description" content="">
-    <meta property="og:image" content="{{ url('assets/img/post-thumbnail/post-thumbnail-primary/maxresdefault.png') }}">
+    <meta property="og:image" content="{{ url('assets/img/post-thumbnail/maxresdefault.png') }}">
 @stop
 
 @section('title', isset($titleWeb) ? $titleWeb . ' - Trick loR' : 'Trick loR')

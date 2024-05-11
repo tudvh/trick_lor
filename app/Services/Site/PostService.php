@@ -50,22 +50,16 @@ class PostService
         return $isPagination ? $posts->paginate($limit) : $posts->take($limit)->get();
     }
 
-    public function getByCategorySlug($categorySlug)
+    /**
+     * Get list by category id
+     *
+     * @param int $categoryId
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getListByCategoryId(int $categoryId): LengthAwarePaginator
     {
-        $posts = Post::public()
-            ->authorVerified()
-            ->whereHas('categories', function ($query) use ($categorySlug) {
-                return $query->where('slug', $categorySlug);
-            })
-            ->with([
-                'author',
-                'categories:name,icon_color',
-                'postViews'
-            ])
-            ->latest('id')
-            ->paginate(12);
-
-        return $posts;
+        return $this->postRepository->getListByCategoryId($categoryId);
     }
 
     /**

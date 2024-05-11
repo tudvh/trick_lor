@@ -50,4 +50,19 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             ->where('status', $status)
             ->get();
     }
+
+    /**
+     * Get by slug
+     *
+     * @param string $slug
+     *
+     * @return Category
+     */
+    public function getBySlug(string $slug): Category
+    {
+        return $this->model
+            ->public()
+            ->where('slug', $slug)
+            ->first();
+    }
 }

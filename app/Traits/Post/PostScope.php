@@ -10,13 +10,16 @@ trait PostScope
 {
     public function scopePublic($query): Builder
     {
-        return $query->where('status', PostStatus::PUBLIC);
+        return $query->where('status', PostStatus::PUBLIC)
+            ->whereHas('categories', function ($query) {
+                return $query->public();
+            });
     }
 
     public function scopeAuthorVerified($query): Builder
     {
         return $query->whereHas('author', function ($query) {
-            $query->where('status', UserStatus::VERIFIED);
+            return $query->where('status', UserStatus::VERIFIED);
         });
     }
 }

@@ -109,4 +109,25 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->take(config('define.pagination.list_posts_for_user'))
             ->get();
     }
+
+    /**
+     * Get list by category id
+     *
+     * @param int $categoryId
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getListByCategoryId(int $categoryId): LengthAwarePaginator
+    {
+        return $this->model
+            ->public()
+            ->authorVerified()
+            ->with(['author', 'categories:name,icon_color'])
+            ->withCount(['postViews'])
+            ->whereHas('categories', function ($query) use ($categoryId) {
+                return $query->where('id', $categoryId);
+            })
+            ->latest('id')
+            ->paginate(config('define.pagination.list_posts_for_user'));
+    }
 }

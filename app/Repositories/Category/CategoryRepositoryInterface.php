@@ -12,4 +12,6 @@ interface CategoryRepositoryInterface extends RepositoryInterface
     public function getList();
 
     public function getByStatus(CategoryStatus $status);
+
+    public function getBySlug(string $slug);
 }

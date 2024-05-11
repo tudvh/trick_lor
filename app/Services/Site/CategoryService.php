@@ -35,10 +35,15 @@ class CategoryService
         return $this->categoryRepository->getByStatus($status);
     }
 
-    public function getBySlug($slug)
+    /**
+     * Get by slug
+     *
+     * @param string $slug
+     *
+     * @return Category
+     */
+    public function getBySlug(string $slug): Category
     {
-        return Category::where('slug', $slug)
-            ->where('active', 1)
-            ->first();
+        return $this->categoryRepository->getBySlug($slug);
     }
 }
