@@ -2,96 +2,122 @@
 
 namespace App\Services\Site;
 
+use App\Enums\User\UserStatus;
 use App\Helpers\StringHelper;
 use App\Models\User;
+use App\Repositories\User\UserRepository;
 use App\Services\CloudinaryService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthService
 {
-    protected $cloudinaryService;
     private const CLOUDINARY_ROOT_PATH = "user-avatar";
     private const AVATAR_MAX_QUALITY = 144;
 
-    public function __construct(CloudinaryService $cloudinaryService)
-    {
-        $this->cloudinaryService = $cloudinaryService;
+    public function __construct(
+        protected CloudinaryService $cloudinaryService,
+        protected UserRepository $userRepository,
+    ) {
     }
 
-    public function handleLogin($email, $password)
+    /**
+     * Login
+     *
+     * @param array $credentials
+     *
+     * @return JsonResponse
+     */
+    public function login(array $credentials): JsonResponse
     {
-        $credentials = ['email' => $email, 'password' => $password];
-
         if (!Auth::guard('site')->attempt($credentials)) {
-            return response()->json(['message' => 'Đăng nhập thất bại!'], 401);
-        }
-        if (Auth::guard('site')->user()->status == 'blocked') {
-            Auth::guard('site')->logout();
-            return response()->json(['message' => 'Tài khoản của bạn đã bị cấm sử dụng!'], 403);
-        }
-        if (Auth::guard('site')->user()->status != 'verified') {
-            Auth::guard('site')->logout();
-            return response()->json(['message' => 'Tài khoản của bạn chưa được kích hoạt, vui lòng vào Email của bạn để tìm email của chúng tôi và kích hoạt nó!'], 403);
+            return response()->json(['message' => 'Đăng nhập thất bại!'], Response::HTTP_UNAUTHORIZED);
         }
 
-        $user = User::where('id', Auth::guard('site')->user()->id)->first();
+        $user = $this->userRepository->findBy(Auth::guard('site')->user()->id, 'id');
+
+        if ($user->status === UserStatus::BLOCKED) {
+            Auth::guard('site')->logout();
+            return response()->json(['message' => 'Tài khoản của bạn đã bị cấm sử dụng!'], Response::HTTP_FORBIDDEN);
+        }
+
+        if ($user->status !== UserStatus::VERIFIED) {
+            Auth::guard('site')->logout();
+            return response()->json(['message' => 'Tài khoản của bạn chưa được kích hoạt. Vui lòng vào Email của bạn để tìm email của chúng tôi và kích hoạt nó!'], Response::HTTP_FORBIDDEN);
+        }
+
         $user->update(['verification_token' => null]);
 
-        return response()->json(['message' => 'Đăng nhập thành công'], 200);
+        return response()->json(['message' => 'Đăng nhập thành công'], Response::HTTP_OK);
     }
 
-    public function handleRegister($fullName, $email, $password)
+    /**
+     * Register
+     *
+     * @param array $data
+     *
+     * @return JsonResponse
+     */
+    public function register(array $data): JsonResponse
     {
-        $fullName = StringHelper::handleName($fullName);
-
-        $user = User::create([
-            'full_name' => $fullName,
-            'email' => trim($email),
-            'username' => Str::slug($fullName) . '-' . uniqid(),
-            'password' => bcrypt(trim($password)),
-        ]);
-
-        $currentTime = now();
+        $fullName = StringHelper::handleName($data['full_name']);
         $verificationToken = hash_hmac('sha256', str()->random(50), config('app.key'));
-        $user->update([
+
+        $data = [
+            ...$data,
+            'fullName' => $fullName,
+            'username' => Str::slug($fullName) . '-' . uniqid(),
+            'password' => bcrypt($data['password']),
             'verification_token' => $verificationToken,
-            'last_email_sent_at' => $currentTime
-        ]);
+            'last_email_sent_at' => now(),
+        ];
+
+        $user = $this->userRepository->create($data);
 
         Mail::send(
             'emails.register-verify',
             compact('fullName', 'verificationToken'),
-            function ($e) use ($email) {
+            function ($e) use ($data) {
                 $e->subject('Welcome To Trick loR');
-                $e->to($email);
+                $e->to($data['email'], $data['fullName']);
             }
         );
 
         return response()->json([
             'message' => 'Chúng tôi đã gửi một tin nhắn đến địa chỉ email của bạn. Vui lòng kiểm tra email để tiếp tục.'
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 
-    public function handleRegisterWithGoogle($fullName, $email, $googleId, $avatar)
+    /**
+     * Register with google
+     *
+     * @param array $data
+     *
+     * @return User
+     */
+    public function registerWithGoogle(array $data): User
     {
-        $user = User::create([
-            'full_name' => $fullName,
-            'email' => $email,
-            'username' => Str::slug($fullName) . '-' . uniqid(),
-            'google_id' => $googleId,
-            'status' => 'verified'
+        $user = $this->userRepository->create([
+            'full_name' => $data['full_name'],
+            'email' => $data['email'],
+            'username' => Str::slug($data['full_name']) . '-' . uniqid(),
+            'google_id' => $data['google_id'],
+            'status' => UserStatus::VERIFIED,
         ]);
 
         $publicId = $this::CLOUDINARY_ROOT_PATH . "/" . $user->id;
         $maxQuality = $this::AVATAR_MAX_QUALITY;
-        $uploadedResult = $this->cloudinaryService->upload($avatar, $publicId, $maxQuality);
+        $uploadedResult = $this->cloudinaryService->upload($data['avatar_url'], $publicId, $maxQuality);
 
-        $user->avatar = $uploadedResult->getSecurePath();
-        $user->avatar_public_id = $uploadedResult->getPublicId();
+        $dataUpdate = [
+            'avatar' => $uploadedResult->getSecurePath(),
+            'avatar_public_id' => $uploadedResult->getPublicId(),
+        ];
 
-        $user->save();
+        $this->userRepository->update($user, $dataUpdate);
 
         return $user;
     }
@@ -122,19 +148,26 @@ class AuthService
         $user->save();
     }
 
-    public function handleForgot($email)
+    /**
+     * Handle forgot
+     *
+     * @param $data $data
+     *
+     * @return JsonResponse
+     */
+    public function handleForgot($data): JsonResponse
     {
-        $user = User::where('email', $email)->first();
+        $user = $this->userRepository->findBy($data['email'], 'email');
 
         if (!$user) {
             return response()->json([
                 'message' => 'Không tìm thấy email của bạn'
-            ], 404);
+            ], Response::HTTP_NOT_FOUND);
         }
-        if ($user->status == 'blocked') {
+        if ($user->status === UserStatus::BLOCKED) {
             return response()->json([
                 'message' => 'Tài khoản của bạn đã bị cấm sử dụng'
-            ], 403);
+            ], Response::HTTP_FORBIDDEN);
         }
 
         $lastEmailSentAt = $user->last_email_sent_at;
@@ -145,11 +178,11 @@ class AuthService
         if ($lastEmailSentAt && $currentTime->diffInMinutes($lastEmailSentAt) < $minTimeBetweenEmails) {
             return response()->json([
                 'message' => 'Vui lòng đợi một thời gian trước khi gửi email tiếp theo.'
-            ], 429);
+            ], Response::HTTP_TOO_MANY_REQUESTS);
         }
 
         $verificationToken = hash_hmac('sha256', str()->random(50), config('app.key'));
-        $user->update([
+        $this->userRepository->update($user, [
             'verification_token' => $verificationToken,
             'last_email_sent_at' => $currentTime
         ]);
@@ -159,14 +192,14 @@ class AuthService
         Mail::send(
             'emails.forgot-password',
             compact('fullName', 'verificationToken'),
-            function ($e) use ($email) {
+            function ($e) use ($email, $fullName) {
                 $e->subject('Reset Your Password');
-                $e->to($email);
+                $e->to($email, $fullName);
             }
         );
 
         return response()->json([
             'message' => 'Chúng tôi đã gửi một tin nhắn đến địa chỉ email của bạn. Vui lòng kiểm tra email để tiếp tục.'
-        ], 201);
+        ], Response::HTTP_OK);
     }
 }

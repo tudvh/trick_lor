@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Post;
 
+use App\Models\Post;
 use App\Repositories\RepositoryInterface;
 
 interface PostRepositoryInterface extends RepositoryInterface
@@ -13,4 +14,8 @@ interface PostRepositoryInterface extends RepositoryInterface
     public function getListForTrending(string $type);
 
     public function getListByCategoryId(int $categoryId);
+
+    public function getListSuggested(Post $post);
+
+    public function getBySlug(string $slug);
 }

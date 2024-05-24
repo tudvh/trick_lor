@@ -2,37 +2,42 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Enums\User\UserStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\Auth\ChangePasswordRequest;
 use App\Models\User;
+use App\Services\Site\UserService;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(
+        protected UserService $userService
+    ) {
         $this->middleware('site', ['only' => ['changePassword', 'personal']]);
     }
 
     public function verifyEmail(Request $request)
     {
-        if (!$request->token) {
+        $verificationToken = $request->input('token');
+
+        if (!$verificationToken) {
             return redirect()->route('site.home')->with('error-notification', 'Đường dẫn không hợp lệ');
         }
 
-        $verificationToken = $request->token;
-        $user = User::where('verification_token', $verificationToken)->first();
+        $user = $this->userService->findByVerificationToken($verificationToken);
 
         if (!$user) {
             return redirect()->route('site.home')->with('error-notification', 'Mã xác nhận không hợp lệ');
         }
 
-        $user->update([
-            'status' => 'verified',
+        $dataUpdate = [
+            'status' => UserStatus::VERIFIED,
             'verification_token' => null,
-        ]);
+        ];
+        $this->userService->update($user, $dataUpdate);
 
         return redirect()->route('site.home')->with('success-notification', 'Bạn đã xác minh email thành công.');
     }
@@ -77,12 +82,12 @@ class AuthController extends Controller
         }
 
         $verificationToken = $request->token;
-        $user = User::where('verification_token', $verificationToken)->first();
+        $user = $this->userService->findByVerificationToken($verificationToken);
 
         if (!$user) {
             return redirect()->route('site.home')->with('error-notification', 'Mã xác nhận không hợp lệ');
         }
-        if ($user->status == 'blocked') {
+        if ($user->status == UserStatus::BLOCKED) {
             return redirect()->route('site.home')->with('error-notification', 'Tài khoản của bạn đã bị cấm sử dụng');
         }
 
@@ -100,13 +105,13 @@ class AuthController extends Controller
         if (!$user) {
             return redirect()->route('site.home')->with('error-notification', 'Mã xác nhận không hợp lệ');
         }
-        if ($user->status == 'blocked') {
+        if ($user->status == UserStatus::BLOCKED) {
             return redirect()->route('site.home')->with('error-notification', 'Tài khoản của bạn đã bị cấm sử dụng');
         }
 
         $user->update([
             'password' => bcrypt($request->input('password_new')),
-            'status' => 'verified',
+            'status' => UserStatus::VERIFIED,
             'verification_token' => null,
         ]);
 

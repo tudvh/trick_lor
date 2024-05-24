@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('avatar_public_id', 100)->nullable();
             $table->string('email', 100);
             $table->string('username', 100);
-            $table->text('password');
+            $table->text('password')->nullable();
             $table->unsignedSmallInteger('role')->default(2)->comment('1: Admin | 2: User');
             $table->string('google_id', 50)->nullable();
             $table->unsignedSmallInteger('status')->default(1)->comment('1: Registered | 2: Verified | 3: Blocked');

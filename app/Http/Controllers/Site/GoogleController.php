@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Enums\User\UserStatus;
 use Exception;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\Admin\UserService;
 use App\Services\Site\AuthService;
 
 class GoogleController extends Controller
 {
-    protected $authService;
 
-    public function __construct(AuthService $authService)
-    {
+    public function __construct(
+        protected AuthService $authService,
+        protected UserService $userService
+    ) {
         $this->authService = $authService;
     }
 
@@ -33,22 +35,26 @@ class GoogleController extends Controller
 
             if ($user) {
                 if (!$user->google_id) {
-                    $user->update(['google_id' => $userGoogle->id]);
+                    $this->userService->update($user, ['google_id' => $userGoogle->id]);
                 }
-                if ($user->status == 'blocked') {
+                if ($user->status == UserStatus::BLOCKED) {
                     $status = 'error';
                     $message = 'Tài khoản của bạn đã bị cấm sử dụng!';
                 } else {
-                    $user->update([
-                        'status' => 'verified',
+                    $this->userService->update($user, [
+                        'status' => UserStatus::VERIFIED,
                         'verification_token' => null,
                     ]);
                     Auth::guard('site')->login($user);
-
                     $message = 'Đăng nhập thành công';
                 }
             } else {
-                $newUser = $this->authService->handleRegisterWithGoogle($userGoogle->name, $userGoogle->email, $userGoogle->id, $userGoogle->avatar);
+                $newUser = $this->authService->registerWithGoogle([
+                    'full_name' => $userGoogle->name,
+                    'email' => $userGoogle->email,
+                    'google_id' => $userGoogle->id,
+                    'avatar_url' => $userGoogle->avatar,
+                ]);
                 Auth::guard('site')->login($newUser);
                 $message = 'Đăng ký tài khoản thành công';
             }

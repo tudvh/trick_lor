@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Site;
 use App\Http\Controllers\Admin;
-use Livewire\Livewire;
 
 
 /*
@@ -25,7 +24,7 @@ Route::group(['prefix' => 'admin'], function () {
     // Auth
     Route::group(['prefix' => 'auth'], function () {
         Route::get('/login', [Admin\AuthController::class, 'login'])->name('admin.auth.login');
-        Route::post('/login', [Admin\AuthController::class, 'handleLogin'])->name('admin.auth.login');
+        Route::post('/login', [Admin\AuthController::class, 'handleLogin'])->name('admin.auth.handle-login');
         Route::get('/logout', [Admin\AuthController::class, 'logout'])->name('admin.auth.logout');
     });
 
@@ -76,7 +75,7 @@ Route::group(['prefix' => ''], function () {
         Route::get('/logout', [Site\AuthController::class, 'logout'])->name('site.auth.logout');
         Route::post('/change-password', [Site\AuthController::class, 'changePassword'])->name('site.auth.change-password');
         Route::get('/reset-password', [Site\AuthController::class, 'resetPassword'])->name('site.auth.reset-password');
-        Route::post('/reset-password', [Site\AuthController::class, 'handleResetPassword'])->name('site.auth.reset-password');
+        Route::post('/reset-password', [Site\AuthController::class, 'handleResetPassword'])->name('site.auth.handle-reset-password');
 
         // Google
         Route::get('/google', [Site\GoogleController::class, 'redirectToGoogle']);
@@ -89,13 +88,4 @@ Route::group(['prefix' => ''], function () {
         Route::get('/new', [Site\PostController::class, 'create'])->name('site.my-posts.create');
         Route::get('/{post}/edit', [Site\PostController::class, 'edit'])->name('site.my-posts.edit');
     });
-});
-
-// Livewire
-Livewire::setScriptRoute(function ($handle) {
-    return Route::get(env('APP_PATH') . '/vendor/livewire/livewire/dist/livewire.js', $handle);
-});
-
-Livewire::setUpdateRoute(function ($handle) {
-    return Route::post(env('APP_PATH') . '/livewire/update', $handle);
 });

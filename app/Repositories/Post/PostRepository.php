@@ -130,4 +130,75 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->latest('id')
             ->paginate(config('define.pagination.list_posts_for_user'));
     }
+
+    /**
+     * Get list suggested
+     *
+     * @param Post $post
+     *
+     * @return Collection
+     */
+    public function getListSuggested(Post $post): Collection
+    {
+        $limit = config('define.pagination.list_posts_suggested');
+
+        // Get suggest with author
+        $suggestedPostsWithAuthor = $this->model
+            ->public()
+            ->authorVerified()
+            ->where('id', '!=', $post->id)
+            ->where('author_id', $post->author_id)
+            ->inRandomOrder()
+            ->take($limit)
+            ->get();
+
+        // Get suggest with category
+        $suggestedPostsWithCategory = $this->model
+            ->public()
+            ->authorVerified()
+            ->where('id', '!=', $post->id)
+            ->whereNotIn('id', $suggestedPostsWithAuthor->pluck('id'))
+            ->whereHas('categories', function ($query) use ($post) {
+                return $query->whereIn('id', $post->categories->pluck('id'));
+            })
+            ->inRandomOrder()
+            ->take($limit - $suggestedPostsWithAuthor->count())
+            ->get();
+
+        // Get suggest with popular
+        $suggestedPostsWithPopular = $this->model
+            ->public()
+            ->authorVerified()
+            ->where('id', '!=', $post->id)
+            ->whereNotIn('id', $suggestedPostsWithAuthor->pluck('id')->merge($suggestedPostsWithCategory->pluck('id')))
+            ->withCount(['postViews as views'])
+            ->orderBy('views', 'desc')
+            ->inRandomOrder()
+            ->take($limit - $suggestedPostsWithAuthor->count() - $suggestedPostsWithCategory->count())
+            ->get();
+
+        return $suggestedPostsWithAuthor
+            ->concat($suggestedPostsWithCategory)
+            ->concat($suggestedPostsWithPopular)
+            ->load(['author', 'categories:name,icon_color'])
+            ->loadCount(['postViews']);
+    }
+
+    /**
+     * Get by slug
+     *
+     * @param string $slug
+     *
+     * @return Post
+     */
+    public function getBySlug(string $slug): Post
+    {
+        return $this->model
+            ->public()
+            ->authorVerified()
+            ->with(['author', 'categories:name,slug,icon_color'])
+            ->withCount(['postViews'])
+            ->where('slug', $slug)
+            ->first();
+    }
 }

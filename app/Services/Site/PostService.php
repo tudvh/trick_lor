@@ -73,47 +73,9 @@ class PostService
         return $this->postRepository->getListForTrending($type);
     }
 
-    private function getSuggestedPosts(Post $post)
+    public function getSuggested(Post $post)
     {
-        return Post::public()
-            ->authorVerified()
-            ->where('id', '!=', $post->id)
-            ->with([
-                'author',
-                'categories:name,icon_color',
-                'postViews'
-            ]);
-    }
-
-    public function getSuggest(Post $post, int $limit)
-    {
-        // Get suggest with author
-        $suggestedPostsWithAuthor = $this->getSuggestedPosts($post)
-            ->where('author_id', $post->author_id)
-            ->inRandomOrder()
-            ->take($limit)
-            ->get();
-
-        // Get suggest with category
-        $suggestedPostsWithCategory = $this->getSuggestedPosts($post)
-            ->whereNotIn('id', $suggestedPostsWithAuthor->pluck('id'))
-            ->whereHas('postCategories', function ($query) use ($post) {
-                $query->whereIn('category_id', $post->postCategories->pluck('category_id'));
-            })
-            ->inRandomOrder()
-            ->take($limit - $suggestedPostsWithAuthor->count())
-            ->get();
-
-        // Get suggest with popular
-        $suggestedPostsWithPopular = $this->getSuggestedPosts($post)
-            ->whereNotIn('id', $suggestedPostsWithAuthor->pluck('id')->merge($suggestedPostsWithCategory->pluck('id')))
-            ->withCount(['postViews as views'])
-            ->orderBy('views', 'desc')
-            ->inRandomOrder()
-            ->take($limit - $suggestedPostsWithAuthor->count() - $suggestedPostsWithCategory->count())
-            ->get();
-
-        return $suggestedPostsWithAuthor->concat($suggestedPostsWithCategory)->concat($suggestedPostsWithPopular);
+        return $this->postRepository->getListSuggested($post);
     }
 
     public function getByUserId($userId, $searchKey, $searchCategory, $sortBy)
@@ -154,18 +116,15 @@ class PostService
         return $posts;
     }
 
-    public function getBySlug($postSlug)
+    /**
+     * Get by slug
+     *
+     * @param string $slug
+     *
+     * @return Post
+     */
+    public function getBySlug(string $slug): Post
     {
-        $post = Post::public()
-            ->authorVerified()
-            ->where('slug', $postSlug)
-            ->with([
-                'author',
-                'categories:name,slug,icon_color',
-                'postViews'
-            ])
-            ->first();
-
-        return $post;
+        return $this->postRepository->getBySlug($slug);
     }
 }

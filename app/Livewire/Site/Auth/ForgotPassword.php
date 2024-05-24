@@ -4,6 +4,7 @@ namespace App\Livewire\Site\Auth;
 
 use App\Services\Site\AuthService;
 use Livewire\Component;
+use Symfony\Component\HttpFoundation\Response;
 
 class ForgotPassword extends Component
 {
@@ -27,9 +28,11 @@ class ForgotPassword extends Component
             'email.email' => 'Vui lòng nhập đúng định dạng email',
         ]);
 
-        $result = $authService->handleForgot($this->email);
+        $result = $authService->handleForgot([
+            'email' => $this->email,
+        ]);
 
-        if ($result->getStatusCode() == 201) {
+        if ($result->getStatusCode() == Response::HTTP_OK) {
             $this->dispatch('handle-forgot-success');
         } else {
             $this->showAlert('error', 'Lỗi', $result->getData()->message);

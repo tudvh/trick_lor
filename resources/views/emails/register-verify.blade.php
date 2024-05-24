@@ -1,68 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ config('app.name') }}</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
+            color: #718096;
         }
 
         p {
             font-size: 1rem;
-            color: #292929;
-            margin: 0 0 10px 0;
+            margin-bottom: 1rem;
+            overflow-wrap: break-word;
+        }
+
+        p.more {
+            font-size: 0.875rem;
+        }
+
+        hr {
+            margin: 25px 0;
+            border-color: #e8e5ef
         }
 
         strong {
             color: orangered;
         }
 
-        a {
+        .btn {
             display: block;
             width: fit-content;
-            margin: 0 auto;
+            margin: 1.875rem auto;
             text-decoration: none;
-            background-image: linear-gradient(#ff9b76, orangered);
+            background-color: orangered;
             color: #ffffff !important;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
             font-weight: bold;
             text-align: center;
         }
 
-        a:hover {
-            background-image: linear-gradient(orangered, orangered);
-        }
-
         .wrapper {
-            background-color: #f0f2f5;
-            padding: 3rem .1rem;
+            background-color: #edf2f7;
         }
 
         .container {
-            max-width: 600px;
+            width: 570px;
             margin: 0 auto;
-            padding: 2rem;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+
+            @media (max-width: 600px) {
+                width: 100%;
+            }
         }
 
         .header {
-            max-width: 300px;
-            margin: 0 auto 24px;
+            padding: 25px 2rem;
+        }
+
+        .header a {
+            display: block;
+            width: 100%;
             text-align: center;
+            color: orangered;
+            font-size: 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        .header img {
-            max-width: 160px;
+        .content {
+            background-color: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+            padding: 2rem;
         }
 
-        .header p {
-            color: #77797c;
-            margin-top: 0.25rem;
-            font-size: 0.95rem;
+        .footer {
+            padding: 32px;
+            font-size: 12px;
+            text-align: center;
         }
     </style>
 </head>
@@ -70,20 +95,31 @@
 <body>
     <div class="wrapper">
         <div class="container">
-            <header class="header">
-                <img src="https://cdn.discordapp.com/attachments/858695320753012789/1193420808983433297/logo-web.png" alt="Trick loR">
-                <p>Welcome to Trick loR</p>
-            </header>
-            <p>Dear <strong>{{ $fullName }}</strong>,</p>
-            <p>Thank you so much for being a member of Trick loR.</p>
-            <p>Click here to verify your email.</p>
-            <p>
-                <a href="{{ URL::to('/') }}/auth/verify-email?token={{ $verificationToken }}">Verify Your Email</a>
-            </p>
-            <p>If you have any questions or require assistance, feel free to respond to this email or reach out to our online support team through the website.</p>
-            <p>Thank you for choosing Trick loR.</p>
-            <p>Best regards,</p>
-            <p>Trick loR</p>
+            <div class="header">
+                <a href="{{ URL::to('/') }}" target="_blank">
+                    {{ config('app.name') }}
+                </a>
+            </div>
+            <div class="content">
+                <p>Hi <strong>{{ $fullName }}</strong>,</p>
+                <p>Welcome to Trick loR! We're thrilled to have you as a member. Please click the button below to verify
+                    your email address and complete your registration.</p>
+                <a href="{{ URL::to('/') }}/auth/verify-email?token={{ $verificationToken }}" class="btn">
+                    Verify Your Email
+                </a>
+                <p>If you did not sign up for this account, no further action is required.</p>
+                <p>Best regards,<br>The Trick loR Team</p>
+                <hr>
+                <p class="more">
+                    If you're having trouble clicking the "Verify Your Email" button, copy and paste the URL below into
+                    your web browser: <a href="{{ URL::to('/') }}/auth/verify-email?token={{ $verificationToken }}">
+                        {{ URL::to('/') }}/auth/verify-email?token={{ $verificationToken }}
+                    </a>
+                </p>
+            </div>
+            <div class="footer">
+                © {{ date('Y') }} Trick loR. All rights reserved.
+            </div>
         </div>
     </div>
 </body>

@@ -65,7 +65,7 @@ class HomeController extends Controller
             return redirect()->route('site.home')->with('error-notification', 'Bài viết này đã bị xóa hoặc bị ẩn.');
         }
 
-        $suggestedPosts = $this->postService->getSuggest($post, 6);
+        $suggestedPosts = $this->postService->getSuggested($post);
 
         // Add post view
         $this->postViewService->create($post->id);

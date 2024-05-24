@@ -15,7 +15,7 @@ class Login extends Component
         $this->dispatch('show-alert', [
             'icon' => $icon,
             'title' => $title,
-            'text' => $text
+            'text' => $text,
         ]);
     }
 
@@ -29,7 +29,10 @@ class Login extends Component
             'password.required' => 'Vui lòng nhập mật khẩu',
         ]);
 
-        $result = $authService->handleLogin($this->email, $this->password);
+        $result = $authService->login([
+            'email' => $this->email,
+            'password' => $this->password,
+        ]);
 
         if ($result->getStatusCode() == 200) {
             $this->dispatch('login-success');
