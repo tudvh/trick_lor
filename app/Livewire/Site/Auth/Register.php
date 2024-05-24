@@ -4,7 +4,7 @@ namespace App\Livewire\Site\Auth;
 
 use Livewire\Component;
 use App\Services\Site\AuthService;
-use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class Register extends Component
 {
@@ -39,16 +39,16 @@ class Register extends Component
             'passwordConfirm.same' => 'Mật khẩu xác nhận phải trùng với mật khẩu',
         ]);
 
-        $result = $authService->register([
-            'full_name' => $this->fullName,
-            'email' => trim($this->email),
-            'password' => trim($this->password),
-        ]);
+        try {
+            $authService->register([
+                'full_name' => $this->fullName,
+                'email' => trim($this->email),
+                'password' => trim($this->password),
+            ]);
 
-        if ($result->getStatusCode() == Response::HTTP_CREATED) {
             $this->dispatch('register-success');
-        } else {
-            $this->showAlert('error', 'Lỗi', $result->getData()->message);
+        } catch (Throwable $th) {
+            $this->showAlert('error', 'Lỗi', $th->getMessage());
             $this->skipRender();
         }
     }

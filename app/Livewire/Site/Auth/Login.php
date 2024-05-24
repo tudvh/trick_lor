@@ -4,6 +4,7 @@ namespace App\Livewire\Site\Auth;
 
 use Livewire\Component;
 use App\Services\Site\AuthService;
+use Throwable;
 
 class Login extends Component
 {
@@ -29,15 +30,15 @@ class Login extends Component
             'password.required' => 'Vui lòng nhập mật khẩu',
         ]);
 
-        $result = $authService->login([
-            'email' => $this->email,
-            'password' => $this->password,
-        ]);
+        try {
+            $authService->login([
+                'email' => $this->email,
+                'password' => $this->password,
+            ]);
 
-        if ($result->getStatusCode() == 200) {
             $this->dispatch('login-success');
-        } else {
-            $this->showAlert('error', 'Lỗi', $result->getData()->message);
+        } catch (Throwable $th) {
+            $this->showAlert('error', 'Lỗi', $th->getMessage());
             $this->skipRender();
         }
     }

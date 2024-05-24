@@ -78,8 +78,8 @@ Route::group(['prefix' => ''], function () {
         Route::post('/reset-password', [Site\AuthController::class, 'handleResetPassword'])->name('site.auth.handle-reset-password');
 
         // Google
-        Route::get('/google', [Site\GoogleController::class, 'redirectToGoogle']);
-        Route::get('/google/callback', [Site\GoogleController::class, 'handleGoogleCallback']);
+        Route::get('/google', [Site\AuthController::class, 'redirectToGoogle']);
+        Route::get('/google/callback', [Site\AuthController::class, 'handleGoogleCallback']);
     });
 
     // Post

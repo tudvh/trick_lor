@@ -2,44 +2,32 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Enums\User\UserStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\Auth\ChangePasswordRequest;
 use App\Models\User;
-use App\Services\Site\UserService;
+use App\Services\Site\AuthService;
+use Throwable;
 
 class AuthController extends Controller
 {
     public function __construct(
-        protected UserService $userService
+        protected AuthService $authService,
     ) {
         $this->middleware('site', ['only' => ['changePassword', 'personal']]);
     }
 
     public function verifyEmail(Request $request)
     {
-        $verificationToken = $request->input('token');
+        try {
+            $this->authService->verifyEmail($request);
 
-        if (!$verificationToken) {
-            return redirect()->route('site.home')->with('error-notification', 'Đường dẫn không hợp lệ');
+            return redirect()->route('site.home')->with('success-notification', 'Xác minh email thành công.');
+        } catch (Throwable $th) {
+            return redirect()->route('site.home')->with('error-notification', $th->getMessage());
         }
-
-        $user = $this->userService->findByVerificationToken($verificationToken);
-
-        if (!$user) {
-            return redirect()->route('site.home')->with('error-notification', 'Mã xác nhận không hợp lệ');
-        }
-
-        $dataUpdate = [
-            'status' => UserStatus::VERIFIED,
-            'verification_token' => null,
-        ];
-        $this->userService->update($user, $dataUpdate);
-
-        return redirect()->route('site.home')->with('success-notification', 'Bạn đã xác minh email thành công.');
     }
 
     public function personal()
@@ -52,7 +40,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::guard('site')->logout();
+        $this->authService->logout();
 
         return redirect()->back();
     }
@@ -77,44 +65,57 @@ class AuthController extends Controller
 
     public function resetPassword(Request $request)
     {
-        if (!$request->token) {
-            return redirect()->route('site.home')->with('error-notification', 'Đường dẫn không hợp lệ');
-        }
+        try {
+            $verificationToken = $request->input('token');
+            $this->authService->resetPassword($verificationToken);
 
-        $verificationToken = $request->token;
-        $user = $this->userService->findByVerificationToken($verificationToken);
-
-        if (!$user) {
-            return redirect()->route('site.home')->with('error-notification', 'Mã xác nhận không hợp lệ');
+            return view('pages.site.reset-password', compact('verificationToken'));
+        } catch (Throwable $th) {
+            return redirect()->route('site.home')->with('error-notification', $th->getMessage());
         }
-        if ($user->status == UserStatus::BLOCKED) {
-            return redirect()->route('site.home')->with('error-notification', 'Tài khoản của bạn đã bị cấm sử dụng');
-        }
-
-        return view('pages.site.reset-password', compact('verificationToken'));
     }
 
     public function handleResetPassword(ChangePasswordRequest $request)
     {
-        if (!$request->verification_token) {
-            return redirect()->route('site.home')->with('error-notification', 'Đường dẫn không hợp lệ');
+        try {
+            $this->authService->handleResetPassword($request);
+
+            return redirect()->route('site.home')->with('success-notification', 'Thiết lập mật khẩu mới thành công');
+        } catch (Throwable $th) {
+            return redirect()->route('site.home')->with('error-notification', $th->getMessage());
         }
+    }
 
-        $user = User::where('verification_token', $request->verification_token)->first();
+    public function redirectToGoogle()
+    {
+        try {
+            return $this->authService->loginWithGoogle();
+        } catch (Throwable $th) {
+            $errorMessage = $th->getMessage();
 
-        if (!$user) {
-            return redirect()->route('site.home')->with('error-notification', 'Mã xác nhận không hợp lệ');
+            return  "<script>
+                        window.opener.receiveDataFromGoogleLoginWindow({status:'error',message:'$errorMessage'});
+                        window.close();
+                    </script>";
         }
-        if ($user->status == UserStatus::BLOCKED) {
-            return redirect()->route('site.home')->with('error-notification', 'Tài khoản của bạn đã bị cấm sử dụng');
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $message = $this->authService->handleLoginWithGoogle();
+
+            return  "<script>
+                        window.opener.receiveDataFromGoogleLoginWindow({status:'success',message:'$message'});
+                        window.close();
+                    </script>";
+        } catch (Throwable $th) {
+            $errorMessage = $th->getMessage();
+
+            return  "<script>
+                        window.opener.receiveDataFromGoogleLoginWindow({status:'error',message:'$errorMessage'});
+                        window.close();
+                    </script>";
         }
-
-        $user->update([
-            'password' => bcrypt($request->input('password_new')),
-            'status' => UserStatus::VERIFIED,
-            'verification_token' => null,
-        ]);
-
-        return redirect()->route('site.home')->with('success-notification', 'Thiết lập mật khẩu mới thành công');
     }
 }
